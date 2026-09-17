@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, MapPin, Award, BookOpen, RotateCcw, Sparkles } from 'lucide-react';
+import { Compass, MapPin, Award, BookOpen, RotateCcw, Sparkles, ShieldCheck, LogIn, LogOut } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 export const Navbar: React.FC = () => {
@@ -12,6 +12,8 @@ export const Navbar: React.FC = () => {
     profile,
     resetProgress,
     loadDemoProgress,
+    setIsLoginModalOpen,
+    logoutStudent,
   } = useApp();
 
   return (
@@ -72,8 +74,32 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Controls: Demo / Reset & Profile Pill */}
+          {/* Right Controls: Auth, Demo / Reset & Profile Pill */}
           <div className="flex items-center space-x-2 sm:space-x-3">
+            
+            {/* JHU Verification / Login Button */}
+            {profile.isVerified ? (
+              <div className="flex items-center space-x-1.5 bg-emerald-500/20 border border-emerald-400/40 px-2.5 py-1.5 rounded-xl text-xs font-bold text-emerald-300">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span className="hidden sm:inline">JHU Verified</span>
+                <button
+                  onClick={logoutStudent}
+                  title="Sign out of student account"
+                  className="ml-1 text-emerald-400/70 hover:text-white p-0.5"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setIsLoginModalOpen(true)}
+                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-hopkins-deep shadow-md shadow-amber-400/20 ring-1 ring-white/30 transition-all transform hover:scale-105"
+              >
+                <ShieldCheck className="w-4 h-4 text-hopkins-deep" />
+                <span>Log In & Verify</span>
+              </button>
+            )}
+
             <button
               onClick={loadDemoProgress}
               title="Load sample student progress"

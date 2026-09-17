@@ -12,6 +12,12 @@ interface LevelUpData {
   isMajorRankUp: boolean;
 }
 
+export interface VerificationNotice {
+  code: string;
+  recipient: string;
+  expiresAt: number;
+}
+
 interface AppContextType {
   places: Place[];
   profile: UserProfile;
@@ -44,6 +50,16 @@ interface AppContextType {
   setTransitFilter: (val: boolean) => void;
   freeOnlyFilter: boolean;
   setFreeOnlyFilter: (val: boolean) => void;
+
+  // Authentication & Verification
+  isLoginModalOpen: boolean;
+  setIsLoginModalOpen: (open: boolean) => void;
+  verificationNotice: VerificationNotice | null;
+  clearVerificationNotice: () => void;
+  requestVerificationCode: (identifier: string) => string;
+  verifyStudentCode: (code: string, additionalData?: Partial<UserProfile>) => { success: boolean; error?: string };
+  logoutStudent: () => void;
+  loginWithDemoStudent: (type: 'homewood' | 'peabody' | 'med') => void;
 }
 
 const DEFAULT_PROFILE: UserProfile = {
@@ -57,9 +73,13 @@ const DEFAULT_PROFILE: UserProfile = {
   placeReviews: {},
   completedQuestIds: [],
   bonusPoints: 0,
+  isAuthenticated: false,
+  isVerified: false,
+  jhedId: 'shopkin1',
+  email: 'shopkin1@jh.edu',
 };
 
-const STORAGE_KEY = 'jaywalk_bmore_user_profile_v1';
+const STORAGE_KEY = 'jaywalk_bmore_user_profile_v2';
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -68,7 +88,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        return {
+          ...DEFAULT_PROFILE,
+          ...parsed,
+        };
       }
     } catch (e) {
       console.error('Error reading profile from localStorage', e);
@@ -79,6 +103,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [activeTab, setActiveTab] = useState<'explore' | 'map' | 'quests' | 'passport'>('explore');
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   const [levelUpData, setLevelUpData] = useState<LevelUpData | null>(null);
+
+  // Authentication states
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [currentExpectedCode, setCurrentExpectedCode] = useState<string | null>(null);
+  const [verificationNotice, setVerificationNotice] = useState<VerificationNotice | null>(null);
 
   // Filters
   const [searchQuery, setSearchQuery] = useState('');
@@ -110,13 +139,171 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Unlocked badges
   const unlockedBadges = BADGES.filter((b) => b.checkUnlocked(profile, PLACES));
 
+  // Request a 6-digit Hopkins verification code
+  const requestVerificationCode = (identifier: string): string => {
+    const cleanId = identifier.trim();
+    // Generate 6-digit code
+    const generated = Math.floor(100000 + Math.random() * 900000).toString();
+    setCurrentExpectedCode(generated);
+
+    const emailDisplay = cleanId.includes('@')
+      ? cleanId
+      : `${cleanId.toLowerCase()}@jh.edu`;
+
+    setVerificationNotice({
+      code: generated,
+      recipient: emailDisplay,
+      expiresAt: Date.now() + 10 * 60 * 1000, // 10 mins
+    });
+
+    return generated;
+  };
+
+  const clearVerificationNotice = () => {
+    setVerificationNotice(null);
+  };
+
+  // Verify code
+  const verifyStudentCode = (
+    inputCode: string,
+    additionalData?: Partial<UserProfile>
+  ): { success: boolean; error?: string } => {
+    const cleaned = inputCode.trim();
+
+    // In demo environment, allow currentExpectedCode or master test code '187600' (JHU founding year 1876)
+    const isValid = (currentExpectedCode && cleaned === currentExpectedCode) || cleaned === '187600';
+
+    if (!isValid) {
+      return {
+        success: false,
+        error: 'Invalid verification code. Please check the 6-digit code sent to your Hopkins inbox.',
+      };
+    }
+
+    const verificationDate = new Date().toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+
+    setProfile((prev) => ({
+      ...prev,
+      ...additionalData,
+      isAuthenticated: true,
+      isVerified: true,
+      verificationDate,
+      verificationMethod: 'email_code',
+    }));
+
+    setCurrentExpectedCode(null);
+    setVerificationNotice(null);
+
+    // Confetti celebration for verified status!
+    try {
+      confetti({
+        particleCount: 80,
+        spread: 60,
+        origin: { y: 0.5 },
+        colors: ['#002D72', '#68ACE5', '#F1C400', '#10B981'],
+      });
+    } catch (e) {
+      // ignore
+    }
+
+    return { success: true };
+  };
+
+  // Logout
+  const logoutStudent = () => {
+    setProfile((prev) => ({
+      ...prev,
+      isAuthenticated: false,
+      isVerified: false,
+    }));
+  };
+
+  // 1-Click Demo Logins
+  const loginWithDemoStudent = (type: 'homewood' | 'peabody' | 'med') => {
+    const today = new Date().toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+
+    let demoUpdates: Partial<UserProfile> = {};
+
+    if (type === 'homewood') {
+      demoUpdates = {
+        studentName: 'Sydney Hopkins',
+        classYear: 'Class of \'27',
+        major: 'Biomedical Engineering',
+        campus: 'Homewood',
+        jhedId: 'shopkin1',
+        email: 'shopkin1@jh.edu',
+        jCardId: 'JHU-948271',
+        avatar: '🐦',
+        isAuthenticated: true,
+        isVerified: true,
+        verificationDate: today,
+        verificationMethod: 'jhed_sso',
+      };
+    } else if (type === 'peabody') {
+      demoUpdates = {
+        studentName: 'Maya Lin',
+        classYear: 'Class of \'26',
+        major: 'Violin Performance & Composition',
+        campus: 'Peabody',
+        jhedId: 'mlin14',
+        email: 'mlin14@jh.edu',
+        jCardId: 'JHU-382910',
+        avatar: '🎻',
+        isAuthenticated: true,
+        isVerified: true,
+        verificationDate: today,
+        verificationMethod: 'jhed_sso',
+      };
+    } else {
+      demoUpdates = {
+        studentName: 'Dr. David Chen',
+        classYear: 'Neurology Resident',
+        major: 'School of Medicine & Neuroscience',
+        campus: 'East Baltimore / Med',
+        jhedId: 'dchen82',
+        email: 'dchen82@jh.edu',
+        jCardId: 'JHU-571029',
+        avatar: '🔬',
+        isAuthenticated: true,
+        isVerified: true,
+        verificationDate: today,
+        verificationMethod: 'jhed_sso',
+      };
+    }
+
+    setProfile((prev) => ({
+      ...prev,
+      ...demoUpdates,
+    }));
+
+    setIsLoginModalOpen(false);
+
+    try {
+      confetti({
+        particleCount: 70,
+        spread: 60,
+        origin: { y: 0.5 },
+        colors: ['#002D72', '#68ACE5', '#F1C400', '#10B981'],
+      });
+    } catch (e) {
+      // ignore
+    }
+  };
+
   // Check in action
   const toggleCheckIn = (placeId: string) => {
     const isAlreadyVisited = profile.visitedPlaceIds.includes(placeId);
     const targetPlace = PLACES.find((p) => p.id === placeId);
     if (!targetPlace) return;
 
-    const oldPoints = totalPoints;
     const oldSubrank = currentSubrank;
 
     let newVisited: string[];
@@ -246,6 +433,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       classYear: 'Class of \'26',
       major: 'Neuroscience & Art History',
       campus: 'Homewood',
+      jhedId: 'ajayhawk1',
+      email: 'ajayhawk1@jh.edu',
+      isAuthenticated: true,
+      isVerified: true,
+      verificationDate: 'Sep 10, 2026',
+      verificationMethod: 'jhed_sso',
       visitedPlaceIds: demoVisited,
       bonusPoints: 75, // Completed Bubble Burster Quest
       completedQuestIds: ['quest-bubble-burster'],
@@ -309,6 +502,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setTransitFilter,
         freeOnlyFilter,
         setFreeOnlyFilter,
+        isLoginModalOpen,
+        setIsLoginModalOpen,
+        verificationNotice,
+        clearVerificationNotice,
+        requestVerificationCode,
+        verifyStudentCode,
+        logoutStudent,
+        loginWithDemoStudent,
       }}
     >
       {children}

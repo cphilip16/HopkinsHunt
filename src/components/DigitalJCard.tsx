@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Award, Sparkles, Check, Edit3, Save, Calendar, Star, BookOpen, Share2 } from 'lucide-react';
+import { Award, Sparkles, Check, Edit3, Save, Calendar, Star, BookOpen, Share2, ShieldCheck } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BADGES } from '../data/badgesData';
 
@@ -13,6 +13,7 @@ export const DigitalJCard: React.FC = () => {
     places,
     unlockedBadges,
     setSelectedPlace,
+    setIsLoginModalOpen,
   } = useApp();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -97,6 +98,22 @@ export const DigitalJCard: React.FC = () => {
                 <p className="text-[11px] text-blue-200/70 font-medium mt-0.5">
                   {profile.classYear} &bull; ID: {profile.jCardId}
                 </p>
+
+                {/* Verification Status on J-Card */}
+                {profile.isVerified ? (
+                  <div className="mt-1 flex items-center space-x-1 text-[11px] font-bold text-emerald-300">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>JHU Verified &bull; {profile.jhedId || 'shopkin1'}</span>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setIsLoginModalOpen(true)}
+                    className="mt-1 flex items-center space-x-1 text-[10px] font-bold text-amber-300 bg-amber-400/20 hover:bg-amber-400/30 px-2 py-0.5 rounded border border-amber-300/40 transition-colors"
+                  >
+                    <ShieldCheck className="w-3 h-3 text-amber-300" />
+                    <span>Unverified Pass &bull; Verify JHU ID &rarr;</span>
+                  </button>
+                )}
 
                 {/* Subrank Level Seal */}
                 <div className="mt-3 inline-flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-hopkins-deep shadow-md font-black text-xs">

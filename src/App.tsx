@@ -9,6 +9,7 @@ import { QuestsView } from './components/QuestsView';
 import { DigitalJCard } from './components/DigitalJCard';
 import { LevelUpModal } from './components/LevelUpModal';
 import { PlaceDetailModal } from './components/PlaceDetailModal';
+import { LoginModal } from './components/LoginModal';
 import { Compass, Sparkles, MapPin } from 'lucide-react';
 
 const AppContent: React.FC = () => {
@@ -135,9 +136,10 @@ const AppContent: React.FC = () => {
 
       </main>
 
-      {/* Global Celebratory & Detail Modals */}
+      {/* Global Celebratory, Detail & Auth Modals */}
       <LevelUpModal />
       <PlaceDetailModal />
+      <LoginModal />
 
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 mt-12 py-8 text-center text-xs text-slate-500">

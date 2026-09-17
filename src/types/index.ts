@@ -104,4 +104,10 @@ export interface UserProfile {
   placeReviews: Record<string, PlaceReview>;
   completedQuestIds: string[];
   bonusPoints: number;
+  isAuthenticated: boolean;
+  isVerified: boolean;
+  jhedId?: string;
+  email?: string;
+  verificationDate?: string;
+  verificationMethod?: 'email_code' | 'jhed_sso';
 }
