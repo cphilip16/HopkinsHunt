@@ -50,8 +50,22 @@ export const RankProgressCard: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-slate-200">
           
           <div className="flex items-center space-x-3 sm:space-x-4">
-            <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center p-2 shadow-lg ring-2 sm:ring-4 ring-white shadow-blue-900/15 flex-shrink-0">
-              <RankInsigniaArt insignia={currentSubrank.insignia} id={currentSubrank.id} size={50} />
+            {/* Major Rank Crest with Subrank Milestone Pin Overlay */}
+            <div className="relative flex items-center flex-shrink-0">
+              <div
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep via-hopkins-heritage to-slate-900 flex items-center justify-center p-2 shadow-xl ring-2 sm:ring-4 ring-amber-300 shadow-blue-900/20"
+                title={`Rank ${currentRank.id}: ${currentRank.name} Crest`}
+              >
+                <RankBadgeArt rankId={currentRank.id} size={54} />
+              </div>
+
+              {/* Subrank Milestone Pin Overlay */}
+              <div
+                className="absolute -bottom-1.5 -right-1.5 sm:-bottom-2 sm:-right-2 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white shadow-md border-2 border-amber-400 flex items-center justify-center p-0.5 z-10"
+                title={`Level ${currentSubrank.levelNumber}: ${currentSubrank.subrankName} Insignia`}
+              >
+                <RankInsigniaArt insignia={currentSubrank.insignia} id={currentSubrank.id} size={26} />
+              </div>
             </div>
 
             {/* Chibi Baby Jay Explorer Mascot Accent */}
@@ -261,8 +275,10 @@ export const RankProgressCard: React.FC = () => {
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2.5">
-                        <RankBadgeArt rankId={rank.id} size={30} />
+                      <div className="flex items-center space-x-3">
+                        <div className="w-12 h-12 rounded-xl bg-white/90 border border-slate-200/80 shadow-xs flex items-center justify-center p-1 flex-shrink-0">
+                          <RankBadgeArt rankId={rank.id} size={40} />
+                        </div>
                         <div>
                           <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
                             Rank {rank.id}
@@ -270,7 +286,7 @@ export const RankProgressCard: React.FC = () => {
                           <h5 className="text-base font-bold text-slate-900">{rank.name}</h5>
                         </div>
                       </div>
-                      <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-white border border-slate-200 text-slate-600">
+                      <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-white border border-slate-200 text-slate-600 shadow-xs">
                         {rank.minPoints} - {rank.maxPoints >= 99999 ? '∞' : `${rank.maxPoints} pts`}
                       </span>
                     </div>
@@ -283,22 +299,24 @@ export const RankProgressCard: React.FC = () => {
                         return (
                           <div
                             key={sub.id}
-                            className={`p-2 rounded-lg border ${
+                            className={`p-2.5 rounded-xl border transition-all ${
                               isCurrentSub
-                                ? 'bg-white border-hopkins-heritage font-bold shadow-sm'
+                                ? 'bg-white border-hopkins-heritage font-bold shadow-sm ring-1 ring-hopkins-heritage/30'
                                 : isUnlockedSub
-                                ? 'bg-white/60 border-emerald-200 text-slate-700'
+                                ? 'bg-white/80 border-emerald-200 text-slate-700 hover:bg-white'
                                 : 'bg-white/40 border-slate-200 text-slate-400'
                             }`}
                           >
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="flex items-center space-x-1.5 truncate">
-                                <RankInsigniaArt insignia={sub.insignia} id={sub.id} size={18} />
-                                <span className="truncate">{sub.subrankName}</span>
+                            <div className="flex items-center justify-between mb-1.5">
+                              <span className="flex items-center space-x-2 truncate">
+                                <div className="w-6 h-6 rounded-md bg-slate-50 flex items-center justify-center flex-shrink-0 border border-slate-200/60 shadow-xs">
+                                  <RankInsigniaArt insignia={sub.insignia} id={sub.id} size={20} />
+                                </div>
+                                <span className="truncate font-bold">{sub.subrankName}</span>
                               </span>
-                              <span className="text-[10px] font-semibold">{sub.minPoints}p</span>
+                              <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">{sub.minPoints}p</span>
                             </div>
-                            <p className="text-[11px] font-normal line-clamp-1">{sub.unlockedPerk}</p>
+                            <p className="text-[11px] font-normal line-clamp-1 text-slate-600">{sub.unlockedPerk}</p>
                           </div>
                         );
                       })}

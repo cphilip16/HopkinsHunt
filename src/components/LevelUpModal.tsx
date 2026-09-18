@@ -6,7 +6,7 @@ import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { WashiTape } from './art/TravelDecorations';
 import { SparkleStarsSticker, MarylandCrabSticker, TreasureChestSticker } from './art/AnimatedStickers';
-import { RankInsigniaArt } from './art/VectorArt';
+import { RankInsigniaArt, RankBadgeArt } from './art/VectorArt';
 
 export const LevelUpModal: React.FC = () => {
   const { levelUpData, setLevelUpData, totalPoints, setActiveTab } = useApp();
@@ -49,9 +49,21 @@ export const LevelUpModal: React.FC = () => {
               speechBubble={isMajorRankUp ? 'Summa Cum Laude!' : 'Pack your bags! Level Up!'}
             />
             <div className="relative">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center p-2 shadow-xl ring-4 ring-amber-300 shadow-sky-500/20">
-                <RankInsigniaArt insignia={subrank.insignia} id={subrank.id} size={54} />
+              <div className="w-18 h-18 sm:w-22 sm:h-22 rounded-2xl bg-gradient-to-tr from-hopkins-deep via-hopkins-heritage to-slate-900 flex items-center justify-center p-2.5 shadow-2xl ring-4 ring-amber-300 shadow-blue-900/30">
+                {isMajorRankUp ? (
+                  <RankBadgeArt rankId={rank.id} size={68} />
+                ) : (
+                  <RankInsigniaArt insignia={subrank.insignia} id={subrank.id} size={58} />
+                )}
               </div>
+              {isMajorRankUp && (
+                <div
+                  className="absolute -bottom-2 -right-2 w-9 h-9 rounded-full bg-white shadow-lg border-2 border-amber-400 flex items-center justify-center p-0.5 z-20"
+                  title={`${subrank.subrankName} Insignia`}
+                >
+                  <RankInsigniaArt insignia={subrank.insignia} id={subrank.id} size={26} />
+                </div>
+              )}
               <div className="absolute -top-3 -right-3 pointer-events-none">
                 <SparkleStarsSticker size={28} />
               </div>

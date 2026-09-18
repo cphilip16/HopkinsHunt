@@ -16,7 +16,7 @@ import {
   LuggageAirmailSticker,
   SOUVENIR_STICKERS,
 } from './art/AnimatedStickers';
-import { BadgeIconArt, AvatarVectorArt, AVATAR_OPTIONS } from './art/VectorArt';
+import { BadgeIconArt, AvatarVectorArt, AVATAR_OPTIONS, RankInsigniaArt, RankBadgeArt } from './art/VectorArt';
 import { ScrapbookGallery } from './ScrapbookGallery';
 
 export const DigitalJCard: React.FC = () => {
@@ -142,10 +142,20 @@ export const DigitalJCard: React.FC = () => {
                   </button>
                 )}
 
-                {/* Subrank Level Seal */}
-                <div className="mt-3 inline-flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-hopkins-deep shadow-md font-black text-xs">
-                  <span className="text-sm">{currentSubrank.insignia}</span>
-                  <span className="truncate">{currentSubrank.subrankName}</span>
+                {/* Subrank Level Seal & Prestige Rank Crest */}
+                <div className="mt-3 flex items-center space-x-2">
+                  <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-hopkins-deep shadow-md font-black text-xs">
+                    <div className="w-5 h-5 rounded-full bg-white/90 flex items-center justify-center p-0.5 shadow-xs flex-shrink-0">
+                      <RankInsigniaArt insignia={currentSubrank.insignia} id={currentSubrank.id} size={18} />
+                    </div>
+                    <span className="truncate">{currentSubrank.subrankName}</span>
+                  </div>
+                  <div
+                    className="w-8 h-8 rounded-xl bg-white/15 border border-white/30 p-0.5 flex items-center justify-center shadow-xs flex-shrink-0"
+                    title={`Rank ${currentRank.id}: ${currentRank.name} Crest`}
+                  >
+                    <RankBadgeArt rankId={currentRank.id} size={28} />
+                  </div>
                 </div>
               </div>
 
