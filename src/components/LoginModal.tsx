@@ -113,32 +113,33 @@ export const LoginModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/70 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-200">
+      <div className="relative w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col">
         
         {/* Top Header with Hopkins Heritage Deep Blue */}
-        <div className="bg-gradient-to-r from-hopkins-deep via-hopkins-heritage to-blue-900 text-white p-6 sm:p-7 relative">
+        <div className="bg-gradient-to-r from-hopkins-deep via-hopkins-heritage to-blue-900 text-white p-5 sm:p-7 relative flex-shrink-0">
           <button
             onClick={() => setIsLoginModalOpen(false)}
-            className="absolute top-4 right-4 p-2 rounded-full text-blue-200 hover:text-white hover:bg-white/10 transition-colors"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-blue-200 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Close login modal"
           >
             <X className="w-5 h-5" />
           </button>
 
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-2xl bg-white text-hopkins-deep font-black text-xl flex items-center justify-center shadow-lg ring-2 ring-sky-300">
+          <div className="flex items-center space-x-3 pr-8">
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white text-hopkins-deep font-black text-lg sm:text-xl flex items-center justify-center shadow-lg ring-2 ring-sky-300 flex-shrink-0">
               JHU
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="text-xs font-black uppercase tracking-wider text-sky-200">
+                <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-sky-200">
                   Authentication & Security
                 </span>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 font-bold">
                   Hopkins SSO
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight mt-0.5">
+              <h2 className="text-lg sm:text-2xl font-black text-white tracking-tight mt-0.5">
                 {step === 'credentials' ? 'Student Sign-In & Verification' : 'Hopkins Multi-Factor Verification'}
               </h2>
             </div>
@@ -149,7 +150,7 @@ export const LoginModal: React.FC = () => {
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 sm:p-8">
+        <div className="p-5 sm:p-8 overflow-y-auto flex-1 pb-8 sm:pb-8">
           
           {/* STEP 1: Enter Credentials */}
           {step === 'credentials' && (
@@ -247,7 +248,7 @@ export const LoginModal: React.FC = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-3 px-4 bg-hopkins-heritage hover:bg-hopkins-deep text-white font-extrabold rounded-2xl flex items-center justify-center space-x-2 shadow-md transition-all mt-2"
+                className="w-full py-3.5 px-4 min-h-[48px] bg-hopkins-heritage hover:bg-hopkins-deep text-white font-extrabold rounded-2xl flex items-center justify-center space-x-2 shadow-md transition-all mt-2"
               >
                 <span>Send 6-Digit Verification Code</span>
                 <ArrowRight className="w-4 h-4" />
@@ -262,28 +263,28 @@ export const LoginModal: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => loginWithDemoStudent('homewood')}
-                    className="p-2.5 rounded-xl border border-sky-200 bg-sky-50/60 hover:bg-sky-100 text-hopkins-deep font-bold text-center transition-colors"
+                    className="p-2 sm:p-2.5 rounded-xl border border-sky-200 bg-sky-50/60 hover:bg-sky-100 text-hopkins-deep font-bold text-center transition-colors min-h-[44px]"
                   >
                     <span className="block text-base">🐦</span>
-                    <span className="truncate block mt-0.5 text-[11px]">Homewood Undergrad</span>
+                    <span className="truncate block mt-0.5 text-[10px] sm:text-[11px]">Homewood</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => loginWithDemoStudent('peabody')}
-                    className="p-2.5 rounded-xl border border-amber-200 bg-amber-50/60 hover:bg-amber-100 text-amber-900 font-bold text-center transition-colors"
+                    className="p-2 sm:p-2.5 rounded-xl border border-amber-200 bg-amber-50/60 hover:bg-amber-100 text-amber-900 font-bold text-center transition-colors min-h-[44px]"
                   >
                     <span className="block text-base">🎻</span>
-                    <span className="truncate block mt-0.5 text-[11px]">Peabody Musician</span>
+                    <span className="truncate block mt-0.5 text-[10px] sm:text-[11px]">Peabody</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => loginWithDemoStudent('med')}
-                    className="p-2.5 rounded-xl border border-rose-200 bg-rose-50/60 hover:bg-rose-100 text-rose-900 font-bold text-center transition-colors"
+                    className="p-2 sm:p-2.5 rounded-xl border border-rose-200 bg-rose-50/60 hover:bg-rose-100 text-rose-900 font-bold text-center transition-colors min-h-[44px]"
                   >
                     <span className="block text-base">🔬</span>
-                    <span className="truncate block mt-0.5 text-[11px]">Med Resident</span>
+                    <span className="truncate block mt-0.5 text-[10px] sm:text-[11px]">Med</span>
                   </button>
                 </div>
               </div>
@@ -300,13 +301,13 @@ export const LoginModal: React.FC = () => {
                 <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-sky-50 border border-sky-200 text-xs">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2 text-hopkins-heritage font-bold">
-                      <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                      <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                       <span>Hopkins MFA Code Dispatched</span>
                     </div>
                     <button
                       type="button"
                       onClick={handleAutofillCode}
-                      className="px-2 py-0.5 bg-hopkins-heritage text-white font-black text-[10px] rounded-lg shadow-sm hover:bg-hopkins-deep"
+                      className="px-2.5 py-1 bg-hopkins-heritage text-white font-black text-[10px] rounded-lg shadow-sm hover:bg-hopkins-deep min-h-[30px]"
                     >
                       Autofill Code
                     </button>
@@ -329,7 +330,7 @@ export const LoginModal: React.FC = () => {
                 </label>
 
                 {/* 6 Digit Input Boxes */}
-                <div className="flex justify-center gap-2 sm:gap-3">
+                <div className="flex justify-center gap-1.5 sm:gap-3">
                   {codeDigits.map((digit, index) => (
                     <input
                       key={index}
@@ -340,7 +341,7 @@ export const LoginModal: React.FC = () => {
                       value={digit}
                       onChange={(e) => handleDigitChange(index, e.target.value)}
                       onKeyDown={(e) => handleKeyDown(index, e)}
-                      className="w-11 h-13 sm:w-12 sm:h-14 text-center text-xl font-mono font-black bg-slate-50 border-2 border-slate-200 focus:border-hopkins-spirit rounded-xl focus:bg-white focus:outline-none focus:ring-4 focus:ring-sky-100 transition-all text-slate-900"
+                      className="w-10 h-12 sm:w-12 sm:h-14 text-center text-lg sm:text-xl font-mono font-black bg-slate-50 border-2 border-slate-200 focus:border-hopkins-spirit rounded-xl focus:bg-white focus:outline-none focus:ring-4 focus:ring-sky-100 transition-all text-slate-900"
                     />
                   ))}
                 </div>
@@ -357,7 +358,7 @@ export const LoginModal: React.FC = () => {
               <button
                 type="submit"
                 disabled={isVerifying}
-                className="w-full py-3 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold rounded-2xl flex items-center justify-center space-x-2 shadow-lg transition-all"
+                className="w-full py-3.5 px-4 min-h-[48px] bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold rounded-2xl flex items-center justify-center space-x-2 shadow-lg transition-all"
               >
                 {isVerifying ? (
                   <RefreshCw className="w-4 h-4 animate-spin" />

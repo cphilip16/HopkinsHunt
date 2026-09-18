@@ -21,11 +21,11 @@ export const PlaceDetailModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden my-8">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/70 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col">
         
         {/* Hero Image */}
-        <div className="relative h-64 sm:h-72 w-full bg-slate-900">
+        <div className="relative h-56 sm:h-72 w-full bg-slate-900 flex-shrink-0">
           <img
             src={selectedPlace.imageUrl}
             alt={selectedPlace.name}
@@ -41,19 +41,20 @@ export const PlaceDetailModal: React.FC = () => {
           {/* Close button */}
           <button
             onClick={() => setSelectedPlace(null)}
-            className="absolute top-4 right-4 p-2.5 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/80 transition-colors z-10"
+            aria-label="Close details modal"
           >
             <X className="w-5 h-5" />
           </button>
 
           {/* Points Pill */}
-          <div className="absolute top-4 left-4 flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-black bg-gradient-to-r from-amber-400 to-amber-500 text-hopkins-deep shadow-lg">
+          <div className="absolute top-3 left-3 sm:top-4 sm:left-4 flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-black bg-gradient-to-r from-amber-400 to-amber-500 text-hopkins-deep shadow-lg">
             <Sparkles className="w-3.5 h-3.5" />
             <span>+{selectedPlace.points} POINTS</span>
           </div>
 
           {/* Bottom Overlay Info */}
-          <div className="absolute bottom-4 inset-x-4 text-white">
+          <div className="absolute bottom-3 inset-x-4 sm:bottom-4 text-white">
             <div className="flex items-center space-x-2 text-xs font-semibold text-sky-200 mb-1">
               <span className="px-2 py-0.5 rounded bg-white/20 uppercase tracking-wider text-[10px]">
                 {selectedPlace.neighborhood}
@@ -63,17 +64,17 @@ export const PlaceDetailModal: React.FC = () => {
               <span>&bull;</span>
               <span>{selectedPlace.cost}</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight">
+            <h2 className="text-xl sm:text-3xl font-black text-white leading-tight">
               {selectedPlace.name}
             </h2>
-            <p className="text-xs text-blue-100/90 font-medium mt-1">
+            <p className="text-xs text-blue-100/90 font-medium mt-0.5 sm:mt-1 line-clamp-1 sm:line-clamp-none">
               {selectedPlace.tagline}
             </p>
           </div>
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 sm:p-8 space-y-6 max-h-[60vh] overflow-y-auto">
+        <div className="p-5 sm:p-8 space-y-5 overflow-y-auto flex-1 pb-8 sm:pb-8">
           
           {/* Action Row: Check In & Status */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-200">
@@ -95,7 +96,7 @@ export const PlaceDetailModal: React.FC = () => {
 
             <button
               onClick={() => toggleCheckIn(selectedPlace.id)}
-              className={`py-2.5 px-5 rounded-xl text-xs font-black transition-all flex items-center justify-center space-x-2 shadow-sm ${
+              className={`py-3 px-5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center space-x-2 shadow-sm ${
                 isVisited
                   ? 'bg-red-50 text-red-600 hover:bg-red-100 border border-red-200'
                   : 'bg-hopkins-heritage hover:bg-hopkins-deep text-white shadow-blue-900/10'
@@ -182,7 +183,8 @@ export const PlaceDetailModal: React.FC = () => {
                     key={star}
                     type="button"
                     onClick={() => setRating(star)}
-                    className="text-lg focus:outline-none"
+                    className="min-w-[40px] min-h-[40px] flex items-center justify-center text-xl focus:outline-none"
+                    aria-label={`Rate ${star} star`}
                   >
                     <span className={star <= rating ? 'text-amber-400' : 'text-slate-300'}>
                       ★
@@ -204,7 +206,7 @@ export const PlaceDetailModal: React.FC = () => {
 
             <button
               onClick={handleSaveNotes}
-              className="py-2 px-4 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl flex items-center space-x-1.5 transition-colors"
+              className="py-2.5 px-4 min-h-[42px] bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl flex items-center justify-center space-x-1.5 transition-colors"
             >
               <Save className="w-3.5 h-3.5" />
               <span>Save Journal Entry</span>

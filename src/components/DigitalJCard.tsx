@@ -220,14 +220,14 @@ export const DigitalJCard: React.FC = () => {
 
               <div>
                 <label className="font-bold text-slate-700 block mb-1">Choose Mascot Avatar</label>
-                <div className="flex gap-2 text-2xl p-2 bg-slate-50 rounded-xl border border-slate-200">
+                <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 text-2xl p-2 bg-slate-50 rounded-xl border border-slate-200">
                   {['🐦', '🦅', '🦉', '🦀', '🎓', '🔬', '🎨', '🚀'].map((em) => (
                     <button
                       key={em}
                       type="button"
                       onClick={() => setEditAvatar(em)}
-                      className={`p-1.5 rounded-lg transition-transform ${
-                        editAvatar === em ? 'bg-sky-200 scale-125' : 'hover:scale-110'
+                      className={`min-h-[44px] flex items-center justify-center rounded-lg transition-transform ${
+                        editAvatar === em ? 'bg-sky-200 scale-110 shadow-sm' : 'hover:scale-105'
                       }`}
                     >
                       {em}
@@ -239,7 +239,7 @@ export const DigitalJCard: React.FC = () => {
               <div className="pt-2">
                 <button
                   onClick={handleSaveProfile}
-                  className="w-full py-2.5 bg-hopkins-heritage hover:bg-hopkins-deep text-white font-bold rounded-xl flex items-center justify-center space-x-2 shadow-md transition-colors"
+                  className="w-full py-3 min-h-[44px] bg-hopkins-heritage hover:bg-hopkins-deep text-white font-bold rounded-xl flex items-center justify-center space-x-2 shadow-md transition-colors"
                 >
                   <Save className="w-4 h-4" />
                   <span>Save to J-Card</span>
@@ -252,8 +252,8 @@ export const DigitalJCard: React.FC = () => {
       </div>
 
       {/* Achievement Badges Section */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-4">
-        <div className="flex items-center justify-between">
+      <div className="bg-white rounded-3xl p-4 sm:p-8 shadow-sm border border-slate-200 space-y-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <div>
             <h3 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center space-x-2">
               <Award className="w-5 h-5 text-amber-500" />
@@ -263,7 +263,7 @@ export const DigitalJCard: React.FC = () => {
               Unlock special pins by hitting exploration milestones across Charm City.
             </p>
           </div>
-          <span className="text-xs font-bold text-hopkins-heritage bg-blue-50 px-3 py-1 rounded-full">
+          <span className="text-xs font-bold text-hopkins-heritage bg-blue-50 px-3 py-1 rounded-full whitespace-nowrap">
             {unlockedBadges.length} / {BADGES.length} Unlocked
           </span>
         </div>
@@ -316,8 +316,8 @@ export const DigitalJCard: React.FC = () => {
       </div>
 
       {/* Visited Passport History & Journal */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-4">
-        <div className="flex items-center justify-between">
+      <div className="bg-white rounded-3xl p-4 sm:p-8 shadow-sm border border-slate-200 space-y-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <div>
             <h3 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center space-x-2">
               <BookOpen className="w-5 h-5 text-hopkins-heritage" />
@@ -327,7 +327,7 @@ export const DigitalJCard: React.FC = () => {
               Your stamped passport of explored Baltimore neighborhoods and personal reflections.
             </p>
           </div>
-          <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
+          <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full whitespace-nowrap">
             {visitedPlacesList.length} Stamped Locations
           </span>
         </div>

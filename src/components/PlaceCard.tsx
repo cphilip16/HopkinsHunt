@@ -21,7 +21,10 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
       }`}
     >
       {/* Image Thumbnail & Overlays */}
-      <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">
+      <div
+        className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900 cursor-pointer"
+        onClick={() => setSelectedPlace(place)}
+      >
         <img
           src={place.imageUrl}
           alt={place.name}
@@ -118,7 +121,7 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
               e.stopPropagation();
               toggleCheckIn(place.id);
             }}
-            className={`flex-1 flex items-center justify-center space-x-1.5 py-2.5 px-4 rounded-xl text-xs font-extrabold transition-all shadow-sm ${
+            className={`flex-1 flex items-center justify-center space-x-1.5 py-3 px-4 min-h-[44px] rounded-xl text-xs font-extrabold transition-all shadow-sm ${
               isVisited
                 ? 'bg-emerald-100 text-emerald-800 hover:bg-red-50 hover:text-red-700 hover:ring-1 hover:ring-red-200'
                 : 'bg-hopkins-heritage hover:bg-hopkins-deep text-white shadow-blue-900/10'
@@ -140,8 +143,9 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
           {/* Details Button */}
           <button
             onClick={() => setSelectedPlace(place)}
-            className="p-2.5 rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-900 bg-slate-50 hover:bg-white transition-colors"
+            className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-900 bg-slate-50 hover:bg-white transition-colors"
             title="View Details, Lore & Journal"
+            aria-label={`View details for ${place.name}`}
           >
             <ChevronRight className="w-4 h-4" />
           </button>

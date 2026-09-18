@@ -46,7 +46,7 @@ export const QuestsView: React.FC = () => {
           return (
             <div
               key={quest.id}
-              className={`rounded-3xl border p-6 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-lg ${
+              className={`rounded-3xl border p-4 sm:p-6 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-lg ${
                 isCompleted
                   ? 'bg-gradient-to-br from-emerald-50/50 via-white to-sky-50/30 border-emerald-300 ring-2 ring-emerald-200'
                   : 'bg-white border-slate-200'
@@ -163,7 +163,7 @@ export const QuestsView: React.FC = () => {
                             </span>
                             <button
                               onClick={() => toggleCheckIn(place.id)}
-                              className={`px-2 py-0.5 rounded-lg text-[10px] font-extrabold ${
+                              className={`px-3 py-1.5 min-h-[34px] flex items-center justify-center rounded-lg text-[10px] font-extrabold ${
                                 placeVisited
                                   ? 'bg-emerald-200/70 text-emerald-800'
                                   : 'bg-hopkins-heritage text-white hover:bg-hopkins-deep'

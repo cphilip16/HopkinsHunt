@@ -53,7 +53,7 @@ export const InteractiveMap: React.FC = () => {
       </div>
 
       {/* SVG Canvas Map Container */}
-      <div className="relative w-full aspect-[4/3] max-h-[640px] bg-slate-900 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl select-none">
+      <div className="relative w-full aspect-[4/3] min-h-[380px] sm:min-h-[460px] max-h-[640px] bg-slate-900 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl select-none">
         
         {/* Decorative Grid Lines */}
         <div
@@ -150,7 +150,7 @@ export const InteractiveMap: React.FC = () => {
           </text>
         </svg>
 
-        {/* Interactive Place Pins (Absolute HTML overlays for crisp tooltip & click interaction) */}
+        {/* Interactive Place Pins (Absolute HTML overlays with touch target padding) */}
         {visiblePlaces.map((place) => {
           const isVisited = profile.visitedPlaceIds.includes(place.id);
           const isSelected = activePin?.id === place.id;
@@ -158,7 +158,7 @@ export const InteractiveMap: React.FC = () => {
           return (
             <div
               key={place.id}
-              className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-300 group z-20"
+              className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-300 group z-20 p-2 -m-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
               style={{
                 left: `${place.coordinates.mapX}%`,
                 top: `${place.coordinates.mapY}%`,
@@ -194,14 +194,15 @@ export const InteractiveMap: React.FC = () => {
 
         {/* Selected Pin Popup Card */}
         {activePin && (
-          <div className="absolute bottom-4 inset-x-4 sm:left-auto sm:right-4 sm:w-80 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-slate-200 z-30 animate-in fade-in slide-in-from-bottom-2">
+          <div className="absolute bottom-3 inset-x-3 sm:inset-x-auto sm:bottom-4 sm:right-4 sm:w-80 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-slate-200 z-30 animate-in fade-in slide-in-from-bottom-2">
             <div className="flex items-start justify-between">
               <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-slate-100 text-slate-700">
                 {activePin.neighborhood}
               </span>
               <button
                 onClick={() => setActivePin(null)}
-                className="text-slate-400 hover:text-slate-600 p-1"
+                className="text-slate-400 hover:text-slate-600 p-1 min-w-[36px] min-h-[36px] flex items-center justify-center"
+                aria-label="Close pin preview"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -222,7 +223,7 @@ export const InteractiveMap: React.FC = () => {
             <div className="mt-3 flex items-center justify-between gap-2 pt-2 border-t border-slate-100">
               <button
                 onClick={() => toggleCheckIn(activePin.id)}
-                className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-all ${
+                className={`flex-1 py-2.5 px-3 min-h-[40px] rounded-xl text-xs font-bold transition-all ${
                   profile.visitedPlaceIds.includes(activePin.id)
                     ? 'bg-emerald-100 text-emerald-800'
                     : 'bg-hopkins-heritage hover:bg-hopkins-deep text-white shadow-sm'
@@ -235,7 +236,7 @@ export const InteractiveMap: React.FC = () => {
 
               <button
                 onClick={() => setSelectedPlace(activePin)}
-                className="py-1.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold"
+                className="py-2.5 px-4 min-h-[40px] bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold"
               >
                 Full Lore
               </button>

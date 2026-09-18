@@ -23,7 +23,7 @@ export const RankProgressCard: React.FC = () => {
   const completedQuestsCount = profile.completedQuestIds.length;
 
   return (
-    <div className="bg-gradient-to-br from-white via-slate-50 to-blue-50/40 rounded-3xl p-6 sm:p-8 shadow-jhu border border-blue-100 relative overflow-hidden">
+    <div className="bg-gradient-to-br from-white via-slate-50 to-blue-50/40 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-jhu border border-blue-100 relative overflow-hidden">
       
       {/* Subtle background decoration */}
       <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 rounded-full bg-gradient-to-br from-hopkins-spirit/10 to-transparent pointer-events-none blur-2xl" />
@@ -31,28 +31,28 @@ export const RankProgressCard: React.FC = () => {
       <div className="relative z-10">
         
         {/* Top Header: Current Rank Badge & Point Counter */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200/80">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-slate-200/80">
           
-          <div className="flex items-start space-x-4">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center text-3xl sm:text-4xl shadow-lg ring-4 ring-white shadow-blue-900/15 flex-shrink-0">
+          <div className="flex items-start space-x-3 sm:space-x-4">
+            <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center text-2xl sm:text-4xl shadow-lg ring-2 sm:ring-4 ring-white shadow-blue-900/15 flex-shrink-0">
               {currentSubrank.insignia}
             </div>
 
             <div>
-              <div className="flex items-center space-x-2">
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-black uppercase tracking-wider bg-hopkins-heritage text-white">
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-hopkins-heritage text-white">
                   Rank {currentRank.id}: {currentRank.name}
                 </span>
-                <span className="text-xs font-bold text-slate-500">
-                  Subrank Lv {currentSubrank.levelNumber} of 15
+                <span className="text-[11px] sm:text-xs font-bold text-slate-500">
+                  Lv {currentSubrank.levelNumber} of 15
                 </span>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1 tracking-tight">
+              <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 mt-1 tracking-tight">
                 {currentSubrank.subrankName}
               </h2>
 
-              <p className="text-sm text-slate-600 italic mt-0.5 max-w-xl">
+              <p className="text-xs sm:text-sm text-slate-600 italic mt-0.5 max-w-xl line-clamp-2 sm:line-clamp-none">
                 "{currentSubrank.flavorText}"
               </p>
             </div>

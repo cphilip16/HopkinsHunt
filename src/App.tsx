@@ -10,6 +10,7 @@ import { DigitalJCard } from './components/DigitalJCard';
 import { LevelUpModal } from './components/LevelUpModal';
 import { PlaceDetailModal } from './components/PlaceDetailModal';
 import { LoginModal } from './components/LoginModal';
+import { MobileBottomNav } from './components/MobileBottomNav';
 import { Compass, Sparkles, MapPin } from 'lucide-react';
 
 const AppContent: React.FC = () => {
@@ -71,7 +72,7 @@ const AppContent: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3.5 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-6 sm:space-y-8 pb-28 md:pb-12">
         
         {/* Top Hero: Student Rank & Progress Banner */}
         <RankProgressCard />
@@ -104,7 +105,7 @@ const AppContent: React.FC = () => {
                 </p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
                 {filteredPlaces.map((place) => (
                   <PlaceCard key={place.id} place={place} />
                 ))}
@@ -141,15 +142,18 @@ const AppContent: React.FC = () => {
       <PlaceDetailModal />
       <LoginModal />
 
+      {/* Mobile Bottom Navigation (Ergonomic thumb reach on mobile devices) */}
+      <MobileBottomNav />
+
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 mt-12 py-8 text-center text-xs text-slate-500">
+      <footer className="bg-white border-t border-slate-200 mt-8 sm:mt-12 py-8 pb-24 md:pb-8 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 space-y-2">
           <div className="flex items-center justify-center space-x-2 font-bold text-slate-700">
             <span>🐦 JayWalk Bmore</span>
             <span>&bull;</span>
             <span>Johns Hopkins University Student Exploration Initiative</span>
           </div>
-          <p className="max-w-md mx-auto text-slate-400">
+          <p className="max-w-md mx-auto text-slate-400 text-[11px] leading-relaxed">
             Encouraging Hopkins students to venture beyond the campus bubble and experience the history, cuisine, arts, and vibrant spirit of Charm City!
           </p>
         </div>
