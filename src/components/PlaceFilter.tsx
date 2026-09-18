@@ -99,20 +99,20 @@ export const PlaceFilter: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-4 sm:p-6 shadow-sm border border-slate-200 space-y-4">
+    <div className="bg-white rounded-3xl p-4 sm:p-6 shadow-card-high border border-slate-300 space-y-4">
       
       {/* Search and Quick Toggle Row */}
       <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
         
         {/* Search Input */}
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
           <input
             type="text"
             placeholder="Search spots, 'JHMI shuttle', food, or lore..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-10 py-3 min-h-[44px] bg-slate-50 hover:bg-slate-100/70 focus:bg-white text-sm text-slate-800 placeholder-slate-400 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-hopkins-spirit transition-all"
+            className="w-full pl-10 pr-10 py-3 min-h-[44px] bg-slate-50 hover:bg-slate-100/70 focus:bg-white text-sm text-slate-900 placeholder-slate-400 rounded-2xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-hopkins-heritage transition-all font-medium"
           />
           {searchQuery && (
             <button
@@ -131,8 +131,8 @@ export const PlaceFilter: React.FC = () => {
             onClick={() => setTransitFilter(!transitFilter)}
             className={`flex items-center space-x-1.5 px-3.5 py-2.5 min-h-[40px] rounded-2xl text-xs font-bold border transition-all whitespace-nowrap flex-shrink-0 ${
               transitFilter
-                ? 'bg-hopkins-heritage text-white border-hopkins-heritage shadow-sm'
-                : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                ? 'bg-hopkins-heritage text-white border-hopkins-deep shadow-md'
+                : 'bg-slate-50 text-slate-800 border-slate-300 hover:bg-slate-100'
             }`}
           >
             <HopkinsShuttleSticker size={20} className="flex-shrink-0" />
@@ -144,11 +144,11 @@ export const PlaceFilter: React.FC = () => {
             onClick={() => setFreeOnlyFilter(!freeOnlyFilter)}
             className={`flex items-center space-x-1.5 px-3.5 py-2.5 min-h-[40px] rounded-2xl text-xs font-bold border transition-all whitespace-nowrap flex-shrink-0 ${
               freeOnlyFilter
-                ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
-                : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                ? 'bg-emerald-600 text-white border-emerald-700 shadow-md'
+                : 'bg-slate-50 text-slate-800 border-slate-300 hover:bg-slate-100'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+            <Sparkles className="w-3.5 h-3.5 text-emerald-500 fill-emerald-400" />
             <span>Free Entry Only</span>
             {freeOnlyFilter && <Check className="w-3 h-3 ml-1 text-emerald-200" />}
           </button>
@@ -156,7 +156,7 @@ export const PlaceFilter: React.FC = () => {
           {hasActiveFilters && (
             <button
               onClick={clearAllFilters}
-              className="px-3 py-2 min-h-[40px] text-xs font-bold text-red-600 hover:bg-red-50 rounded-2xl transition-colors whitespace-nowrap flex-shrink-0"
+              className="px-3 py-2 min-h-[40px] text-xs font-extrabold text-red-700 hover:bg-red-50 rounded-2xl transition-colors whitespace-nowrap flex-shrink-0"
             >
               Reset Filters
             </button>
@@ -167,8 +167,8 @@ export const PlaceFilter: React.FC = () => {
 
       {/* Neighborhood Filters Scrollbar */}
       <div>
-        <div className="flex items-center space-x-2 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-          <Filter className="w-3 h-3 text-slate-400" />
+        <div className="flex items-center space-x-2 text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-2">
+          <Filter className="w-3.5 h-3.5 text-hopkins-heritage" />
           <span>Neighborhood</span>
         </div>
         <div className="flex gap-2 overflow-x-auto touch-pan-x pb-1 no-scrollbar">
@@ -176,10 +176,10 @@ export const PlaceFilter: React.FC = () => {
             <button
               key={nh.value}
               onClick={() => setSelectedNeighborhood(nh.value)}
-              className={`px-3.5 py-2 min-h-[38px] rounded-xl text-xs font-semibold whitespace-nowrap flex-shrink-0 transition-all ${
+              className={`px-3.5 py-2 min-h-[38px] rounded-xl text-xs font-bold whitespace-nowrap flex-shrink-0 transition-all border ${
                 selectedNeighborhood === nh.value
-                  ? 'bg-hopkins-spirit text-hopkins-deep font-bold shadow-sm ring-1 ring-sky-300'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200/70 hover:text-slate-900'
+                  ? 'bg-hopkins-heritage text-white border-hopkins-deep shadow-md shadow-blue-900/20 ring-2 ring-sky-300'
+                  : 'bg-slate-50 text-slate-800 border-slate-200 hover:bg-slate-100 hover:text-slate-950'
               }`}
             >
               {nh.label}
@@ -190,8 +190,8 @@ export const PlaceFilter: React.FC = () => {
 
       {/* Category Pills */}
       <div>
-        <div className="flex items-center space-x-2 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-          <Sparkles className="w-3 h-3 text-slate-400" />
+        <div className="flex items-center space-x-2 text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-2">
+          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
           <span>Category & Vibe</span>
         </div>
         <div className="flex gap-2 overflow-x-auto touch-pan-x pb-1 no-scrollbar">
@@ -199,10 +199,10 @@ export const PlaceFilter: React.FC = () => {
             <button
               key={cat.value}
               onClick={() => setSelectedCategory(cat.value)}
-              className={`flex items-center space-x-2 px-3.5 py-2 min-h-[38px] rounded-xl text-xs font-semibold whitespace-nowrap flex-shrink-0 transition-all ${
+              className={`flex items-center space-x-2 px-3.5 py-2 min-h-[38px] rounded-xl text-xs font-bold whitespace-nowrap flex-shrink-0 transition-all border ${
                 selectedCategory === cat.value
-                  ? 'bg-slate-900 text-white font-bold shadow-sm'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200/70 hover:text-slate-900'
+                  ? 'bg-gradient-to-r from-hopkins-deep to-hopkins-heritage text-white border-blue-900 shadow-md ring-2 ring-amber-400'
+                  : 'bg-slate-50 text-slate-800 border-slate-200 hover:bg-slate-100 hover:text-slate-950'
               }`}
             >
               {cat.renderIcon()}

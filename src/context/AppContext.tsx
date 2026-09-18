@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { Place, UserProfile, Subrank, Rank, Quest, Badge } from '../types';
+import { Place, UserProfile, Subrank, Rank, Quest, Badge, GroupTrip, ScrapbookPhoto } from '../types';
 import { PLACES } from '../data/placesData';
 import { SUBRANKS, getRankAndSubrank } from '../data/ranksData';
 import { QUESTS } from '../data/questsData';
 import { BADGES } from '../data/badgesData';
+import { INITIAL_GROUP_TRIPS } from '../data/groupTripsData';
+import { INITIAL_SCRAPBOOK_PHOTOS } from '../data/scrapbookData';
 
 interface LevelUpData {
   subrank: Subrank;
@@ -21,8 +23,8 @@ export interface VerificationNotice {
 interface AppContextType {
   places: Place[];
   profile: UserProfile;
-  activeTab: 'explore' | 'map' | 'quests' | 'passport';
-  setActiveTab: (tab: 'explore' | 'map' | 'quests' | 'passport') => void;
+  activeTab: 'explore' | 'map' | 'trips' | 'quests' | 'camera' | 'passport';
+  setActiveTab: (tab: 'explore' | 'map' | 'trips' | 'quests' | 'camera' | 'passport') => void;
   selectedPlace: Place | null;
   setSelectedPlace: (place: Place | null) => void;
   levelUpData: LevelUpData | null;
@@ -51,6 +53,26 @@ interface AppContextType {
   freeOnlyFilter: boolean;
   setFreeOnlyFilter: (val: boolean) => void;
 
+  // Flock Expeditions (Group Trips)
+  groupTrips: GroupTrip[];
+  joinGroupTrip: (tripId: string) => void;
+  leaveGroupTrip: (tripId: string) => void;
+  createGroupTrip: (newTrip: Omit<GroupTrip, 'id' | 'members' | 'status' | 'creator'>) => void;
+  checkInGroupTrip: (tripId: string) => void;
+  isCreateTripModalOpen: boolean;
+  setIsCreateTripModalOpen: (open: boolean) => void;
+
+  // Scrapbook & Camera
+  scrapbookPhotos: ScrapbookPhoto[];
+  addScrapbookPhoto: (photo: Omit<ScrapbookPhoto, 'id' | 'timestamp' | 'likes'>) => void;
+  deleteScrapbookPhoto: (id: string) => void;
+  likeScrapbookPhoto: (id: string) => void;
+  isCameraModalOpen: boolean;
+  setIsCameraModalOpen: (open: boolean) => void;
+  cameraTargetPlace: Place | null;
+  setCameraTargetPlace: (place: Place | null) => void;
+  openCameraForPlace: (place: Place) => void;
+
   // Authentication & Verification
   isLoginModalOpen: boolean;
   setIsLoginModalOpen: (open: boolean) => void;
@@ -77,9 +99,13 @@ const DEFAULT_PROFILE: UserProfile = {
   isVerified: false,
   jhedId: 'shopkin1',
   email: 'shopkin1@jh.edu',
+  joinedTripIds: [],
+  photos: [],
 };
 
 const STORAGE_KEY = 'jaywalk_bmore_user_profile_v2';
+const TRIPS_STORAGE_KEY = 'jaywalk_bmore_group_trips_v1';
+const PHOTOS_STORAGE_KEY = 'jaywalk_bmore_scrapbook_photos_v1';
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -100,9 +126,36 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return DEFAULT_PROFILE;
   });
 
-  const [activeTab, setActiveTab] = useState<'explore' | 'map' | 'quests' | 'passport'>('explore');
+  const [activeTab, setActiveTab] = useState<'explore' | 'map' | 'trips' | 'quests' | 'camera' | 'passport'>('explore');
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   const [levelUpData, setLevelUpData] = useState<LevelUpData | null>(null);
+
+  // Group Trips & Camera Modals
+  const [isCreateTripModalOpen, setIsCreateTripModalOpen] = useState(false);
+  const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
+  const [cameraTargetPlace, setCameraTargetPlace] = useState<Place | null>(null);
+
+  // Group Trips state
+  const [groupTrips, setGroupTrips] = useState<GroupTrip[]>(() => {
+    try {
+      const saved = localStorage.getItem(TRIPS_STORAGE_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error('Error reading group trips from localStorage', e);
+    }
+    return INITIAL_GROUP_TRIPS;
+  });
+
+  // Scrapbook Photos state
+  const [scrapbookPhotos, setScrapbookPhotos] = useState<ScrapbookPhoto[]>(() => {
+    try {
+      const saved = localStorage.getItem(PHOTOS_STORAGE_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error('Error reading scrapbook photos from localStorage', e);
+    }
+    return INITIAL_SCRAPBOOK_PHOTOS;
+  });
 
   // Authentication states
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -124,6 +177,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       console.error('Error saving profile to localStorage', e);
     }
   }, [profile]);
+
+  // Save group trips
+  useEffect(() => {
+    try {
+      localStorage.setItem(TRIPS_STORAGE_KEY, JSON.stringify(groupTrips));
+    } catch (e) {
+      console.error('Error saving group trips to localStorage', e);
+    }
+  }, [groupTrips]);
+
+  // Save scrapbook photos
+  useEffect(() => {
+    try {
+      localStorage.setItem(PHOTOS_STORAGE_KEY, JSON.stringify(scrapbookPhotos));
+    } catch (e) {
+      console.error('Error saving scrapbook photos to localStorage', e);
+    }
+  }, [scrapbookPhotos]);
 
   // Calculate total points
   const placePoints = profile.visitedPlaceIds.reduce((sum, id) => {
@@ -468,6 +539,177 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setProfile(demoProfile);
   };
 
+  // Flock Expeditions (Group Trips) Handlers
+  const joinGroupTrip = (tripId: string) => {
+    setGroupTrips((prev) =>
+      prev.map((trip) => {
+        if (trip.id !== tripId) return trip;
+        if (trip.members.some((m) => m.name === profile.studentName)) return trip;
+        if (trip.members.length >= trip.maxMembers) return trip;
+
+        const newMember = {
+          id: `member-${Date.now()}`,
+          name: profile.studentName,
+          major: profile.major,
+          classYear: profile.classYear,
+          avatar: profile.avatar,
+          joinedAt: 'Just now',
+        };
+
+        return {
+          ...trip,
+          members: [...trip.members, newMember],
+        };
+      })
+    );
+
+    setProfile((prev) => ({
+      ...prev,
+      joinedTripIds: [...(prev.joinedTripIds || []), tripId],
+    }));
+
+    try {
+      confetti({
+        particleCount: 40,
+        spread: 60,
+        origin: { y: 0.7 },
+        colors: ['#002D72', '#68ACE5', '#F1C400', '#E03A3E'],
+      });
+    } catch (e) {
+      // ignore
+    }
+  };
+
+  const leaveGroupTrip = (tripId: string) => {
+    setGroupTrips((prev) =>
+      prev.map((trip) => {
+        if (trip.id !== tripId) return trip;
+        return {
+          ...trip,
+          members: trip.members.filter((m) => m.name !== profile.studentName),
+        };
+      })
+    );
+
+    setProfile((prev) => ({
+      ...prev,
+      joinedTripIds: (prev.joinedTripIds || []).filter((id) => id !== tripId),
+    }));
+  };
+
+  const createGroupTrip = (newTripData: Omit<GroupTrip, 'id' | 'members' | 'status' | 'creator'>) => {
+    const newTrip: GroupTrip = {
+      ...newTripData,
+      id: `trip-${Date.now()}`,
+      status: 'upcoming',
+      creator: {
+        name: profile.studentName,
+        major: profile.major,
+        classYear: profile.classYear,
+        avatar: profile.avatar,
+        campus: profile.campus,
+        isJhuVerified: profile.isVerified,
+      },
+      members: [
+        {
+          id: `member-creator-${Date.now()}`,
+          name: profile.studentName,
+          major: profile.major,
+          classYear: profile.classYear,
+          avatar: profile.avatar,
+          joinedAt: 'Just now',
+          isCreator: true,
+        },
+      ],
+    };
+
+    setGroupTrips((prev) => [newTrip, ...prev]);
+    setProfile((prev) => ({
+      ...prev,
+      bonusPoints: prev.bonusPoints + 25, // Organizer reward!
+      joinedTripIds: [...(prev.joinedTripIds || []), newTrip.id],
+    }));
+
+    try {
+      confetti({
+        particleCount: 65,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#002D72', '#68ACE5', '#F1C400', '#E03A3E'],
+      });
+    } catch (e) {
+      // ignore
+    }
+  };
+
+  const checkInGroupTrip = (tripId: string) => {
+    const trip = groupTrips.find((t) => t.id === tripId);
+    if (!trip) return;
+
+    setProfile((prev) => {
+      const alreadyVisited = prev.visitedPlaceIds.includes(trip.destinationPlaceId);
+      const newVisited = alreadyVisited ? prev.visitedPlaceIds : [...prev.visitedPlaceIds, trip.destinationPlaceId];
+      return {
+        ...prev,
+        bonusPoints: prev.bonusPoints + trip.bonusGroupPoints,
+        visitedPlaceIds: newVisited,
+      };
+    });
+
+    try {
+      confetti({
+        particleCount: 80,
+        spread: 100,
+        origin: { y: 0.5 },
+        colors: ['#002D72', '#68ACE5', '#F1C400', '#E03A3E', '#22C55E'],
+      });
+    } catch (e) {
+      // ignore
+    }
+  };
+
+  // Scrapbook Photos Handlers
+  const addScrapbookPhoto = (photoData: Omit<ScrapbookPhoto, 'id' | 'timestamp' | 'likes'>) => {
+    const newPhoto: ScrapbookPhoto = {
+      ...photoData,
+      id: `photo-${Date.now()}`,
+      timestamp: 'Just now',
+      likes: 1,
+    };
+
+    setScrapbookPhotos((prev) => [newPhoto, ...prev]);
+    setProfile((prev) => ({
+      ...prev,
+      bonusPoints: prev.bonusPoints + 15, // Photo proof keepsake bonus
+    }));
+
+    try {
+      confetti({
+        particleCount: 45,
+        spread: 70,
+        origin: { y: 0.7 },
+        colors: ['#68ACE5', '#F1C400', '#FFFFFF', '#002D72'],
+      });
+    } catch (e) {
+      // ignore
+    }
+  };
+
+  const deleteScrapbookPhoto = (id: string) => {
+    setScrapbookPhotos((prev) => prev.filter((p) => p.id !== id));
+  };
+
+  const likeScrapbookPhoto = (id: string) => {
+    setScrapbookPhotos((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, likes: p.likes + 1 } : p))
+    );
+  };
+
+  const openCameraForPlace = (place: Place) => {
+    setCameraTargetPlace(place);
+    setIsCameraModalOpen(true);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -502,6 +744,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setTransitFilter,
         freeOnlyFilter,
         setFreeOnlyFilter,
+        groupTrips,
+        joinGroupTrip,
+        leaveGroupTrip,
+        createGroupTrip,
+        checkInGroupTrip,
+        isCreateTripModalOpen,
+        setIsCreateTripModalOpen,
+        scrapbookPhotos,
+        addScrapbookPhoto,
+        deleteScrapbookPhoto,
+        likeScrapbookPhoto,
+        isCameraModalOpen,
+        setIsCameraModalOpen,
+        cameraTargetPlace,
+        setCameraTargetPlace,
+        openCameraForPlace,
         isLoginModalOpen,
         setIsLoginModalOpen,
         verificationNotice,

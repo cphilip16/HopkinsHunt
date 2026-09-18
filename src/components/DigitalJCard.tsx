@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Award, Sparkles, Check, Edit3, Save, Calendar, Star, BookOpen, Share2, ShieldCheck, MapPin } from 'lucide-react';
+import { Award, Sparkles, Check, Edit3, Save, Calendar, Star, BookOpen, Share2, ShieldCheck, MapPin, Camera } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BADGES } from '../data/badgesData';
 import { HopkinsShield } from './art/HopkinsShield';
@@ -17,6 +17,7 @@ import {
   SOUVENIR_STICKERS,
 } from './art/AnimatedStickers';
 import { BadgeIconArt, AvatarVectorArt, AVATAR_OPTIONS } from './art/VectorArt';
+import { ScrapbookGallery } from './ScrapbookGallery';
 
 export const DigitalJCard: React.FC = () => {
   const {
@@ -543,6 +544,9 @@ export const DigitalJCard: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Travel Scrapbook & Keepsake Polaroids */}
+      <ScrapbookGallery />
 
     </div>
   );

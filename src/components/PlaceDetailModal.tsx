@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, MapPin, Bus, Clock, DollarSign, Award, Sparkles, Check, Star, Calendar, Save, Stamp, Heart, Mail, Compass, BookOpen } from 'lucide-react';
+import { X, MapPin, Bus, Clock, DollarSign, Award, Sparkles, Check, Star, Calendar, Save, Stamp, Heart, Mail, Compass, BookOpen, Camera, Users } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { CuteMascot } from './art/CuteMascot';
@@ -13,7 +13,15 @@ import {
 } from './art/AnimatedStickers';
 
 export const PlaceDetailModal: React.FC = () => {
-  const { selectedPlace, setSelectedPlace, profile, toggleCheckIn, updateReview } = useApp();
+  const {
+    selectedPlace,
+    setSelectedPlace,
+    profile,
+    toggleCheckIn,
+    updateReview,
+    openCameraForPlace,
+    setIsCreateTripModalOpen,
+  } = useApp();
 
   if (!selectedPlace) return null;
 
@@ -157,6 +165,32 @@ export const PlaceDetailModal: React.FC = () => {
                   <span>Stamp My Passport (+{selectedPlace.points} PTS)</span>
                 </>
               )}
+            </button>
+          </div>
+
+          {/* Quick Expedition Actions: Camera Snap & Flock Trip */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button
+              onClick={() => {
+                const place = selectedPlace;
+                setSelectedPlace(null);
+                openCameraForPlace(place);
+              }}
+              className="py-2.5 px-3 rounded-2xl bg-white border-2 border-amber-300 hover:border-amber-400 hover:bg-amber-50 text-slate-900 font-heading font-black text-xs shadow-sm flex items-center justify-center space-x-2 transition-all transform active:scale-95"
+            >
+              <Camera className="w-4 h-4 text-hopkins-heritage" />
+              <span>Snap Photo Proof (+15 PTS)</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setSelectedPlace(null);
+                setIsCreateTripModalOpen(true);
+              }}
+              className="py-2.5 px-3 rounded-2xl bg-white border-2 border-sky-300 hover:border-sky-400 hover:bg-sky-50 text-slate-900 font-heading font-black text-xs shadow-sm flex items-center justify-center space-x-2 transition-all transform active:scale-95"
+            >
+              <Users className="w-4 h-4 text-hopkins-heritage" />
+              <span>Plan Flock Trip (+25 PTS)</span>
             </button>
           </div>
 

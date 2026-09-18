@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Bus, Check, Plus, Sparkles, Clock, DollarSign, Award, ChevronRight, Heart, Pin } from 'lucide-react';
+import { MapPin, Bus, Check, Plus, Sparkles, Clock, DollarSign, Award, ChevronRight, Heart, Pin, Camera } from 'lucide-react';
 import { Place } from '../types';
 import { useApp } from '../context/AppContext';
 import { PassportStamp } from './art/PassportStamp';
@@ -17,7 +17,7 @@ interface PlaceCardProps {
 }
 
 export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
-  const { profile, toggleCheckIn, setSelectedPlace } = useApp();
+  const { profile, toggleCheckIn, setSelectedPlace, openCameraForPlace } = useApp();
   const isVisited = profile.visitedPlaceIds.includes(place.id);
   const userReview = profile.placeReviews[place.id];
 
@@ -33,10 +33,10 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
 
   return (
     <div
-      className={`group rounded-3xl bg-[#FFFDF9] border transition-all duration-300 flex flex-col overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-1 relative ${
+      className={`group rounded-3xl bg-white border-2 transition-all duration-300 flex flex-col overflow-hidden shadow-card-high hover:shadow-2xl hover:-translate-y-1 relative ${
         isVisited
-          ? 'border-emerald-300/80 ring-2 ring-emerald-200/60'
-          : 'border-amber-200/70 hover:border-hopkins-spirit'
+          ? 'border-emerald-400 ring-2 ring-emerald-200'
+          : 'border-slate-200 hover:border-hopkins-spirit'
       }`}
     >
       {/* Decorative Pastel Washi Tape Pinned at Top Center */}
@@ -63,12 +63,12 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
           />
 
           {/* Vignette gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
           {/* Top Badges: Neighborhood Pill & Postage Stamp Points */}
           <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10">
             <div className="flex items-center space-x-1.5">
-              <span className="px-3 py-1 rounded-full text-[11px] font-extrabold bg-black/60 backdrop-blur-md text-white border border-white/20 flex items-center space-x-1.5 shadow-sm">
+              <span className="px-3 py-1 rounded-full text-[11px] font-extrabold bg-black/70 backdrop-blur-md text-white border border-white/20 flex items-center space-x-1.5 shadow-sm">
                 <MapPin className="w-3 h-3 text-white" />
                 <span>{place.neighborhood}</span>
               </span>
@@ -78,12 +78,16 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
                 <div className="hidden xs:inline-block transform -rotate-6 filter drop-shadow-sm">
                   <SteamingCoffeeSticker size={26} />
                 </div>
-              ) : place.category === 'museum' ? (
+              ) : place.category === 'historic' ? (
                 <div className="hidden xs:inline-block transform rotate-6 filter drop-shadow-sm">
                   <GilmanClockSticker size={26} />
                 </div>
+              ) : place.category === 'hopkins' ? (
+                <div className="hidden xs:inline-block transform -rotate-12 filter drop-shadow-sm">
+                  <BabyJaySticker size={24} />
+                </div>
               ) : (
-                <div className="hidden xs:inline-block transform -rotate-3 filter drop-shadow-sm">
+                <div className="hidden xs:inline-block transform -rotate-6 filter drop-shadow-sm">
                   <CompassRoseSticker size={26} />
                 </div>
               )}
@@ -107,7 +111,7 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
               <span>&bull;</span>
               <span>{place.cost}</span>
             </div>
-            <h3 className="text-lg sm:text-xl font-black tracking-tight text-white leading-snug drop-shadow-md">
+            <h3 className="text-lg sm:text-xl font-heading font-black tracking-tight text-white leading-snug drop-shadow-md">
               {place.name}
             </h3>
           </div>
@@ -133,42 +137,42 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
         
         {/* Description & Hopkins Lore */}
         <div className="space-y-2.5">
-          <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-slate-700 font-medium line-clamp-2 leading-relaxed">
             {place.description}
           </p>
 
           {/* Hopkins Student Lore Quote */}
-          <div className="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100/80 text-[11px] text-hopkins-deep">
-            <div className="font-bold flex items-center space-x-1.5 text-hopkins-heritage mb-0.5">
+          <div className="p-2.5 rounded-xl bg-blue-50/80 border border-blue-200/80 text-[11px] text-hopkins-deep">
+            <div className="font-extrabold flex items-center space-x-1.5 text-hopkins-heritage mb-0.5">
               <BabyJaySticker size={18} />
               <span>Hopkins Lore:</span>
             </div>
-            <p className="line-clamp-2 italic text-slate-700">
+            <p className="line-clamp-2 italic text-slate-800 font-medium">
               "{place.hopkinsLore}"
             </p>
           </div>
 
           {/* Transit Advice */}
-          <div className="flex items-start space-x-1.5 text-[11px] text-slate-600 bg-slate-50 p-2 rounded-xl">
+          <div className="flex items-start space-x-1.5 text-[11px] text-slate-700 bg-slate-100/90 p-2 rounded-xl border border-slate-200/60 font-medium">
             <Bus className="w-3.5 h-3.5 text-hopkins-heritage flex-shrink-0 mt-0.5" />
             <span className="line-clamp-1">{place.transitTip}</span>
           </div>
 
           {/* Student Perk if available */}
           {place.studentPerk && (
-            <div className="flex items-center space-x-1 text-[11px] font-semibold text-emerald-700">
+            <div className="flex items-center space-x-1 text-[11px] font-bold text-emerald-800">
               <Award className="w-3.5 h-3.5 flex-shrink-0" />
               <span className="line-clamp-1">{place.studentPerk}</span>
             </div>
           )}
         </div>
 
-        {/* Action Button: Check In / Stamped */}
-        <div className="pt-2 border-t border-slate-100 flex items-center gap-2">
+        {/* Action Button: Check In / Stamped & Camera Button */}
+        <div className="pt-2 border-t border-slate-200 flex items-center gap-2">
           
           <button
             onClick={() => toggleCheckIn(place.id)}
-            className={`flex-1 py-3 px-4 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center space-x-2 shadow-xs ${
+            className={`flex-1 py-3 px-4 min-h-[44px] rounded-xl text-xs font-heading font-black transition-all flex items-center justify-center space-x-2 shadow-sm ${
               isVisited
                 ? 'bg-emerald-600 text-white shadow-emerald-600/20'
                 : 'bg-hopkins-heritage hover:bg-hopkins-deep text-white shadow-blue-900/15'
@@ -187,10 +191,20 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
             )}
           </button>
 
+          {/* Photo Proof Snap Button */}
+          <button
+            onClick={() => openCameraForPlace(place)}
+            className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl border border-slate-300 hover:border-amber-400 text-slate-700 hover:text-amber-700 bg-white hover:bg-amber-50 shadow-xs transition-colors"
+            title="Snap Photo Proof with Field Camera"
+            aria-label={`Snap photo at ${place.name}`}
+          >
+            <Camera className="w-4 h-4 text-hopkins-heritage" />
+          </button>
+
           {/* Details Button */}
           <button
             onClick={() => setSelectedPlace(place)}
-            className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-900 bg-slate-50 hover:bg-white transition-colors"
+            className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl border border-slate-300 hover:border-slate-400 text-slate-700 hover:text-slate-900 bg-slate-50 hover:bg-white transition-colors"
             title="View Details, Lore & Journal"
             aria-label={`View details for ${place.name}`}
           >

@@ -7,6 +7,10 @@ import { PlaceCard } from './components/PlaceCard';
 import { InteractiveMap } from './components/InteractiveMap';
 import { QuestsView } from './components/QuestsView';
 import { DigitalJCard } from './components/DigitalJCard';
+import { FlockTripsView } from './components/FlockTripsView';
+import { ScrapbookGallery } from './components/ScrapbookGallery';
+import { CameraModal } from './components/CameraModal';
+import { CreateTripModal } from './components/CreateTripModal';
 import { LevelUpModal } from './components/LevelUpModal';
 import { PlaceDetailModal } from './components/PlaceDetailModal';
 import { LoginModal } from './components/LoginModal';
@@ -126,14 +130,28 @@ const AppContent: React.FC = () => {
           </section>
         )}
 
-        {/* Tab 3: Student Quests */}
+        {/* Tab 3: Flock Expeditions (Group Trips) */}
+        {activeTab === 'trips' && (
+          <section>
+            <FlockTripsView />
+          </section>
+        )}
+
+        {/* Tab 4: Student Quests */}
         {activeTab === 'quests' && (
           <section>
             <QuestsView />
           </section>
         )}
 
-        {/* Tab 4: J-Card Passport & Badges */}
+        {/* Tab 5: Travel Scrapbook Photo Studio */}
+        {activeTab === 'camera' && (
+          <section>
+            <ScrapbookGallery />
+          </section>
+        )}
+
+        {/* Tab 6: J-Card Passport & Badges */}
         {activeTab === 'passport' && (
           <section>
             <DigitalJCard />
@@ -142,10 +160,12 @@ const AppContent: React.FC = () => {
 
       </main>
 
-      {/* Global Celebratory, Detail & Auth Modals */}
+      {/* Global Celebratory, Detail, Camera & Auth Modals */}
       <LevelUpModal />
       <PlaceDetailModal />
       <LoginModal />
+      <CameraModal />
+      <CreateTripModal />
 
       {/* Interactive Hopkins Blue Jay Feather Particle Celebration */}
       <FeatherCelebration />

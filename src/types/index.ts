@@ -93,6 +93,57 @@ export interface PlaceReview {
   rating: number;
 }
 
+export interface GroupTripMember {
+  id: string;
+  name: string;
+  major: string;
+  classYear: string;
+  avatar: string;
+  joinedAt: string;
+  isCreator?: boolean;
+}
+
+export interface GroupTrip {
+  id: string;
+  title: string;
+  destinationPlaceId: string;
+  destinationName: string;
+  neighborhood: NeighborhoodType;
+  category: CategoryType;
+  meetupLocation: string;
+  meetupTime: string;
+  dateLabel: string;
+  transitMethod: 'JHMI Shuttle' | 'Charm City Circulator' | 'Walking Flock' | 'Light Rail' | 'Hopkins Night Ride';
+  maxMembers: number;
+  creator: {
+    name: string;
+    major: string;
+    classYear: string;
+    avatar: string;
+    campus: string;
+    isJhuVerified: boolean;
+  };
+  members: GroupTripMember[];
+  notes: string;
+  bonusGroupPoints: number;
+  status: 'upcoming' | 'gathering' | 'completed';
+  checklist: string[];
+}
+
+export interface ScrapbookPhoto {
+  id: string;
+  placeId?: string;
+  placeName: string;
+  neighborhood?: string;
+  dataUrl: string;
+  timestamp: string;
+  caption: string;
+  filter: 'normal' | 'vintage' | 'warm-sun' | 'hopkins-blue' | 'noir';
+  frameStyle: 'polaroid' | 'postcard' | 'classic-stamp';
+  stickerKey?: string;
+  likes: number;
+}
+
 export interface UserProfile {
   studentName: string;
   classYear: string;
@@ -104,6 +155,8 @@ export interface UserProfile {
   placeReviews: Record<string, PlaceReview>;
   completedQuestIds: string[];
   bonusPoints: number;
+  joinedTripIds?: string[];
+  photos?: ScrapbookPhoto[];
   isAuthenticated: boolean;
   isVerified: boolean;
   jhedId?: string;

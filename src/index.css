@@ -5,7 +5,20 @@
 @layer base {
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: #0f172a;
   }
+  h1, h2, h3, h4, .font-heading, .font-display {
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+}
+
+@keyframes cameraFlashPop {
+  0% { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+.camera-flash-active {
+  animation: cameraFlashPop 0.4s ease-out forwards;
 }
 
 /* Custom scrollbar hiding utility */

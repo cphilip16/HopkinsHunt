@@ -28,7 +28,7 @@ export const RankProgressCard: React.FC = () => {
   const completedQuestsCount = profile.completedQuestIds.length;
 
   return (
-    <div className="bg-gradient-to-br from-white via-[#FFFDF9] to-blue-50/50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-jhu border border-amber-200/60 relative overflow-hidden">
+    <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-card-high border-2 border-slate-200 relative overflow-hidden">
       
       {/* Top Maryland & Baltimore Ribbon Accent */}
       <div className="absolute top-0 inset-x-0">
@@ -47,7 +47,7 @@ export const RankProgressCard: React.FC = () => {
       <div className="relative z-10">
         
         {/* Top Header: Current Rank Badge, Chibi Mascot & Point Counter */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-amber-200/60">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-slate-200">
           
           <div className="flex items-center space-x-3 sm:space-x-4">
             <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center p-2 shadow-lg ring-2 sm:ring-4 ring-white shadow-blue-900/15 flex-shrink-0">
@@ -61,7 +61,7 @@ export const RankProgressCard: React.FC = () => {
 
             <div>
               <div className="flex items-center space-x-1.5 sm:space-x-2">
-                <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-hopkins-heritage text-white flex items-center space-x-1.5">
+                <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-hopkins-heritage text-white flex items-center space-x-1.5 shadow-xs">
                   <Compass className="w-3.5 h-3.5 text-sky-200" />
                   <span>Rank {currentRank.id}: {currentRank.name}</span>
                 </span>
@@ -70,26 +70,26 @@ export const RankProgressCard: React.FC = () => {
                 </span>
               </div>
 
-              <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 mt-1 tracking-tight">
+              <h2 className="text-xl sm:text-3xl font-heading font-black text-slate-900 mt-1 tracking-tight">
                 {currentSubrank.subrankName}
               </h2>
 
-              <p className="text-xs sm:text-sm text-slate-600 italic mt-0.5 max-w-xl line-clamp-2 sm:line-clamp-none">
+              <p className="text-xs sm:text-sm text-slate-700 italic mt-0.5 max-w-xl line-clamp-2 sm:line-clamp-none font-medium">
                 "{currentSubrank.flavorText}"
               </p>
             </div>
           </div>
 
           {/* Points display */}
-          <div className="bg-white px-5 py-4 rounded-2xl border border-slate-200 shadow-sm flex md:flex-col items-center justify-between md:items-end min-w-[180px]">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-              Total Points
+          <div className="bg-slate-50 px-5 py-4 rounded-2xl border-2 border-amber-300 shadow-sm flex md:flex-col items-center justify-between md:items-end min-w-[180px]">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-600">
+              Exploration Points
             </span>
             <div className="flex items-baseline space-x-1.5">
-              <span className="text-3xl sm:text-4xl font-black text-hopkins-heritage">
+              <span className="text-3xl sm:text-4xl font-heading font-black text-hopkins-heritage">
                 {totalPoints}
               </span>
-              <span className="text-sm font-bold text-slate-400">PTS</span>
+              <span className="text-sm font-black text-slate-500">PTS</span>
             </div>
             {profile.bonusPoints > 0 && (
               <span className="text-[11px] font-semibold text-emerald-600">

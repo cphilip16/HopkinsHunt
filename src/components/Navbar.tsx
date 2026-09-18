@@ -1,11 +1,12 @@
 import React from 'react';
-import { Compass, MapPin, Award, BookOpen, RotateCcw, Sparkles, ShieldCheck, LogIn, LogOut } from 'lucide-react';
+import { Compass, MapPin, Award, BookOpen, RotateCcw, Sparkles, ShieldCheck, LogIn, LogOut, Camera, Users } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { CuteMascot } from './art/CuteMascot';
 import { AirmailStrip } from './art/TravelDecorations';
 import { BabyJaySticker, SparkleStarsSticker } from './art/AnimatedStickers';
+import { RankInsigniaArt, AvatarVectorArt } from './art/VectorArt';
 
 export const Navbar: React.FC = () => {
   const {
@@ -19,6 +20,7 @@ export const Navbar: React.FC = () => {
     loadDemoProgress,
     setIsLoginModalOpen,
     logoutStudent,
+    setIsCameraModalOpen,
   } = useApp();
 
   return (
@@ -62,7 +64,9 @@ export const Navbar: React.FC = () => {
           {/* Center: Live Rank & Points Meter (Desktop) */}
           <div className="hidden lg:flex items-center space-x-4 bg-white/5 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10">
             <div className="flex items-center space-x-2.5">
-              <span className="text-2xl">{currentSubrank.insignia}</span>
+              <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                <RankInsigniaArt insignia={currentSubrank.insignia} size={30} />
+              </div>
               <div>
                 <div className="flex items-center space-x-1.5">
                   <span className="text-xs font-semibold uppercase tracking-wider text-hopkins-spirit">
@@ -97,6 +101,16 @@ export const Navbar: React.FC = () => {
               <Sparkles className="w-3 h-3 text-amber-300" />
               <span>{totalPoints}p</span>
             </div>
+
+            {/* Field Camera Quick Snap Button */}
+            <button
+              onClick={() => setIsCameraModalOpen(true)}
+              title="Open Charm City Field Camera"
+              className="inline-flex items-center space-x-1 sm:space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 shadow-sm transition-all transform active:scale-95"
+            >
+              <Camera className="w-3.5 h-3.5 text-amber-300" />
+              <span className="hidden sm:inline">Camera</span>
+            </button>
 
             {/* JHU Verification / Login Button */}
             {profile.isVerified ? (
@@ -148,7 +162,9 @@ export const Navbar: React.FC = () => {
                   : 'bg-hopkins-spirit text-hopkins-deep hover:bg-sky-200'
               }`}
             >
-              <span className="text-base">{profile.avatar}</span>
+              <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+                <AvatarVectorArt avatarId={profile.avatar} size={20} />
+              </div>
               <span>J-Card & Passport</span>
             </button>
           </div>
@@ -182,6 +198,21 @@ export const Navbar: React.FC = () => {
           </button>
 
           <button
+            onClick={() => setActiveTab('trips')}
+            className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+              activeTab === 'trips'
+                ? 'bg-white text-hopkins-deep shadow-md font-bold'
+                : 'text-blue-100/90 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            <Users className="w-4 h-4" />
+            <span>Flock Trips</span>
+            <span className="ml-1 px-1.5 py-0.2 text-[10px] font-black bg-sky-400 text-hopkins-deep rounded-full">
+              Pods
+            </span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('quests')}
             className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
               activeTab === 'quests'
@@ -194,6 +225,18 @@ export const Navbar: React.FC = () => {
             <span className="ml-1 px-1.5 py-0.2 text-[10px] font-black bg-amber-400 text-hopkins-deep rounded-full">
               Bonus PTS
             </span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('camera')}
+            className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+              activeTab === 'camera'
+                ? 'bg-white text-hopkins-deep shadow-md font-bold'
+                : 'text-blue-100/90 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            <Camera className="w-4 h-4" />
+            <span>Scrapbook</span>
           </button>
 
           <button
