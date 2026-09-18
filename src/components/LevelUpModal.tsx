@@ -1,9 +1,10 @@
 import React from 'react';
 import { Sparkles, Trophy, Check, X, ArrowRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { BlueJayMascot } from './art/BlueJayMascot';
+import { CuteMascot } from './art/CuteMascot';
 import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
+import { WashiTape } from './art/TravelDecorations';
 
 export const LevelUpModal: React.FC = () => {
   const { levelUpData, setLevelUpData, totalPoints, setActiveTab } = useApp();
@@ -13,9 +14,13 @@ export const LevelUpModal: React.FC = () => {
   const { subrank, rank, isMajorRankUp } = levelUpData;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="relative w-full max-w-lg bg-gradient-to-b from-white via-slate-50 to-blue-50 rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-sky-300 overflow-hidden text-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-300">
+      <div className="relative w-full max-w-lg bg-[#FFFDF9] rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-amber-300 overflow-hidden text-center">
         
+        {/* Top Washi Tape Accents */}
+        <WashiTape color="amber" angle={-2} className="-top-3 left-12 z-30" />
+        <WashiTape color="rose" angle={3} className="-top-3 right-12 z-30" />
+
         {/* Top celebratory Maryland Ribbon */}
         <div className="absolute top-0 inset-x-0">
           <MarylandRibbon height={4} />
@@ -30,13 +35,18 @@ export const LevelUpModal: React.FC = () => {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Celebratory Blue Jay Mascot Cheer & Insignia Burst */}
-        <div className="relative my-2 flex items-center justify-center">
+        {/* Celebratory Chibi Baby Jay Mascot Cheer & Insignia Burst */}
+        <div className="relative my-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           {/* Ambient spirit glow */}
-          <div className="absolute w-40 h-40 rounded-full bg-gradient-to-tr from-amber-400/30 via-sky-300/30 to-transparent blur-2xl animate-pulse" />
+          <div className="absolute w-44 h-44 rounded-full bg-gradient-to-tr from-amber-300/40 via-sky-300/30 to-rose-200/40 blur-2xl animate-pulse" />
           
           <div className="relative flex items-center justify-center space-x-3">
-            <BlueJayMascot pose="cheer" size={105} className="animate-bounce" />
+            <CuteMascot
+              pose="cheering"
+              size={110}
+              speechBubble="Pack your bags! Level Up!"
+              className="animate-bounce"
+            />
             <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center text-3xl sm:text-4xl shadow-xl ring-4 ring-amber-300 shadow-sky-500/20">
               {subrank.insignia}
             </div>

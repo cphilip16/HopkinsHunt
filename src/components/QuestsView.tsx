@@ -1,9 +1,11 @@
 import React from 'react';
-import { Award, Check, Sparkles, MapPin, ChevronRight } from 'lucide-react';
+import { Award, Check, Sparkles, MapPin, ChevronRight, Compass } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Quest } from '../types';
-import { BlueJayMascot } from './art/BlueJayMascot';
+import { CuteMascot } from './art/CuteMascot';
 import { MarylandRibbon } from './art/MarylandRibbon';
+import { WashiTape } from './art/TravelDecorations';
+import { PassportStamp } from './art/PassportStamp';
 
 export const QuestsView: React.FC = () => {
   const { quests, places, profile, toggleCheckIn, setSelectedPlace } = useApp();
@@ -19,7 +21,7 @@ export const QuestsView: React.FC = () => {
         </div>
 
         <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-400 text-hopkins-deep mb-3">
+          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-400 text-hopkins-deep mb-3 shadow-md">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Bonus Travel Expeditions</span>
           </div>
@@ -27,13 +29,18 @@ export const QuestsView: React.FC = () => {
             Hopkins Explorer Quests
           </h2>
           <p className="text-sm text-blue-100/90 mt-2 leading-relaxed">
-            Curated journeys that take you beyond Homewood. Complete all destinations in an expedition to unlock massive bonus point multipliers and prestigious J-Card badge pins!
+            Curated journeys that take you beyond Homewood. Complete all destinations in an expedition to unlock massive bonus point multipliers and collectible J-Card passport pins!
           </p>
         </div>
 
-        {/* Flying Blue Jay Mascot Art Backdrop */}
-        <div className="absolute right-4 bottom-1 pointer-events-none hidden sm:block">
-          <BlueJayMascot pose="flight" size={135} className="transform -rotate-6 opacity-90 drop-shadow-xl" />
+        {/* Cute Baby Jay Explorer Mascot Art Backdrop */}
+        <div className="absolute right-4 -bottom-2 pointer-events-none hidden sm:block">
+          <CuteMascot
+            pose="explorer"
+            size={120}
+            speechBubble="Let's go explore Bmore!"
+            className="transform -rotate-3 drop-shadow-xl"
+          />
         </div>
       </div>
 
@@ -51,15 +58,27 @@ export const QuestsView: React.FC = () => {
           const isCompleted = completedCount === quest.placeIds.length;
           const progressPercent = Math.round((completedCount / quest.placeIds.length) * 100);
 
+          const tapeColor = quest.difficulty === 'Easy' ? 'teal' : quest.difficulty === 'Moderate' ? 'amber' : 'rose';
+
           return (
             <div
               key={quest.id}
-              className={`rounded-3xl border p-4 sm:p-6 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-lg ${
+              className={`relative rounded-3xl border-2 p-4 sm:p-6 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-lg pt-6 ${
                 isCompleted
-                  ? 'bg-gradient-to-br from-emerald-50/50 via-white to-sky-50/30 border-emerald-300 ring-2 ring-emerald-200'
-                  : 'bg-white border-slate-200'
+                  ? 'bg-[#FAF7EE] border-emerald-300 ring-2 ring-emerald-200/70 shadow-emerald-100'
+                  : 'bg-[#FFFDF9] border-amber-200/80 shadow-stone-100'
               }`}
             >
+              {/* Top Washi Tape Scrapbook Accent */}
+              <WashiTape color={tapeColor as any} angle={quest.difficulty === 'Easy' ? -2 : quest.difficulty === 'Moderate' ? 1.5 : -1.5} className="-top-3 left-8 z-20" />
+
+              {/* Rubber Passport Stamp on Completion */}
+              {isCompleted && (
+                <div className="absolute top-1 right-2 sm:right-4 pointer-events-none z-20 scale-75 transform rotate-6">
+                  <PassportStamp neighborhood="COMPLETED" visitedDate="EXPEDITION CLEARED" color="emerald" />
+                </div>
+              )}
+
               <div>
                 {/* Header: Icon, Title & Bonus Points */}
                 <div className="flex items-start justify-between gap-3">

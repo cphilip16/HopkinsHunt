@@ -331,3 +331,4 @@ export const BlueJayMascot: React.FC<BlueJayMascotProps> = ({
     </div>
   );
 };
+

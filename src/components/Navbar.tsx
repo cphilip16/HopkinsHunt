@@ -3,6 +3,8 @@ import { Compass, MapPin, Award, BookOpen, RotateCcw, Sparkles, ShieldCheck, Log
 import { useApp } from '../context/AppContext';
 import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
+import { CuteMascot } from './art/CuteMascot';
+import { AirmailStrip } from './art/TravelDecorations';
 
 export const Navbar: React.FC = () => {
   const {
@@ -35,18 +37,23 @@ export const Navbar: React.FC = () => {
                 1876
               </span>
             </div>
+            
+            {/* Cute Baby Jay Explorer Mascot */}
+            <div className="hidden xs:block flex-shrink-0">
+              <CuteMascot pose="waving" size={36} className="transform -rotate-6 hover:rotate-0 transition-transform" />
+            </div>
+
             <div>
               <div className="flex items-center space-x-1.5 sm:space-x-2">
                 <span className="font-extrabold text-lg sm:text-2xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-sky-200 flex items-center gap-1.5">
                   <span>JayWalk Bmore</span>
-                  <span className="text-base sm:text-xl">🐦</span>
                 </span>
-                <span className="hidden md:inline-block px-2 py-0.5 text-[10px] font-black uppercase tracking-widest bg-gradient-to-r from-hopkins-spirit/20 to-blue-500/20 text-sky-200 rounded-md border border-sky-400/30">
-                  Johns Hopkins
+                <span className="hidden md:inline-block px-2 py-0.5 text-[10px] font-black uppercase tracking-widest bg-gradient-to-r from-amber-400/20 to-sky-400/20 text-amber-200 rounded-md border border-amber-300/30">
+                  Travel Passport
                 </span>
               </div>
               <p className="text-[11px] text-blue-200/80 font-medium hidden sm:block">
-                Charm City Exploration & Student Level Ranks &bull; Homewood & Peabody
+                Charm City Exploration & Passport Stamps &bull; Homewood & Peabody
               </p>
             </div>
           </div>
@@ -207,6 +214,9 @@ export const Navbar: React.FC = () => {
         </nav>
 
       </div>
+      
+      {/* Airmail Border Accent */}
+      <AirmailStrip height={3} />
     </header>
   );
 };

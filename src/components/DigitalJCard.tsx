@@ -4,6 +4,9 @@ import { useApp } from '../context/AppContext';
 import { BADGES } from '../data/badgesData';
 import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
+import { PassportStamp } from './art/PassportStamp';
+import { LuggageTag, WashiTape } from './art/TravelDecorations';
+import { CuteMascot } from './art/CuteMascot';
 
 export const DigitalJCard: React.FC = () => {
   const {
@@ -162,14 +165,16 @@ export const DigitalJCard: React.FC = () => {
 
           </div>
 
-          {/* Edit Profile Trigger */}
-          <div className="mt-4 text-center">
+          {/* Travel Credentials & Edit Profile Trigger */}
+          <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2">
+            <LuggageTag tagNumber={profile.jCardId.replace('-', '')} label="JHU EXPEDITION PASS" />
+
             <button
               onClick={() => setIsEditing(!isEditing)}
-              className="inline-flex items-center space-x-1.5 text-xs font-bold text-hopkins-heritage hover:text-blue-900 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200 transition-colors"
+              className="inline-flex items-center space-x-1.5 text-xs font-bold text-hopkins-heritage hover:text-blue-900 bg-white px-4 py-2 rounded-xl shadow-xs border border-amber-200/80 transition-colors"
             >
               <Edit3 className="w-3.5 h-3.5" />
-              <span>{isEditing ? 'Cancel Editing' : 'Customize Student J-Card'}</span>
+              <span>{isEditing ? 'Cancel Editing' : 'Customize Pass'}</span>
             </button>
           </div>
         </div>
@@ -326,73 +331,105 @@ export const DigitalJCard: React.FC = () => {
         </div>
       </div>
 
-      {/* Visited Passport History & Journal */}
-      <div className="bg-white rounded-3xl p-4 sm:p-8 shadow-sm border border-slate-200 space-y-4">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+      {/* Visited Passport Stamp Book & Journal */}
+      <div className="bg-[#FAF7EE] rounded-3xl p-4 sm:p-8 shadow-sm border-2 border-amber-200/90 space-y-4 relative overflow-hidden">
+        {/* Top Travel Airmail Ribbon */}
+        <div className="absolute top-0 inset-x-0">
+          <MarylandRibbon height={3} />
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-2">
           <div>
-            <h3 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center space-x-2">
-              <BookOpen className="w-5 h-5 text-hopkins-heritage" />
-              <span>Visited Destinations & Travel Journal</span>
+            <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center space-x-2">
+              <span>📖</span>
+              <span>Student Passport Visa Stamps & Travel Diary</span>
             </h3>
-            <p className="text-xs text-slate-500 mt-0.5">
-              Your stamped passport of explored Baltimore neighborhoods and personal reflections.
+            <p className="text-xs text-amber-900/80 mt-0.5">
+              Your personal stamped travel visa pages across Baltimore's historic neighborhoods.
             </p>
           </div>
-          <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full whitespace-nowrap">
-            {visitedPlacesList.length} Stamped Locations
+          <span className="text-xs font-black text-emerald-800 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full whitespace-nowrap shadow-2xs">
+            {visitedPlacesList.length} Stamped Visas
           </span>
         </div>
 
         {visitedPlacesList.length === 0 ? (
-          <div className="text-center py-12 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200">
-            <span className="text-4xl block mb-2">🧭</span>
-            <h4 className="text-sm font-bold text-slate-700">No Check-Ins Yet!</h4>
+          <div className="text-center py-12 bg-white/70 rounded-2xl border-2 border-dashed border-amber-200/80">
+            <CuteMascot pose="explorer" size={88} bubbleText="No stamps yet! Let's go!" />
+            <h4 className="text-sm font-bold text-slate-700 mt-2">Your Passport Book is Blank!</h4>
             <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1">
-              Start exploring Charles Village, Hampden, Mount Vernon, or the Inner Harbor and check in to stamp your passport and rack up points!
+              Venture to Charles Village, Hampden, Mount Vernon, or the Harbor to collect your first official rubber stamp!
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-            {visitedPlacesList.map((place) => {
+            {visitedPlacesList.map((place, idx) => {
               const review = profile.placeReviews[place.id];
+              const stampColors: ('emerald' | 'sapphire' | 'crimson' | 'amber')[] = [
+                'emerald',
+                'sapphire',
+                'crimson',
+                'amber',
+              ];
+              const stampColor = stampColors[idx % stampColors.length];
 
               return (
                 <div
                   key={place.id}
-                  className="p-4 rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50/30 to-white flex flex-col justify-between space-y-3"
+                  className="p-4 rounded-2xl border border-amber-300/80 bg-white/90 flex flex-col justify-between space-y-3 relative overflow-hidden shadow-xs hover:shadow-md transition-shadow"
                 >
-                  <div className="flex items-start justify-between gap-2">
+                  {/* Top Tiny Washi Tape Pin */}
+                  <div className="absolute top-0 right-4 z-10">
+                    <WashiTape color="gold" width={60} angle={3} />
+                  </div>
+
+                  <div className="flex items-start justify-between gap-2 pr-14">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded">
-                        {place.neighborhood}
+                      <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100/90 px-2 py-0.5 rounded-full border border-emerald-200">
+                        📍 {place.neighborhood}
                       </span>
                       <h4
-                        className="text-base font-bold text-slate-900 mt-1 cursor-pointer hover:text-hopkins-heritage"
+                        className="text-base font-black text-slate-900 mt-1 cursor-pointer hover:text-hopkins-heritage"
                         onClick={() => setSelectedPlace(place)}
                       >
                         {place.name}
                       </h4>
                     </div>
 
-                    <span className="px-2.5 py-1 bg-amber-400/20 text-amber-900 border border-amber-300 rounded-xl text-xs font-black">
+                    <span className="px-2 py-0.5 bg-amber-100 text-amber-900 border border-amber-300 rounded-lg text-[11px] font-black whitespace-nowrap">
                       +{place.points} PTS
                     </span>
                   </div>
 
-                  {review && (
-                    <div className="bg-white/80 p-3 rounded-xl border border-slate-100 text-xs text-slate-600">
-                      <div className="flex items-center justify-between text-[11px] text-slate-400 font-semibold mb-1">
-                        <span className="flex items-center">
-                          <Calendar className="w-3 h-3 mr-1" />
-                          {review.date}
-                        </span>
-                        <span className="text-amber-500 font-bold">
-                          {'★'.repeat(review.rating || 5)}
-                        </span>
-                      </div>
-                      <p className="italic text-slate-700">"{review.notes}"</p>
+                  {/* Stamp & Review Row */}
+                  <div className="flex items-center space-x-3 bg-[#FFFDF7] p-2.5 rounded-xl border border-amber-200/70">
+                    {/* Authentic Rubber Stamp */}
+                    <div className="flex-shrink-0">
+                      <PassportStamp
+                        neighborhood={place.neighborhood}
+                        date={review?.date || 'APPROVED'}
+                        size={66}
+                        rotation={-8}
+                        color={stampColor}
+                      />
                     </div>
-                  )}
+
+                    <div className="flex-1 min-w-0 text-xs text-slate-600">
+                      {review ? (
+                        <>
+                          <div className="flex items-center justify-between text-[11px] text-amber-700 font-bold mb-0.5">
+                            <span>Traveler Log</span>
+                            <span className="text-amber-500">{'★'.repeat(review.rating || 5)}</span>
+                          </div>
+                          <p className="italic text-slate-700 line-clamp-2">"{review.notes}"</p>
+                        </>
+                      ) : (
+                        <p className="text-[11px] text-slate-400 italic">
+                          Stamped & verified into official Hopkins traveler passport!
+                        </p>
+                      )}
+                    </div>
+                  </div>
 
                   <div className="flex items-center justify-between text-[11px] pt-1">
                     <span className="text-slate-400 truncate max-w-[200px]">
@@ -402,7 +439,7 @@ export const DigitalJCard: React.FC = () => {
                       onClick={() => setSelectedPlace(place)}
                       className="text-hopkins-heritage font-bold hover:underline"
                     >
-                      View Lore &rarr;
+                      View Postcard & Lore &rarr;
                     </button>
                   </div>
                 </div>

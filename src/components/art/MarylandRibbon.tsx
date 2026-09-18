@@ -31,3 +31,4 @@ export const MarylandRibbon: React.FC<MarylandRibbonProps> = ({
     </div>
   );
 };
+

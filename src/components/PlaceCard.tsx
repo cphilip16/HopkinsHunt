@@ -1,7 +1,9 @@
 import React from 'react';
-import { MapPin, Bus, Check, Plus, Sparkles, Clock, DollarSign, Award, ChevronRight } from 'lucide-react';
+import { MapPin, Bus, Check, Plus, Sparkles, Clock, DollarSign, Award, ChevronRight, Heart } from 'lucide-react';
 import { Place } from '../types';
 import { useApp } from '../context/AppContext';
+import { PassportStamp } from './art/PassportStamp';
+import { WashiTape } from './art/TravelDecorations';
 
 interface PlaceCardProps {
   place: Place;
@@ -12,68 +14,92 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
   const isVisited = profile.visitedPlaceIds.includes(place.id);
   const userReview = profile.placeReviews[place.id];
 
+  // Pick cute pastel tape color based on category
+  const washiColor =
+    place.category === 'museum'
+      ? 'sky'
+      : place.category === 'food'
+      ? 'pink'
+      : place.category === 'nature'
+      ? 'mint'
+      : 'gold';
+
   return (
     <div
-      className={`group rounded-3xl bg-white border transition-all duration-300 flex flex-col overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 ${
+      className={`group rounded-3xl bg-[#FFFDF9] border transition-all duration-300 flex flex-col overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-1 relative ${
         isVisited
-          ? 'border-emerald-300/80 ring-1 ring-emerald-200 bg-gradient-to-b from-emerald-50/20 to-white'
-          : 'border-slate-200 hover:border-hopkins-spirit/50'
+          ? 'border-emerald-300/80 ring-2 ring-emerald-200/60'
+          : 'border-amber-200/70 hover:border-hopkins-spirit'
       }`}
     >
-      {/* Image Thumbnail & Overlays */}
+      {/* Decorative Pastel Washi Tape Pinned at Top Center */}
+      <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 z-30">
+        <WashiTape color={washiColor} width={88} angle={-2} />
+      </div>
+
+      {/* Snapshot Image Container with Polaroid Framing */}
       <div
-        className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900 cursor-pointer"
+        className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900 cursor-pointer pt-2 px-2"
         onClick={() => setSelectedPlace(place)}
       >
-        <img
-          src={place.imageUrl}
-          alt={place.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-          loading="lazy"
-          onError={(e) => {
-            const target = e.currentTarget;
-            target.onerror = null;
-            target.src = 'https://upload.wikimedia.org/wikipedia/commons/0/05/Fell%27s_Point_Thames_St.jpg';
-          }}
-        />
+        <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-inner">
+          <img
+            src={place.imageUrl}
+            alt={place.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+            loading="lazy"
+            onError={(e) => {
+              const target = e.currentTarget;
+              target.onerror = null;
+              target.src = 'https://upload.wikimedia.org/wikipedia/commons/0/05/Fell%27s_Point_Thames_St.jpg';
+            }}
+          />
 
-        {/* Gradient scrim */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          {/* Vignette gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-        {/* Top Badges: Neighborhood & Points Value */}
-        <div className="absolute top-3 inset-x-3 flex items-center justify-between">
-          <span className="px-3 py-1 rounded-full text-xs font-bold bg-black/60 backdrop-blur-md text-white border border-white/20">
-            {place.neighborhood}
-          </span>
-
-          <div className="flex items-center space-x-1 px-3 py-1 rounded-full text-xs font-black bg-gradient-to-r from-amber-400 to-amber-500 text-hopkins-deep shadow-md">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>+{place.points} PTS</span>
-          </div>
-        </div>
-
-        {/* Bottom Image Overlay: Name & Tagline */}
-        <div className="absolute bottom-3 inset-x-3 text-white">
-          <div className="flex items-center space-x-2 text-[11px] font-semibold text-sky-200 mb-0.5">
-            <span className="capitalize">{place.category}</span>
-            <span>&bull;</span>
-            <span className="flex items-center">
-              <Clock className="w-3 h-3 mr-0.5" />
-              {place.estimatedTime}
+          {/* Top Badges: Neighborhood Pill & Postage Stamp Points */}
+          <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10">
+            <span className="px-3 py-1 rounded-full text-[11px] font-extrabold bg-black/60 backdrop-blur-md text-white border border-white/20 flex items-center space-x-1 shadow-sm">
+              <span>📍</span>
+              <span>{place.neighborhood}</span>
             </span>
-            <span>&bull;</span>
-            <span>{place.cost}</span>
+
+            {/* Cute Perforated Postage Stamp Point Badge */}
+            <div className="relative flex items-center space-x-1 px-2.5 py-1 bg-amber-400 text-hopkins-deep font-black text-xs shadow-md border-2 border-dashed border-amber-600 rounded-lg transform rotate-2 hover:rotate-0 transition-transform">
+              <Sparkles className="w-3 h-3 text-hopkins-deep" />
+              <span>+{place.points} PTS</span>
+            </div>
           </div>
-          <h3 className="text-lg sm:text-xl font-extrabold tracking-tight text-white leading-snug drop-shadow-sm">
-            {place.name}
-          </h3>
+
+          {/* Bottom Snapshot Overlay: Destination Name & Tagline */}
+          <div className="absolute bottom-2.5 inset-x-3 text-white">
+            <div className="flex items-center space-x-1.5 text-[11px] font-bold text-sky-200 mb-0.5">
+              <span className="capitalize">{place.category}</span>
+              <span>&bull;</span>
+              <span className="flex items-center">
+                <Clock className="w-3 h-3 mr-0.5" />
+                {place.estimatedTime}
+              </span>
+              <span>&bull;</span>
+              <span>{place.cost}</span>
+            </div>
+            <h3 className="text-lg sm:text-xl font-black tracking-tight text-white leading-snug drop-shadow-md">
+              {place.name}
+            </h3>
+          </div>
         </div>
 
-        {/* Visited Checkmark Ribbon */}
+        {/* Official Rubber Passport Stamp Overlay when Visited */}
         {isVisited && (
-          <div className="absolute top-3 right-3 sm:right-auto sm:left-3 bg-emerald-500 text-white text-[11px] font-black px-2.5 py-1 rounded-full flex items-center space-x-1 shadow-lg ring-2 ring-white">
-            <Check className="w-3.5 h-3.5" />
-            <span>Visited & Earned</span>
+          <div className="absolute bottom-3 right-3 z-20 pointer-events-none transform translate-y-1">
+            <PassportStamp
+              neighborhood={place.neighborhood}
+              date={userReview?.date || 'VISITED'}
+              size={88}
+              rotation={-14}
+              color="emerald"
+            />
           </div>
         )}
       </div>
@@ -152,10 +178,14 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
 
         </div>
 
-        {/* Personal note snippet if checked in */}
+        {/* Personal travel reflection sticky note if checked in */}
         {isVisited && userReview?.notes && (
-          <div className="text-[10px] text-slate-500 italic bg-emerald-50/50 p-2 rounded-lg border border-emerald-100">
-            <span className="font-semibold text-emerald-800">Your Reflection ({userReview.date}):</span> "{userReview.notes}"
+          <div className="text-[11px] text-amber-950 italic bg-[#FFFBEB] p-2.5 rounded-xl border border-amber-200/80 shadow-xs flex items-start space-x-1.5">
+            <span className="text-xs">📌</span>
+            <div>
+              <span className="font-bold text-amber-900 not-italic block text-[10px]">Travel Diary ({userReview.date}):</span>
+              "{userReview.notes}"
+            </div>
           </div>
         )}
 

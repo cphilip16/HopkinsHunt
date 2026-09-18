@@ -110,3 +110,4 @@ export const CampusSkyline: React.FC<CampusSkylineProps> = ({
     </div>
   );
 };
+
