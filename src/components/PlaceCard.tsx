@@ -27,6 +27,11 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
           alt={place.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
           loading="lazy"
+          onError={(e) => {
+            const target = e.currentTarget;
+            target.onerror = null;
+            target.src = 'https://upload.wikimedia.org/wikipedia/commons/0/05/Fell%27s_Point_Thames_St.jpg';
+          }}
         />
 
         {/* Gradient scrim */}
