@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Award, Sparkles, Check, Edit3, Save, Calendar, Star, BookOpen, Share2, ShieldCheck } from 'lucide-react';
+import { Award, Sparkles, Check, Edit3, Save, Calendar, Star, BookOpen, Share2, ShieldCheck, MapPin } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BADGES } from '../data/badgesData';
 import { HopkinsShield } from './art/HopkinsShield';
@@ -7,7 +7,16 @@ import { MarylandRibbon } from './art/MarylandRibbon';
 import { PassportStamp } from './art/PassportStamp';
 import { LuggageTag, WashiTape } from './art/TravelDecorations';
 import { CuteMascot } from './art/CuteMascot';
-import { BabyJaySticker, CompassRoseSticker, MarylandCrabSticker, SparkleStarsSticker, SOUVENIR_STICKERS } from './art/AnimatedStickers';
+import {
+  BabyJaySticker,
+  CompassRoseSticker,
+  MarylandCrabSticker,
+  SparkleStarsSticker,
+  BookStackSticker,
+  LuggageAirmailSticker,
+  SOUVENIR_STICKERS,
+} from './art/AnimatedStickers';
+import { BadgeIconArt, AvatarVectorArt, AVATAR_OPTIONS } from './art/VectorArt';
 
 export const DigitalJCard: React.FC = () => {
   const {
@@ -94,8 +103,8 @@ export const DigitalJCard: React.FC = () => {
               
               {/* Student Avatar */}
               <div className="relative">
-                <div className="w-20 h-24 rounded-2xl bg-gradient-to-t from-sky-200 to-white flex items-center justify-center text-5xl shadow-lg ring-2 ring-white/30">
-                  {profile.avatar}
+                <div className="w-20 h-24 rounded-2xl bg-gradient-to-t from-sky-200 to-white flex items-center justify-center p-2 shadow-lg ring-2 ring-white/30 overflow-hidden">
+                  <AvatarVectorArt avatarId={profile.avatar} size={54} />
                 </div>
                 <div className="absolute -bottom-2 inset-x-0 text-center">
                   <span className="text-[9px] font-black uppercase tracking-widest bg-hopkins-deep text-sky-200 px-1.5 py-0.5 rounded border border-white/30">
@@ -239,17 +248,23 @@ export const DigitalJCard: React.FC = () => {
 
               <div>
                 <label className="font-bold text-slate-700 block mb-1">Choose Mascot Avatar</label>
-                <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 text-2xl p-2 bg-slate-50 rounded-xl border border-slate-200">
-                  {['🐦', '🦅', '🦉', '🦀', '🎓', '🔬', '🎨', '🚀'].map((em) => (
+                <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 p-2 bg-slate-50 rounded-xl border border-slate-200">
+                  {AVATAR_OPTIONS.map((opt) => (
                     <button
-                      key={em}
+                      key={opt.id}
                       type="button"
-                      onClick={() => setEditAvatar(em)}
-                      className={`min-h-[44px] flex items-center justify-center rounded-lg transition-transform ${
-                        editAvatar === em ? 'bg-sky-200 scale-110 shadow-sm' : 'hover:scale-105'
+                      onClick={() => setEditAvatar(opt.id)}
+                      className={`min-h-[52px] p-1 flex flex-col items-center justify-center rounded-xl transition-all border ${
+                        editAvatar === opt.id
+                          ? 'bg-sky-100 border-sky-400 ring-2 ring-sky-300 scale-105 shadow-xs'
+                          : 'bg-white border-slate-200 hover:scale-102 hover:bg-slate-50'
                       }`}
+                      title={opt.label}
                     >
-                      {em}
+                      <AvatarVectorArt avatarId={opt.id} size={28} />
+                      <span className="text-[8px] font-extrabold text-slate-600 mt-1 truncate max-w-full text-center leading-tight">
+                        {opt.label.split(' ')[0]}
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -301,13 +316,13 @@ export const DigitalJCard: React.FC = () => {
                 }`}
               >
                 <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 ${
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center p-1.5 flex-shrink-0 ${
                     isUnlocked
                       ? 'bg-gradient-to-tr from-amber-300 to-amber-500 shadow-md ring-2 ring-white'
                       : 'bg-slate-200 text-slate-400 grayscale'
                   }`}
                 >
-                  {badge.icon}
+                  <BadgeIconArt badgeId={badge.id} isUnlocked={isUnlocked} size={36} />
                 </div>
 
                 <div className="flex-1 min-w-0">
@@ -347,7 +362,7 @@ export const DigitalJCard: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-2">
           <div>
             <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center space-x-2">
-              <span>🎒</span>
+              <LuggageAirmailSticker size={26} />
               <span>Charm City Souvenir Sticker Album</span>
             </h3>
             <p className="text-xs text-amber-900/80 mt-0.5">
@@ -401,7 +416,7 @@ export const DigitalJCard: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-2">
           <div>
             <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center space-x-2">
-              <span>📖</span>
+              <BookStackSticker size={26} />
               <span>Student Passport Visa Stamps & Travel Diary</span>
             </h3>
             <p className="text-xs text-amber-900/80 mt-0.5">
@@ -453,8 +468,9 @@ export const DigitalJCard: React.FC = () => {
 
                   <div className="flex items-start justify-between gap-2 pr-14">
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100/90 px-2 py-0.5 rounded-full border border-emerald-200">
-                        📍 {place.neighborhood}
+                      <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100/90 px-2 py-0.5 rounded-full border border-emerald-200 inline-flex items-center space-x-1">
+                        <MapPin className="w-2.5 h-2.5 text-emerald-700" />
+                        <span>{place.neighborhood}</span>
                       </span>
                       <h4
                         className="text-base font-black text-slate-900 mt-1 cursor-pointer hover:text-hopkins-heritage"
@@ -487,7 +503,18 @@ export const DigitalJCard: React.FC = () => {
                         <>
                           <div className="flex items-center justify-between text-[11px] text-amber-700 font-bold mb-0.5">
                             <span>Traveler Log</span>
-                            <span className="text-amber-500">{'★'.repeat(review.rating || 5)}</span>
+                            <div className="flex space-x-0.5">
+                              {Array.from({ length: 5 }).map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={`w-3 h-3 ${
+                                    i < (review.rating || 5)
+                                      ? 'fill-amber-400 text-amber-400'
+                                      : 'text-slate-300'
+                                  }`}
+                                />
+                              ))}
+                            </div>
                           </div>
                           <p className="italic text-slate-700 line-clamp-2">"{review.notes}"</p>
                         </>

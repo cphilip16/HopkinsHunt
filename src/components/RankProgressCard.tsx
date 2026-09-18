@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Sparkles, Trophy, ChevronRight, CheckCircle2, Info, ChevronDown, ChevronUp } from 'lucide-react';
+import { Sparkles, Trophy, ChevronRight, CheckCircle2, Info, ChevronDown, ChevronUp, Compass, Map, Briefcase, Landmark, Award } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { RANKS, SUBRANKS } from '../data/ranksData';
 import { CampusSkyline } from './art/CampusSkyline';
 import { CuteMascot } from './art/CuteMascot';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { PaperAirplaneTrail } from './art/TravelDecorations';
+import { RankInsigniaArt, RankBadgeArt } from './art/VectorArt';
 
 export const RankProgressCard: React.FC = () => {
   const {
@@ -49,8 +50,8 @@ export const RankProgressCard: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-amber-200/60">
           
           <div className="flex items-center space-x-3 sm:space-x-4">
-            <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center text-2xl sm:text-4xl shadow-lg ring-2 sm:ring-4 ring-white shadow-blue-900/15 flex-shrink-0">
-              {currentSubrank.insignia}
+            <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center p-2 shadow-lg ring-2 sm:ring-4 ring-white shadow-blue-900/15 flex-shrink-0">
+              <RankInsigniaArt insignia={currentSubrank.insignia} id={currentSubrank.id} size={50} />
             </div>
 
             {/* Chibi Baby Jay Explorer Mascot Accent */}
@@ -60,8 +61,8 @@ export const RankProgressCard: React.FC = () => {
 
             <div>
               <div className="flex items-center space-x-1.5 sm:space-x-2">
-                <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-hopkins-heritage text-white flex items-center space-x-1">
-                  <span>🧭</span>
+                <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-hopkins-heritage text-white flex items-center space-x-1.5">
+                  <Compass className="w-3.5 h-3.5 text-sky-200" />
                   <span>Rank {currentRank.id}: {currentRank.name}</span>
                 </span>
                 <span className="text-[11px] sm:text-xs font-bold text-slate-500">
@@ -171,8 +172,8 @@ export const RankProgressCard: React.FC = () => {
         <div className="mt-6 pt-6 border-t border-amber-200/60 grid grid-cols-2 sm:grid-cols-4 gap-3">
           
           <div className="bg-white/90 p-3.5 rounded-2xl border border-amber-200/80 shadow-xs">
-            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1">
-              <span>🗺️</span>
+            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1.5">
+              <Map className="w-3.5 h-3.5 text-blue-600" />
               <span>Passport Stamps</span>
             </span>
             <div className="text-xl font-black text-slate-900 mt-1">
@@ -184,8 +185,8 @@ export const RankProgressCard: React.FC = () => {
           </div>
 
           <div className="bg-white/90 p-3.5 rounded-2xl border border-amber-200/80 shadow-xs">
-            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1">
-              <span>🎒</span>
+            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1.5">
+              <Briefcase className="w-3.5 h-3.5 text-amber-600" />
               <span>Expeditions</span>
             </span>
             <div className="text-xl font-black text-slate-900 mt-1">
@@ -197,8 +198,8 @@ export const RankProgressCard: React.FC = () => {
           </div>
 
           <div className="bg-white/90 p-3.5 rounded-2xl border border-amber-200/80 shadow-xs">
-            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1">
-              <span>🏛️</span>
+            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1.5">
+              <Landmark className="w-3.5 h-3.5 text-emerald-600" />
               <span>Homebase</span>
             </span>
             <div className="text-base font-black text-hopkins-heritage truncate mt-1">
@@ -210,8 +211,8 @@ export const RankProgressCard: React.FC = () => {
           </div>
 
           <div className="bg-white/90 p-3.5 rounded-2xl border border-amber-200/80 shadow-xs">
-            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1">
-              <span>⭐</span>
+            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1.5">
+              <Award className="w-3.5 h-3.5 text-purple-600" />
               <span>Travel Level</span>
             </span>
             <div className="text-base font-black text-amber-800 truncate mt-1">
@@ -261,7 +262,7 @@ export const RankProgressCard: React.FC = () => {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2.5">
-                        <span className="text-2xl">{rank.badgeIcon}</span>
+                        <RankBadgeArt rankId={rank.id} size={30} />
                         <div>
                           <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
                             Rank {rank.id}
@@ -291,8 +292,9 @@ export const RankProgressCard: React.FC = () => {
                             }`}
                           >
                             <div className="flex items-center justify-between mb-1">
-                              <span>
-                                {sub.insignia} {sub.subrankName}
+                              <span className="flex items-center space-x-1.5 truncate">
+                                <RankInsigniaArt insignia={sub.insignia} id={sub.id} size={18} />
+                                <span className="truncate">{sub.subrankName}</span>
                               </span>
                               <span className="text-[10px] font-semibold">{sub.minPoints}p</span>
                             </div>

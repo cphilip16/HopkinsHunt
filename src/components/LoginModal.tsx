@@ -6,6 +6,7 @@ import { MarylandRibbon } from './art/MarylandRibbon';
 import { BlueJayMascot } from './art/BlueJayMascot';
 import { CuteMascot } from './art/CuteMascot';
 import { WaxSealSticker, SparkleStarsSticker } from './art/AnimatedStickers';
+import { AvatarVectorArt } from './art/VectorArt';
 
 export const LoginModal: React.FC = () => {
   const {
@@ -277,28 +278,28 @@ export const LoginModal: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => loginWithDemoStudent('homewood')}
-                    className="p-2 sm:p-2.5 rounded-xl border border-sky-200 bg-sky-50/60 hover:bg-sky-100 text-hopkins-deep font-bold text-center transition-colors min-h-[44px]"
+                    className="p-2 sm:p-2.5 rounded-xl border border-sky-200 bg-sky-50/60 hover:bg-sky-100 text-hopkins-deep font-bold text-center transition-colors min-h-[44px] flex flex-col items-center justify-center"
                   >
-                    <span className="block text-base">🐦</span>
-                    <span className="truncate block mt-0.5 text-[10px] sm:text-[11px]">Homewood</span>
+                    <AvatarVectorArt avatarId="baby-jay" size={26} />
+                    <span className="truncate block mt-1 text-[10px] sm:text-[11px]">Homewood</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => loginWithDemoStudent('peabody')}
-                    className="p-2 sm:p-2.5 rounded-xl border border-amber-200 bg-amber-50/60 hover:bg-amber-100 text-amber-900 font-bold text-center transition-colors min-h-[44px]"
+                    className="p-2 sm:p-2.5 rounded-xl border border-amber-200 bg-amber-50/60 hover:bg-amber-100 text-amber-900 font-bold text-center transition-colors min-h-[44px] flex flex-col items-center justify-center"
                   >
-                    <span className="block text-base">🎻</span>
-                    <span className="truncate block mt-0.5 text-[10px] sm:text-[11px]">Peabody</span>
+                    <AvatarVectorArt avatarId="peabody-violin" size={26} />
+                    <span className="truncate block mt-1 text-[10px] sm:text-[11px]">Peabody</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => loginWithDemoStudent('med')}
-                    className="p-2 sm:p-2.5 rounded-xl border border-rose-200 bg-rose-50/60 hover:bg-rose-100 text-rose-900 font-bold text-center transition-colors min-h-[44px]"
+                    className="p-2 sm:p-2.5 rounded-xl border border-rose-200 bg-rose-50/60 hover:bg-rose-100 text-rose-900 font-bold text-center transition-colors min-h-[44px] flex flex-col items-center justify-center"
                   >
-                    <span className="block text-base">🔬</span>
-                    <span className="truncate block mt-0.5 text-[10px] sm:text-[11px]">Med</span>
+                    <AvatarVectorArt avatarId="med-microscope" size={26} />
+                    <span className="truncate block mt-1 text-[10px] sm:text-[11px]">Med</span>
                   </button>
                 </div>
               </div>

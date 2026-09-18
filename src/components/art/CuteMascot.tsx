@@ -1,4 +1,5 @@
 import React from 'react';
+import { Sparkles } from 'lucide-react';
 
 export type CuteMascotPose = 'waving' | 'snapping' | 'cheering' | 'explorer' | 'scholar' | 'snacking';
 
@@ -24,7 +25,7 @@ export const CuteMascot: React.FC<CuteMascotProps> = ({
       {/* Interactive Speech / Thought Bubble */}
       {activeBubble && (
         <div className="mb-2 px-3 py-1.5 rounded-2xl bg-white text-slate-800 text-[11px] font-black shadow-lg border-2 border-sky-200 flex items-center space-x-1.5 animate-bounce z-20">
-          <span className="text-amber-400">✨</span>
+          <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-400 flex-shrink-0" />
           <span>{activeBubble}</span>
           <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-b-2 border-r-2 border-sky-200 rotate-45" />
         </div>

@@ -11,7 +11,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 49,
     flavorText: 'Just swiped your J-Card. You barely know where Brody Learning Commons ends and Gilman Hall begins.',
     unlockedPerk: 'Access to campus-adjacent Charles Village quests & student food maps.',
-    insignia: '🐣',
+    insignia: 'nestling-hatch',
     colorClass: 'from-sky-400 to-blue-500',
   },
   {
@@ -23,7 +23,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 99,
     flavorText: 'You survived an all-nighter on A-level and ventured out to St. Paul Street for late-night nourishment.',
     unlockedPerk: 'Unlock secret coffee shop and study nook recommendations.',
-    insignia: '📚',
+    insignia: 'brody-books',
     colorClass: 'from-sky-500 to-blue-600',
   },
   {
@@ -35,7 +35,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 149,
     flavorText: 'You can jaywalk across Charles Street during rush hour without batting an eye.',
     unlockedPerk: 'Unlock Charles Village Farmers Market and BMA special event guides.',
-    insignia: '🏃',
+    insignia: 'charles-runner',
     colorClass: 'from-blue-500 to-indigo-600',
   },
 
@@ -49,7 +49,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 224,
     flavorText: 'You traded the library stacks for afternoon strolls in the Dell and sculpture gazing at the BMA.',
     unlockedPerk: 'Digital J-Card receives Bronze Hopkins Seal badge.',
-    insignia: '🌿',
+    insignia: 'wyman-dell',
     colorClass: 'from-emerald-400 to-teal-600',
   },
   {
@@ -61,7 +61,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 299,
     flavorText: 'You know the exact departure schedule of the free shuttle connecting Homewood, Peabody, and Med Campus.',
     unlockedPerk: 'Hopkins Shuttle transit route overlay enabled on Map.',
-    insignia: '🚌',
+    insignia: 'jhmi-shuttle',
     colorClass: 'from-teal-500 to-cyan-600',
   },
   {
@@ -73,7 +73,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 399,
     flavorText: 'You have sat beneath the six tiers of cast-iron balconies at George Peabody Library feeling like you stepped into Hogwarts.',
     unlockedPerk: 'Mount Vernon cultural discount guide unlocked.',
-    insignia: '🎻',
+    insignia: 'peabody-violin',
     colorClass: 'from-cyan-500 to-blue-600',
   },
 
@@ -87,7 +87,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 524,
     flavorText: 'You have browsed The Avenue, eaten at Golden West Cafe, and learned to say "How you doin\', Hon?"',
     unlockedPerk: 'Hampden vintage boutique & bakery secret map unlocked.',
-    insignia: '🕶️',
+    insignia: 'hampden-shades',
     colorClass: 'from-amber-400 to-orange-500',
   },
   {
@@ -99,7 +99,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 649,
     flavorText: 'You navigated past tourist traps straight to the historic naval decks and the coral reef at the National Aquarium.',
     unlockedPerk: 'Water taxi discount & student Friday aquarium pass tracker.',
-    insignia: '⚓',
+    insignia: 'harbor-anchor',
     colorClass: 'from-blue-600 to-indigo-700',
   },
   {
@@ -111,7 +111,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 799,
     flavorText: 'You can navigate 250-year-old cobblestones in sneakers without stumbling, clutching piping hot Ekiben steamed buns.',
     unlockedPerk: 'Fells Point live music & late night food circuit unlock.',
-    insignia: '⛵',
+    insignia: 'fells-sailboat',
     colorClass: 'from-indigo-500 to-purple-600',
   },
 
@@ -125,7 +125,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 999,
     flavorText: 'You shake Old Bay seasoning onto your fries, popcorn, pizza, and bloody marys without a second thought.',
     unlockedPerk: 'Digital J-Card Silver Blue Jay Wing foil decoration.',
-    insignia: '🦀',
+    insignia: 'old-bay-crab',
     colorClass: 'from-rose-500 to-red-600',
   },
   {
@@ -137,7 +137,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 1199,
     flavorText: 'You stood where Francis Scott Key watched the bombs bursting in air, gazing proudly back at the Baltimore skyline.',
     unlockedPerk: 'Historic Baltimore harbor fortifications badge.',
-    insignia: '🏰',
+    insignia: 'fort-mchenry',
     colorClass: 'from-red-600 to-amber-700',
   },
   {
@@ -149,7 +149,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 1399,
     flavorText: 'Hand you a wooden mallet, a crab knife, and a table lined with butcher paper—you extract jumbo lump meat with surgical precision.',
     unlockedPerk: 'Maryland Crabhouse master guide with seasonal pricing insights.',
-    insignia: '🔨',
+    insignia: 'crab-mallet',
     colorClass: 'from-orange-500 to-red-700',
   },
 
@@ -163,7 +163,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 1799,
     flavorText: 'You have embraced the gothic lore of Charm City and paid your respects at Edgar Allan Poe\'s eternal resting place.',
     unlockedPerk: 'Exclusive Raven Insignia on Digital J-Card pass.',
-    insignia: '🪶',
+    insignia: 'poe-raven',
     colorClass: 'from-purple-600 to-slate-900',
   },
   {
@@ -175,7 +175,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 2299,
     flavorText: 'Both Johns Hopkins deans and local corner-store baristas tip their hats when you walk into the room.',
     unlockedPerk: 'Gold J-Card Hall of Fame status with custom ambassador title.',
-    insignia: '👑',
+    insignia: 'charm-crown',
     colorClass: 'from-amber-500 to-yellow-600',
   },
   {
@@ -187,7 +187,7 @@ export const SUBRANKS: Subrank[] = [
     maxPoints: 99999,
     flavorText: 'The supreme explorer of Johns Hopkins and Baltimore! You have ventured beyond the bubble and conquered all Charm City has to offer.',
     unlockedPerk: 'Permanent University Traveler of the Century Laureate medal.',
-    insignia: '🌟',
+    insignia: 'grand-laureate',
     colorClass: 'from-yellow-400 via-amber-500 to-red-600',
   },
 ];
@@ -196,7 +196,7 @@ export const RANKS: Rank[] = [
   {
     id: 1,
     name: 'Nestling',
-    badgeIcon: '🐣',
+    badgeIcon: 'rank-nestling',
     minPoints: 0,
     maxPoints: 149,
     themeColor: '#68ACE5',
@@ -206,7 +206,7 @@ export const RANKS: Rank[] = [
   {
     id: 2,
     name: 'Homewood Hopper',
-    badgeIcon: '🪶',
+    badgeIcon: 'rank-hopper',
     minPoints: 150,
     maxPoints: 399,
     themeColor: '#007788',
@@ -216,7 +216,7 @@ export const RANKS: Rank[] = [
   {
     id: 3,
     name: 'Charm City Scout',
-    badgeIcon: '🧭',
+    badgeIcon: 'rank-scout',
     minPoints: 400,
     maxPoints: 799,
     themeColor: '#002D72',
@@ -226,7 +226,7 @@ export const RANKS: Rank[] = [
   {
     id: 4,
     name: 'Bmore Blue Jay',
-    badgeIcon: '🦀',
+    badgeIcon: 'rank-bluejay',
     minPoints: 800,
     maxPoints: 1399,
     themeColor: '#D9381E',
@@ -236,7 +236,7 @@ export const RANKS: Rank[] = [
   {
     id: 5,
     name: 'Charm City Laureate',
-    badgeIcon: '👑',
+    badgeIcon: 'rank-laureate',
     minPoints: 1400,
     maxPoints: 99999,
     themeColor: '#F2B824',

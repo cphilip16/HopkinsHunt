@@ -4,7 +4,7 @@ export const BADGES: (Badge & { checkUnlocked: (profile: UserProfile, places: Pl
   {
     id: 'first-step',
     title: 'First Flight',
-    icon: '🐣',
+    icon: 'badge-first-step',
     description: 'Checked into your very first Baltimore destination.',
     requirement: 'Check into 1 place',
     checkUnlocked: (profile) => profile.visitedPlaceIds.length >= 1,
@@ -12,7 +12,7 @@ export const BADGES: (Badge & { checkUnlocked: (profile: UserProfile, places: Pl
   {
     id: 'dorm-escapee',
     title: 'Dorm Escapee',
-    icon: '🏃',
+    icon: 'badge-dorm-escapee',
     description: 'Visited at least 3 spots outside the Homewood library stacks.',
     requirement: 'Check into 3 places',
     checkUnlocked: (profile) => profile.visitedPlaceIds.length >= 3,
@@ -20,7 +20,7 @@ export const BADGES: (Badge & { checkUnlocked: (profile: UserProfile, places: Pl
   {
     id: 'shuttle-navigator',
     title: 'JHMI Shuttle Pro',
-    icon: '🚌',
+    icon: 'badge-shuttle-navigator',
     description: 'Took advantage of free Hopkins transit to explore beyond Homewood.',
     requirement: 'Visit 2 places with JHMI Shuttle transit',
     checkUnlocked: (profile, places) => {
@@ -32,7 +32,7 @@ export const BADGES: (Badge & { checkUnlocked: (profile: UserProfile, places: Pl
   {
     id: 'thrifty-scholar',
     title: 'Thrifty Blue Jay',
-    icon: '💸',
+    icon: 'badge-thrifty-scholar',
     description: 'Discovered the finest zero-cost cultural gems Baltimore has to offer.',
     requirement: 'Visit 4 Free entry destinations',
     checkUnlocked: (profile, places) => {
@@ -44,7 +44,7 @@ export const BADGES: (Badge & { checkUnlocked: (profile: UserProfile, places: Pl
   {
     id: 'museum-connoisseur',
     title: 'Curator of Charm',
-    icon: '🏛️',
+    icon: 'badge-museum-connoisseur',
     description: 'Immersed yourself in the world-class arts and historic galleries of Baltimore.',
     requirement: 'Visit 3 museum destinations',
     checkUnlocked: (profile, places) => {
@@ -56,7 +56,7 @@ export const BADGES: (Badge & { checkUnlocked: (profile: UserProfile, places: Pl
   {
     id: 'old-bay-crustacean',
     title: 'Old Bay Aficionado',
-    icon: '🦀',
+    icon: 'badge-old-bay-crustacean',
     description: 'Savored authentic Baltimore eats and Maryland seafood delicacies.',
     requirement: 'Visit 3 food spots in Baltimore',
     checkUnlocked: (profile, places) => {
@@ -68,7 +68,7 @@ export const BADGES: (Badge & { checkUnlocked: (profile: UserProfile, places: Pl
   {
     id: 'point-club-500',
     title: '500-Point High Flyer',
-    icon: '⭐',
+    icon: 'badge-point-club-500',
     description: 'Surpassed 500 total travel exploration points across Baltimore.',
     requirement: 'Earn 500+ total points',
     checkUnlocked: (profile, places) => {
@@ -82,7 +82,7 @@ export const BADGES: (Badge & { checkUnlocked: (profile: UserProfile, places: Pl
   {
     id: 'quest-champion',
     title: 'Quest Master',
-    icon: '🏆',
+    icon: 'badge-quest-champion',
     description: 'Successfully completed at least two official student exploration quests.',
     requirement: 'Complete 2 Quests',
     checkUnlocked: (profile) => profile.completedQuestIds.length >= 2,
@@ -90,7 +90,7 @@ export const BADGES: (Badge & { checkUnlocked: (profile: UserProfile, places: Pl
   {
     id: 'baltimore-baron',
     title: 'True Baltimorean',
-    icon: '👑',
+    icon: 'badge-baltimore-baron',
     description: 'Visited over 10 distinct places across Charm City.',
     requirement: 'Visit 10 different locations',
     checkUnlocked: (profile) => profile.visitedPlaceIds.length >= 10,

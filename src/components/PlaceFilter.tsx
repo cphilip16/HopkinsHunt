@@ -148,7 +148,8 @@ export const PlaceFilter: React.FC = () => {
                 : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
             }`}
           >
-            <span>💸 Free Entry Only</span>
+            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Free Entry Only</span>
             {freeOnlyFilter && <Check className="w-3 h-3 ml-1 text-emerald-200" />}
           </button>
 

@@ -13,6 +13,7 @@ import { LoginModal } from './components/LoginModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { FeatherCelebration } from './components/FeatherCelebration';
 import { MarylandRibbon } from './components/art/MarylandRibbon';
+import { BabyJaySticker, BinocularsSticker } from './components/art/AnimatedStickers';
 import { Compass, Sparkles, MapPin } from 'lucide-react';
 
 const AppContent: React.FC = () => {
@@ -100,7 +101,9 @@ const AppContent: React.FC = () => {
             {/* Places Grid */}
             {filteredPlaces.length === 0 ? (
               <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
-                <span className="text-4xl block mb-2">🔍</span>
+                <div className="flex justify-center mb-2">
+                  <BinocularsSticker size={48} className="transform -rotate-6" />
+                </div>
                 <h3 className="text-base font-bold text-slate-800">No matching places found</h3>
                 <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
                   Try clearing your search query or adjusting your neighborhood and transit filters.
@@ -155,7 +158,7 @@ const AppContent: React.FC = () => {
         <MarylandRibbon height={3} />
         <div className="max-w-7xl mx-auto px-4 py-8 pb-24 md:pb-8 space-y-2">
           <div className="flex items-center justify-center space-x-2 font-bold text-slate-700">
-            <span>🐦 JayWalk Bmore</span>
+            <span className="inline-flex items-center gap-1.5"><BabyJaySticker size={20} /> JayWalk Bmore</span>
             <span>&bull;</span>
             <span>Johns Hopkins University Student Exploration Initiative</span>
           </div>

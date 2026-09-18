@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, MapPin, Bus, Clock, DollarSign, Award, Sparkles, Check, Star, Calendar, Save, Stamp, Heart } from 'lucide-react';
+import { X, MapPin, Bus, Clock, DollarSign, Award, Sparkles, Check, Star, Calendar, Save, Stamp, Heart, Mail, Compass, BookOpen } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { CuteMascot } from './art/CuteMascot';
@@ -93,7 +93,8 @@ export const PlaceDetailModal: React.FC = () => {
 
           {/* Postcard Greeting Dispatch Subhead */}
           <div className="absolute bottom-16 sm:bottom-20 left-4 text-[10px] sm:text-xs font-black uppercase tracking-widest text-amber-300 drop-shadow-md flex items-center space-x-1.5">
-            <span>💌 Greetings from Baltimore</span>
+            <Mail className="w-3.5 h-3.5 text-amber-300" />
+            <span>Greetings from Baltimore</span>
             <span>&bull;</span>
             <span>JHU Explorer Field Dispatch</span>
           </div>
@@ -161,8 +162,9 @@ export const PlaceDetailModal: React.FC = () => {
 
           {/* Description */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center space-x-1">
-              <span>📍 Destination Guide</span>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center space-x-1.5">
+              <Compass className="w-3.5 h-3.5 text-slate-400" />
+              <span>Destination Guide</span>
             </h3>
             <p className="text-sm text-slate-700 leading-relaxed font-normal">
               {selectedPlace.description}
@@ -227,8 +229,9 @@ export const PlaceDetailModal: React.FC = () => {
           {/* Student Travel Reflection & Journal Section */}
           <div className="pt-4 border-t-2 border-dashed border-amber-200 space-y-3">
             <h3 className="text-sm font-black text-slate-900 flex items-center justify-between">
-              <span className="flex items-center space-x-1.5">
-                <span>📔 Student Travel Journal & Field Notes</span>
+              <span className="flex items-center space-x-2">
+                <BookOpen className="w-4 h-4 text-amber-700" />
+                <span>Student Travel Journal & Field Notes</span>
               </span>
               {saveConfirmation && (
                 <span className="text-xs font-black text-emerald-600 animate-pulse">
@@ -245,12 +248,16 @@ export const PlaceDetailModal: React.FC = () => {
                     key={star}
                     type="button"
                     onClick={() => setRating(star)}
-                    className="min-w-[36px] min-h-[36px] flex items-center justify-center text-xl focus:outline-none transition-transform active:scale-110"
+                    className="min-w-[36px] min-h-[36px] flex items-center justify-center focus:outline-none transition-transform active:scale-110"
                     aria-label={`Rate ${star} star`}
                   >
-                    <span className={star <= rating ? 'text-amber-400 drop-shadow-sm' : 'text-slate-300'}>
-                      ★
-                    </span>
+                    <Star
+                      className={`w-5 h-5 ${
+                        star <= rating
+                          ? 'fill-amber-400 text-amber-400 drop-shadow-sm'
+                          : 'text-slate-300'
+                      }`}
+                    />
                   </button>
                 ))}
               </div>

@@ -17,6 +17,7 @@ import {
   StarSpangledFlagSticker,
   MarylandCrabSticker,
 } from './art/AnimatedStickers';
+import { QuestIconArt } from './art/VectorArt';
 
 export const QuestsView: React.FC = () => {
   const { quests, places, profile, toggleCheckIn, setSelectedPlace } = useApp();
@@ -123,9 +124,9 @@ export const QuestsView: React.FC = () => {
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start space-x-3">
                     <div className="relative">
-                      <span className="text-3xl sm:text-4xl p-2 rounded-2xl bg-slate-100 flex-shrink-0 block">
-                        {quest.icon}
-                      </span>
+                      <div className="p-1.5 rounded-2xl bg-slate-100 flex-shrink-0 flex items-center justify-center">
+                        <QuestIconArt questId={quest.id} icon={quest.icon} size={42} />
+                      </div>
                       {/* Animated Micro Sticker */}
                       <div className="absolute -bottom-2.5 -right-2.5">
                         {getQuestSticker(quest, isCompleted)}

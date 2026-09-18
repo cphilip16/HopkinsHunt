@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Bus, Check, Plus, Sparkles, Clock, DollarSign, Award, ChevronRight, Heart } from 'lucide-react';
+import { MapPin, Bus, Check, Plus, Sparkles, Clock, DollarSign, Award, ChevronRight, Heart, Pin } from 'lucide-react';
 import { Place } from '../types';
 import { useApp } from '../context/AppContext';
 import { PassportStamp } from './art/PassportStamp';
@@ -9,6 +9,7 @@ import {
   MarylandCrabSticker,
   CompassRoseSticker,
   GilmanClockSticker,
+  BabyJaySticker,
 } from './art/AnimatedStickers';
 
 interface PlaceCardProps {
@@ -67,8 +68,8 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
           {/* Top Badges: Neighborhood Pill & Postage Stamp Points */}
           <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10">
             <div className="flex items-center space-x-1.5">
-              <span className="px-3 py-1 rounded-full text-[11px] font-extrabold bg-black/60 backdrop-blur-md text-white border border-white/20 flex items-center space-x-1 shadow-sm">
-                <span>📍</span>
+              <span className="px-3 py-1 rounded-full text-[11px] font-extrabold bg-black/60 backdrop-blur-md text-white border border-white/20 flex items-center space-x-1.5 shadow-sm">
+                <MapPin className="w-3 h-3 text-white" />
                 <span>{place.neighborhood}</span>
               </span>
 
@@ -138,8 +139,9 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
 
           {/* Hopkins Student Lore Quote */}
           <div className="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100/80 text-[11px] text-hopkins-deep">
-            <div className="font-bold flex items-center space-x-1 text-hopkins-heritage mb-0.5">
-              <span>🐦 Hopkins Lore:</span>
+            <div className="font-bold flex items-center space-x-1.5 text-hopkins-heritage mb-0.5">
+              <BabyJaySticker size={18} />
+              <span>Hopkins Lore:</span>
             </div>
             <p className="line-clamp-2 italic text-slate-700">
               "{place.hopkinsLore}"
@@ -161,30 +163,26 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
           )}
         </div>
 
-        {/* Actions Row */}
+        {/* Action Button: Check In / Stamped */}
         <div className="pt-2 border-t border-slate-100 flex items-center gap-2">
           
-          {/* Check-in Toggle Button */}
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleCheckIn(place.id);
-            }}
-            className={`flex-1 flex items-center justify-center space-x-1.5 py-3 px-4 min-h-[44px] rounded-xl text-xs font-extrabold transition-all shadow-sm ${
+            onClick={() => toggleCheckIn(place.id)}
+            className={`flex-1 py-3 px-4 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center space-x-2 shadow-xs ${
               isVisited
-                ? 'bg-emerald-100 text-emerald-800 hover:bg-red-50 hover:text-red-700 hover:ring-1 hover:ring-red-200'
-                : 'bg-hopkins-heritage hover:bg-hopkins-deep text-white shadow-blue-900/10'
+                ? 'bg-emerald-600 text-white shadow-emerald-600/20'
+                : 'bg-hopkins-heritage hover:bg-hopkins-deep text-white shadow-blue-900/15'
             }`}
           >
             {isVisited ? (
               <>
-                <Check className="w-3.5 h-3.5 text-emerald-700 group-hover:hidden" />
-                <span className="group-hover:inline">Checked In (+{place.points}p)</span>
+                <Check className="w-4 h-4 stroke-[3]" />
+                <span>Stamped in Passport</span>
               </>
             ) : (
               <>
-                <Plus className="w-3.5 h-3.5" />
-                <span>Check In (+{place.points} pts)</span>
+                <Plus className="w-4 h-4 stroke-[3]" />
+                <span>Stamp Location (+{place.points} PTS)</span>
               </>
             )}
           </button>
@@ -204,7 +202,7 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
         {/* Personal travel reflection sticky note if checked in */}
         {isVisited && userReview?.notes && (
           <div className="text-[11px] text-amber-950 italic bg-[#FFFBEB] p-2.5 rounded-xl border border-amber-200/80 shadow-xs flex items-start space-x-1.5">
-            <span className="text-xs">📌</span>
+            <Pin className="w-3.5 h-3.5 text-amber-700 flex-shrink-0 mt-0.5" />
             <div>
               <span className="font-bold text-amber-900 not-italic block text-[10px]">Travel Diary ({userReview.date}):</span>
               "{userReview.notes}"

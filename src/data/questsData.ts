@@ -9,7 +9,7 @@ export const QUESTS: Quest[] = [
     placeIds: ['paper-moon', 'wyman-park-dell', 'hampden-the-avenue'],
     bonusPoints: 75,
     badgeReward: 'Bubble Burster Pin',
-    icon: '🫧',
+    icon: 'quest-bubble',
     difficulty: 'Easy',
   },
   {
@@ -20,7 +20,7 @@ export const QUESTS: Quest[] = [
     placeIds: ['peabody-library', 'walters-art-museum', 'mt-vernon-monument'],
     bonusPoints: 100,
     badgeReward: 'Peabody Scholar Seal',
-    icon: '🏛️',
+    icon: 'quest-peabody',
     difficulty: 'Moderate',
   },
   {
@@ -31,7 +31,7 @@ export const QUESTS: Quest[] = [
     placeIds: ['bma', 'peabody-library', 'hopkins-historic-dome'],
     bonusPoints: 120,
     badgeReward: 'Hopkins Tri-Campus Ribbon',
-    icon: '🚌',
+    icon: 'quest-shuttle',
     difficulty: 'Moderate',
   },
   {
@@ -42,7 +42,7 @@ export const QUESTS: Quest[] = [
     placeIds: ['fells-point-square', 'ekiben', 'sound-garden'],
     bonusPoints: 95,
     badgeReward: 'Fells Point Mariner Medallion',
-    icon: '⛵',
+    icon: 'quest-fells',
     difficulty: 'Moderate',
   },
   {
@@ -53,7 +53,7 @@ export const QUESTS: Quest[] = [
     placeIds: ['fort-mchenry', 'lp-steamers', 'federal-hill-park'],
     bonusPoints: 160,
     badgeReward: 'Star-Spangled Defender Cross',
-    icon: '⭐',
+    icon: 'quest-fort',
     difficulty: 'Legendary',
   },
   {
@@ -64,7 +64,7 @@ export const QUESTS: Quest[] = [
     placeIds: ['graffiti-alley', 'avam', 'charles-theatre'],
     bonusPoints: 110,
     badgeReward: 'Visionary Rebel Rosette',
-    icon: '🎨',
+    icon: 'quest-arts',
     difficulty: 'Moderate',
   }
 ];
