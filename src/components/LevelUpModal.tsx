@@ -5,7 +5,7 @@ import { CuteMascot } from './art/CuteMascot';
 import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { WashiTape } from './art/TravelDecorations';
-import { SparkleStarsSticker, MarylandCrabSticker } from './art/AnimatedStickers';
+import { SparkleStarsSticker, MarylandCrabSticker, TreasureChestSticker } from './art/AnimatedStickers';
 
 export const LevelUpModal: React.FC = () => {
   const { levelUpData, setLevelUpData, totalPoints, setActiveTab } = useApp();
@@ -43,9 +43,9 @@ export const LevelUpModal: React.FC = () => {
           
           <div className="relative flex items-center justify-center space-x-3">
             <CuteMascot
-              pose="cheering"
+              pose={isMajorRankUp ? 'scholar' : 'cheering'}
               size={110}
-              speechBubble="Pack your bags! Level Up!"
+              speechBubble={isMajorRankUp ? 'Summa Cum Laude!' : 'Pack your bags! Level Up!'}
             />
             <div className="relative">
               <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center text-3xl sm:text-4xl shadow-xl ring-4 ring-amber-300 shadow-sky-500/20">
@@ -54,8 +54,12 @@ export const LevelUpModal: React.FC = () => {
               <div className="absolute -top-3 -right-3 pointer-events-none">
                 <SparkleStarsSticker size={28} />
               </div>
-              <div className="absolute -bottom-2 -left-2 pointer-events-none">
-                <MarylandCrabSticker size={24} />
+              <div className="absolute -bottom-3 -left-3 pointer-events-none">
+                {isMajorRankUp ? (
+                  <TreasureChestSticker size={32} />
+                ) : (
+                  <MarylandCrabSticker size={24} />
+                )}
               </div>
             </div>
           </div>

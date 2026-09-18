@@ -530,3 +530,655 @@ export const SparkleStarsSticker: React.FC<{ size?: number; className?: string }
     </div>
   );
 };
+
+// ================= 8. ANIMATED HOT AIR BALLOON STICKER =================
+export const HotAirBalloonSticker: React.FC<{ size?: number; className?: string }> = ({
+  size = 54,
+  className = '',
+}) => {
+  return (
+    <div className={`relative inline-block select-none ${className}`} title="Hopkins Explorer Hot Air Balloon">
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="filter drop-shadow-md"
+      >
+        <style>
+          {`
+            @keyframes balloonBobbing {
+              0%, 100% { transform: translateY(0) rotate(-1deg); }
+              50% { transform: translateY(-7px) rotate(2deg); }
+            }
+            @keyframes basketGentleSway {
+              0%, 100% { transform: rotate(0deg); }
+              50% { transform: rotate(-3deg); }
+            }
+            .animate-balloon-bob {
+              animation: balloonBobbing 3.4s infinite ease-in-out;
+            }
+            .animate-basket-sway {
+              transform-origin: 50px 72px;
+              animation: basketGentleSway 2.8s infinite ease-in-out;
+            }
+          `}
+        </style>
+
+        <g className="animate-balloon-bob">
+          {/* Envelope (Hopkins Blue & Gold Striped Balloon) */}
+          <path
+            d="M 50 4 C 28 4 14 24 20 48 C 24 62 42 70 45 74 H 55 C 58 70 76 62 80 48 C 86 24 72 4 50 4 Z"
+            fill="#002D72"
+            stroke="#001845"
+            strokeWidth="1.5"
+          />
+
+          {/* Center Gold & Spirit Blue Stripes */}
+          <path
+            d="M 50 4 C 40 4 34 24 38 48 C 41 62 48 70 50 74 C 52 70 59 62 62 48 C 66 24 60 4 50 4 Z"
+            fill="#F1C400"
+          />
+          <path
+            d="M 50 4 C 46 4 44 24 45 48 C 46 62 49 70 50 74 C 51 70 54 62 55 48 C 56 24 54 4 50 4 Z"
+            fill="#68ACE5"
+          />
+
+          {/* Bunting Garland Ribbon */}
+          <path d="M 22 44 Q 50 56 78 44" stroke="#FFFFFF" strokeWidth="1.2" fill="none" />
+          <polygon points="34,48 38,54 42,49" fill="#E11D48" />
+          <polygon points="46,50 50,56 54,50" fill="#F1C400" />
+          <polygon points="58,49 62,54 66,48" fill="#10B981" />
+
+          {/* Rigging Ropes */}
+          <line x1="45" y1="74" x2="43" y2="84" stroke="#92400E" strokeWidth="1" />
+          <line x1="49" y1="74" x2="47" y2="84" stroke="#92400E" strokeWidth="1" />
+          <line x1="51" y1="74" x2="53" y2="84" stroke="#92400E" strokeWidth="1" />
+          <line x1="55" y1="74" x2="57" y2="84" stroke="#92400E" strokeWidth="1" />
+
+          {/* Burner Flame Glow */}
+          <circle cx="50" cy="76" r="3" fill="#F59E0B" opacity="0.85" />
+          <circle cx="50" cy="76" r="1.5" fill="#FEF08A" />
+
+          {/* Swaying Woven Wicker Basket */}
+          <g className="animate-basket-sway">
+            <rect x="42" y="84" width="16" height="12" rx="2.5" fill="#D97706" stroke="#78350F" strokeWidth="1.2" />
+            <line x1="42" y1="88" x2="58" y2="88" stroke="#78350F" strokeWidth="0.8" />
+            <line x1="42" y1="92" x2="58" y2="92" stroke="#78350F" strokeWidth="0.8" />
+            {/* Mini Gold Telescope protruding from basket */}
+            <line x1="56" y1="86" x2="63" y2="81" stroke="#F1C400" strokeWidth="1.8" strokeLinecap="round" />
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+};
+
+// ================= 9. ANIMATED JHU SHUTTLE BUS STICKER =================
+export const HopkinsShuttleSticker: React.FC<{ size?: number; className?: string }> = ({
+  size = 52,
+  className = '',
+}) => {
+  return (
+    <div className={`relative inline-block select-none ${className}`} title="JHU Homewood-JHMI Shuttle Bus">
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="filter drop-shadow-sm"
+      >
+        <style>
+          {`
+            @keyframes wheelRotation {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+            @keyframes shuttleEngineVibe {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-1.5px); }
+            }
+            .animate-wheel-spin {
+              transform-origin: center;
+              animation: wheelRotation 1.4s linear infinite;
+            }
+            .animate-shuttle-vibe {
+              animation: shuttleEngineVibe 0.4s infinite ease-in-out;
+            }
+          `}
+        </style>
+
+        <g className="animate-shuttle-vibe">
+          {/* Bus Main Coach Body */}
+          <rect x="14" y="32" width="72" height="38" rx="8" fill="#002D72" stroke="#001845" strokeWidth="1.5" />
+
+          {/* White Upper Section */}
+          <path d="M 14 46 H 86 V 38 C 86 34 82 32 78 32 H 22 C 18 32 14 34 14 38 Z" fill="#FFFFFF" />
+
+          {/* Gold JHU Accent Stripe */}
+          <rect x="14" y="46" width="72" height="4" fill="#F1C400" />
+
+          {/* Front Destination Board: HOMEWOOD */}
+          <rect x="64" y="34" width="18" height="5" rx="1" fill="#0F172A" />
+          <text x="73" y="38" fontSize="3.5" fontWeight="900" fill="#FDE047" textAnchor="middle" fontFamily="monospace">JHU</text>
+
+          {/* Windows */}
+          {/* Passenger Window 1 */}
+          <rect x="20" y="36" width="10" height="9" rx="2" fill="#68ACE5" stroke="#001845" strokeWidth="0.8" />
+          {/* Passenger Window 2 (Baby Jay inside!) */}
+          <rect x="34" y="36" width="12" height="9" rx="2" fill="#68ACE5" stroke="#001845" strokeWidth="0.8" />
+          {/* Baby Jay silhouette in window */}
+          <circle cx="40" cy="42" r="3.5" fill="#002D72" />
+          <circle cx="41.5" cy="41" r="1.2" fill="#FFFFFF" />
+
+          {/* Passenger Window 3 */}
+          <rect x="50" y="36" width="10" height="9" rx="2" fill="#68ACE5" stroke="#001845" strokeWidth="0.8" />
+          {/* Front Windshield */}
+          <path d="M 64 36 H 80 C 82 36 84 38 84 41 V 45 H 64 Z" fill="#BAE6FD" stroke="#001845" strokeWidth="0.8" />
+
+          {/* Headlights (Glowing) */}
+          <rect x="83" y="56" width="4" height="6" rx="2" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+          <circle cx="85" cy="59" r="4" fill="#FEF08A" opacity="0.4" />
+
+          {/* Taillights */}
+          <rect x="13" y="56" width="3" height="6" rx="1.5" fill="#EF4444" />
+
+          {/* Wheel Arch Cutouts */}
+          <circle cx="32" cy="70" r="10" fill="#F8FAFC" />
+          <circle cx="70" cy="70" r="10" fill="#F8FAFC" />
+
+          {/* Front & Rear Wheels with Spinning Hubcaps */}
+          <g transform="translate(32, 70)">
+            <circle cx="0" cy="0" r="8" fill="#1E293B" stroke="#0F172A" strokeWidth="1.2" />
+            <circle cx="0" cy="0" r="4" fill="#94A3B8" />
+            <g className="animate-wheel-spin">
+              <line x1="-3" y1="0" x2="3" y2="0" stroke="#002D72" strokeWidth="1" />
+              <line x1="0" y1="-3" x2="0" y2="3" stroke="#002D72" strokeWidth="1" />
+            </g>
+          </g>
+
+          <g transform="translate(70, 70)">
+            <circle cx="0" cy="0" r="8" fill="#1E293B" stroke="#0F172A" strokeWidth="1.2" />
+            <circle cx="0" cy="0" r="4" fill="#94A3B8" />
+            <g className="animate-wheel-spin">
+              <line x1="-3" y1="0" x2="3" y2="0" stroke="#002D72" strokeWidth="1" />
+              <line x1="0" y1="-3" x2="0" y2="3" stroke="#002D72" strokeWidth="1" />
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+};
+
+// ================= 10. ANIMATED PEABODY LIBRARY BOOK STACK =================
+export const BookStackSticker: React.FC<{ size?: number; className?: string }> = ({
+  size = 46,
+  className = '',
+}) => {
+  return (
+    <div className={`relative inline-block select-none ${className}`} title="Peabody Library Tome Stack">
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="filter drop-shadow-sm"
+      >
+        <style>
+          {`
+            @keyframes pageFlutterWave {
+              0%, 100% { transform: rotate(0deg); }
+              50% { transform: rotate(-10deg) translateY(-2px); }
+            }
+            @keyframes wisdomSparklePulse {
+              0%, 100% { opacity: 0.3; transform: scale(0.8); }
+              50% { opacity: 1; transform: scale(1.2); }
+            }
+            .animate-page-flutter {
+              transform-origin: 32px 34px;
+              animation: pageFlutterWave 2.2s infinite ease-in-out;
+            }
+            .animate-wisdom-sparkle {
+              transform-origin: 50px 18px;
+              animation: wisdomSparklePulse 2s infinite ease-in-out;
+            }
+          `}
+        </style>
+
+        {/* Wisdom Aura Sparkle */}
+        <g className="animate-wisdom-sparkle">
+          <circle cx="50" cy="18" r="6" fill="#FDE047" opacity="0.4" />
+          <polygon points="50,10 52,16 58,18 52,20 50,26 48,20 42,18 48,16" fill="#F59E0B" />
+        </g>
+
+        {/* Bottom Big Book (Navy Blue Leather) */}
+        <rect x="18" y="74" width="64" height="14" rx="3" fill="#002D72" stroke="#001845" strokeWidth="1.2" />
+        <rect x="22" y="76" width="58" height="10" fill="#FAF5FF" />
+        <rect x="18" y="74" width="8" height="14" rx="2" fill="#001D4A" />
+        <line x1="26" y1="76" x2="26" y2="86" stroke="#F1C400" strokeWidth="1" />
+
+        {/* Middle Book (Crimson Red Leather) */}
+        <rect x="24" y="56" width="54" height="14" rx="3" fill="#991B1B" stroke="#7F1D1D" strokeWidth="1.2" />
+        <rect x="28" y="58" width="48" height="10" fill="#FFFDF0" />
+        <rect x="24" y="56" width="8" height="14" rx="2" fill="#7F1D1D" />
+        <line x1="32" y1="58" x2="32" y2="68" stroke="#FDE68A" strokeWidth="1" />
+
+        {/* Top Book (Emerald Green Leather) */}
+        <rect x="28" y="40" width="46" height="13" rx="3" fill="#047857" stroke="#065F46" strokeWidth="1.2" />
+        <rect x="32" y="42" width="40" height="9" fill="#FFFDF0" />
+        <rect x="28" y="40" width="7" height="13" rx="2" fill="#065F46" />
+
+        {/* Open Tome on Top with Fluttering Pages */}
+        <g transform="translate(30, 24)">
+          {/* Left open page */}
+          <path d="M 20 12 C 14 10 6 8 0 10 L 0 16 C 6 14 14 16 20 18 Z" fill="#FFFDF0" stroke="#CBD5E1" strokeWidth="1" />
+          {/* Right fluttering page */}
+          <g className="animate-page-flutter">
+            <path d="M 20 12 C 26 10 34 8 40 10 L 40 16 C 34 14 26 16 20 18 Z" fill="#FFFDF0" stroke="#CBD5E1" strokeWidth="1" />
+            <line x1="24" y1="13" x2="36" y2="13" stroke="#94A3B8" strokeWidth="0.8" />
+          </g>
+          {/* Bookmark Ribbon Hanging Down */}
+          <path d="M 20 18 L 18 34 L 20 32 L 22 34 Z" fill="#F1C400" />
+        </g>
+      </svg>
+    </div>
+  );
+};
+
+// ================= 11. ANIMATED TREASURE CHEST STICKER =================
+export const TreasureChestSticker: React.FC<{ size?: number; className?: string }> = ({
+  size = 48,
+  className = '',
+}) => {
+  return (
+    <div className={`relative inline-block select-none ${className}`} title="Hopkins Bonus Points Chest">
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="filter drop-shadow-sm"
+      >
+        <style>
+          {`
+            @keyframes chestRayPulse {
+              0%, 100% { opacity: 0.35; transform: scale(0.9); }
+              50% { opacity: 0.85; transform: scale(1.15); }
+            }
+            @keyframes coinSparkleHop {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-4px); }
+            }
+            .animate-chest-glow {
+              transform-origin: 50px 45px;
+              animation: chestRayPulse 2.4s infinite ease-in-out;
+            }
+            .animate-coin-sparkle {
+              animation: coinSparkleHop 1.8s infinite ease-in-out;
+            }
+          `}
+        </style>
+
+        {/* Golden Light Beams Bursting from Inside */}
+        <g className="animate-chest-glow">
+          <polygon points="50,44 20,20 30,12" fill="#FDE047" opacity="0.35" />
+          <polygon points="50,44 42,8 58,8" fill="#FDE047" opacity="0.5" />
+          <polygon points="50,44 70,12 80,20" fill="#FDE047" opacity="0.35" />
+        </g>
+
+        {/* Floating Gold Coin Sparkles */}
+        <g className="animate-coin-sparkle">
+          <circle cx="44" cy="34" r="4.5" fill="#F59E0B" stroke="#B45309" strokeWidth="1" />
+          <circle cx="56" cy="32" r="5" fill="#FDE047" stroke="#D97706" strokeWidth="1" />
+          <polygon points="56,30 57,32 59,32 57,34 58,36 56,34 54,36 55,34 53,32 55,32" fill="#B45309" />
+        </g>
+
+        {/* Open Chest Base Body */}
+        <rect x="20" y="48" width="60" height="34" rx="4" fill="#78350F" stroke="#451A03" strokeWidth="1.5" />
+
+        {/* Brass Hardware Bands */}
+        <rect x="28" y="48" width="6" height="34" fill="#F59E0B" stroke="#B45309" strokeWidth="0.8" />
+        <rect x="66" y="48" width="6" height="34" fill="#F59E0B" stroke="#B45309" strokeWidth="0.8" />
+
+        {/* Slightly Tilted Open Chest Lid */}
+        <g transform="translate(18, 22) rotate(-8)">
+          <path d="M 2 20 Q 32 4 62 20 Z" fill="#92400E" stroke="#451A03" strokeWidth="1.5" />
+          <rect x="2" y="20" width="60" height="6" rx="2" fill="#78350F" stroke="#451A03" strokeWidth="1" />
+          {/* Lid Brass Straps */}
+          <rect x="10" y="8" width="6" height="18" fill="#F59E0B" />
+          <rect x="48" y="8" width="6" height="18" fill="#F59E0B" />
+        </g>
+
+        {/* Keyhole Lock Faceplate */}
+        <rect x="45" y="52" width="10" height="14" rx="2" fill="#F1C400" stroke="#B45309" strokeWidth="1" />
+        <circle cx="50" cy="57" r="2" fill="#451A03" />
+        <polygon points="49,57 51,57 52,63 48,63" fill="#451A03" />
+      </svg>
+    </div>
+  );
+};
+
+// ================= 12. ANIMATED WAX SEAL STAMP =================
+export const WaxSealSticker: React.FC<{ size?: number; className?: string }> = ({
+  size = 46,
+  className = '',
+}) => {
+  return (
+    <div className={`relative inline-block select-none ${className}`} title="Official Veritas Wax Seal">
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="filter drop-shadow-md"
+      >
+        <style>
+          {`
+            @keyframes sealGlintSweep {
+              0%, 100% { opacity: 0; transform: rotate(0deg); }
+              45%, 55% { opacity: 0.85; transform: rotate(180deg); }
+            }
+            .animate-seal-glint {
+              transform-origin: 50px 50px;
+              animation: sealGlintSweep 3.2s infinite ease-in-out;
+            }
+          `}
+        </style>
+
+        {/* Melted Wax Outer Irregular Drips */}
+        <path
+          d="M 50 10 C 66 8 82 18 88 34 C 94 48 90 68 78 82 C 64 94 42 92 28 86 C 14 78 8 62 10 46 C 12 28 32 12 50 10 Z"
+          fill="#991B1B"
+          stroke="#7F1D1D"
+          strokeWidth="2"
+        />
+
+        {/* Circular Stamp Well */}
+        <circle cx="50" cy="50" r="32" fill="#B91C1C" stroke="#7F1D1D" strokeWidth="1.5" />
+        <circle cx="50" cy="50" r="28" stroke="#DC2626" strokeWidth="1" strokeDasharray="3 2" />
+
+        {/* Embossed Veritas Open Book & Globe */}
+        <path d="M 40 40 Q 50 44 60 40 V 58 Q 50 54 40 58 Z" fill="#7F1D1D" />
+        <path d="M 40 40 Q 50 44 50 58 Q 40 54 40 40 Z" fill="#FCA5A5" opacity="0.6" />
+        <path d="M 60 40 Q 50 44 50 58 Q 60 54 60 40 Z" fill="#FCA5A5" opacity="0.6" />
+
+        {/* Stars on Seal */}
+        <circle cx="50" cy="28" r="2" fill="#FDE68A" />
+        <circle cx="34" cy="50" r="1.5" fill="#FDE68A" />
+        <circle cx="66" cy="50" r="1.5" fill="#FDE68A" />
+        <text x="50" y="68" fontSize="5.5" fontWeight="900" fill="#FEF08A" textAnchor="middle" letterSpacing="0.8">JHU 1876</text>
+
+        {/* Specular Glint Shimmer */}
+        <g className="animate-seal-glint">
+          <circle cx="36" cy="30" r="14" fill="#FFFFFF" opacity="0.25" />
+        </g>
+      </svg>
+    </div>
+  );
+};
+
+// ================= 13. ANIMATED EXPLORER BINOCULARS =================
+export const BinocularsSticker: React.FC<{ size?: number; className?: string }> = ({
+  size = 46,
+  className = '',
+}) => {
+  return (
+    <div className={`relative inline-block select-none ${className}`} title="Brass Field Glasses">
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="filter drop-shadow-sm"
+      >
+        <style>
+          {`
+            @keyframes binocularScanSway {
+              0%, 100% { transform: rotate(-5deg); }
+              50% { transform: rotate(5deg); }
+            }
+            .animate-binocular-scan {
+              transform-origin: 50px 50px;
+              animation: binocularScanSway 3s infinite ease-in-out;
+            }
+          `}
+        </style>
+
+        <g className="animate-binocular-scan">
+          {/* Leather Neck Strap */}
+          <path d="M 28 32 Q 50 14 72 32" stroke="#78350F" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+
+          {/* Center Bridge Axle */}
+          <rect x="44" y="44" width="12" height="12" rx="2" fill="#B45309" stroke="#78350F" strokeWidth="1" />
+          <circle cx="50" cy="50" r="3" fill="#F59E0B" />
+
+          {/* Left Barrel */}
+          <g transform="translate(20, 30)">
+            {/* Eyepiece */}
+            <rect x="6" y="0" width="16" height="8" rx="2" fill="#1E293B" />
+            {/* Main Brass Barrel */}
+            <rect x="2" y="8" width="24" height="28" rx="4" fill="#D97706" stroke="#92400E" strokeWidth="1.2" />
+            {/* Objective Ring */}
+            <rect x="0" y="36" width="28" height="8" rx="3" fill="#1E293B" stroke="#0F172A" strokeWidth="1" />
+            {/* Blue Glass Lens Reflection */}
+            <ellipse cx="14" cy="40" rx="11" ry="3" fill="#38BDF8" />
+            <ellipse cx="12" cy="39" rx="5" ry="1.2" fill="#FFFFFF" opacity="0.85" />
+          </g>
+
+          {/* Right Barrel */}
+          <g transform="translate(52, 30)">
+            {/* Eyepiece */}
+            <rect x="6" y="0" width="16" height="8" rx="2" fill="#1E293B" />
+            {/* Main Brass Barrel */}
+            <rect x="2" y="8" width="24" height="28" rx="4" fill="#D97706" stroke="#92400E" strokeWidth="1.2" />
+            {/* Objective Ring */}
+            <rect x="0" y="36" width="28" height="8" rx="3" fill="#1E293B" stroke="#0F172A" strokeWidth="1" />
+            {/* Blue Glass Lens Reflection */}
+            <ellipse cx="14" cy="40" rx="11" ry="3" fill="#38BDF8" />
+            <ellipse cx="12" cy="39" rx="5" ry="1.2" fill="#FFFFFF" opacity="0.85" />
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+};
+
+// ================= 14. ANIMATED FORT MCHENRY STAR-SPANGLED FLAG =================
+export const StarSpangledFlagSticker: React.FC<{ size?: number; className?: string }> = ({
+  size = 46,
+  className = '',
+}) => {
+  return (
+    <div className={`relative inline-block select-none ${className}`} title="Fort McHenry Star-Spangled Banner">
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="filter drop-shadow-sm"
+      >
+        <style>
+          {`
+            @keyframes flagWaveBreeze {
+              0%, 100% { transform: skewY(0deg) scaleY(1); }
+              50% { transform: skewY(3deg) scaleY(0.96); }
+            }
+            .animate-flag-wave {
+              transform-origin: 22px 24px;
+              animation: flagWaveBreeze 2.4s infinite ease-in-out;
+            }
+          `}
+        </style>
+
+        {/* Wooden Flagpole */}
+        <line x1="22" y1="12" x2="22" y2="88" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
+        <circle cx="22" cy="12" r="3" fill="#F59E0B" />
+
+        {/* Waving 15-Star & 15-Stripe Banner */}
+        <g className="animate-flag-wave">
+          {/* Flag Red & White Stripes */}
+          <g>
+            <rect x="24" y="16" width="60" height="4" fill="#DC2626" />
+            <rect x="24" y="20" width="60" height="4" fill="#FFFFFF" />
+            <rect x="24" y="24" width="60" height="4" fill="#DC2626" />
+            <rect x="24" y="28" width="60" height="4" fill="#FFFFFF" />
+            <rect x="24" y="32" width="60" height="4" fill="#DC2626" />
+            <rect x="24" y="36" width="60" height="4" fill="#FFFFFF" />
+            <rect x="24" y="40" width="60" height="4" fill="#DC2626" />
+            <rect x="24" y="44" width="60" height="4" fill="#FFFFFF" />
+            <rect x="24" y="48" width="60" height="4" fill="#DC2626" />
+          </g>
+
+          {/* Blue Canton with 15 Stars */}
+          <rect x="24" y="16" width="28" height="20" fill="#002D72" />
+          {/* Stars Array */}
+          <g fill="#FFFFFF" fontSize="4">
+            <text x="28" y="22">★</text>
+            <text x="36" y="22">★</text>
+            <text x="44" y="22">★</text>
+            <text x="32" y="28">★</text>
+            <text x="40" y="28">★</text>
+            <text x="28" y="34">★</text>
+            <text x="36" y="34">★</text>
+            <text x="44" y="34">★</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+};
+
+// ================= STICKER ALBUM REGISTRY =================
+export interface SouvenirStickerItem {
+  id: string;
+  name: string;
+  category: string;
+  Component: React.FC<{ size?: number; className?: string }>;
+  description: string;
+  unlockedAt: number; // points required to unlock
+}
+
+export const SOUVENIR_STICKERS: SouvenirStickerItem[] = [
+  {
+    id: 'baby-jay',
+    name: 'Baby Jay Explorer',
+    category: 'Hopkins Spirit',
+    Component: BabyJaySticker,
+    description: 'The beloved chibi Blue Jay mascot in his safari explorer hat.',
+    unlockedAt: 0,
+  },
+  {
+    id: 'maryland-crab',
+    name: 'Charm City Blue Crab',
+    category: 'Baltimore Heritage',
+    Component: MarylandCrabSticker,
+    description: 'Waving blue crab with authentic Maryland flag shell pattern.',
+    unlockedAt: 50,
+  },
+  {
+    id: 'gilman-clock',
+    name: 'Gilman Clock Tower',
+    category: 'Homewood Lore',
+    Component: GilmanClockSticker,
+    description: 'The historic Gilman Hall cupola with working minute hand.',
+    unlockedAt: 100,
+  },
+  {
+    id: 'compass-rose',
+    name: 'Vintage Brass Compass',
+    category: 'Travel Gear',
+    Component: CompassRoseSticker,
+    description: 'Nautical brass compass with oscillating magnetic needle.',
+    unlockedAt: 150,
+  },
+  {
+    id: 'hot-air-balloon',
+    name: 'Hopkins Airship Balloon',
+    category: 'Expeditions',
+    Component: HotAirBalloonSticker,
+    description: 'Heritage Blue & Gold striped hot air balloon sailing over Baltimore.',
+    unlockedAt: 200,
+  },
+  {
+    id: 'steaming-coffee',
+    name: 'Charm City Cafe Mug',
+    category: 'Student Life',
+    Component: SteamingCoffeeSticker,
+    description: 'Warm cafe mug with rising curly steam and gold heart.',
+    unlockedAt: 250,
+  },
+  {
+    id: 'peabody-books',
+    name: 'Peabody Library Tomes',
+    category: 'Mount Vernon',
+    Component: BookStackSticker,
+    description: 'Stack of antique leather-bound volumes with fluttering open pages.',
+    unlockedAt: 300,
+  },
+  {
+    id: 'hopkins-shuttle',
+    name: 'Homewood-JHMI Shuttle',
+    category: 'Transit',
+    Component: HopkinsShuttleSticker,
+    description: 'The iconic blue campus transit shuttle with Baby Jay on board.',
+    unlockedAt: 350,
+  },
+  {
+    id: 'treasure-chest',
+    name: 'Bonus Points Trunk',
+    category: 'Rewards',
+    Component: TreasureChestSticker,
+    description: 'Explorer chest overflowing with glowing gold travel coins.',
+    unlockedAt: 400,
+  },
+  {
+    id: 'wax-seal',
+    name: 'Veritas Wax Seal',
+    category: 'Hopkins Charter',
+    Component: WaxSealSticker,
+    description: 'Crimson university wax stamp certifying your student journey.',
+    unlockedAt: 500,
+  },
+  {
+    id: 'binoculars',
+    name: 'Brass Field Glasses',
+    category: 'Travel Gear',
+    Component: BinocularsSticker,
+    description: 'High-power binoculars scanning across the Inner Harbor promontory.',
+    unlockedAt: 600,
+  },
+  {
+    id: 'star-spangled-flag',
+    name: 'Fort McHenry 15-Star Flag',
+    category: 'National Monument',
+    Component: StarSpangledFlagSticker,
+    description: 'Historic Star-Spangled Banner waving over Baltimore Harbor.',
+    unlockedAt: 750,
+  },
+  {
+    id: 'airmail-envelope',
+    name: 'Hopkins Winged Dispatch',
+    category: 'Stationery',
+    Component: LuggageAirmailSticker,
+    description: 'Classic airmail letter with flapping blue aviator wings.',
+    unlockedAt: 900,
+  },
+  {
+    id: 'sparkle-stars',
+    name: 'Celestial Spirit Stars',
+    category: 'Milestones',
+    Component: SparkleStarsSticker,
+    description: 'Radiant gold star bursts celebrating your grand exploration.',
+    unlockedAt: 1000,
+  },
+];
+
+

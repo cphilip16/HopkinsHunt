@@ -5,7 +5,12 @@ import { MarylandRibbon } from './art/MarylandRibbon';
 import { CuteMascot } from './art/CuteMascot';
 import { PassportStamp } from './art/PassportStamp';
 import { WashiTape } from './art/TravelDecorations';
-import { MarylandCrabSticker, LuggageAirmailSticker, SparkleStarsSticker } from './art/AnimatedStickers';
+import {
+  MarylandCrabSticker,
+  LuggageAirmailSticker,
+  SparkleStarsSticker,
+  WaxSealSticker,
+} from './art/AnimatedStickers';
 
 export const PlaceDetailModal: React.FC = () => {
   const { selectedPlace, setSelectedPlace, profile, toggleCheckIn, updateReview } = useApp();
@@ -167,7 +172,16 @@ export const PlaceDetailModal: React.FC = () => {
           {/* Baby Jay Mascot's Hopkins Lore & Student Traditions */}
           <div className="p-4 rounded-2xl bg-sky-50/70 border border-sky-200 flex items-start space-x-3.5">
             <div className="flex-shrink-0 -mt-1">
-              <CuteMascot pose="snapping" size={56} />
+              <CuteMascot
+                pose={
+                  selectedPlace.category === 'food'
+                    ? 'snacking'
+                    : selectedPlace.category === 'museum' || selectedPlace.category === 'historic'
+                    ? 'scholar'
+                    : 'snapping'
+                }
+                size={58}
+              />
             </div>
             <div className="flex-1">
               <div className="flex items-center space-x-1.5 text-xs font-black text-hopkins-heritage uppercase tracking-wider mb-1">
@@ -263,10 +277,13 @@ export const PlaceDetailModal: React.FC = () => {
 
               <div className="flex items-center space-x-2">
                 <div className="transform -rotate-6 hover:rotate-0 transition-transform">
-                  <LuggageAirmailSticker size={36} />
+                  <WaxSealSticker size={34} />
+                </div>
+                <div className="transform rotate-3 hover:rotate-0 transition-transform">
+                  <LuggageAirmailSticker size={34} />
                 </div>
                 <div className="transform rotate-6 hover:rotate-0 transition-transform">
-                  <MarylandCrabSticker size={34} />
+                  <MarylandCrabSticker size={32} />
                 </div>
               </div>
             </div>

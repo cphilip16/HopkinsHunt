@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type CuteMascotPose = 'waving' | 'snapping' | 'cheering' | 'explorer';
+export type CuteMascotPose = 'waving' | 'snapping' | 'cheering' | 'explorer' | 'scholar' | 'snacking';
 
 interface CuteMascotProps {
   pose?: CuteMascotPose;
@@ -188,15 +188,28 @@ export const CuteMascot: React.FC<CuteMascotProps> = ({
             fill="#8AC6F9"
           />
 
-          {/* Mini Explorer Safari Hat */}
-          <g transform="translate(48, 8)">
-            {/* Hat Brim */}
-            <ellipse cx="22" cy="18" rx="24" ry="6" fill="url(#chibiHat)" stroke="#B45309" strokeWidth="1.2" />
-            {/* Hat Crown */}
-            <path d="M 8 18 Q 8 6 22 6 Q 36 6 36 18 Z" fill="url(#chibiHat)" stroke="#B45309" strokeWidth="1.2" />
-            {/* Hat Ribbon band in JHU Heritage Navy */}
-            <path d="M 8 16 Q 22 20 36 16 L 36 18 Q 22 22 8 18 Z" fill="#002D72" />
-          </g>
+          {/* Headwear: Mortarboard cap for scholar, Safari Hat for other poses */}
+          {pose === 'scholar' ? (
+            <g transform="translate(42, 6)">
+              {/* Cap Skull cap */}
+              <ellipse cx="28" cy="18" rx="14" ry="5" fill="#001D4A" />
+              {/* Diamond Mortarboard Top */}
+              <polygon points="28,4 52,14 28,22 4,14" fill="#002D72" stroke="#001845" strokeWidth="1.2" />
+              {/* Golden Button & Swinging Tassel */}
+              <circle cx="28" cy="14" r="2.2" fill="#F1C400" />
+              <path d="M 28 14 Q 40 18 42 28" stroke="#F1C400" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+              <circle cx="42" cy="29" r="2" fill="#D97706" />
+            </g>
+          ) : (
+            <g transform="translate(48, 8)">
+              {/* Hat Brim */}
+              <ellipse cx="22" cy="18" rx="24" ry="6" fill="url(#chibiHat)" stroke="#B45309" strokeWidth="1.2" />
+              {/* Hat Crown */}
+              <path d="M 8 18 Q 8 6 22 6 Q 36 6 36 18 Z" fill="url(#chibiHat)" stroke="#B45309" strokeWidth="1.2" />
+              {/* Hat Ribbon band in JHU Heritage Navy */}
+              <path d="M 8 16 Q 22 20 36 16 L 36 18 Q 22 22 8 18 Z" fill="#002D72" />
+            </g>
+          )}
 
           {/* Little Yellow Feet */}
           <path d="M 56 118 L 52 126 M 56 118 L 56 127 M 56 118 L 60 126" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" />
@@ -304,6 +317,62 @@ export const CuteMascot: React.FC<CuteMascotProps> = ({
                 strokeWidth="5"
                 strokeLinecap="round"
               />
+            </g>
+          )}
+
+          {/* POSE 5: SCHOLAR (Reading JHU Textbook with Glasses) */}
+          {pose === 'scholar' && (
+            <g id="chibi-pose-scholar">
+              {/* Wire-Rimmed Round Glasses */}
+              <circle cx="56" cy="52" r="9.5" fill="none" stroke="#D97706" strokeWidth="1.6" />
+              <circle cx="84" cy="52" r="9.5" fill="none" stroke="#D97706" strokeWidth="1.6" />
+              <line x1="65.5" y1="52" x2="74.5" y2="52" stroke="#D97706" strokeWidth="1.8" />
+
+              {/* Open JHU Veritas Book */}
+              <g transform="translate(42, 74)">
+                <rect x="0" y="0" width="56" height="26" rx="3" fill="#002D72" stroke="#001845" strokeWidth="1.2" />
+                <path d="M 2 2 H 26 V 24 H 2 Z" fill="#FFFDF0" />
+                <path d="M 30 2 H 54 V 24 H 30 Z" fill="#FFFDF0" />
+                <line x1="28" y1="2" x2="28" y2="24" stroke="#D97706" strokeWidth="1.5" />
+                {/* Book text lines */}
+                <line x1="6" y1="7" x2="22" y2="7" stroke="#94A3B8" strokeWidth="1" />
+                <line x1="6" y1="12" x2="22" y2="12" stroke="#94A3B8" strokeWidth="1" />
+                <line x1="6" y1="17" x2="18" y2="17" stroke="#94A3B8" strokeWidth="1" />
+                <line x1="34" y1="7" x2="50" y2="7" stroke="#94A3B8" strokeWidth="1" />
+                <line x1="34" y1="12" x2="50" y2="12" stroke="#94A3B8" strokeWidth="1" />
+                <line x1="34" y1="17" x2="44" y2="17" stroke="#94A3B8" strokeWidth="1" />
+              </g>
+
+              {/* Wings holding book */}
+              <path d="M 42 78 Q 46 88 50 82 M 98 78 Q 94 88 90 82" stroke="#4A90E2" strokeWidth="5" strokeLinecap="round" />
+            </g>
+          )}
+
+          {/* POSE 6: SNACKING (Eating Baltimore Berger Cookie with Heart Eyes) */}
+          {pose === 'snacking' && (
+            <g id="chibi-pose-snacking">
+              {/* Kawaii Heart Eyes */}
+              <g transform="translate(50, 46)">
+                <path d="M 6 6 Q 6 2 9 2 Q 12 2 12 5 Q 12 9 6 12 Q 0 9 0 5 Q 0 2 3 2 Q 6 2 6 6 Z" fill="#F43F5E" />
+              </g>
+              <g transform="translate(78, 46)">
+                <path d="M 6 6 Q 6 2 9 2 Q 12 2 12 5 Q 12 9 6 12 Q 0 9 0 5 Q 0 2 3 2 Q 6 2 6 6 Z" fill="#F43F5E" />
+              </g>
+
+              {/* Thick Chocolate-Dipped Baltimore Berger Cookie */}
+              <g transform="translate(56, 72)">
+                <circle cx="14" cy="14" r="14" fill="#FDE68A" stroke="#B45309" strokeWidth="1.2" />
+                <path d="M 2 14 C 2 7 8 2 14 2 C 21 2 26 7 26 14 C 26 18 20 18 14 20 C 8 22 2 18 2 14 Z" fill="#451A03" />
+                {/* Bite Mark */}
+                <circle cx="24" cy="6" r="4" fill="#002D72" />
+              </g>
+
+              {/* Little Crumbs */}
+              <circle cx="50" cy="94" r="1.5" fill="#451A03" />
+              <circle cx="86" cy="92" r="1.2" fill="#B45309" />
+
+              {/* Both wings holding cookie */}
+              <path d="M 48 76 Q 58 84 62 78 M 92 76 Q 82 84 78 78" stroke="#4A90E2" strokeWidth="5" strokeLinecap="round" />
             </g>
           )}
 

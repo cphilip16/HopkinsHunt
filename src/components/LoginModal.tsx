@@ -4,6 +4,8 @@ import { useApp } from '../context/AppContext';
 import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { BlueJayMascot } from './art/BlueJayMascot';
+import { CuteMascot } from './art/CuteMascot';
+import { WaxSealSticker, SparkleStarsSticker } from './art/AnimatedStickers';
 
 export const LoginModal: React.FC = () => {
   const {
@@ -132,20 +134,28 @@ export const LoginModal: React.FC = () => {
             <X className="w-5 h-5" />
           </button>
 
-          <div className="flex items-center space-x-3.5 pr-8">
-            <HopkinsShield size={42} className="flex-shrink-0 drop-shadow-md" />
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-sky-200">
-                  Authentication & Security
-                </span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 font-bold">
-                  Hopkins SSO
-                </span>
+          <div className="flex items-center justify-between pr-8">
+            <div className="flex items-center space-x-3.5">
+              <HopkinsShield size={42} className="flex-shrink-0 drop-shadow-md" />
+              <div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-sky-200">
+                    Authentication & Security
+                  </span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 font-bold">
+                    Hopkins SSO
+                  </span>
+                </div>
+                <h2 className="text-lg sm:text-2xl font-black text-white tracking-tight mt-0.5 flex items-center gap-2">
+                  <span>{step === 'credentials' ? 'Student Sign-In & Verification' : 'Hopkins Multi-Factor Verification'}</span>
+                  <span className="hidden xs:inline-block"><WaxSealSticker size={28} /></span>
+                </h2>
               </div>
-              <h2 className="text-lg sm:text-2xl font-black text-white tracking-tight mt-0.5">
-                {step === 'credentials' ? 'Student Sign-In & Verification' : 'Hopkins Multi-Factor Verification'}
-              </h2>
+            </div>
+
+            {/* Scholar Baby Jay Mascot */}
+            <div className="hidden sm:block flex-shrink-0">
+              <CuteMascot pose="scholar" size={54} />
             </div>
           </div>
           <p className="text-xs text-blue-200/90 mt-2 leading-relaxed">

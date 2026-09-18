@@ -7,7 +7,7 @@ import { MarylandRibbon } from './art/MarylandRibbon';
 import { PassportStamp } from './art/PassportStamp';
 import { LuggageTag, WashiTape } from './art/TravelDecorations';
 import { CuteMascot } from './art/CuteMascot';
-import { BabyJaySticker, CompassRoseSticker, MarylandCrabSticker, SparkleStarsSticker } from './art/AnimatedStickers';
+import { BabyJaySticker, CompassRoseSticker, MarylandCrabSticker, SparkleStarsSticker, SOUVENIR_STICKERS } from './art/AnimatedStickers';
 
 export const DigitalJCard: React.FC = () => {
   const {
@@ -326,6 +326,63 @@ export const DigitalJCard: React.FC = () => {
                   </p>
                   <span className="text-[11px] font-semibold text-slate-400 mt-1 block">
                     Requirement: {badge.requirement}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Traveler Souvenir Animated Sticker Album */}
+      <div className="bg-[#FFFDF9] rounded-3xl p-4 sm:p-8 shadow-sm border-2 border-dashed border-amber-300/90 space-y-4 relative overflow-hidden">
+        {/* Top Washi Tape Pins */}
+        <div className="absolute -top-2.5 left-10 z-20">
+          <WashiTape color="rose" width={76} angle={-2} />
+        </div>
+        <div className="absolute -top-2.5 right-10 z-20">
+          <WashiTape color="mint" width={76} angle={2} />
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-2">
+          <div>
+            <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center space-x-2">
+              <span>🎒</span>
+              <span>Charm City Souvenir Sticker Album</span>
+            </h3>
+            <p className="text-xs text-amber-900/80 mt-0.5">
+              Collectible animated stickers unlocked as your Hopkins Exploration Score climbs.
+            </p>
+          </div>
+          <span className="text-xs font-black text-amber-900 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full whitespace-nowrap">
+            {SOUVENIR_STICKERS.filter((s) => totalPoints >= s.unlockedAt).length} / {SOUVENIR_STICKERS.length} Unlocked
+          </span>
+        </div>
+
+        {/* Sticker Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 pt-2">
+          {SOUVENIR_STICKERS.map((sticker) => {
+            const isUnlocked = totalPoints >= sticker.unlockedAt;
+            const StickerComponent = sticker.Component;
+
+            return (
+              <div
+                key={sticker.id}
+                className={`p-3 rounded-2xl border flex flex-col items-center text-center justify-between transition-all select-none ${
+                  isUnlocked
+                    ? 'bg-white border-amber-200/90 shadow-xs hover:shadow-md hover:-translate-y-1'
+                    : 'bg-slate-100/60 border-slate-200 opacity-50 grayscale'
+                }`}
+              >
+                <div className="h-16 flex items-center justify-center">
+                  <StickerComponent size={isUnlocked ? 48 : 42} />
+                </div>
+                <div className="mt-2 w-full">
+                  <span className="text-[11px] font-extrabold text-slate-900 line-clamp-1">
+                    {sticker.name}
+                  </span>
+                  <span className="text-[9px] font-bold text-amber-700/80 block mt-0.5">
+                    {isUnlocked ? '✓ Collected' : `${sticker.unlockedAt} pts`}
                   </span>
                 </div>
               </div>

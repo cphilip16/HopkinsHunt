@@ -6,10 +6,42 @@ import { CuteMascot } from './art/CuteMascot';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { WashiTape } from './art/TravelDecorations';
 import { PassportStamp } from './art/PassportStamp';
-import { CompassRoseSticker, LuggageAirmailSticker, BabyJaySticker } from './art/AnimatedStickers';
+import {
+  CompassRoseSticker,
+  LuggageAirmailSticker,
+  BabyJaySticker,
+  TreasureChestSticker,
+  HopkinsShuttleSticker,
+  HotAirBalloonSticker,
+  BookStackSticker,
+  StarSpangledFlagSticker,
+  MarylandCrabSticker,
+} from './art/AnimatedStickers';
 
 export const QuestsView: React.FC = () => {
   const { quests, places, profile, toggleCheckIn, setSelectedPlace } = useApp();
+
+  const getQuestSticker = (quest: Quest, isCompleted: boolean) => {
+    if (isCompleted) {
+      return <TreasureChestSticker size={26} />;
+    }
+    if (quest.id === 'quest-hopkins-triangle') {
+      return <HopkinsShuttleSticker size={24} />;
+    }
+    if (quest.id === 'quest-peabody-culture') {
+      return <BookStackSticker size={24} />;
+    }
+    if (quest.id === 'quest-star-spangled') {
+      return <StarSpangledFlagSticker size={24} />;
+    }
+    if (quest.id === 'quest-fells-point-flavor') {
+      return <MarylandCrabSticker size={24} />;
+    }
+    if (quest.difficulty === 'Easy') {
+      return <HotAirBalloonSticker size={24} />;
+    }
+    return <LuggageAirmailSticker size={24} />;
+  };
 
   return (
     <div className="space-y-6">
@@ -34,8 +66,9 @@ export const QuestsView: React.FC = () => {
           </p>
         </div>
 
-        {/* Cute Baby Jay Explorer Mascot Art Backdrop */}
-        <div className="absolute right-4 -bottom-2 pointer-events-none hidden sm:block">
+        {/* Cute Baby Jay Explorer Mascot Art + Treasure Chest Backdrop */}
+        <div className="absolute right-4 -bottom-2 pointer-events-none hidden sm:flex items-end space-x-2">
+          <TreasureChestSticker size={76} className="transform -rotate-6 filter drop-shadow-xl mb-1" />
           <CuteMascot
             pose="explorer"
             size={120}
@@ -94,14 +127,8 @@ export const QuestsView: React.FC = () => {
                         {quest.icon}
                       </span>
                       {/* Animated Micro Sticker */}
-                      <div className="absolute -bottom-2 -right-2">
-                        {quest.difficulty === 'Easy' ? (
-                          <CompassRoseSticker size={22} />
-                        ) : quest.difficulty === 'Moderate' ? (
-                          <LuggageAirmailSticker size={22} />
-                        ) : (
-                          <BabyJaySticker size={24} />
-                        )}
+                      <div className="absolute -bottom-2.5 -right-2.5">
+                        {getQuestSticker(quest, isCompleted)}
                       </div>
                     </div>
                     <div>
@@ -232,8 +259,15 @@ export const QuestsView: React.FC = () => {
                     Pin Reward: <strong className="text-slate-800">{quest.badgeReward}</strong>
                   </span>
                 </div>
-                {isCompleted && (
-                  <span className="text-emerald-600 font-bold">Awarded to J-Card!</span>
+                {isCompleted ? (
+                  <div className="flex items-center space-x-1.5 text-emerald-600 font-bold">
+                    <TreasureChestSticker size={18} />
+                    <span>Awarded to J-Card!</span>
+                  </div>
+                ) : (
+                  <span className="text-[11px] text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md font-medium">
+                    +{quest.bonusPoints} bonus pts
+                  </span>
                 )}
               </div>
             </div>

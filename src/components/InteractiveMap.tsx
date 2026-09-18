@@ -4,6 +4,8 @@ import { useApp } from '../context/AppContext';
 import { Place } from '../types';
 import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
+import { HotAirBalloonSticker, CompassRoseSticker, BinocularsSticker } from './art/AnimatedStickers';
+import { PassportStamp } from './art/PassportStamp';
 
 export const InteractiveMap: React.FC = () => {
   const {
@@ -40,27 +42,43 @@ export const InteractiveMap: React.FC = () => {
             <HopkinsShield size={32} />
           </div>
           <div>
-            <h3 className="text-sm font-bold tracking-tight">Interactive Baltimore & JHU Campus Map</h3>
+            <h3 className="text-sm font-bold tracking-tight flex items-center gap-1.5">
+              <span>Interactive Baltimore & JHU Campus Map</span>
+              <span className="hidden md:inline-block"><CompassRoseSticker size={20} /></span>
+            </h3>
             <p className="text-xs text-blue-200">
               Pins show travel spots across Baltimore. The dashed blue line traces the free JHMI Shuttle route!
             </p>
           </div>
         </div>
 
-        <div className="flex items-center space-x-2 text-xs font-semibold">
-          <span className="flex items-center space-x-1 bg-white/10 px-2.5 py-1 rounded-lg">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block" />
-            <span>Visited ({profile.visitedPlaceIds.length})</span>
-          </span>
-          <span className="flex items-center space-x-1 bg-white/10 px-2.5 py-1 rounded-lg">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block" />
-            <span>Unvisited</span>
-          </span>
+        <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 text-xs font-semibold">
+            <span className="flex items-center space-x-1 bg-white/10 px-2.5 py-1 rounded-lg">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block" />
+              <span>Visited ({profile.visitedPlaceIds.length})</span>
+            </span>
+            <span className="flex items-center space-x-1 bg-white/10 px-2.5 py-1 rounded-lg">
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block" />
+              <span>Unvisited</span>
+            </span>
+          </div>
+
+          {/* Floating Hot Air Balloon in Sky */}
+          <div className="hidden sm:block flex-shrink-0">
+            <HotAirBalloonSticker size={46} />
+          </div>
         </div>
       </div>
 
       {/* SVG Canvas Map Container */}
       <div className="relative w-full aspect-[4/3] min-h-[380px] sm:min-h-[460px] max-h-[640px] bg-slate-900 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl select-none">
+        
+        {/* Top-Right Brass Binoculars Observation Badge */}
+        <div className="absolute top-3 right-3 z-20 hidden sm:flex items-center space-x-1.5 bg-slate-800/80 backdrop-blur-md px-2.5 py-1 rounded-xl border border-slate-700 text-[10px] font-bold text-slate-300 pointer-events-none">
+          <BinocularsSticker size={22} />
+          <span>Field Observation</span>
+        </div>
         
         {/* Decorative Grid Lines */}
         <div
