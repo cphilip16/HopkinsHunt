@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Sparkles, Trophy, ChevronRight, CheckCircle2, Info, ChevronDown, ChevronUp } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { RANKS, SUBRANKS } from '../data/ranksData';
+import { CampusSkyline } from './art/CampusSkyline';
+import { BlueJayMascot } from './art/BlueJayMascot';
+import { MarylandRibbon } from './art/MarylandRibbon';
 
 export const RankProgressCard: React.FC = () => {
   const {
@@ -23,19 +26,35 @@ export const RankProgressCard: React.FC = () => {
   const completedQuestsCount = profile.completedQuestIds.length;
 
   return (
-    <div className="bg-gradient-to-br from-white via-slate-50 to-blue-50/40 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-jhu border border-blue-100 relative overflow-hidden">
+    <div className="bg-gradient-to-br from-white via-slate-50 to-blue-50/50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-jhu border border-blue-100/80 relative overflow-hidden">
       
-      {/* Subtle background decoration */}
-      <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 rounded-full bg-gradient-to-br from-hopkins-spirit/10 to-transparent pointer-events-none blur-2xl" />
+      {/* Top Maryland & Baltimore Ribbon Accent */}
+      <div className="absolute top-0 inset-x-0">
+        <MarylandRibbon height={3} />
+      </div>
+
+      {/* Subtle background Gilman Hall & Campus Skyline Watermark */}
+      <CampusSkyline
+        className="absolute -bottom-2 inset-x-0 text-hopkins-heritage"
+        opacity={0.13}
+      />
+      
+      {/* Radial ambient glow */}
+      <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 rounded-full bg-gradient-to-br from-hopkins-spirit/15 to-transparent pointer-events-none blur-2xl" />
 
       <div className="relative z-10">
         
-        {/* Top Header: Current Rank Badge & Point Counter */}
+        {/* Top Header: Current Rank Badge, Mascot & Point Counter */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-slate-200/80">
           
           <div className="flex items-start space-x-3 sm:space-x-4">
             <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center text-2xl sm:text-4xl shadow-lg ring-2 sm:ring-4 ring-white shadow-blue-900/15 flex-shrink-0">
               {currentSubrank.insignia}
+            </div>
+
+            {/* Blue Jay Explorer Mascot Accent */}
+            <div className="hidden sm:block flex-shrink-0">
+              <BlueJayMascot pose="explorer" size={68} className="transform hover:scale-105 transition-transform" />
             </div>
 
             <div>

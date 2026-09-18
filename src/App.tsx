@@ -11,6 +11,8 @@ import { LevelUpModal } from './components/LevelUpModal';
 import { PlaceDetailModal } from './components/PlaceDetailModal';
 import { LoginModal } from './components/LoginModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
+import { FeatherCelebration } from './components/FeatherCelebration';
+import { MarylandRibbon } from './components/art/MarylandRibbon';
 import { Compass, Sparkles, MapPin } from 'lucide-react';
 
 const AppContent: React.FC = () => {
@@ -142,12 +144,16 @@ const AppContent: React.FC = () => {
       <PlaceDetailModal />
       <LoginModal />
 
+      {/* Interactive Hopkins Blue Jay Feather Particle Celebration */}
+      <FeatherCelebration />
+
       {/* Mobile Bottom Navigation (Ergonomic thumb reach on mobile devices) */}
       <MobileBottomNav />
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 mt-8 sm:mt-12 py-8 pb-24 md:pb-8 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 space-y-2">
+      {/* Footer with Maryland Ribbon Accent */}
+      <footer className="bg-white border-t border-slate-200 mt-8 sm:mt-12 text-center text-xs text-slate-500 overflow-hidden">
+        <MarylandRibbon height={3} />
+        <div className="max-w-7xl mx-auto px-4 py-8 pb-24 md:pb-8 space-y-2">
           <div className="flex items-center justify-center space-x-2 font-bold text-slate-700">
             <span>🐦 JayWalk Bmore</span>
             <span>&bull;</span>

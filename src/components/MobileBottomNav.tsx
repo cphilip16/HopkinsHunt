@@ -1,6 +1,7 @@
 import React from 'react';
 import { Compass, MapPin, Award, BookOpen, Sparkles } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { MarylandRibbon } from './art/MarylandRibbon';
 
 export const MobileBottomNav: React.FC = () => {
   const { activeTab, setActiveTab, profile, quests } = useApp();
@@ -9,8 +10,11 @@ export const MobileBottomNav: React.FC = () => {
   const visitedCount = profile.visitedPlaceIds.length;
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-40 md:hidden bg-hopkins-deep/95 backdrop-blur-xl border-t border-blue-900/60 shadow-2xl px-3 py-1.5 safe-bottom">
-      <div className="flex items-center justify-around">
+    <nav className="fixed bottom-0 inset-x-0 z-40 md:hidden bg-hopkins-deep/95 backdrop-blur-xl border-t border-blue-900/60 shadow-2xl safe-bottom overflow-hidden">
+      {/* Maryland Accent Trim on Mobile Bottom Nav */}
+      <MarylandRibbon height={2} />
+
+      <div className="flex items-center justify-around px-3 py-1.5">
         
         {/* Places Tab */}
         <button
@@ -84,3 +88,4 @@ export const MobileBottomNav: React.FC = () => {
     </nav>
   );
 };
+

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { X, ShieldCheck, Mail, Key, User, BookOpen, Sparkles, Check, ArrowRight, RefreshCw, AlertCircle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { HopkinsShield } from './art/HopkinsShield';
+import { MarylandRibbon } from './art/MarylandRibbon';
+import { BlueJayMascot } from './art/BlueJayMascot';
 
 export const LoginModal: React.FC = () => {
   const {
@@ -116,6 +119,9 @@ export const LoginModal: React.FC = () => {
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/70 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-200">
       <div className="relative w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col">
         
+        {/* Top Maryland Accent Trim */}
+        <MarylandRibbon height={3} />
+
         {/* Top Header with Hopkins Heritage Deep Blue */}
         <div className="bg-gradient-to-r from-hopkins-deep via-hopkins-heritage to-blue-900 text-white p-5 sm:p-7 relative flex-shrink-0">
           <button
@@ -126,10 +132,8 @@ export const LoginModal: React.FC = () => {
             <X className="w-5 h-5" />
           </button>
 
-          <div className="flex items-center space-x-3 pr-8">
-            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white text-hopkins-deep font-black text-lg sm:text-xl flex items-center justify-center shadow-lg ring-2 ring-sky-300 flex-shrink-0">
-              JHU
-            </div>
+          <div className="flex items-center space-x-3.5 pr-8">
+            <HopkinsShield size={42} className="flex-shrink-0 drop-shadow-md" />
             <div>
               <div className="flex items-center space-x-2">
                 <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-sky-200">

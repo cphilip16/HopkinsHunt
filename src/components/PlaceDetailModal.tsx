@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, MapPin, Bus, Clock, DollarSign, Award, Sparkles, Check, Star, Calendar, Save } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { MarylandRibbon } from './art/MarylandRibbon';
 
 export const PlaceDetailModal: React.FC = () => {
   const { selectedPlace, setSelectedPlace, profile, toggleCheckIn, updateReview } = useApp();
@@ -24,6 +25,9 @@ export const PlaceDetailModal: React.FC = () => {
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/70 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-200">
       <div className="relative w-full max-w-2xl bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col">
         
+        {/* Top Maryland Accent Strip */}
+        <MarylandRibbon height={3} />
+
         {/* Hero Image */}
         <div className="relative h-56 sm:h-72 w-full bg-slate-900 flex-shrink-0">
           <img

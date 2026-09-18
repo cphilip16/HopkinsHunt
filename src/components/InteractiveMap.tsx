@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { MapPin, Navigation, Bus, Check, Sparkles, X, ChevronRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Place } from '../types';
+import { HopkinsShield } from './art/HopkinsShield';
+import { MarylandRibbon } from './art/MarylandRibbon';
 
 export const InteractiveMap: React.FC = () => {
   const {
@@ -27,10 +29,15 @@ export const InteractiveMap: React.FC = () => {
   return (
     <div className="space-y-4">
       {/* Map Explainer Banner */}
-      <div className="bg-gradient-to-r from-hopkins-deep to-hopkins-heritage rounded-2xl p-4 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md">
+      <div className="bg-gradient-to-r from-hopkins-deep to-hopkins-heritage rounded-2xl p-4 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md relative overflow-hidden">
+        {/* Top Maryland Accent Ribbon */}
+        <div className="absolute top-0 inset-x-0">
+          <MarylandRibbon height={3} />
+        </div>
+
         <div className="flex items-center space-x-3">
-          <div className="p-2.5 bg-white/10 rounded-xl">
-            <Navigation className="w-5 h-5 text-sky-300" />
+          <div className="p-1 bg-white/10 rounded-xl flex items-center justify-center">
+            <HopkinsShield size={32} />
           </div>
           <div>
             <h3 className="text-sm font-bold tracking-tight">Interactive Baltimore & JHU Campus Map</h3>

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Award, Sparkles, Check, Edit3, Save, Calendar, Star, BookOpen, Share2, ShieldCheck } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BADGES } from '../data/badgesData';
+import { HopkinsShield } from './art/HopkinsShield';
+import { MarylandRibbon } from './art/MarylandRibbon';
 
 export const DigitalJCard: React.FC = () => {
   const {
@@ -44,24 +46,33 @@ export const DigitalJCard: React.FC = () => {
         
         {/* The Digital J-Card */}
         <div className="w-full max-w-md mx-auto">
-          <div className="relative rounded-3xl p-6 sm:p-7 bg-gradient-to-br from-[#001D4A] via-[#002D72] to-[#0A479D] text-white shadow-2xl border-2 border-sky-400/40 overflow-hidden select-none transform transition-transform hover:scale-[1.01]">
+          <div className="relative rounded-3xl p-6 sm:p-7 bg-gradient-to-br from-[#001D4A] via-[#002D72] to-[#0A479D] text-white shadow-2xl border-2 border-sky-400/40 overflow-hidden select-none transform transition-transform hover:scale-[1.01] group">
             
-            {/* Holographic foil line */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/20 via-sky-300/10 to-transparent rounded-full blur-xl pointer-events-none" />
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-tr from-amber-400/20 to-transparent rounded-full blur-2xl pointer-events-none" />
+            {/* Top Maryland Flag Ribbon Accent */}
+            <div className="absolute top-0 inset-x-0">
+              <MarylandRibbon height={3} />
+            </div>
 
-            {/* Top JHU Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-white/20">
+            {/* Embedded Official Hopkins Veritas Shield Watermark */}
+            <div className="absolute -right-6 -bottom-6 opacity-10 pointer-events-none transform rotate-12 scale-125">
+              <HopkinsShield size={190} />
+            </div>
+
+            {/* Holographic foil line & sheen shimmer */}
+            <div className="absolute top-0 right-0 w-36 h-36 bg-gradient-to-bl from-white/25 via-sky-300/15 to-transparent rounded-full blur-xl pointer-events-none" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-tr from-amber-400/20 to-transparent rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+            {/* Top JHU Header with Official Shield */}
+            <div className="flex items-center justify-between pb-4 border-b border-white/20 relative z-10">
               <div className="flex items-center space-x-2.5">
-                <div className="w-9 h-9 rounded-xl bg-white text-hopkins-deep flex items-center justify-center font-black text-lg shadow-md">
-                  JHU
-                </div>
+                <HopkinsShield size={34} className="shadow-md" />
                 <div>
                   <h4 className="text-xs font-black uppercase tracking-wider text-sky-200 leading-none">
                     Johns Hopkins University
                   </h4>
-                  <span className="text-[10px] text-blue-200/80 font-medium">
-                    Charm City Explorer Pass
+                  <span className="text-[10px] text-blue-200/80 font-serif italic">
+                    Veritas vos liberabit &bull; Explorer Pass
                   </span>
                 </div>
               </div>

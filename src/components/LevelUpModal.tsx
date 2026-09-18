@@ -1,6 +1,9 @@
 import React from 'react';
 import { Sparkles, Trophy, Check, X, ArrowRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { BlueJayMascot } from './art/BlueJayMascot';
+import { HopkinsShield } from './art/HopkinsShield';
+import { MarylandRibbon } from './art/MarylandRibbon';
 
 export const LevelUpModal: React.FC = () => {
   const { levelUpData, setLevelUpData, totalPoints, setActiveTab } = useApp();
@@ -10,30 +13,41 @@ export const LevelUpModal: React.FC = () => {
   const { subrank, rank, isMajorRankUp } = levelUpData;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-300">
       <div className="relative w-full max-w-lg bg-gradient-to-b from-white via-slate-50 to-blue-50 rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-sky-300 overflow-hidden text-center">
         
-        {/* Top celebratory header ribbon */}
-        <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-hopkins-spirit via-amber-400 to-baltimore-crab" />
+        {/* Top celebratory Maryland Ribbon */}
+        <div className="absolute top-0 inset-x-0">
+          <MarylandRibbon height={4} />
+        </div>
 
         {/* Close Button */}
         <button
           onClick={() => setLevelUpData(null)}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors"
+          className="absolute top-4 right-4 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors z-20"
+          aria-label="Close celebration modal"
         >
           <X className="w-5 h-5" />
         </button>
 
-        {/* Mascot / Insignia Burst */}
-        <div className="mx-auto w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center text-5xl sm:text-6xl shadow-xl ring-4 ring-amber-300 shadow-sky-500/20 my-2 animate-bounce">
-          {subrank.insignia}
+        {/* Celebratory Blue Jay Mascot Cheer & Insignia Burst */}
+        <div className="relative my-2 flex items-center justify-center">
+          {/* Ambient spirit glow */}
+          <div className="absolute w-40 h-40 rounded-full bg-gradient-to-tr from-amber-400/30 via-sky-300/30 to-transparent blur-2xl animate-pulse" />
+          
+          <div className="relative flex items-center justify-center space-x-3">
+            <BlueJayMascot pose="cheer" size={105} className="animate-bounce" />
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center text-3xl sm:text-4xl shadow-xl ring-4 ring-amber-300 shadow-sky-500/20">
+              {subrank.insignia}
+            </div>
+          </div>
         </div>
 
         {/* Titles */}
-        <div className="mt-4">
-          <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-400 text-hopkins-deep shadow-sm">
+        <div className="mt-3">
+          <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-gradient-to-r from-amber-400 to-amber-500 text-hopkins-deep shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>{isMajorRankUp ? 'Major Rank Achieved!' : 'Subrank Level Up!'}</span>
+            <span>{isMajorRankUp ? 'Major Rank Achieved!' : 'Hopkins Level Up!'}</span>
           </span>
 
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mt-2 tracking-tight">

@@ -2,6 +2,8 @@ import React from 'react';
 import { Award, Check, Sparkles, MapPin, ChevronRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Quest } from '../types';
+import { BlueJayMascot } from './art/BlueJayMascot';
+import { MarylandRibbon } from './art/MarylandRibbon';
 
 export const QuestsView: React.FC = () => {
   const { quests, places, profile, toggleCheckIn, setSelectedPlace } = useApp();
@@ -11,6 +13,11 @@ export const QuestsView: React.FC = () => {
       
       {/* Quests Header */}
       <div className="bg-gradient-to-r from-blue-900 via-hopkins-heritage to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+        {/* Top Maryland Accent Strip */}
+        <div className="absolute top-0 inset-x-0">
+          <MarylandRibbon height={3} />
+        </div>
+
         <div className="relative z-10 max-w-2xl">
           <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-400 text-hopkins-deep mb-3">
             <Sparkles className="w-3.5 h-3.5" />
@@ -24,8 +31,9 @@ export const QuestsView: React.FC = () => {
           </p>
         </div>
 
-        <div className="absolute top-0 right-0 -mt-10 -mr-10 text-9xl opacity-10 pointer-events-none select-none">
-          🧭
+        {/* Flying Blue Jay Mascot Art Backdrop */}
+        <div className="absolute right-4 bottom-1 pointer-events-none hidden sm:block">
+          <BlueJayMascot pose="flight" size={135} className="transform -rotate-6 opacity-90 drop-shadow-xl" />
         </div>
       </div>
 

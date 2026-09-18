@@ -1,6 +1,8 @@
 import React from 'react';
 import { Compass, MapPin, Award, BookOpen, RotateCcw, Sparkles, ShieldCheck, LogIn, LogOut } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { HopkinsShield } from './art/HopkinsShield';
+import { MarylandRibbon } from './art/MarylandRibbon';
 
 export const Navbar: React.FC = () => {
   const {
@@ -18,28 +20,33 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 bg-gradient-to-r from-hopkins-deep via-hopkins-heritage to-hopkins-deep text-white shadow-xl border-b border-blue-900/60 safe-top">
+      {/* Maryland & Baltimore Heraldic Accent Trim */}
+      <MarylandRibbon height={3} />
+
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Logo & JHU Identity */}
           <div className="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer" onClick={() => setActiveTab('explore')}>
-            <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-hopkins-spirit to-blue-300 text-hopkins-deep shadow-md shadow-sky-500/20 ring-2 ring-white/20">
-              <span className="text-xl sm:text-2xl select-none">🐦</span>
-              <span className="absolute -bottom-1 -right-1 text-[10px] sm:text-xs bg-baltimore-crab text-white font-black px-1 sm:px-1.5 py-0.2 sm:py-0.5 rounded-full ring-1 ring-white">
-                JHU
+            <div className="relative flex items-center justify-center">
+              {/* Authentic Hopkins Shield Crest */}
+              <HopkinsShield size={36} className="transform hover:scale-105 transition-transform" />
+              <span className="absolute -bottom-1 -right-1 text-[9px] sm:text-[10px] bg-gradient-to-r from-amber-400 to-amber-500 text-hopkins-deep font-black px-1 sm:px-1.5 py-0.2 rounded-full ring-1 ring-white shadow-sm">
+                1876
               </span>
             </div>
             <div>
               <div className="flex items-center space-x-1.5 sm:space-x-2">
-                <span className="font-extrabold text-lg sm:text-2xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-sky-200">
-                  JayWalk Bmore
+                <span className="font-extrabold text-lg sm:text-2xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-sky-200 flex items-center gap-1.5">
+                  <span>JayWalk Bmore</span>
+                  <span className="text-base sm:text-xl">🐦</span>
                 </span>
-                <span className="hidden md:inline-block px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider bg-hopkins-spirit/20 text-sky-200 rounded-md border border-sky-400/30">
-                  Student Explorer
+                <span className="hidden md:inline-block px-2 py-0.5 text-[10px] font-black uppercase tracking-widest bg-gradient-to-r from-hopkins-spirit/20 to-blue-500/20 text-sky-200 rounded-md border border-sky-400/30">
+                  Johns Hopkins
                 </span>
               </div>
               <p className="text-[11px] text-blue-200/80 font-medium hidden sm:block">
-                Johns Hopkins &bull; Baltimore Travel Quests & Level Ranks
+                Charm City Exploration & Student Level Ranks &bull; Homewood & Peabody
               </p>
             </div>
           </div>
