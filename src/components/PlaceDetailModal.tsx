@@ -5,6 +5,7 @@ import { MarylandRibbon } from './art/MarylandRibbon';
 import { CuteMascot } from './art/CuteMascot';
 import { PassportStamp } from './art/PassportStamp';
 import { WashiTape } from './art/TravelDecorations';
+import { MarylandCrabSticker, LuggageAirmailSticker, SparkleStarsSticker } from './art/AnimatedStickers';
 
 export const PlaceDetailModal: React.FC = () => {
   const { selectedPlace, setSelectedPlace, profile, toggleCheckIn, updateReview } = useApp();
@@ -17,6 +18,15 @@ export const PlaceDetailModal: React.FC = () => {
   const [notes, setNotes] = useState(existingReview?.notes || '');
   const [rating, setRating] = useState(existingReview?.rating || 5);
   const [saveConfirmation, setSaveConfirmation] = useState(false);
+  const [isJustStamped, setIsJustStamped] = useState(false);
+
+  const handleToggleStamp = () => {
+    if (!isVisited) {
+      setIsJustStamped(true);
+      setTimeout(() => setIsJustStamped(false), 2000);
+    }
+    toggleCheckIn(selectedPlace.id);
+  };
 
   const handleSaveNotes = () => {
     updateReview(selectedPlace.id, notes, rating);
@@ -67,7 +77,12 @@ export const PlaceDetailModal: React.FC = () => {
           {/* Rubber Passport Stamp Overlay if Visited */}
           {isVisited && (
             <div className="absolute top-3 right-16 z-20 pointer-events-none transform -rotate-12 scale-90 sm:scale-100">
-              <PassportStamp neighborhood={selectedPlace.neighborhood} visitedDate="AUTHENTICATED" color="sapphire" />
+              <PassportStamp
+                neighborhood={selectedPlace.neighborhood}
+                visitedDate="AUTHENTICATED"
+                color="sapphire"
+                animate={isJustStamped}
+              />
             </div>
           )}
 
@@ -121,7 +136,7 @@ export const PlaceDetailModal: React.FC = () => {
             </div>
 
             <button
-              onClick={() => toggleCheckIn(selectedPlace.id)}
+              onClick={handleToggleStamp}
               className={`py-3 px-5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center space-x-2 shadow-md ${
                 isVisited
                   ? 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-300'
@@ -237,13 +252,24 @@ export const PlaceDetailModal: React.FC = () => {
               />
             </div>
 
-            <button
-              onClick={handleSaveNotes}
-              className="py-2.5 px-4 min-h-[42px] bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl flex items-center justify-center space-x-1.5 transition-colors shadow-sm"
-            >
-              <Save className="w-3.5 h-3.5" />
-              <span>Save to Passport Diary</span>
-            </button>
+            <div className="flex items-center justify-between pt-1">
+              <button
+                onClick={handleSaveNotes}
+                className="py-2.5 px-4 min-h-[42px] bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl flex items-center justify-center space-x-1.5 transition-colors shadow-sm"
+              >
+                <Save className="w-3.5 h-3.5" />
+                <span>Save to Passport Diary</span>
+              </button>
+
+              <div className="flex items-center space-x-2">
+                <div className="transform -rotate-6 hover:rotate-0 transition-transform">
+                  <LuggageAirmailSticker size={36} />
+                </div>
+                <div className="transform rotate-6 hover:rotate-0 transition-transform">
+                  <MarylandCrabSticker size={34} />
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>

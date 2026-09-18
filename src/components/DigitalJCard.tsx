@@ -7,6 +7,7 @@ import { MarylandRibbon } from './art/MarylandRibbon';
 import { PassportStamp } from './art/PassportStamp';
 import { LuggageTag, WashiTape } from './art/TravelDecorations';
 import { CuteMascot } from './art/CuteMascot';
+import { BabyJaySticker, CompassRoseSticker, MarylandCrabSticker, SparkleStarsSticker } from './art/AnimatedStickers';
 
 export const DigitalJCard: React.FC = () => {
   const {
@@ -64,7 +65,9 @@ export const DigitalJCard: React.FC = () => {
             {/* Holographic foil line & sheen shimmer */}
             <div className="absolute top-0 right-0 w-36 h-36 bg-gradient-to-bl from-white/25 via-sky-300/15 to-transparent rounded-full blur-xl pointer-events-none" />
             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-tr from-amber-400/20 to-transparent rounded-full blur-2xl pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            {/* Animated sweeping light glint */}
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
 
             {/* Top JHU Header with Official Shield */}
             <div className="flex items-center justify-between pb-4 border-b border-white/20 relative z-10">
@@ -348,9 +351,17 @@ export const DigitalJCard: React.FC = () => {
               Your personal stamped travel visa pages across Baltimore's historic neighborhoods.
             </p>
           </div>
-          <span className="text-xs font-black text-emerald-800 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full whitespace-nowrap shadow-2xs">
-            {visitedPlacesList.length} Stamped Visas
-          </span>
+          <div className="flex items-center space-x-2">
+            <div className="hidden sm:flex items-center space-x-1 bg-amber-200/40 px-2 py-1 rounded-xl border border-amber-300/60">
+              <CompassRoseSticker size={26} />
+              <MarylandCrabSticker size={26} />
+              <BabyJaySticker size={28} />
+              <SparkleStarsSticker size={18} />
+            </div>
+            <span className="text-xs font-black text-emerald-800 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full whitespace-nowrap shadow-2xs">
+              {visitedPlacesList.length} Stamped Visas
+            </span>
+          </div>
         </div>
 
         {visitedPlacesList.length === 0 ? (

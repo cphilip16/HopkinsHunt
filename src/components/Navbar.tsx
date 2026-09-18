@@ -5,6 +5,7 @@ import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { CuteMascot } from './art/CuteMascot';
 import { AirmailStrip } from './art/TravelDecorations';
+import { BabyJaySticker, SparkleStarsSticker } from './art/AnimatedStickers';
 
 export const Navbar: React.FC = () => {
   const {
@@ -38,9 +39,9 @@ export const Navbar: React.FC = () => {
               </span>
             </div>
             
-            {/* Cute Baby Jay Explorer Mascot */}
+            {/* Cute Animated Baby Jay Explorer Mascot Sticker */}
             <div className="hidden xs:block flex-shrink-0">
-              <CuteMascot pose="waving" size={36} className="transform -rotate-6 hover:rotate-0 transition-transform" />
+              <BabyJaySticker size={40} className="transform -rotate-6 hover:rotate-0 transition-transform cursor-pointer" />
             </div>
 
             <div>
@@ -79,7 +80,7 @@ export const Navbar: React.FC = () => {
 
             <div className="text-right pl-1">
               <div className="text-[10px] font-bold uppercase tracking-wider text-amber-300 flex items-center justify-end space-x-1">
-                <Sparkles className="w-3 h-3 text-amber-300" />
+                <SparkleStarsSticker size={16} />
                 <span>Exploration Score</span>
               </div>
               <div className="text-lg font-black text-amber-300 tracking-tight">

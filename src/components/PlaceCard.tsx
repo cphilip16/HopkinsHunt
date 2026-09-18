@@ -3,7 +3,13 @@ import { MapPin, Bus, Check, Plus, Sparkles, Clock, DollarSign, Award, ChevronRi
 import { Place } from '../types';
 import { useApp } from '../context/AppContext';
 import { PassportStamp } from './art/PassportStamp';
-import { WashiTape } from './art/TravelDecorations';
+import { WashiTape, PostageStampBadge } from './art/TravelDecorations';
+import {
+  SteamingCoffeeSticker,
+  MarylandCrabSticker,
+  CompassRoseSticker,
+  GilmanClockSticker,
+} from './art/AnimatedStickers';
 
 interface PlaceCardProps {
   place: Place;
@@ -60,15 +66,31 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
 
           {/* Top Badges: Neighborhood Pill & Postage Stamp Points */}
           <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10">
-            <span className="px-3 py-1 rounded-full text-[11px] font-extrabold bg-black/60 backdrop-blur-md text-white border border-white/20 flex items-center space-x-1 shadow-sm">
-              <span>📍</span>
-              <span>{place.neighborhood}</span>
-            </span>
+            <div className="flex items-center space-x-1.5">
+              <span className="px-3 py-1 rounded-full text-[11px] font-extrabold bg-black/60 backdrop-blur-md text-white border border-white/20 flex items-center space-x-1 shadow-sm">
+                <span>📍</span>
+                <span>{place.neighborhood}</span>
+              </span>
+
+              {/* Contextual Animated Micro-Sticker */}
+              {place.category === 'food' ? (
+                <div className="hidden xs:inline-block transform -rotate-6 filter drop-shadow-sm">
+                  <SteamingCoffeeSticker size={26} />
+                </div>
+              ) : place.category === 'museum' ? (
+                <div className="hidden xs:inline-block transform rotate-6 filter drop-shadow-sm">
+                  <GilmanClockSticker size={26} />
+                </div>
+              ) : (
+                <div className="hidden xs:inline-block transform -rotate-3 filter drop-shadow-sm">
+                  <CompassRoseSticker size={26} />
+                </div>
+              )}
+            </div>
 
             {/* Cute Perforated Postage Stamp Point Badge */}
-            <div className="relative flex items-center space-x-1 px-2.5 py-1 bg-amber-400 text-hopkins-deep font-black text-xs shadow-md border-2 border-dashed border-amber-600 rounded-lg transform rotate-2 hover:rotate-0 transition-transform">
-              <Sparkles className="w-3 h-3 text-hopkins-deep" />
-              <span>+{place.points} PTS</span>
+            <div className="transform rotate-2 hover:rotate-0 transition-transform">
+              <PostageStampBadge points={place.points} />
             </div>
           </div>
 
@@ -98,7 +120,8 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
               date={userReview?.date || 'VISITED'}
               size={88}
               rotation={-14}
-              color="emerald"
+              color={washiColor === 'pink' ? 'crimson' : washiColor === 'mint' ? 'emerald' : washiColor === 'sky' ? 'sapphire' : 'amber'}
+              animate={true}
             />
           </div>
         )}

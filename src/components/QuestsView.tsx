@@ -6,6 +6,7 @@ import { CuteMascot } from './art/CuteMascot';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { WashiTape } from './art/TravelDecorations';
 import { PassportStamp } from './art/PassportStamp';
+import { CompassRoseSticker, LuggageAirmailSticker, BabyJaySticker } from './art/AnimatedStickers';
 
 export const QuestsView: React.FC = () => {
   const { quests, places, profile, toggleCheckIn, setSelectedPlace } = useApp();
@@ -72,10 +73,15 @@ export const QuestsView: React.FC = () => {
               {/* Top Washi Tape Scrapbook Accent */}
               <WashiTape color={tapeColor as any} angle={quest.difficulty === 'Easy' ? -2 : quest.difficulty === 'Moderate' ? 1.5 : -1.5} className="-top-3 left-8 z-20" />
 
-              {/* Rubber Passport Stamp on Completion */}
+              {/* Rubber Passport Stamp on Completion with Tactile Slam Animation */}
               {isCompleted && (
                 <div className="absolute top-1 right-2 sm:right-4 pointer-events-none z-20 scale-75 transform rotate-6">
-                  <PassportStamp neighborhood="COMPLETED" visitedDate="EXPEDITION CLEARED" color="emerald" />
+                  <PassportStamp
+                    neighborhood="COMPLETED"
+                    visitedDate="EXPEDITION CLEARED"
+                    color="emerald"
+                    animate={true}
+                  />
                 </div>
               )}
 
@@ -83,9 +89,21 @@ export const QuestsView: React.FC = () => {
                 {/* Header: Icon, Title & Bonus Points */}
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start space-x-3">
-                    <span className="text-3xl sm:text-4xl p-2 rounded-2xl bg-slate-100 flex-shrink-0">
-                      {quest.icon}
-                    </span>
+                    <div className="relative">
+                      <span className="text-3xl sm:text-4xl p-2 rounded-2xl bg-slate-100 flex-shrink-0 block">
+                        {quest.icon}
+                      </span>
+                      {/* Animated Micro Sticker */}
+                      <div className="absolute -bottom-2 -right-2">
+                        {quest.difficulty === 'Easy' ? (
+                          <CompassRoseSticker size={22} />
+                        ) : quest.difficulty === 'Moderate' ? (
+                          <LuggageAirmailSticker size={22} />
+                        ) : (
+                          <BabyJaySticker size={24} />
+                        )}
+                      </div>
+                    </div>
                     <div>
                       <div className="flex items-center space-x-2">
                         <span

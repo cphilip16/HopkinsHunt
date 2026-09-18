@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useApp } from '../context/AppContext';
 
-interface FeatherParticle {
+interface CelebrationParticle {
   id: number;
+  type: 'feather' | 'star' | 'stamp' | 'heart';
   x: number;
   y: number;
   rotation: number;
@@ -11,58 +12,72 @@ interface FeatherParticle {
   speedY: number;
   speedX: number;
   rotationSpeed: number;
+  wobbleSpeed: number;
+  wobbleOffset: number;
 }
 
 export const FeatherCelebration: React.FC = () => {
   const { profile } = useApp();
-  const [particles, setParticles] = useState<FeatherParticle[]>([]);
+  const [particles, setParticles] = useState<CelebrationParticle[]>([]);
   const [prevCount, setPrevCount] = useState(profile.visitedPlaceIds.length);
 
-  const triggerFeathers = () => {
-    const colors = ['#68ACE5', '#002D72', '#F1C400', '#0056B3', '#A4D2F6'];
-    const newParticles: FeatherParticle[] = [];
+  const triggerCelebration = () => {
+    const colors = ['#68ACE5', '#002D72', '#F1C400', '#0056B3', '#A4D2F6', '#FB7185'];
+    const types: ('feather' | 'star' | 'stamp' | 'heart')[] = [
+      'feather',
+      'feather',
+      'feather',
+      'star',
+      'star',
+      'stamp',
+      'heart',
+    ];
+    const newParticles: CelebrationParticle[] = [];
 
-    for (let i = 0; i < 24; i++) {
+    for (let i = 0; i < 32; i++) {
       newParticles.push({
         id: Date.now() + i,
-        x: Math.random() * 90 + 5, // 5% to 95% of viewport width
-        y: Math.random() * -20 - 5, // Just above viewport
+        type: types[Math.floor(Math.random() * types.length)],
+        x: Math.random() * 92 + 4, // 4% to 96% of viewport width
+        y: Math.random() * -25 - 5, // Just above viewport
         rotation: Math.random() * 360,
-        scale: Math.random() * 0.5 + 0.75, // 0.75 to 1.25 scale
+        scale: Math.random() * 0.5 + 0.7, // 0.7 to 1.2 scale
         color: colors[Math.floor(Math.random() * colors.length)],
-        speedY: Math.random() * 2.5 + 2.5, // Falling speed
-        speedX: (Math.random() - 0.5) * 2, // Drift left/right
+        speedY: Math.random() * 2.2 + 2.0, // Gentle falling speed
+        speedX: (Math.random() - 0.5) * 1.8,
         rotationSpeed: (Math.random() - 0.5) * 4,
+        wobbleSpeed: Math.random() * 0.08 + 0.04,
+        wobbleOffset: Math.random() * Math.PI * 2,
       });
     }
 
     setParticles((prev) => [...prev, ...newParticles]);
   };
 
-  // Trigger when places visited increases
+  // Trigger whenever visited places count increases
   useEffect(() => {
     if (profile.visitedPlaceIds.length > prevCount) {
-      triggerFeathers();
+      triggerCelebration();
     }
     setPrevCount(profile.visitedPlaceIds.length);
   }, [profile.visitedPlaceIds.length]);
 
-  // Animate particles down
+  // Animate particles physics loop
   useEffect(() => {
     if (particles.length === 0) return;
 
     const interval = setInterval(() => {
-      setParticles((prevParticles) =>
-        prevParticles
+      setParticles((prev) =>
+        prev
           .map((p) => ({
             ...p,
             y: p.y + p.speedY,
-            x: p.x + p.speedX,
+            x: p.x + p.speedX + Math.sin(p.y * p.wobbleSpeed + p.wobbleOffset) * 0.4,
             rotation: p.rotation + p.rotationSpeed,
           }))
-          .filter((p) => p.y < 110) // Remove once off screen
+          .filter((p) => p.y < 112) // Remove once off bottom
       );
-    }, 30);
+    }, 32);
 
     return () => clearInterval(interval);
   }, [particles.length]);
@@ -74,58 +89,72 @@ export const FeatherCelebration: React.FC = () => {
       {particles.map((p) => (
         <div
           key={p.id}
-          className="absolute transition-transform will-change-transform"
+          className="absolute will-change-transform"
           style={{
             left: `${p.x}vw`,
             top: `${p.y}vh`,
             transform: `rotate(${p.rotation}deg) scale(${p.scale})`,
           }}
         >
-          {/* Handcrafted Vector Blue Jay Feather */}
-          <svg
-            width="32"
-            height="54"
-            viewBox="0 0 32 54"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="filter drop-shadow-sm opacity-90"
-          >
-            {/* Feather Vane (Left & Right) */}
-            <path
-              d="M 16 0 C 6 12 2 30 16 46 C 30 30 26 12 16 0 Z"
-              fill={p.color}
-              opacity="0.95"
-            />
-            {/* Top Spirit Tip Highlight */}
-            <path
-              d="M 16 0 C 11 6 8 16 16 24 C 24 16 21 6 16 0 Z"
-              fill="#FFFFFF"
-              opacity="0.3"
-            />
-            {/* Center Quill / Shaft */}
-            <line
-              x1="16"
-              y1="0"
-              x2="16"
-              y2="54"
-              stroke="#FFFFFF"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            />
-            {/* Quill base extension */}
-            <line
-              x1="16"
-              y1="46"
-              x2="16"
-              y2="54"
-              stroke="#F1C400"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-            />
-          </svg>
+          {/* TYPE 1: BLUE JAY FEATHER */}
+          {p.type === 'feather' && (
+            <svg
+              width="30"
+              height="52"
+              viewBox="0 0 30 52"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="filter drop-shadow-sm opacity-95"
+            >
+              <path
+                d="M 15 0 C 5 12 1 30 15 44 C 29 30 25 12 15 0 Z"
+                fill={p.color}
+                opacity="0.95"
+              />
+              <path
+                d="M 15 0 C 10 6 7 15 15 22 C 23 15 20 6 15 0 Z"
+                fill="#FFFFFF"
+                opacity="0.35"
+              />
+              <line x1="15" y1="0" x2="15" y2="52" stroke="#FFFFFF" strokeWidth="1.6" strokeLinecap="round" />
+              <line x1="15" y1="44" x2="15" y2="52" stroke="#F1C400" strokeWidth="2.2" strokeLinecap="round" />
+            </svg>
+          )}
+
+          {/* TYPE 2: GOLDEN STAR BURST */}
+          {p.type === 'star' && (
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="filter drop-shadow-md"
+            >
+              <polygon
+                points="12,2 15,9 22,10 17,15 18,22 12,18 6,22 7,15 2,10 9,9"
+                fill="#FDE047"
+                stroke="#D97706"
+                strokeWidth="1"
+              />
+            </svg>
+          )}
+
+          {/* TYPE 3: PASSPORT STAMP DISK */}
+          {p.type === 'stamp' && (
+            <div className="w-6 h-6 rounded-full border-2 border-dashed border-emerald-500 bg-emerald-100/90 flex items-center justify-center text-[10px] font-black text-emerald-800 shadow-sm">
+              ✓
+            </div>
+          )}
+
+          {/* TYPE 4: CONFETTI HEART */}
+          {p.type === 'heart' && (
+            <div className="text-sm drop-shadow-sm">
+              {p.color === '#FB7185' ? '💖' : '💙'}
+            </div>
+          )}
         </div>
       ))}
     </div>
   );
 };
-

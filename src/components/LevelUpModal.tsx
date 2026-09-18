@@ -5,6 +5,7 @@ import { CuteMascot } from './art/CuteMascot';
 import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { WashiTape } from './art/TravelDecorations';
+import { SparkleStarsSticker, MarylandCrabSticker } from './art/AnimatedStickers';
 
 export const LevelUpModal: React.FC = () => {
   const { levelUpData, setLevelUpData, totalPoints, setActiveTab } = useApp();
@@ -45,10 +46,17 @@ export const LevelUpModal: React.FC = () => {
               pose="cheering"
               size={110}
               speechBubble="Pack your bags! Level Up!"
-              className="animate-bounce"
             />
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center text-3xl sm:text-4xl shadow-xl ring-4 ring-amber-300 shadow-sky-500/20">
-              {subrank.insignia}
+            <div className="relative">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep to-hopkins-heritage flex items-center justify-center text-3xl sm:text-4xl shadow-xl ring-4 ring-amber-300 shadow-sky-500/20">
+                {subrank.insignia}
+              </div>
+              <div className="absolute -top-3 -right-3 pointer-events-none">
+                <SparkleStarsSticker size={28} />
+              </div>
+              <div className="absolute -bottom-2 -left-2 pointer-events-none">
+                <MarylandCrabSticker size={24} />
+              </div>
             </div>
           </div>
         </div>
