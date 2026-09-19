@@ -15,7 +15,7 @@ export const RankInsigniaArt: React.FC<{
 
   // Helper render for 15 subrank SVGs
   const renderSvg = () => {
-    // Level 1: Nestling Hatchling (Homewood Twig Cradle, Porcelain Egg, Aviator Baby Jay & Diploma Scroll)
+    // Level 1: Nestling Hatchling (Homewood Twig Cradle & Egg Oval Silhouette)
     if (key.includes('subrank-1') || key.includes('fledgling') || key.includes('🐣') || key.includes('nestling-hatch')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
@@ -51,233 +51,329 @@ export const RankInsigniaArt: React.FC<{
               <stop offset="50%" stopColor="#F59E0B" />
               <stop offset="100%" stopColor="#92400E" />
             </linearGradient>
+            <clipPath id="sub1-nest-clip">
+              <path d="M12 28 C10 40 38 40 36 28 C38 16 28 6 24 4 C20 6 10 16 12 28 Z" />
+            </clipPath>
           </defs>
 
-          {/* Medallion Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub1-bg)" stroke="url(#sub1-gold-rim)" strokeWidth="1.6" />
-          <circle cx="24" cy="24" r="20" stroke="#FFFFFF" strokeWidth="0.8" strokeDasharray="1.5 1.5" fill="none" opacity="0.8" />
-
-          {/* Ambient Inner Glow */}
-          <circle cx="24" cy="22" r="15" fill="#38BDF8" opacity="0.15" />
-
-          {/* Homewood Woven Birch Nest Twig Cradle */}
-          <g>
-            <path d="M10 37 Q24 45 38 37" stroke="url(#sub1-twig)" strokeWidth="3" strokeLinecap="round" fill="none" />
-            <path d="M12 40 Q24 47 36 40" stroke="#78350F" strokeWidth="2.2" strokeLinecap="round" fill="none" />
-            <line x1="14" y1="37" x2="22" y2="43" stroke="#92400E" strokeWidth="1.2" strokeLinecap="round" />
-            <line x1="34" y1="37" x2="26" y2="43" stroke="#92400E" strokeWidth="1.2" strokeLinecap="round" />
-            <line x1="20" y1="38" x2="28" y2="43" stroke="#78350F" strokeWidth="1" strokeLinecap="round" />
-            {/* Green Maryland Ivy Leaves */}
-            <ellipse cx="14" cy="37" rx="1.2" ry="2.2" transform="rotate(-40 14 37)" fill="#059669" />
-            <ellipse cx="34" cy="37" rx="1.2" ry="2.2" transform="rotate(40 34 37)" fill="#059669" />
-          </g>
-
-          {/* Cracked Egg Shell Base */}
+          {/* Organic Egg & Nest Cradle Silhouette Outer Contour */}
+          {/* Outer Gold Rim & Birch Frame */}
           <path
-            d="M13 28 C13 38 18 41 24 41 C30 41 35 38 35 28 L31 30.5 L28 27.5 L24 31.5 L20 27.5 L16 30.5 Z"
-            fill="url(#sub1-egg)"
-            stroke="#94A3B8"
+            d="M12 28 C10 40 38 40 36 28 C38 16 28 6 24 4 C20 6 10 16 12 28 Z"
+            fill="url(#sub1-gold-rim)"
+            stroke="#78350F"
             strokeWidth="1.2"
           />
-          {/* Shell Inner Shadow */}
-          <path d="M14 29 L17 31 L20 28 L24 32 L28 28 L31 31 L34 29 C34 31 33 33 31 35 C28 34 20 34 17 35 C15 33 14 31 14 29 Z" fill="#CBD5E1" opacity="0.4" />
-          {/* Hopkins Navy Chevron on Egg */}
-          <path d="M15 33.5 L20 36.5 L24 34.5 L28 36.5 L33 33.5 L32.5 35.5 L28 38.5 L24 36.5 L20 38.5 L15.5 35.5 Z" fill="#002D72" stroke="url(#sub1-gold-rim)" strokeWidth="0.4" />
-          <circle cx="24" cy="35.5" r="0.8" fill="#FEF08A" />
 
-          {/* Baby Blue Jay Peeking Out */}
-          {/* Jay Torso & Head */}
-          <ellipse cx="24" cy="22" rx="9" ry="8.5" fill="url(#sub1-jay)" />
+          {/* Clipped Sky Interior */}
+          <g clipPath="url(#sub1-nest-clip)">
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub1-bg)" />
+            {/* Ambient Morning Light */}
+            <circle cx="24" cy="18" r="14" fill="#38BDF8" opacity="0.25" />
 
-          {/* Blue Jay Head Crest Feathers */}
-          <path d="M22 13 Q24 9 26 11 Q25 14 24 16 Z" fill="#0284C7" />
-          <path d="M20 14 Q22 10 24 12 Q23 15 22 16 Z" fill="#002D72" />
-          <path d="M24 13 Q26 10 28 12 Q26 15 25 16 Z" fill="#38BDF8" />
+            {/* Cracked Egg Shell Base */}
+            <path
+              d="M13 28 C13 38 18 41 24 41 C30 41 35 38 35 28 L31 30.5 L28 27.5 L24 31.5 L20 27.5 L16 30.5 Z"
+              fill="url(#sub1-egg)"
+              stroke="#94A3B8"
+              strokeWidth="1.2"
+            />
+            {/* Shell Inner Shadow */}
+            <path d="M14 29 L17 31 L20 28 L24 32 L28 28 L31 31 L34 29 C34 31 33 33 31 35 C28 34 20 34 17 35 C15 33 14 31 14 29 Z" fill="#CBD5E1" opacity="0.4" />
+            {/* Hopkins Navy Chevron on Egg */}
+            <path d="M15 33.5 L20 36.5 L24 34.5 L28 36.5 L33 33.5 L32.5 35.5 L28 38.5 L24 36.5 L20 38.5 L15.5 35.5 Z" fill="#002D72" stroke="url(#sub1-gold-rim)" strokeWidth="0.4" />
+            <circle cx="24" cy="35.5" r="0.8" fill="#FEF08A" />
 
-          {/* White Facial Mask & Chin Bib */}
-          <path d="M17 21 Q24 26 31 21 Q24 18 17 21 Z" fill="#FFFFFF" />
-          <path d="M20 23 Q24 28 28 23 Q24 26 20 23 Z" fill="#F8FAFC" />
-          {/* Black Collar Line */}
-          <path d="M18 22 C18 25 21 27 24 27 C27 27 30 25 30 22" stroke="#001438" strokeWidth="0.8" fill="none" />
+            {/* Baby Blue Jay Peeking Out */}
+            <ellipse cx="24" cy="22" rx="9" ry="8.5" fill="url(#sub1-jay)" />
 
-          {/* Rosy Blushing Cheeks */}
-          <ellipse cx="19" cy="22.5" rx="1.8" ry="1.2" fill="#FDA4AF" opacity="0.75" />
-          <ellipse cx="29" cy="22.5" rx="1.8" ry="1.2" fill="#FDA4AF" opacity="0.75" />
+            {/* Blue Jay Head Crest Feathers */}
+            <path d="M22 13 Q24 9 26 11 Q25 14 24 16 Z" fill="#0284C7" />
+            <path d="M20 14 Q22 10 24 12 Q23 15 22 16 Z" fill="#002D72" />
+            <path d="M24 13 Q26 10 28 12 Q26 15 25 16 Z" fill="#38BDF8" />
 
-          {/* Sparkling Big Traveler Eyes */}
-          <circle cx="20.5" cy="19.5" r="1.8" fill="#0F172A" />
-          <circle cx="20" cy="19" r="0.6" fill="#FFFFFF" />
-          <circle cx="21" cy="20.2" r="0.3" fill="#FFFFFF" />
-          <circle cx="27.5" cy="19.5" r="1.8" fill="#0F172A" />
-          <circle cx="27" cy="19" r="0.6" fill="#FFFFFF" />
-          <circle cx="28" cy="20.2" r="0.3" fill="#FFFFFF" />
+            {/* White Facial Mask & Chin Bib */}
+            <path d="M17 21 Q24 26 31 21 Q24 18 17 21 Z" fill="#FFFFFF" />
+            <path d="M20 23 Q24 28 28 23 Q24 26 20 23 Z" fill="#F8FAFC" />
+            <path d="M18 22 C18 25 21 27 24 27 C27 27 30 25 30 22" stroke="#001438" strokeWidth="0.8" fill="none" />
 
-          {/* Cute Orange Beak */}
-          <polygon points="22,20.5 26,20.5 24,23.5" fill="#F59E0B" stroke="#D97706" strokeWidth="0.5" />
+            {/* Rosy Blushing Cheeks */}
+            <ellipse cx="19" cy="22.5" rx="1.8" ry="1.2" fill="#FDA4AF" opacity="0.75" />
+            <ellipse cx="29" cy="22.5" rx="1.8" ry="1.2" fill="#FDA4AF" opacity="0.75" />
 
-          {/* Polished Brass Aviator Goggles on Forehead */}
+            {/* Sparkling Big Traveler Eyes */}
+            <circle cx="20.5" cy="19.5" r="1.8" fill="#0F172A" />
+            <circle cx="20" cy="19" r="0.6" fill="#FFFFFF" />
+            <circle cx="21" cy="20.2" r="0.3" fill="#FFFFFF" />
+            <circle cx="27.5" cy="19.5" r="1.8" fill="#0F172A" />
+            <circle cx="27" cy="19" r="0.6" fill="#FFFFFF" />
+            <circle cx="28" cy="20.2" r="0.3" fill="#FFFFFF" />
+
+            {/* Cute Orange Beak */}
+            <polygon points="22,20.5 26,20.5 24,23.5" fill="#F59E0B" stroke="#D97706" strokeWidth="0.5" />
+
+            {/* Polished Brass Aviator Goggles on Forehead */}
+            <g>
+              <rect x="17" y="14.8" width="14" height="2" rx="1" fill="#451A03" />
+              <rect x="17.5" y="13.2" width="5.5" height="5.2" rx="2.5" fill="url(#sub1-goggle)" stroke="#78350F" strokeWidth="0.6" />
+              <rect x="18.5" y="14.2" width="3.5" height="3.2" rx="1.6" fill="#38BDF8" />
+              <line x1="19" y1="14.5" x2="21" y2="16.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
+
+              <rect x="25" y="13.2" width="5.5" height="5.2" rx="2.5" fill="url(#sub1-goggle)" stroke="#78350F" strokeWidth="0.6" />
+              <rect x="26" y="14.2" width="3.5" height="3.2" rx="1.6" fill="#38BDF8" />
+              <line x1="26.5" y1="14.5" x2="28.5" y2="16.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
+
+              {/* Bridge */}
+              <rect x="23" y="15" width="2" height="1.5" rx="0.5" fill="url(#sub1-goggle)" />
+
+              {/* Little Blue Explorer Feather tucked in goggle */}
+              <path d="M30 14 C33 11 34 7 33 5 C31 8 30 11 29 14 Z" fill="#38BDF8" stroke="#002D72" strokeWidth="0.4" />
+            </g>
+
+            {/* Miniature Hopkins Parchment Diploma Scroll in Wing */}
+            <g transform="rotate(-15 15 30)">
+              <rect x="12" y="27" width="10" height="4" rx="1" fill="#FFFBEB" stroke="#B45309" strokeWidth="0.6" />
+              <circle cx="17" cy="29" r="1.2" fill="#DC2626" />
+              <line x1="17" y1="29" x2="19" y2="31" stroke="#DC2626" strokeWidth="0.6" strokeLinecap="round" />
+            </g>
+          </g>
+
+          {/* Woven Homewood Birch Nest Twigs Surrounding Cradle Base */}
           <g>
-            <rect x="17" y="14.8" width="14" height="2" rx="1" fill="#451A03" />
-            <rect x="17.5" y="13.2" width="5.5" height="5.2" rx="2.5" fill="url(#sub1-goggle)" stroke="#78350F" strokeWidth="0.6" />
-            <rect x="18.5" y="14.2" width="3.5" height="3.2" rx="1.6" fill="#38BDF8" />
-            <line x1="19" y1="14.5" x2="21" y2="16.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
+            <path d="M10 33 Q24 43 38 33" stroke="url(#sub1-twig)" strokeWidth="3" strokeLinecap="round" fill="none" />
+            <path d="M12 36 Q24 45 36 36" stroke="#78350F" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+            <line x1="13" y1="33" x2="21" y2="40" stroke="#92400E" strokeWidth="1.3" strokeLinecap="round" />
+            <line x1="35" y1="33" x2="27" y2="40" stroke="#92400E" strokeWidth="1.3" strokeLinecap="round" />
+            <line x1="19" y1="35" x2="28" y2="41" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
 
-            <rect x="25" y="13.2" width="5.5" height="5.2" rx="2.5" fill="url(#sub1-goggle)" stroke="#78350F" strokeWidth="0.6" />
-            <rect x="26" y="14.2" width="3.5" height="3.2" rx="1.6" fill="#38BDF8" />
-            <line x1="26.5" y1="14.5" x2="28.5" y2="16.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
-
-            {/* Bridge */}
-            <rect x="23" y="15" width="2" height="1.5" rx="0.5" fill="url(#sub1-goggle)" />
-
-            {/* Little Blue Explorer Feather tucked in goggle */}
-            <path d="M30 14 C33 11 34 7 33 5 C31 8 30 11 29 14 Z" fill="#38BDF8" stroke="#002D72" strokeWidth="0.4" />
+            {/* Maryland Green Oak & Ivy Leaves at Nest Flanks */}
+            <ellipse cx="10" cy="31" rx="1.5" ry="2.8" transform="rotate(-40 10 31)" fill="#059669" stroke="#064E3B" strokeWidth="0.4" />
+            <ellipse cx="38" cy="31" rx="1.5" ry="2.8" transform="rotate(40 38 31)" fill="#059669" stroke="#064E3B" strokeWidth="0.4" />
           </g>
 
-          {/* Miniature Hopkins Parchment Diploma Scroll in Wing */}
-          <g transform="rotate(-15 15 30)">
-            <rect x="12" y="27" width="10" height="4" rx="1" fill="#FFFBEB" stroke="#B45309" strokeWidth="0.6" />
-            <circle cx="17" cy="29" r="1.2" fill="#DC2626" />
-            <line x1="17" y1="29" x2="19" y2="31" stroke="#DC2626" strokeWidth="0.6" strokeLinecap="round" />
-            <line x1="13" y1="28.5" x2="16" y2="28.5" stroke="#D97706" strokeWidth="0.4" />
-          </g>
-
-          {/* Sparkle Gold Stars */}
-          <polygon points="38,9 39,11.5 41.5,12 39,12.5 38,15 37,12.5 34.5,12 37,11.5" fill="#FBBF24" />
-          <circle cx="9" cy="15" r="1.2" fill="#FDE047" />
+          {/* Sparkle Gold Star at Apex */}
+          <polygon points="24,3 25,5.5 27.5,6 25,6.5 24,9 23,6.5 20.5,6 23,5.5" fill="#FEF08A" />
         </svg>
       );
     }
 
-    // Level 2: Brody Stalker (Scholarly Book Stack with Reading Glasses)
+    // Level 2: Brody Stalker (Archival Open Leather Tome / Bookplate Silhouette)
     if (key.includes('subrank-2') || key.includes('brody') || key.includes('📚') || key.includes('brody-books')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub2-bg" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor="#EEF2FF" />
-              <stop offset="100%" stopColor="#C7D2FE" />
-            </radialGradient>
+            <linearGradient id="sub2-leather" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#78350F" />
+              <stop offset="35%" stopColor="#451A03" />
+              <stop offset="70%" stopColor="#291102" />
+              <stop offset="100%" stopColor="#1B0A01" />
+            </linearGradient>
+            <linearGradient id="sub2-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFDF0" />
+              <stop offset="30%" stopColor="#FEF08A" />
+              <stop offset="70%" stopColor="#F59E0B" />
+              <stop offset="100%" stopColor="#B45309" />
+            </linearGradient>
+            <linearGradient id="sub2-vellum" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFBEB" />
+              <stop offset="50%" stopColor="#FEF3C7" />
+              <stop offset="100%" stopColor="#FDE68A" />
+            </linearGradient>
             <linearGradient id="sub2-navy" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#001845" />
-              <stop offset="30%" stopColor="#002D72" />
+              <stop offset="40%" stopColor="#002D72" />
               <stop offset="100%" stopColor="#1E3A8A" />
             </linearGradient>
             <linearGradient id="sub2-green" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#064E3B" />
-              <stop offset="30%" stopColor="#0F766E" />
+              <stop offset="40%" stopColor="#0F766E" />
               <stop offset="100%" stopColor="#059669" />
             </linearGradient>
             <linearGradient id="sub2-red" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#7F1D1D" />
-              <stop offset="30%" stopColor="#B91C1C" />
+              <stop offset="40%" stopColor="#B91C1C" />
               <stop offset="100%" stopColor="#DC2626" />
             </linearGradient>
+            <clipPath id="sub2-book-clip">
+              <path d="M6 10 C12 7 20 9 24 12 C28 9 36 7 42 10 L42 38 C36 35 28 37 24 34 C20 37 12 35 6 38 Z" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub2-bg)" stroke="#818CF8" strokeWidth="1.5" />
-          <circle cx="24" cy="24" r="20" stroke="#FFFFFF" strokeWidth="0.8" fill="none" opacity="0.6" />
+          {/* Archival Open Leather Tome Silhouette */}
+          {/* Leather Binding Backing */}
+          <path
+            d="M5 9 C11.5 6 20 8 24 11 C28 8 36.5 6 43 9 L43 39 C36.5 36 28 38 24 35 C20 38 11.5 36 5 39 Z"
+            fill="url(#sub2-leather)"
+            stroke="url(#sub2-gold)"
+            strokeWidth="1.2"
+          />
 
-          {/* Book 1 (Bottom): Johns Hopkins Heritage Navy */}
-          <rect x="8" y="32" width="32" height="7" rx="2" fill="url(#sub2-navy)" stroke="#001845" strokeWidth="0.8" />
-          <rect x="11" y="33.5" width="26" height="4" rx="0.5" fill="#F8FAFC" />
-          {/* Gold Embossed Spine Ribs */}
-          <line x1="12" y1="32" x2="12" y2="39" stroke="#F59E0B" strokeWidth="1.5" />
-          <line x1="15" y1="32" x2="15" y2="39" stroke="#F59E0B" strokeWidth="1.5" />
+          {/* Gold Filigree Corner Bookplate Corners */}
+          <polygon points="5,9 10,9 5,14" fill="url(#sub2-gold)" />
+          <polygon points="43,9 38,9 43,14" fill="url(#sub2-gold)" />
+          <polygon points="5,39 10,39 5,34" fill="url(#sub2-gold)" />
+          <polygon points="43,39 38,39 43,34" fill="url(#sub2-gold)" />
 
-          {/* Book 2 (Middle): Ivy Gilman Green */}
-          <rect x="11" y="24" width="27" height="6.5" rx="1.8" fill="url(#sub2-green)" stroke="#064E3B" strokeWidth="0.8" />
-          <rect x="13.5" y="25.5" width="22" height="3.5" rx="0.5" fill="#FFFBEB" />
-          <line x1="14" y1="24" x2="14" y2="30.5" stroke="#FBBF24" strokeWidth="1.2" />
-          <line x1="17" y1="24" x2="17" y2="30.5" stroke="#FBBF24" strokeWidth="1.2" />
+          {/* Clipped Vellum Pages Field */}
+          <g clipPath="url(#sub2-book-clip)">
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub2-vellum)" />
 
-          {/* Book 3 (Top): Homewood Crimson (Angled) */}
-          <g transform="rotate(-4 24 19)">
-            <rect x="13" y="16" width="23" height="6" rx="1.5" fill="url(#sub2-red)" stroke="#7F1D1D" strokeWidth="0.8" />
-            <rect x="15" y="17.5" width="18" height="3" rx="0.5" fill="#F8FAFC" />
-            <line x1="16" y1="16" x2="16" y2="22" stroke="#FDE047" strokeWidth="1.2" />
-            {/* Satin Gold Ribbon Bookmark */}
-            <path d="M29 22 L29 30 L31 28.5 L33 30 L33 22 Z" fill="#F59E0B" stroke="#D97706" strokeWidth="0.5" />
+            {/* Central Book Spine Valley Shadow */}
+            <line x1="24" y1="11" x2="24" y2="36" stroke="#D97706" strokeWidth="1.2" />
+
+            {/* Faint Archival Library Grid / Page Ruled Lines */}
+            <line x1="9" y1="16" x2="21" y2="17" stroke="#CBD5E1" strokeWidth="0.5" />
+            <line x1="9" y1="20" x2="21" y2="21" stroke="#CBD5E1" strokeWidth="0.5" />
+            <line x1="27" y1="17" x2="39" y2="16" stroke="#CBD5E1" strokeWidth="0.5" />
+            <line x1="27" y1="21" x2="39" y2="20" stroke="#CBD5E1" strokeWidth="0.5" />
+
+            {/* Stack of 3 Scholarly Academic Volumes */}
+            {/* Book 1 (Bottom): Johns Hopkins Heritage Navy */}
+            <rect x="10" y="29" width="28" height="6.5" rx="1.5" fill="url(#sub2-navy)" stroke="#001438" strokeWidth="0.7" />
+            <rect x="13" y="30.5" width="22" height="3.5" rx="0.5" fill="#F8FAFC" />
+            <line x1="14" y1="29" x2="14" y2="35.5" stroke="#F59E0B" strokeWidth="1.2" />
+            <line x1="17" y1="29" x2="17" y2="35.5" stroke="#F59E0B" strokeWidth="1.2" />
+
+            {/* Book 2 (Middle): Ivy Gilman Green */}
+            <rect x="12" y="22" width="24" height="6" rx="1.5" fill="url(#sub2-green)" stroke="#064E3B" strokeWidth="0.7" />
+            <rect x="14.5" y="23.5" width="19" height="3" rx="0.5" fill="#FFFBEB" />
+            <line x1="15" y1="22" x2="15" y2="28" stroke="#FBBF24" strokeWidth="1" />
+            <line x1="18" y1="22" x2="18" y2="28" stroke="#FBBF24" strokeWidth="1" />
+
+            {/* Book 3 (Top): Homewood Crimson (Angled) */}
+            <g transform="rotate(-3 24 17)">
+              <rect x="14" y="15" width="20" height="5.5" rx="1.2" fill="url(#sub2-red)" stroke="#7F1D1D" strokeWidth="0.7" />
+              <rect x="16" y="16.5" width="16" height="2.5" rx="0.5" fill="#F8FAFC" />
+              <line x1="17" y1="15" x2="17" y2="20.5" stroke="#FDE047" strokeWidth="1" />
+              {/* Satin Gold Ribbon Bookmark */}
+              <path d="M28 20 L28 27 L30 25.5 L32 27 L32 20 Z" fill="#F59E0B" stroke="#D97706" strokeWidth="0.4" />
+            </g>
+
+            {/* Academic Gold Wireframe Reading Glasses */}
+            <circle cx="19" cy="11.5" r="3.8" stroke="#D97706" strokeWidth="1.2" fill="#FFFFFF" fillOpacity="0.85" />
+            <circle cx="29" cy="11.5" r="3.8" stroke="#D97706" strokeWidth="1.2" fill="#FFFFFF" fillOpacity="0.85" />
+            {/* Bridge */}
+            <path d="M22.8 11.5 Q24 10.2 25.2 11.5" stroke="#D97706" strokeWidth="1.2" fill="none" />
+            {/* Specular Lens Reflection */}
+            <line x1="17" y1="9.8" x2="20" y2="12.5" stroke="#60A5FA" strokeWidth="0.7" opacity="0.8" />
+            <line x1="27" y1="9.8" x2="30" y2="12.5" stroke="#60A5FA" strokeWidth="0.7" opacity="0.8" />
           </g>
 
-          {/* Academic Gold Wireframe Spectacles */}
-          <circle cx="19" cy="11" r="4.2" stroke="#D97706" strokeWidth="1.4" fill="#FFFFFF" fillOpacity="0.85" />
-          <circle cx="29" cy="11" r="4.2" stroke="#D97706" strokeWidth="1.4" fill="#FFFFFF" fillOpacity="0.85" />
-          {/* Bridge */}
-          <path d="M23.2 11 Q24 9.5 24.8 11" stroke="#D97706" strokeWidth="1.4" fill="none" />
-          {/* Lens Glass Gleams */}
-          <line x1="17" y1="9" x2="20" y2="12" stroke="#60A5FA" strokeWidth="0.8" opacity="0.8" />
-          <line x1="27" y1="9" x2="30" y2="12" stroke="#60A5FA" strokeWidth="0.8" opacity="0.8" />
+          {/* Central Gold Spine Rivet Head */}
+          <circle cx="24" cy="11.5" r="1.2" fill="url(#sub2-gold)" stroke="#78350F" strokeWidth="0.4" />
+          <circle cx="24" cy="34.5" r="1.2" fill="url(#sub2-gold)" stroke="#78350F" strokeWidth="0.4" />
         </svg>
       );
     }
 
-    // Level 3: Charles Street Sprinter (Winged Blue Jay Runner)
+    // Level 3: Charles Street Sprinter (Aerodynamic Winged Speed Shield Silhouette)
     if (key.includes('subrank-3') || key.includes('charles') || key.includes('🏃') || key.includes('charles-runner')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub3-bg" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor="#E0F2FE" />
-              <stop offset="100%" stopColor="#BAE6FD" />
-            </radialGradient>
-            <linearGradient id="sub3-shoe" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#002D72" />
-              <stop offset="100%" stopColor="#1E3A8A" />
-            </linearGradient>
-            <linearGradient id="sub3-wing" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#68ACE5" />
+            <linearGradient id="sub3-speed-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#38BDF8" />
               <stop offset="50%" stopColor="#0284C7" />
               <stop offset="100%" stopColor="#002D72" />
             </linearGradient>
+            <linearGradient id="sub3-asphalt" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#1E293B" />
+              <stop offset="60%" stopColor="#0F172A" />
+              <stop offset="100%" stopColor="#020617" />
+            </linearGradient>
+            <linearGradient id="sub3-shoe" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#38BDF8" />
+              <stop offset="50%" stopColor="#0284C7" />
+              <stop offset="100%" stopColor="#002D72" />
+            </linearGradient>
+            <linearGradient id="sub3-wing" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#BAE6FD" />
+              <stop offset="40%" stopColor="#38BDF8" />
+              <stop offset="80%" stopColor="#0284C7" />
+              <stop offset="100%" stopColor="#001845" />
+            </linearGradient>
+            <clipPath id="sub3-shield-clip">
+              <path d="M8 12 L24 4 L40 12 L38 28 C36 38 24 44 24 44 C24 44 12 38 10 28 Z" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub3-bg)" stroke="#0284C7" strokeWidth="1.5" />
+          {/* Swept-Back Hermes Wing Feathers Extending From Flanks */}
+          <path d="M8 14 C3 12 2 18 5 22 C2 21 3 26 7 28 Z" fill="url(#sub3-wing)" stroke="#002D72" strokeWidth="0.6" />
+          <path d="M40 14 C45 12 46 18 43 22 C46 21 45 26 41 28 Z" fill="url(#sub3-wing)" stroke="#002D72" strokeWidth="0.6" />
 
-          {/* Speed Motion Lines */}
-          <line x1="5" y1="28" x2="15" y2="28" stroke="#38BDF8" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="3 3" />
-          <line x1="3" y1="33" x2="17" y2="33" stroke="#0284C7" strokeWidth="2" strokeLinecap="round" />
-          <line x1="7" y1="23" x2="14" y2="23" stroke="#93C5FD" strokeWidth="1.5" strokeLinecap="round" />
-
-          {/* Cushioned Sole */}
+          {/* Aerodynamic Speed Shield Outer Frame */}
           <path
-            d="M12 35 C17 35 23 37 29 37 C35 37 39 35 42 34 C43 33 41 31 39 31 L15 31 C12 31 10 33 12 35 Z"
-            fill="#FFFFFF"
-            stroke="#64748B"
+            d="M8 12 L24 4 L40 12 L38 28 C36 38 24 44 24 44 C24 44 12 38 10 28 Z"
+            fill="url(#sub3-speed-rim)"
+            stroke="#001438"
             strokeWidth="1.2"
           />
-          <path d="M18 35 L38 35" stroke="#F59E0B" strokeWidth="1" strokeDasharray="2 1" />
 
-          {/* Shoe Body */}
-          <path d="M15 31 L19 21 C21 17 26 17 29 21 L34 26 L39 31 Z" fill="url(#sub3-shoe)" />
-          {/* Gold Laces */}
-          <line x1="22" y1="22" x2="26" y2="26" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="25" y1="20" x2="29" y2="24" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round" />
+          {/* Inner Inset Rim */}
+          <path
+            d="M9.5 13 L24 5.8 L38.5 13 L36.8 27.5 C34.8 36.5 24 42 24 42 C24 42 13.2 36.5 11.2 27.5 Z"
+            fill="#0F172A"
+          />
 
-          {/* Hermes-Style Blue Jay Feathered Wing */}
-          <g>
-            {/* Base Feathers */}
-            <path d="M18 20 C18 12 28 11 36 8 C33 13 31 16 28 18 C33 17 36 15 38 13 C35 18 30 22 24 23 Z" fill="url(#sub3-wing)" />
-            {/* Highlight Feather */}
-            <path d="M22 17 C26 13 32 11 35 9 C32 13 29 16 26 18 Z" fill="#BAE6FD" />
-            {/* White Wing Tip */}
-            <polygon points="36,8 38,13 35,13" fill="#FFFFFF" />
+          {/* Clipped Track Field */}
+          <g clipPath="url(#sub3-shield-clip)">
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub3-asphalt)" />
+
+            {/* Charles Street Crosswalk Speed Stripes */}
+            <line x1="6" y1="20" x2="16" y2="20" stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="round" strokeDasharray="3 2" opacity="0.6" />
+            <line x1="4" y1="26" x2="18" y2="26" stroke="#FDE047" strokeWidth="1.8" strokeLinecap="round" strokeDasharray="4 2" />
+            <line x1="8" y1="32" x2="18" y2="32" stroke="#38BDF8" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+
+            {/* Hermes-Style Winged Blue Jay Sneaker */}
+            {/* Sneaker Air Cushion Sole */}
+            <path
+              d="M13 34 C18 34 24 36 30 36 C35 36 38 34 40 33 C41 32 39 30 37 30 L16 30 C13 30 11 32 13 34 Z"
+              fill="#FFFFFF"
+              stroke="#64748B"
+              strokeWidth="1"
+            />
+            <path d="M19 34 L36 34" stroke="#F59E0B" strokeWidth="0.8" strokeDasharray="2 1" />
+
+            {/* Sneaker Upper Body */}
+            <path d="M16 30 L20 21 C22 17 26 17 29 21 L33 26 L38 30 Z" fill="url(#sub3-shoe)" stroke="#001845" strokeWidth="0.7" />
+            {/* Golden Laces */}
+            <line x1="22" y1="22" x2="26" y2="25" stroke="#FBBF24" strokeWidth="1.2" strokeLinecap="round" />
+            <line x1="24" y1="20" x2="28" y2="23" stroke="#FBBF24" strokeWidth="1.2" strokeLinecap="round" />
+
+            {/* Majestic Hermes Blue Jay Feathered Wing on Shoe */}
+            <g>
+              {/* Primary Wing */}
+              <path
+                d="M18 20 C18 11 28 10 37 7 C33 12 31 15 28 17 C33 16 36 14 38 12 C35 17 30 21 24 22 Z"
+                fill="url(#sub3-wing)"
+                stroke="#001438"
+                strokeWidth="0.6"
+              />
+              {/* Secondary Feathers */}
+              <path d="M22 16 C26 12 32 10 35 8 C32 12 29 15 26 17 Z" fill="#BAE6FD" />
+              <polygon points="37,7 39,12 36,12" fill="#FFFFFF" />
+            </g>
           </g>
 
-          {/* Star Sparkle */}
-          <polygon points="40,16 41,18 43,19 41,20 40,22 39,20 37,19 39,18" fill="#F59E0B" />
+          {/* 4-Point Golden Track Star at Shield Apex */}
+          <polygon points="24,3 25,6 28,7 25,8 24,11 23,8 20,7 23,6" fill="#FDE047" stroke="#B45309" strokeWidth="0.4" />
         </svg>
       );
     }
 
-    // Level 4: Wyman Park Wanderer (Oak Leaf & Dell Acorn)
+    // Level 4: Wyman Park Wanderer (Botanical Gothic Quatrefoil Silhouette)
     if (key.includes('subrank-4') || key.includes('wyman') || key.includes('🌿') || key.includes('wyman-dell')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub4-bg" cx="50%" cy="40%" r="55%">
+            <linearGradient id="sub4-quatre-border" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#059669" />
+              <stop offset="50%" stopColor="#047857" />
+              <stop offset="100%" stopColor="#064E3B" />
+            </linearGradient>
+            <radialGradient id="sub4-dell-bg" cx="50%" cy="40%" r="55%">
               <stop offset="0%" stopColor="#ECFDF5" />
+              <stop offset="70%" stopColor="#D1FAE5" />
               <stop offset="100%" stopColor="#A7F3D0" />
             </radialGradient>
             <linearGradient id="sub4-leaf" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -290,51 +386,92 @@ export const RankInsigniaArt: React.FC<{
               <stop offset="60%" stopColor="#92400E" />
               <stop offset="100%" stopColor="#451A03" />
             </linearGradient>
+            <linearGradient id="sub4-gold-acc" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FEF08A" />
+              <stop offset="100%" stopColor="#F59E0B" />
+            </linearGradient>
+            <clipPath id="sub4-quatre-clip">
+              <path d="M24 3 C27 3 30 6 33 9 C36 12 40 15 42 18 C45 22 45 26 42 30 C40 33 36 36 33 39 C30 42 27 45 24 45 C21 45 18 42 15 39 C12 36 8 33 6 30 C3 26 3 22 6 18 C8 15 12 12 15 9 C18 6 21 3 24 3 Z" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub4-bg)" stroke="#059669" strokeWidth="1.5" />
-
-          {/* Maryland White Oak Leaf */}
+          {/* Botanical 4-Lobed Gothic Quatrefoil Silhouette Outer Frame */}
           <path
-            d="M23 8 C27 13 36 14 33 22 C37 26 33 32 29 34 C25 36 23 40 23 40 C23 40 21 36 17 34 C13 32 9 26 13 22 C10 14 19 13 23 8 Z"
-            fill="url(#sub4-leaf)"
-            stroke="#047857"
+            d="M24 2 C27.5 2 31 5.5 34 8.5 C37 11.5 41 14.5 43.5 18 C46.5 22 46.5 26 43.5 30 C41 33.5 37 36.5 34 39.5 C31 42.5 27.5 46 24 46 C20.5 46 17 42.5 14 39.5 C11 36.5 7 33.5 4.5 30 C1.5 26 1.5 22 4.5 18 C7 14.5 11 11.5 14 8.5 C17 5.5 20.5 2 24 2 Z"
+            fill="url(#sub4-quatre-border)"
+            stroke="#064E3B"
             strokeWidth="1.2"
           />
-          {/* Main Leaf Stem & Veins */}
-          <path d="M23 8 L23 40" stroke="#FDE68A" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M23 16 Q28 19 31 21" stroke="#A7F3D0" strokeWidth="1" />
-          <path d="M23 24 Q28 27 30 29" stroke="#A7F3D0" strokeWidth="1" />
-          <path d="M23 16 Q18 19 15 21" stroke="#A7F3D0" strokeWidth="1" />
-          <path d="M23 24 Q18 27 16 29" stroke="#A7F3D0" strokeWidth="1" />
+          {/* Inner Inset Gold Cord */}
+          <path
+            d="M24 3.5 C27 3.5 30 6.5 33 9.5 C36 12.5 39.5 15.2 42 18.5 C44.5 22 44.5 26 42 29.5 C39.5 32.8 36 35.5 33 38.5 C30 41.5 27 44.5 24 44.5 C21 44.5 18 41.5 15 38.5 C12 35.5 8.5 32.8 6 29.5 C3.5 26 3.5 22 6 18.5 C8.5 15.2 12 12.5 15 9.5 C18 6.5 21 3.5 24 3.5 Z"
+            stroke="url(#sub4-gold-acc)"
+            strokeWidth="0.8"
+            fill="none"
+            opacity="0.8"
+          />
 
-          {/* Glossy Forest Dell Acorn */}
-          {/* Acorn Nut */}
-          <ellipse cx="33" cy="33" rx="5.5" ry="6.5" fill="url(#sub4-acorn)" />
-          {/* Specular curved gleam */}
-          <path d="M35 30 Q37 33 36 36" stroke="#FEF3C7" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
-          {/* Textured Woody Cap */}
-          <path d="M27.5 30 C27.5 26 38.5 26 38.5 30 Z" fill="#451A03" stroke="#78350F" strokeWidth="1" />
-          <line x1="30" y1="28" x2="36" y2="28" stroke="#D97706" strokeWidth="0.8" strokeDasharray="1 1" />
-          {/* Stem */}
-          <path d="M33 26 Q35 23 34 22" stroke="#451A03" strokeWidth="1.8" strokeLinecap="round" />
+          {/* Clipped Forest Dell Field */}
+          <g clipPath="url(#sub4-quatre-clip)">
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub4-dell-bg)" />
 
-          {/* Firefly dew sparkles */}
-          <circle cx="14" cy="14" r="2" fill="#FDE047" />
-          <circle cx="14" cy="14" r="0.8" fill="#FFFFFF" />
+            {/* Faint Botanical Dell Leaflet Rings */}
+            <circle cx="24" cy="24" r="14" stroke="#6EE7B7" strokeWidth="0.8" strokeDasharray="2 2" fill="none" opacity="0.6" />
+
+            {/* Sculpted Maryland White Oak Leaf */}
+            <path
+              d="M23 8 C27 13 36 14 33 22 C37 26 33 32 29 34 C25 36 23 40 23 40 C23 40 21 36 17 34 C13 32 9 26 13 22 C10 14 19 13 23 8 Z"
+              fill="url(#sub4-leaf)"
+              stroke="#047857"
+              strokeWidth="1"
+            />
+            {/* Main Leaf Stem & Gold-Lit Veins */}
+            <path d="M23 8 L23 40" stroke="#FDE68A" strokeWidth="1.4" strokeLinecap="round" />
+            <path d="M23 15 Q28 18 31 20" stroke="#FEF08A" strokeWidth="0.9" />
+            <path d="M23 23 Q28 26 30 28" stroke="#FEF08A" strokeWidth="0.9" />
+            <path d="M23 15 Q18 18 15 20" stroke="#FEF08A" strokeWidth="0.9" />
+            <path d="M23 23 Q18 26 16 28" stroke="#FEF08A" strokeWidth="0.9" />
+
+            {/* Glossy Forest Dell Acorn */}
+            <ellipse cx="33" cy="32" rx="5" ry="6" fill="url(#sub4-acorn)" stroke="#451A03" strokeWidth="0.6" />
+            {/* Specular Curved Gleam */}
+            <path d="M35 29 Q37 32 36 35" stroke="#FEF3C7" strokeWidth="0.9" strokeLinecap="round" opacity="0.7" />
+            {/* Textured Woody Cap */}
+            <path d="M28 29 C28 25 38 25 38 29 Z" fill="#451A03" stroke="#78350F" strokeWidth="0.8" />
+            <line x1="30" y1="27" x2="36" y2="27" stroke="#D97706" strokeWidth="0.8" strokeDasharray="1 1" />
+            {/* Stem */}
+            <path d="M33 25 Q35 22 34 21" stroke="#451A03" strokeWidth="1.6" strokeLinecap="round" />
+
+            {/* Glowing Firefly Dew Sparkles */}
+            <circle cx="14" cy="14" r="1.8" fill="#FDE047" />
+            <circle cx="14" cy="14" r="0.7" fill="#FFFFFF" />
+            <circle cx="34" cy="14" r="1.5" fill="#FDE047" />
+            <circle cx="14" cy="34" r="1.5" fill="#FDE047" />
+          </g>
+
+          {/* 4 Gold Studs at Quatrefoil Intersections */}
+          <circle cx="24" cy="2.5" r="1" fill="url(#sub4-gold-acc)" stroke="#064E3B" strokeWidth="0.3" />
+          <circle cx="45.5" cy="24" r="1" fill="url(#sub4-gold-acc)" stroke="#064E3B" strokeWidth="0.3" />
+          <circle cx="24" cy="45.5" r="1" fill="url(#sub4-gold-acc)" stroke="#064E3B" strokeWidth="0.3" />
+          <circle cx="2.5" cy="24" r="1" fill="url(#sub4-gold-acc)" stroke="#064E3B" strokeWidth="0.3" />
         </svg>
       );
     }
 
-    // Level 5: JHMI Shuttle Veteran (Hopkins Shuttle Bus)
+    // Level 5: JHMI Shuttle Veteran (Notched Transit Ticket / Keystone Plaque Silhouette)
     if (key.includes('subrank-5') || key.includes('shuttle') || key.includes('🚌') || key.includes('jhmi-shuttle')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub5-bg" cx="50%" cy="40%" r="55%">
+            <linearGradient id="sub5-ticket-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#1E3A8A" />
+              <stop offset="50%" stopColor="#002D72" />
+              <stop offset="100%" stopColor="#001438" />
+            </linearGradient>
+            <radialGradient id="sub5-sky" cx="50%" cy="35%" r="55%">
               <stop offset="0%" stopColor="#E0F2FE" />
-              <stop offset="100%" stopColor="#93C5FD" />
+              <stop offset="70%" stopColor="#BAE6FD" />
+              <stop offset="100%" stopColor="#7DD3FC" />
             </radialGradient>
             <linearGradient id="sub5-bus" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#002D72" />
@@ -345,225 +482,392 @@ export const RankInsigniaArt: React.FC<{
               <stop offset="0%" stopColor="#BAE6FD" />
               <stop offset="100%" stopColor="#38BDF8" />
             </linearGradient>
+            <linearGradient id="sub5-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FEF08A" />
+              <stop offset="50%" stopColor="#F59E0B" />
+              <stop offset="100%" stopColor="#B45309" />
+            </linearGradient>
+            <clipPath id="sub5-keystone-clip">
+              <path d="M10 5 L38 5 C38 13 43 16 43 24 C43 32 38 35 38 43 L10 43 C10 35 5 32 5 24 C5 16 10 13 10 5 Z" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub5-bg)" stroke="#1D4ED8" strokeWidth="1.5" />
+          {/* Notched Transit Ticket / Keystone Plaque Outer Frame */}
+          <path
+            d="M10 5 L38 5 C38 13 43 16 43 24 C43 32 38 35 38 43 L10 43 C10 35 5 32 5 24 C5 16 10 13 10 5 Z"
+            fill="url(#sub5-ticket-rim)"
+            stroke="url(#sub5-gold)"
+            strokeWidth="1.2"
+          />
 
-          {/* Road baseline */}
-          <line x1="8" y1="38" x2="40" y2="38" stroke="#475569" strokeWidth="2.5" strokeLinecap="round" />
-          <line x1="14" y1="38" x2="34" y2="38" stroke="#FDE047" strokeWidth="1" strokeDasharray="3 2" />
+          {/* Inner Beveled Border */}
+          <path
+            d="M11.5 6.5 L36.5 6.5 C36.5 13.8 41.5 16.5 41.5 24 C41.5 31.5 36.5 34.2 36.5 41.5 L11.5 41.5 C11.5 34.2 6.5 31.5 6.5 24 C6.5 16.5 11.5 13.8 11.5 6.5 Z"
+            stroke="#38BDF8"
+            strokeWidth="0.6"
+            strokeDasharray="2 1.5"
+            fill="none"
+            opacity="0.8"
+          />
 
-          {/* Blue Jay Shuttle Bus Body */}
-          <rect x="9" y="13" width="30" height="21" rx="4.5" fill="url(#sub5-bus)" stroke="#001845" strokeWidth="1.2" />
+          {/* Clipped Highway Ground */}
+          <g clipPath="url(#sub5-keystone-clip)">
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub5-sky)" />
 
-          {/* University Gold Swoosh */}
-          <path d="M9 25 C16 25 24 28 39 26 L39 29 C24 31 16 28 9 28 Z" fill="#F59E0B" />
+            {/* Roadway & Asphalt */}
+            <rect x="4" y="32" width="40" height="12" fill="#334155" />
+            <line x1="8" y1="38" x2="40" y2="38" stroke="#FDE047" strokeWidth="1.2" strokeDasharray="3 2" />
 
-          {/* Windshield & Windows */}
-          <rect x="12" y="16" width="10" height="7.5" rx="1.5" fill="url(#sub5-glass)" />
-          <rect x="24" y="16" width="6" height="7.5" rx="1" fill="url(#sub5-glass)" />
-          <rect x="32" y="16" width="5" height="7.5" rx="1" fill="url(#sub5-glass)" />
-          {/* Glass reflection slash */}
-          <line x1="14" y1="17" x2="19" y2="22" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" opacity="0.8" />
+            {/* Blue Jay Shuttle Bus Body */}
+            <rect x="10" y="14" width="28" height="19" rx="4" fill="url(#sub5-bus)" stroke="#001845" strokeWidth="1.2" />
 
-          {/* Illuminated Green LED Destination Sign */}
-          <rect x="13" y="14" width="22" height="2" rx="0.5" fill="#047857" />
-          <text x="24" y="15.8" textAnchor="middle" fontSize="1.8" fontWeight="bold" fill="#34D399" fontFamily="monospace">JHMI EXPRESS</text>
+            {/* University Gold Swoosh */}
+            <path d="M10 25 C16 25 24 28 38 26 L38 29 C24 31 16 28 10 28 Z" fill="url(#sub5-gold)" />
 
-          {/* Chrome Headlights */}
-          <circle cx="11.5" cy="28" r="1.8" fill="#FBBF24" stroke="#D97706" strokeWidth="0.6" />
-          <circle cx="36.5" cy="28" r="1.8" fill="#FBBF24" stroke="#D97706" strokeWidth="0.6" />
+            {/* Windshield & Side Windows */}
+            <rect x="13" y="17" width="9" height="7" rx="1.5" fill="url(#sub5-glass)" />
+            <rect x="24" y="17" width="6" height="7" rx="1" fill="url(#sub5-glass)" />
+            <rect x="31" y="17" width="5" height="7" rx="1" fill="url(#sub5-glass)" />
+            <line x1="14.5" y1="18" x2="19.5" y2="23" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" opacity="0.8" />
 
-          {/* Dual Transit Wheels */}
-          <circle cx="16" cy="34" r="4.2" fill="#0F172A" />
-          <circle cx="16" cy="34" r="2" fill="#94A3B8" />
-          <circle cx="16" cy="34" r="0.8" fill="#F1F5F9" />
-          <circle cx="32" cy="34" r="4.2" fill="#0F172A" />
-          <circle cx="32" cy="34" r="2" fill="#94A3B8" />
-          <circle cx="32" cy="34" r="0.8" fill="#F1F5F9" />
+            {/* Illuminated Green LED Destination Sign */}
+            <rect x="13" y="15" width="22" height="1.8" rx="0.5" fill="#047857" />
+            <text x="24" y="16.5" textAnchor="middle" fontSize="1.5" fontWeight="bold" fill="#34D399" fontFamily="monospace">JHMI EXPRESS</text>
+
+            {/* Chrome Headlights */}
+            <circle cx="12" cy="28" r="1.6" fill="#FBBF24" stroke="#D97706" strokeWidth="0.5" />
+            <circle cx="36" cy="28" r="1.6" fill="#FBBF24" stroke="#D97706" strokeWidth="0.5" />
+
+            {/* Dual Transit Wheels */}
+            <circle cx="16" cy="33" r="3.8" fill="#0F172A" />
+            <circle cx="16" cy="33" r="1.8" fill="#94A3B8" />
+            <circle cx="32" cy="33" r="3.8" fill="#0F172A" />
+            <circle cx="32" cy="33" r="1.8" fill="#94A3B8" />
+          </g>
+
+          {/* Gold Transit Ticket Punch Hole Rings */}
+          <circle cx="5" cy="24" r="2.2" stroke="url(#sub5-gold)" strokeWidth="0.8" fill="none" />
+          <circle cx="43" cy="24" r="2.2" stroke="url(#sub5-gold)" strokeWidth="0.8" fill="none" />
         </svg>
       );
     }
 
-    // Level 6: Peabody Harmonizer (Classical Violin & Gold Clef)
+    // Level 6: Peabody Harmonizer (Classical Concert Lyre / Music Harp Silhouette)
     if (key.includes('subrank-6') || key.includes('peabody') || key.includes('🎻') || key.includes('peabody-violin')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub6-bg" cx="50%" cy="40%" r="55%">
+            <linearGradient id="sub6-lyre-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFDF0" />
+              <stop offset="30%" stopColor="#FEF08A" />
+              <stop offset="60%" stopColor="#F59E0B" />
+              <stop offset="100%" stopColor="#B45309" />
+            </linearGradient>
+            <radialGradient id="sub6-hall-bg" cx="50%" cy="40%" r="60%">
               <stop offset="0%" stopColor="#FEF3C7" />
-              <stop offset="100%" stopColor="#FDE68A" />
+              <stop offset="60%" stopColor="#FDE68A" />
+              <stop offset="100%" stopColor="#D97706" stopOpacity="0.4" />
             </radialGradient>
             <linearGradient id="sub6-wood" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#D97706" />
               <stop offset="50%" stopColor="#B45309" />
               <stop offset="100%" stopColor="#78350F" />
             </linearGradient>
-            <linearGradient id="sub6-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="sub6-clef-gold" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#FDE047" />
               <stop offset="100%" stopColor="#D97706" />
             </linearGradient>
+            <clipPath id="sub6-lyre-clip">
+              <path d="M9 6 C13 12 15 26 12 35 C15 42 33 42 36 35 C33 26 35 12 39 6 C35 10 29 10 24 6 C19 10 13 10 9 6 Z" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub6-bg)" stroke="#D97706" strokeWidth="1.5" />
-
-          {/* Rotated Peabody Conservatory Violin */}
-          <g transform="rotate(32 24 24)">
-            {/* Lower Bout */}
-            <ellipse cx="24" cy="28" rx="8.5" ry="10" fill="url(#sub6-wood)" stroke="#451A03" strokeWidth="0.8" />
-            {/* Upper Bout */}
-            <ellipse cx="24" cy="18" rx="6.5" ry="7.5" fill="url(#sub6-wood)" stroke="#451A03" strokeWidth="0.8" />
-            {/* C-Bout Waist Insets */}
-            <circle cx="16.5" cy="23" r="3.2" fill="#FEF3C7" />
-            <circle cx="31.5" cy="23" r="3.2" fill="#FEF3C7" />
-            {/* Ebony Fingerboard & Pegbox */}
-            <rect x="22" y="6" width="4" height="13" fill="#1E293B" rx="0.8" />
-            <circle cx="24" cy="5" r="2.5" fill="#78350F" stroke="#451A03" strokeWidth="0.8" />
-            {/* F-Holes */}
-            <path d="M21 21 Q20 23 21 25" stroke="#451A03" strokeWidth="1.2" strokeLinecap="round" />
-            <path d="M27 21 Q28 23 27 25" stroke="#451A03" strokeWidth="1.2" strokeLinecap="round" />
-            {/* Strings */}
-            <line x1="23" y1="8" x2="23" y2="34" stroke="#FEF3C7" strokeWidth="0.6" />
-            <line x1="25" y1="8" x2="25" y2="34" stroke="#FEF3C7" strokeWidth="0.6" />
-          </g>
-
-          {/* Floating Gold Treble Clef & Musical Note */}
+          {/* Classical Concert Lyre Silhouette Outer Frame */}
           <path
-            d="M38 12 C36 10 33 12 33 15 C33 19 38 21 38 25 C38 28 35 29 33 28 M35 9 L35 31 C35 34 32 35 30 33"
-            stroke="url(#sub6-gold)"
-            strokeWidth="1.8"
-            fill="none"
-            strokeLinecap="round"
+            d="M9 6 C13 12 15 26 12 35 C15 42 33 42 36 35 C33 26 35 12 39 6 C35 10 29 10 24 6 C19 10 13 10 9 6 Z"
+            fill="url(#sub6-lyre-gold)"
+            stroke="#78350F"
+            strokeWidth="1.2"
           />
-          <circle cx="30" cy="33" r="2.2" fill="#D97706" />
-          {/* Sparkle */}
-          <polygon points="12,12 13,14 15,15 13,16 12,18 11,16 9,15 11,14" fill="#F59E0B" />
+
+          {/* Classical Horn Finials Atop Lyre */}
+          <circle cx="9" cy="6" r="2.2" fill="url(#sub6-lyre-gold)" stroke="#78350F" strokeWidth="0.6" />
+          <circle cx="39" cy="6" r="2.2" fill="url(#sub6-lyre-gold)" stroke="#78350F" strokeWidth="0.6" />
+          {/* Lyre Base Pedestal */}
+          <rect x="18" y="41" width="12" height="3" rx="1" fill="url(#sub6-lyre-gold)" stroke="#78350F" strokeWidth="0.6" />
+
+          {/* Clipped Concert Hall Field */}
+          <g clipPath="url(#sub6-lyre-clip)">
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub6-hall-bg)" />
+
+            {/* Vertical Golden Lyre / Harp Strings Behind Violin */}
+            <line x1="18" y1="8" x2="18" y2="38" stroke="#D97706" strokeWidth="0.6" opacity="0.6" />
+            <line x1="22" y1="8" x2="22" y2="38" stroke="#D97706" strokeWidth="0.6" opacity="0.6" />
+            <line x1="26" y1="8" x2="26" y2="38" stroke="#D97706" strokeWidth="0.6" opacity="0.6" />
+            <line x1="30" y1="8" x2="30" y2="38" stroke="#D97706" strokeWidth="0.6" opacity="0.6" />
+
+            {/* Peabody Conservatory Master Violin */}
+            <g transform="rotate(28 24 24)">
+              {/* Lower Bout */}
+              <ellipse cx="24" cy="27" rx="8" ry="9.5" fill="url(#sub6-wood)" stroke="#451A03" strokeWidth="0.8" />
+              {/* Upper Bout */}
+              <ellipse cx="24" cy="17" rx="6" ry="7" fill="url(#sub6-wood)" stroke="#451A03" strokeWidth="0.8" />
+              {/* C-Bout Waist Insets */}
+              <circle cx="17" cy="22" r="2.8" fill="#FDE68A" />
+              <circle cx="31" cy="22" r="2.8" fill="#FDE68A" />
+              {/* Ebony Fingerboard & Scroll Pegbox */}
+              <rect x="22.2" y="6" width="3.6" height="13" fill="#1E293B" rx="0.8" />
+              <circle cx="24" cy="5" r="2.2" fill="#78350F" stroke="#451A03" strokeWidth="0.8" />
+              {/* F-Holes */}
+              <path d="M21 20 Q20 22 21 24" stroke="#451A03" strokeWidth="1.1" strokeLinecap="round" />
+              <path d="M27 20 Q28 22 27 24" stroke="#451A03" strokeWidth="1.1" strokeLinecap="round" />
+              {/* Violin Strings */}
+              <line x1="23.2" y1="7" x2="23.2" y2="33" stroke="#FEF3C7" strokeWidth="0.6" />
+              <line x1="24.8" y1="7" x2="24.8" y2="33" stroke="#FEF3C7" strokeWidth="0.6" />
+            </g>
+
+            {/* Floating Gold Treble Clef & Musical Notes */}
+            <path
+              d="M37 13 C35 11 32 13 32 16 C32 20 37 22 37 26 C37 29 34 30 32 29 M34 10 L34 32 C34 35 31 36 29 34"
+              stroke="url(#sub6-clef-gold)"
+              strokeWidth="1.6"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <circle cx="29" cy="34" r="2" fill="#D97706" />
+
+            {/* Sparkle Notes */}
+            <polygon points="12,13 13,15 15,16 13,17 12,19 11,17 9,16 11,15" fill="#F59E0B" />
+          </g>
         </svg>
       );
     }
 
-    // Level 7: Hampden "Hon" Hunter (Retro Cat-Eye Sunglasses)
+    // Level 7: Hampden "Hon" Hunter (Atomic 1960s Hon Harlequin / Winged Cat-Eye Cartouche)
     if (key.includes('subrank-7') || key.includes('hampden') || key.includes('hon') || key.includes('🕶️') || key.includes('hampden-shades')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub7-bg" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor="#FDF2F8" />
+            <linearGradient id="sub7-cartouche" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#F472B6" />
+              <stop offset="40%" stopColor="#DB2777" />
+              <stop offset="80%" stopColor="#BE185D" />
+              <stop offset="100%" stopColor="#831843" />
+            </linearGradient>
+            <radialGradient id="sub7-field" cx="50%" cy="45%" r="60%">
+              <stop offset="0%" stopColor="#FFF1F2" />
+              <stop offset="50%" stopColor="#FCE7F3" />
               <stop offset="100%" stopColor="#FBCFE8" />
             </radialGradient>
+            <linearGradient id="sub7-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FEF08A" />
+              <stop offset="50%" stopColor="#F59E0B" />
+              <stop offset="100%" stopColor="#B45309" />
+            </linearGradient>
             <linearGradient id="sub7-frame" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#F472B6" />
-              <stop offset="50%" stopColor="#DB2777" />
-              <stop offset="100%" stopColor="#9D174D" />
+              <stop offset="50%" stopColor="#E11D48" />
+              <stop offset="100%" stopColor="#881337" />
             </linearGradient>
             <linearGradient id="sub7-lens" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#4C1D95" />
-              <stop offset="100%" stopColor="#1E1B4B" />
+              <stop offset="60%" stopColor="#2E1065" />
+              <stop offset="100%" stopColor="#BE185D" />
             </linearGradient>
+            <clipPath id="sub7-atomic-clip">
+              <path d="M24 7 C31 7 38 3 44 8 C46 16 43 27 38 36 C31 43 26 46 24 46 C22 46 17 43 10 36 C5 27 2 16 4 8 C10 3 17 7 24 7 Z" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub7-bg)" stroke="#DB2777" strokeWidth="1.5" />
+          {/* Atomic 1960s Harlequin Cartouche Outer Silhouette */}
+          <path
+            d="M24 7 C31 7 38 3 44 8 C46 16 43 27 38 36 C31 43 26 46 24 46 C22 46 17 43 10 36 C5 27 2 16 4 8 C10 3 17 7 24 7 Z"
+            fill="url(#sub7-cartouche)"
+            stroke="url(#sub7-gold)"
+            strokeWidth="1.5"
+          />
 
-          {/* Pink Flamingo Feather in Hair Accent */}
-          <path d="M22 6 C20 10 20 14 23 18 C26 14 26 10 22 6 Z" fill="#F472B6" />
-          <line x1="22.5" y1="6" x2="23" y2="18" stroke="#FFFFFF" strokeWidth="0.8" />
+          {/* Winged Tip Rhinestone Ornaments */}
+          <circle cx="4" cy="8" r="1.8" fill="#FFFFFF" stroke="url(#sub7-gold)" strokeWidth="0.8" />
+          <circle cx="44" cy="8" r="1.8" fill="#FFFFFF" stroke="url(#sub7-gold)" strokeWidth="0.8" />
+          <circle cx="24" cy="46" r="1.5" fill="url(#sub7-gold)" stroke="#831843" strokeWidth="0.6" />
 
-          {/* Left Cat-Eye Wing */}
-          <path d="M7 21 C8 13 20 14 22 22 C22 28 14 30 9 26 C7 24 6 23 7 21 Z" fill="url(#sub7-frame)" stroke="#831843" strokeWidth="0.8" />
-          {/* Left Polarized Lens */}
-          <path d="M9 21 C10 16 19 16 20 22 C20 26 15 28 11 25 Z" fill="url(#sub7-lens)" />
-          <line x1="12" y1="18" x2="15" y2="24" stroke="#FFFFFF" strokeWidth="0.8" opacity="0.6" strokeLinecap="round" />
+          {/* Clipped Retro Field */}
+          <g clipPath="url(#sub7-atomic-clip)">
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub7-field)" />
 
-          {/* Right Cat-Eye Wing */}
-          <path d="M41 21 C40 13 28 14 26 22 C26 28 34 30 39 26 C41 24 42 23 41 21 Z" fill="url(#sub7-frame)" stroke="#831843" strokeWidth="0.8" />
-          {/* Right Polarized Lens */}
-          <path d="M39 21 C38 16 29 16 28 22 C28 26 33 28 37 25 Z" fill="url(#sub7-lens)" />
-          <line x1="33" y1="18" x2="36" y2="24" stroke="#FFFFFF" strokeWidth="0.8" opacity="0.6" strokeLinecap="round" />
+            {/* Atomic Retro 4-Point Starbursts */}
+            <path d="M12 14 L13.5 17 L16.5 17 L14 19 L15 22 L12 20 L9 22 L10 19 L7.5 17 L10.5 17 Z" fill="#F472B6" opacity="0.35" />
+            <path d="M36 14 L37.5 17 L40.5 17 L38 19 L39 22 L36 20 L33 22 L34 19 L31.5 17 L34.5 17 Z" fill="#F472B6" opacity="0.35" />
+            <polygon points="24,10 25,12 27,12.5 25,13 24,15 23,13 21,12.5 23,12" fill="#F59E0B" opacity="0.7" />
 
-          {/* Golden Center Bridge */}
-          <path d="M22 21 Q24 19 26 21" stroke="#F59E0B" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            {/* Lush Pink Flamingo Feather Plume Arching Behind Shades */}
+            <path d="M18 4 C15 9 15 15 21 19 C25 14 24 8 18 4 Z" fill="#FB7185" />
+            <path d="M18 4 C20 8 20 14 24 17 C27 13 25 7 18 4 Z" fill="#F43F5E" opacity="0.7" />
+            <line x1="18.5" y1="4" x2="22" y2="18" stroke="#FFFFFF" strokeWidth="0.8" strokeLinecap="round" />
 
-          {/* Brilliant Rhinestone Studs */}
-          <circle cx="8" cy="17" r="1.8" fill="#FFFFFF" stroke="#FDE047" strokeWidth="0.6" />
-          <circle cx="40" cy="17" r="1.8" fill="#FFFFFF" stroke="#FDE047" strokeWidth="0.6" />
-          <circle cx="10" cy="19.5" r="1" fill="#FDE047" />
-          <circle cx="38" cy="19.5" r="1" fill="#FDE047" />
+            {/* Iconic Hampden Retro Cat-Eye Sunglasses */}
+            {/* Left Cat-Eye Wing Frame */}
+            <path
+              d="M7 21 C8 13 20 14 22 22 C22 28 14 30 9 26 C7 24 6 23 7 21 Z"
+              fill="url(#sub7-frame)"
+              stroke="#881337"
+              strokeWidth="0.9"
+            />
+            {/* Left Polarized Mirrored Lens */}
+            <path d="M9 21 C10 16 19 16 20 22 C20 26 15 28 11 25 Z" fill="url(#sub7-lens)" />
+            <line x1="12" y1="18" x2="16" y2="25" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" opacity="0.8" />
+            <line x1="14.5" y1="18" x2="17.5" y2="23" stroke="#FFFFFF" strokeWidth="0.5" strokeLinecap="round" opacity="0.5" />
+
+            {/* Right Cat-Eye Wing Frame */}
+            <path
+              d="M41 21 C40 13 28 14 26 22 C26 28 34 30 39 26 C41 24 42 23 41 21 Z"
+              fill="url(#sub7-frame)"
+              stroke="#881337"
+              strokeWidth="0.9"
+            />
+            {/* Right Polarized Mirrored Lens */}
+            <path d="M39 21 C38 16 29 16 28 22 C28 26 33 28 37 25 Z" fill="url(#sub7-lens)" />
+            <line x1="32" y1="18" x2="36" y2="25" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" opacity="0.8" />
+            <line x1="33.5" y1="18" x2="30.5" y2="23" stroke="#FFFFFF" strokeWidth="0.5" strokeLinecap="round" opacity="0.5" />
+
+            {/* Polished Gold Center Bridge */}
+            <path d="M22 21 Q24 18.5 26 21" stroke="url(#sub7-gold)" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+
+            {/* Sparkling Crystal Rhinestone Studs at Brow Wingtips */}
+            <circle cx="8" cy="17" r="1.8" fill="#FFFFFF" stroke="url(#sub7-gold)" strokeWidth="0.6" />
+            <circle cx="40" cy="17" r="1.8" fill="#FFFFFF" stroke="url(#sub7-gold)" strokeWidth="0.6" />
+            <circle cx="10.5" cy="19.5" r="1.1" fill="#FEF08A" stroke="#B45309" strokeWidth="0.4" />
+            <circle cx="37.5" cy="19.5" r="1.1" fill="#FEF08A" stroke="#B45309" strokeWidth="0.4" />
+
+            {/* Lower Gold Heart / "HON" Script Plaque */}
+            <g transform="translate(0, 1)">
+              <path
+                d="M24 38 C21 34 18 36 18 38 C18 41 24 44 24 44 C24 44 30 41 30 38 C30 36 27 34 24 38 Z"
+                fill="url(#sub7-gold)"
+                stroke="#831843"
+                strokeWidth="0.6"
+              />
+              <text x="24" y="40.5" textAnchor="middle" fontSize="3.2" fontWeight="900" fill="#881337" fontFamily="cursive, sans-serif">
+                HON
+              </text>
+            </g>
+          </g>
         </svg>
       );
     }
 
-    // Level 8: Inner Harbor Helmsman (Naval Brass Anchor & Cord)
+    // Level 8: Inner Harbor Helmsman (Admiralty Heavy Naval Anchor Plaque)
     if (key.includes('subrank-8') || key.includes('harbor') || key.includes('helmsman') || key.includes('⚓') || key.includes('harbor-anchor')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub8-bg" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor="#E0F2FE" />
-              <stop offset="100%" stopColor="#BAE6FD" />
-            </radialGradient>
-            <linearGradient id="sub8-brass" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FEF08A" />
-              <stop offset="50%" stopColor="#F59E0B" />
-              <stop offset="100%" stopColor="#92400E" />
+            <linearGradient id="sub8-brass-frame" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFBEB" />
+              <stop offset="25%" stopColor="#FEF08A" />
+              <stop offset="55%" stopColor="#F59E0B" />
+              <stop offset="85%" stopColor="#B45309" />
+              <stop offset="100%" stopColor="#78350F" />
             </linearGradient>
+            <radialGradient id="sub8-deep-sea" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stopColor="#0284C7" />
+              <stop offset="50%" stopColor="#0369A1" />
+              <stop offset="85%" stopColor="#002D72" />
+              <stop offset="100%" stopColor="#001845" />
+            </radialGradient>
+            <linearGradient id="sub8-rope" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FEF3C7" />
+              <stop offset="50%" stopColor="#FDE68A" />
+              <stop offset="100%" stopColor="#D97706" />
+            </linearGradient>
+            <clipPath id="sub8-anchor-clip">
+              <path d="M20 3 C20 1.5 28 1.5 28 3 L28 6 C31 6.5 35 8.5 35 11 L43 11 C45 11 45 15 43 15 L35 15 C34 19 31 23 28 25 L28 35 C33 35 38 31 40 26 L45 28 C42 37 34 43 27 44.5 L27 46.5 C27 47.5 21 47.5 21 46.5 L21 44.5 C14 43 6 37 3 28 L8 26 C10 31 15 35 20 35 L20 25 C17 23 14 19 13 15 L5 15 C3 15 3 11 5 11 L13 11 C13 8.5 17 6.5 20 6 Z" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub8-bg)" stroke="#0284C7" strokeWidth="1.5" />
-
-          {/* Patapsco Harbor Rippling Waves */}
-          <path d="M8 38 Q16 35 24 38 Q32 41 40 38 L40 42 L8 42 Z" fill="#0284C7" opacity="0.3" />
-          <path d="M6 40 Q14 38 24 40 Q34 42 42 40 L42 43 L6 43 Z" fill="#002D72" opacity="0.5" />
-
-          {/* Top Anchor Ring & Shackle */}
-          <circle cx="24" cy="10" r="4.5" stroke="url(#sub8-brass)" strokeWidth="2.2" fill="none" />
-          <circle cx="24" cy="10" r="2.2" fill="url(#sub8-bg)" />
-
-          {/* Stock Crossbar */}
-          <line x1="13" y1="17" x2="35" y2="17" stroke="url(#sub8-brass)" strokeWidth="3" strokeLinecap="round" />
-          <circle cx="13" cy="17" r="2" fill="#78350F" />
-          <circle cx="35" cy="17" r="2" fill="#78350F" />
-
-          {/* Anchor Vertical Shank */}
-          <line x1="24" y1="12" x2="24" y2="39" stroke="url(#sub8-brass)" strokeWidth="3.8" strokeLinecap="round" />
-
-          {/* Curved Lower Arms */}
-          <path d="M11 27 C11 39 37 39 37 27" stroke="url(#sub8-brass)" strokeWidth="3.2" fill="none" strokeLinecap="round" />
-
-          {/* Triangular Flukes */}
-          <polygon points="8,27 13,28 10,33" fill="#B45309" stroke="#78350F" strokeWidth="0.8" />
-          <polygon points="40,27 35,28 38,33" fill="#B45309" stroke="#78350F" strokeWidth="0.8" />
-
-          {/* Helical Twisted Manila Hemp Rope */}
+          {/* Heavy Admiralty Anchor Plaque Silhouette */}
           <path
-            d="M21 12 Q27 15 24 19 Q20 23 26 27 Q22 31 25 35 Q20 38 23 40"
-            stroke="#FEF3C7"
-            strokeWidth="2.2"
-            fill="none"
+            d="M20 3 C20 1.5 28 1.5 28 3 L28 6 C31 6.5 35 8.5 35 11 L43 11 C45 11 45 15 43 15 L35 15 C34 19 31 23 28 25 L28 35 C33 35 38 31 40 26 L45 28 C42 37 34 43 27 44.5 L27 46.5 C27 47.5 21 47.5 21 46.5 L21 44.5 C14 43 6 37 3 28 L8 26 C10 31 15 35 20 35 L20 25 C17 23 14 19 13 15 L5 15 C3 15 3 11 5 11 L13 11 C13 8.5 17 6.5 20 6 Z"
+            fill="url(#sub8-brass-frame)"
+            stroke="#451A03"
+            strokeWidth="1.2"
           />
-          <path
-            d="M21 12 Q27 15 24 19 Q20 23 26 27 Q22 31 25 35 Q20 38 23 40"
-            stroke="#D97706"
-            strokeWidth="1.8"
-            strokeDasharray="2 1.5"
-            fill="none"
-          />
+
+          {/* Clipped Deep Sea Field */}
+          <g clipPath="url(#sub8-anchor-clip)">
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub8-deep-sea)" />
+
+            {/* Inner Harbor Helmsman Ships Wheel Centered Behind Anchor */}
+            <g transform="translate(0, 4)">
+              {/* Spoke Handles */}
+              {Array.from({ length: 6 }).map((_, i) => (
+                <line
+                  key={i}
+                  x1={24 + 5 * Math.cos((i * 60 * Math.PI) / 180)}
+                  y1={22 + 5 * Math.sin((i * 60 * Math.PI) / 180)}
+                  x2={24 + 14 * Math.cos((i * 60 * Math.PI) / 180)}
+                  y2={22 + 14 * Math.sin((i * 60 * Math.PI) / 180)}
+                  stroke="#D97706"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+              ))}
+              <circle cx="24" cy="22" r="10" stroke="url(#sub8-brass-frame)" strokeWidth="1.5" fill="none" opacity="0.8" />
+              <circle cx="24" cy="22" r="3.2" fill="url(#sub8-brass-frame)" stroke="#451A03" strokeWidth="0.8" />
+            </g>
+
+            {/* Patapsco Harbor Rippling Waves in Lower Flukes */}
+            <path d="M5 40 Q14 36 24 39 Q34 42 43 38 L43 46 L5 46 Z" fill="#0284C7" opacity="0.4" />
+            <path d="M7 42 Q15 39 24 41 Q33 43 41 40 L41 46 L7 46 Z" fill="#38BDF8" opacity="0.3" />
+
+            {/* Anchor Internal Raised Brass Spine & Stock Accent */}
+            <rect x="22.5" y="10" width="3" height="26" rx="1.5" fill="url(#sub8-brass-frame)" stroke="#78350F" strokeWidth="0.6" />
+            <rect x="8" y="12" width="32" height="2.2" rx="1" fill="url(#sub8-brass-frame)" stroke="#78350F" strokeWidth="0.5" />
+
+            {/* Shackle Ring Inner Center Hole */}
+            <circle cx="24" cy="4.2" r="1.8" fill="#001845" stroke="#78350F" strokeWidth="0.6" />
+
+            {/* Helical Wrapped Manila Hemp Cord with Shackle Loop */}
+            <path
+              d="M21 5 Q27 8 24 12 Q19 16 26 20 Q20 24 25 28 Q21 32 26 36 Q32 38 38 31"
+              stroke="url(#sub8-rope)"
+              strokeWidth="2.4"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <path
+              d="M21 5 Q27 8 24 12 Q19 16 26 20 Q20 24 25 28 Q21 32 26 36 Q32 38 38 31"
+              stroke="#B45309"
+              strokeWidth="2"
+              strokeDasharray="2 1.5"
+              fill="none"
+              strokeLinecap="round"
+            />
+
+            {/* North Navigational Star atop Shackle */}
+            <polygon points="24,1 24.8,2.8 26.5,3 25,4.2 25.5,6 24,5 22.5,6 23,4.2 21.5,3 23.2,2.8" fill="#FFFBEB" />
+          </g>
         </svg>
       );
     }
 
-    // Level 9: Fells Point Pathologist (Twin-Masted Cobblestone Schooner)
+    // Level 9: Fells Point Pathologist (Clipper Prow / Triangular Nautical Shield)
     if (key.includes('subrank-9') || key.includes('fells') || key.includes('⛵') || key.includes('fells-sailboat')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub9-bg" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor="#EEF2FF" />
-              <stop offset="100%" stopColor="#C7D2FE" />
-            </radialGradient>
+            <linearGradient id="sub9-prow-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FEF08A" />
+              <stop offset="40%" stopColor="#F59E0B" />
+              <stop offset="80%" stopColor="#4338CA" />
+              <stop offset="100%" stopColor="#1E1B4B" />
+            </linearGradient>
+            <linearGradient id="sub9-twilight" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stopColor="#0F172A" />
+              <stop offset="30%" stopColor="#1E1B4B" />
+              <stop offset="65%" stopColor="#1D4ED8" />
+              <stop offset="100%" stopColor="#38BDF8" />
+            </linearGradient>
             <linearGradient id="sub9-hull" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#78350F" />
               <stop offset="60%" stopColor="#451A03" />
@@ -571,55 +875,95 @@ export const RankInsigniaArt: React.FC<{
             </linearGradient>
             <linearGradient id="sub9-sail" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="100%" stopColor="#E2E8F0" />
+              <stop offset="60%" stopColor="#F1F5F9" />
+              <stop offset="100%" stopColor="#CBD5E1" />
             </linearGradient>
+            <clipPath id="sub9-clipper-clip">
+              <path d="M5 6 C12 5 36 5 43 6 L43 25 C43 35 34 43 24 46 C14 43 5 35 5 25 Z" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub9-bg)" stroke="#4F46E5" strokeWidth="1.5" />
+          {/* Nautical Clipper Prow Escutcheon Outer Silhouette */}
+          <path
+            d="M5 6 C12 5 36 5 43 6 L43 25 C43 35 34 43 24 46 C14 43 5 35 5 25 Z"
+            fill="url(#sub9-prow-rim)"
+            stroke="#1E1B4B"
+            strokeWidth="1.4"
+          />
 
-          {/* Foaming Chesapeake Ocean Waves */}
-          <path d="M6 36 Q13 33 20 36 Q27 39 34 36 Q41 33 44 36 L44 42 L6 42 Z" fill="#0284C7" />
-          <path d="M6 38 Q13 36 20 38 Q27 40 34 38 Q41 36 44 38 L44 42 L6 42 Z" fill="#002D72" />
+          {/* Clipped Maritime Field */}
+          <g clipPath="url(#sub9-clipper-clip)">
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub9-twilight)" />
 
-          {/* Baltimore Clipper Wood Hull */}
-          <path d="M9 34 L13 37 L35 37 L40 31 L11 31 Z" fill="url(#sub9-hull)" stroke="#1E293B" strokeWidth="1" />
-          {/* Gold Sheerline */}
-          <path d="M11 32 L39 32" stroke="#F59E0B" strokeWidth="0.8" />
+            {/* Radiant Polaris Star in Twilight Sky */}
+            <polygon points="12,11 13,13.5 15.5,14 13,14.5 12,17 11,14.5 8.5,14 11,13.5" fill="#FEF08A" />
+            <circle cx="12" cy="14" r="0.8" fill="#FFFFFF" />
 
-          {/* Main Mast & Fore Mast */}
-          <line x1="21" y1="10" x2="21" y2="32" stroke="#451A03" strokeWidth="2.2" strokeLinecap="round" />
-          <line x1="32" y1="14" x2="32" y2="32" stroke="#451A03" strokeWidth="1.8" strokeLinecap="round" />
+            {/* Foaming Chesapeake Ocean Waves */}
+            <path d="M4 35 Q13 32 22 35 Q31 38 44 34 L44 48 L4 48 Z" fill="#0284C7" />
+            <path d="M4 38 Q13 35 23 38 Q33 41 44 37 L44 48 L4 48 Z" fill="#002D72" />
+            {/* Whitecap Foam Specks */}
+            <path d="M6 35 Q11 33 16 35" stroke="#E0F2FE" strokeWidth="0.8" strokeLinecap="round" fill="none" />
+            <path d="M26 38 Q32 36 38 38" stroke="#E0F2FE" strokeWidth="0.8" strokeLinecap="round" fill="none" />
 
-          {/* Standing Rigging Shrouds */}
-          <line x1="21" y1="12" x2="10" y2="31" stroke="#94A3B8" strokeWidth="0.6" />
-          <line x1="32" y1="16" x2="39" y2="31" stroke="#94A3B8" strokeWidth="0.6" />
+            {/* Fells Point Quayside Granite Cobblestones (Bottom Keel Area) */}
+            <g opacity="0.75">
+              <ellipse cx="20" cy="44" rx="2.5" ry="1.2" fill="#475569" stroke="#334155" strokeWidth="0.4" />
+              <ellipse cx="25" cy="45" rx="2.8" ry="1.3" fill="#64748B" stroke="#334155" strokeWidth="0.4" />
+              <ellipse cx="28" cy="43.5" rx="2.4" ry="1.1" fill="#475569" stroke="#334155" strokeWidth="0.4" />
+              <ellipse cx="16" cy="45" rx="2.2" ry="1" fill="#334155" stroke="#1E293B" strokeWidth="0.4" />
+            </g>
 
-          {/* Billowing Main Canvas Sail */}
-          <path d="M20 11 L10 28 L20 28 Z" fill="url(#sub9-sail)" stroke="#94A3B8" strokeWidth="0.8" />
-          <line x1="15" y1="20" x2="20" y2="28" stroke="#CBD5E1" strokeWidth="0.5" />
+            {/* Historic Baltimore Clipper Schooner */}
+            {/* Bowsprit Spar Jutting Forward */}
+            <line x1="12" y1="31" x2="6" y2="28" stroke="#451A03" strokeWidth="1.4" strokeLinecap="round" />
 
-          {/* Billowing Fore Canvas Sail */}
-          <path d="M22 13 L31 29 L22 29 Z" fill="url(#sub9-sail)" stroke="#94A3B8" strokeWidth="0.8" />
+            {/* Walnut & Mahogany Hull */}
+            <path d="M9 32 L13 35 L35 35 L40 29 L11 29 Z" fill="url(#sub9-hull)" stroke="#1E293B" strokeWidth="1" />
+            {/* Gilded Sheerline Stripe */}
+            <path d="M11 30 L39 30" stroke="#F59E0B" strokeWidth="0.8" />
 
-          {/* Crimson Maritime Pennant */}
-          <polygon points="21,10 16,8 21,7" fill="#DC2626" />
+            {/* Main Mast & Fore Mast */}
+            <line x1="21" y1="8" x2="21" y2="30" stroke="#451A03" strokeWidth="2.2" strokeLinecap="round" />
+            <line x1="32" y1="12" x2="32" y2="30" stroke="#451A03" strokeWidth="1.8" strokeLinecap="round" />
+
+            {/* Standing & Running Rigging Shrouds */}
+            <line x1="21" y1="10" x2="9" y2="29" stroke="#CBD5E1" strokeWidth="0.6" opacity="0.8" />
+            <line x1="21" y1="10" x2="32" y2="12" stroke="#CBD5E1" strokeWidth="0.6" opacity="0.8" />
+            <line x1="32" y1="14" x2="39" y2="29" stroke="#CBD5E1" strokeWidth="0.6" opacity="0.8" />
+            <line x1="21" y1="14" x2="6" y2="28" stroke="#CBD5E1" strokeWidth="0.6" opacity="0.8" />
+
+            {/* Billowing Main Canvas Sail */}
+            <path d="M20 9 L9 26 L20 26 Z" fill="url(#sub9-sail)" stroke="#94A3B8" strokeWidth="0.8" />
+            <line x1="14" y1="18" x2="20" y2="26" stroke="#94A3B8" strokeWidth="0.5" opacity="0.6" />
+
+            {/* Billowing Fore Canvas Sail */}
+            <path d="M22 11 L31 27 L22 27 Z" fill="url(#sub9-sail)" stroke="#94A3B8" strokeWidth="0.8" />
+
+            {/* Jib Sail Forward */}
+            <path d="M19 16 L8 28 L19 28 Z" fill="url(#sub9-sail)" opacity="0.85" stroke="#94A3B8" strokeWidth="0.6" />
+
+            {/* Snapping Crimson Maritime Pennant */}
+            <polygon points="21,8 15,6.5 21,5" fill="#DC2626" />
+          </g>
         </svg>
       );
     }
 
-    // Level 10: Old Bay Connoisseur (Maryland Blue Crab Emblem)
+    // Level 10: Old Bay Connoisseur (Chamfered Octagonal Old Bay Spice Tin)
     if (key.includes('subrank-10') || key.includes('old bay') || key.includes('🦀') || key.includes('old-bay-crab')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub10-bg" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor="#FEF2F2" />
-              <stop offset="100%" stopColor="#FEE2E2" />
-            </radialGradient>
+            <linearGradient id="sub10-tin-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FEF08A" />
+              <stop offset="35%" stopColor="#F59E0B" />
+              <stop offset="70%" stopColor="#B45309" />
+              <stop offset="100%" stopColor="#78350F" />
+            </linearGradient>
             <linearGradient id="sub10-shell" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#0E7490" />
-              <stop offset="40%" stopColor="#047857" />
+              <stop offset="45%" stopColor="#047857" />
               <stop offset="100%" stopColor="#064E3B" />
             </linearGradient>
             <linearGradient id="sub10-claw" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -627,163 +971,286 @@ export const RankInsigniaArt: React.FC<{
               <stop offset="50%" stopColor="#DC2626" />
               <stop offset="100%" stopColor="#991B1B" />
             </linearGradient>
+            <clipPath id="sub10-tin-clip">
+              <polygon points="13,3 35,3 45,13 45,35 35,45 13,45 3,35 3,13" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub10-bg)" stroke="#DC2626" strokeWidth="1.5" />
+          {/* Chamfered Octagonal Old Bay Tin Outer Silhouette */}
+          <polygon
+            points="13,3 35,3 45,13 45,35 35,45 13,45 3,35 3,13"
+            fill="url(#sub10-tin-rim)"
+            stroke="#451A03"
+            strokeWidth="1.4"
+          />
 
-          {/* Chesapeake Cerulean Blue Walking Legs */}
-          <path d="M12 24 L5 27 M13 28 L7 33 M15 32 L10 38" stroke="#0284C7" strokeWidth="2.2" strokeLinecap="round" />
-          <path d="M36 24 L43 27 M35 28 L41 33 M33 32 L38 38" stroke="#0284C7" strokeWidth="2.2" strokeLinecap="round" />
+          {/* 8 Chamfered Corner Gold Rivets */}
+          {[
+            [13, 4.5], [35, 4.5], [43.5, 13], [43.5, 35],
+            [35, 43.5], [13, 43.5], [4.5, 35], [4.5, 13]
+          ].map(([x, y], i) => (
+            <circle key={i} cx={x} cy={y} r="1" fill="#FEF08A" stroke="#78350F" strokeWidth="0.3" />
+          ))}
 
-          {/* Swimming Back Flippers */}
-          <ellipse cx="9" cy="38" rx="2.5" ry="1.5" transform="rotate(-30 9 38)" fill="#38BDF8" />
-          <ellipse cx="39" cy="38" rx="2.5" ry="1.5" transform="rotate(30 39 38)" fill="#38BDF8" />
+          {/* Clipped Old Bay Tricolor Tin Field */}
+          <g clipPath="url(#sub10-tin-clip)">
+            {/* Top Band: Iconic Canary Yellow */}
+            <rect x="0" y="0" width="48" height="15" fill="#FBBF24" />
+            {/* Mid Band: Chesapeake Navy Blue */}
+            <rect x="0" y="15" width="48" height="18" fill="#002D72" />
+            {/* Lower Band: Crimson Red */}
+            <rect x="0" y="33" width="48" height="15" fill="#DC2626" />
 
-          {/* Textured Carapace Shell */}
-          <ellipse cx="24" cy="27" rx="13" ry="8.5" fill="url(#sub10-shell)" stroke="#042F2E" strokeWidth="1" />
-          {/* Lateral Spine Points */}
-          <polygon points="10,27 7,27 12,25" fill="#064E3B" />
-          <polygon points="38,27 41,27 36,25" fill="#064E3B" />
+            {/* Gold Pinstripe Dividers */}
+            <line x1="0" y1="15" x2="48" y2="15" stroke="#FEF08A" strokeWidth="0.8" />
+            <line x1="0" y1="33" x2="48" y2="33" stroke="#FEF08A" strokeWidth="0.8" />
 
-          {/* Large Pincer Arms */}
-          <path d="M16 23 Q11 17 9 13" stroke="#0284C7" strokeWidth="3.2" strokeLinecap="round" fill="none" />
-          <path d="M32 23 Q37 17 39 13" stroke="#0284C7" strokeWidth="3.2" strokeLinecap="round" fill="none" />
+            {/* Top Seal Stamp: OLD BAY */}
+            <rect x="15" y="6" width="18" height="6.5" rx="1.5" fill="#002D72" stroke="#FEF08A" strokeWidth="0.6" />
+            <text x="24" y="11" textAnchor="middle" fontSize="3.8" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.8">
+              OLD BAY
+            </text>
 
-          {/* Scarlet Red Claw Tips (Signature Chesapeake Blue Crab) */}
-          <path d="M9 13 C6 10 7 6 11 7 C13 9 11 12 9 13 Z" fill="url(#sub10-claw)" />
-          <path d="M9 13 C5 15 5 19 8 19 C10 17 10 14 9 13 Z" fill="#0284C7" />
-          <path d="M39 13 C42 10 41 6 37 7 C35 9 37 12 39 13 Z" fill="url(#sub10-claw)" />
-          <path d="M39 13 C43 15 43 19 40 19 C38 17 38 14 39 13 Z" fill="#0284C7" />
+            {/* Chesapeake Cerulean Blue Walking Legs */}
+            <path d="M13 25 L6 27 M14 29 L8 34 M16 33 L11 39" stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="round" />
+            <path d="M35 25 L42 27 M34 29 L40 34 M32 33 L37 39" stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="round" />
 
-          {/* Eyestalks */}
-          <circle cx="21" cy="18.5" r="2" fill="#FFFFFF" />
-          <circle cx="21" cy="18.5" r="1.1" fill="#0F172A" />
-          <circle cx="27" cy="18.5" r="2" fill="#FFFFFF" />
-          <circle cx="27" cy="18.5" r="1.1" fill="#0F172A" />
+            {/* Swimming Back Flippers */}
+            <ellipse cx="10" cy="39" rx="2.6" ry="1.5" transform="rotate(-30 10 39)" fill="#0284C7" stroke="#0369A1" strokeWidth="0.5" />
+            <ellipse cx="38" cy="39" rx="2.6" ry="1.5" transform="rotate(30 38 39)" fill="#0284C7" stroke="#0369A1" strokeWidth="0.5" />
 
-          {/* Old Bay Yellow/Red Tin Badge Accent */}
-          <rect x="20" y="24" width="8" height="6" rx="1" fill="#FBBF24" stroke="#D97706" strokeWidth="0.6" />
-          <rect x="20" y="24" width="8" height="2" fill="#002D72" />
-          <rect x="20" y="28" width="8" height="2" fill="#DC2626" />
+            {/* Mottled Textured Carapace Shell */}
+            <ellipse cx="24" cy="27" rx="12" ry="8" fill="url(#sub10-shell)" stroke="#042F2E" strokeWidth="1" />
+            {/* Lateral Spines */}
+            <polygon points="12,27 7,27 13,25" fill="#064E3B" stroke="#042F2E" strokeWidth="0.5" />
+            <polygon points="36,27 41,27 35,25" fill="#064E3B" stroke="#042F2E" strokeWidth="0.5" />
+
+            {/* Front Pincer Arms */}
+            <path d="M17 23 Q12 18 10 13" stroke="#0284C7" strokeWidth="3" strokeLinecap="round" fill="none" />
+            <path d="M31 23 Q36 18 38 13" stroke="#0284C7" strokeWidth="3" strokeLinecap="round" fill="none" />
+
+            {/* Signature Scarlet Red Claw Tips */}
+            <path d="M10 13 C7 10 8 6 12 7 C14 9 12 12 10 13 Z" fill="url(#sub10-claw)" />
+            <path d="M10 13 C6 15 6 19 9 19 C11 17 11 14 10 13 Z" fill="#0284C7" />
+            <path d="M38 13 C41 10 40 6 36 7 C34 9 36 12 38 13 Z" fill="url(#sub10-claw)" />
+            <path d="M38 13 C42 15 42 19 39 19 C37 17 37 14 38 13 Z" fill="#0284C7" />
+
+            {/* Eyestalks */}
+            <circle cx="21.5" cy="19.5" r="1.8" fill="#FFFFFF" />
+            <circle cx="21.5" cy="19.5" r="1" fill="#0F172A" />
+            <circle cx="26.5" cy="19.5" r="1.8" fill="#FFFFFF" />
+            <circle cx="26.5" cy="19.5" r="1" fill="#0F172A" />
+
+            {/* Floating Old Bay Spice Flecks */}
+            <circle cx="16" cy="19" r="1" fill="#EF4444" />
+            <circle cx="32" cy="19" r="0.9" fill="#FEF08A" />
+            <circle cx="24" cy="37" r="1.1" fill="#FEF08A" />
+            <circle cx="18" cy="40" r="0.8" fill="#FBBF24" />
+            <circle cx="30" cy="41" r="0.8" fill="#FBBF24" />
+          </g>
         </svg>
       );
     }
 
-    // Level 11: Fort McHenry Defender (Historic Star-Fort Citadel)
+    // Level 11: Fort McHenry Defender (Authentic 5-Pointed Star Fort Bastion Fortress)
     if (key.includes('subrank-11') || key.includes('mchenry') || key.includes('fort') || key.includes('🏰') || key.includes('fort-mchenry')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub11-bg" cx="50%" cy="30%" r="60%">
-              <stop offset="0%" stopColor="#FEF3C7" />
-              <stop offset="60%" stopColor="#FED7AA" />
-              <stop offset="100%" stopColor="#FDBA74" />
+            <linearGradient id="sub11-star-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FEF08A" />
+              <stop offset="30%" stopColor="#F59E0B" />
+              <stop offset="70%" stopColor="#B45309" />
+              <stop offset="100%" stopColor="#78350F" />
+            </linearGradient>
+            <radialGradient id="sub11-dawn" cx="50%" cy="30%" r="65%">
+              <stop offset="0%" stopColor="#FFFBEB" />
+              <stop offset="40%" stopColor="#FED7AA" />
+              <stop offset="75%" stopColor="#FDBA74" />
+              <stop offset="100%" stopColor="#EA580C" />
             </radialGradient>
             <linearGradient id="sub11-brick" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#B45309" />
-              <stop offset="60%" stopColor="#991B1B" />
+              <stop offset="50%" stopColor="#991B1B" />
               <stop offset="100%" stopColor="#78350F" />
             </linearGradient>
+            <clipPath id="sub11-star-clip">
+              <polygon points="24,2 30.5,15 45,15 33.5,24.5 38,39 24,30.5 10,39 14.5,24.5 3,15 17.5,15" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub11-bg)" stroke="#B45309" strokeWidth="1.5" />
-
-          {/* Star-Spangled Sunrise Rays */}
-          {Array.from({ length: 7 }).map((_, i) => (
-            <line
-              key={i}
-              x1="24"
-              y1="10"
-              x2={24 + 16 * Math.cos(((i * 25 - 150) * Math.PI) / 180)}
-              y2={10 + 16 * Math.sin(((i * 25 - 150) * Math.PI) / 180)}
-              stroke="#FEF08A"
-              strokeWidth="0.8"
-              opacity="0.8"
-            />
-          ))}
-
-          {/* Historic Star-Fort Brick Ramparts */}
-          <path
-            d="M9 37 L13 26 L17 26 L17 30 L21 30 L21 26 L27 26 L27 30 L31 30 L31 26 L35 26 L39 37 Z"
-            fill="url(#sub11-brick)"
+          {/* Authentic 5-Pointed Star Fort Bastion Outer Silhouette */}
+          <polygon
+            points="24,2 30.5,15 45,15 33.5,24.5 38,39 24,30.5 10,39 14.5,24.5 3,15 17.5,15"
+            fill="url(#sub11-star-rim)"
             stroke="#451A03"
             strokeWidth="1.5"
           />
-          {/* Mortar Brick Pattern */}
-          <line x1="12" y1="32" x2="36" y2="32" stroke="#FEF3C7" strokeWidth="0.8" strokeDasharray="3 2" opacity="0.6" />
 
-          {/* Center Bastion Apex */}
-          <polygon points="24,19 28,26 20,26" fill="#78350F" stroke="#451A03" strokeWidth="1" />
+          {/* 5 Star Apex Studs */}
+          {[
+            [24, 3.8], [43, 15.5], [36.5, 37.5], [11.5, 37.5], [5, 15.5]
+          ].map(([x, y], i) => (
+            <circle key={i} cx={x} cy={y} r="1" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
+          ))}
 
-          {/* Cast Bronze Harbor Defense Cannon */}
-          <line x1="17" y1="23" x2="10" y2="20" stroke="#1E293B" strokeWidth="3.2" strokeLinecap="round" />
-          <circle cx="17" cy="23" r="2.2" fill="#64748B" stroke="#0F172A" strokeWidth="0.8" />
+          {/* Clipped Dawn Citadel Field */}
+          <g clipPath="url(#sub11-star-clip)">
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub11-dawn)" />
 
-          {/* Star-Spangled Banner 15-Star Flag */}
-          <line x1="24" y1="7" x2="24" y2="20" stroke="#451A03" strokeWidth="1.6" />
-          {/* Stripes */}
-          <rect x="24" y="7" width="12" height="7" fill="#DC2626" stroke="#991B1B" strokeWidth="0.5" />
-          <line x1="24" y1="8.4" x2="36" y2="8.4" stroke="#FFFFFF" strokeWidth="0.9" />
-          <line x1="24" y1="10.5" x2="36" y2="10.5" stroke="#FFFFFF" strokeWidth="0.9" />
-          <line x1="24" y1="12.6" x2="36" y2="12.6" stroke="#FFFFFF" strokeWidth="0.9" />
-          {/* Blue Canton & Star */}
-          <rect x="24" y="7" width="5.5" height="4" fill="#1E3A8A" />
-          <circle cx="26.8" cy="9" r="1" fill="#FFFFFF" />
+            {/* "Dawn's Early Light" Sunburst Rays */}
+            {[-45, -25, -5, 15, 35, 55].map((angle, i) => (
+              <line
+                key={i}
+                x1="24"
+                y1="14"
+                x2={24 + 20 * Math.sin((angle * Math.PI) / 180)}
+                y2={14 - 20 * Math.cos((angle * Math.PI) / 180)}
+                stroke="#FEF08A"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                opacity="0.85"
+              />
+            ))}
+
+            {/* Mortar Rocket Sparks in the Sky */}
+            <polygon points="12,12 13,13.5 15,14 13,14.5 12,16 11,14.5 9,14 11,13.5" fill="#EF4444" />
+            <polygon points="36,12 37,13.5 39,14 37,14.5 36,16 35,14.5 33,14 35,13.5" fill="#EF4444" />
+
+            {/* Historic Star-Fort Brick Ramparts & Battlements */}
+            <path
+              d="M9 37 L13 25 L17 25 L17 29 L21 29 L21 25 L27 25 L27 29 L31 29 L31 25 L35 25 L39 37 Z"
+              fill="url(#sub11-brick)"
+              stroke="#451A03"
+              strokeWidth="1.2"
+            />
+            {/* Mortar Brick Pattern */}
+            <line x1="12" y1="31" x2="36" y2="31" stroke="#FEF3C7" strokeWidth="0.8" strokeDasharray="3 2" opacity="0.7" />
+            <line x1="15" y1="34" x2="33" y2="34" stroke="#FEF3C7" strokeWidth="0.8" strokeDasharray="3 2" opacity="0.7" />
+
+            {/* Center Bastion Apex Flagmount */}
+            <polygon points="24,18 28,25 20,25" fill="#78350F" stroke="#451A03" strokeWidth="0.8" />
+
+            {/* Cast Bronze Harbor Defense Cannon Trained to Port */}
+            <line x1="18" y1="22" x2="10" y2="19" stroke="#1E293B" strokeWidth="3.2" strokeLinecap="round" />
+            <circle cx="18" cy="22" r="2.2" fill="#64748B" stroke="#0F172A" strokeWidth="0.8" />
+            <circle cx="18" cy="22" r="0.8" fill="#FEF08A" />
+
+            {/* Star-Spangled Banner 15-Star Flag Flying Proud */}
+            <line x1="24" y1="6" x2="24" y2="20" stroke="#78350F" strokeWidth="1.6" />
+            <circle cx="24" cy="6" r="1" fill="#FEF08A" />
+            {/* Flag Stripes */}
+            <rect x="24" y="7" width="13" height="7.5" fill="#DC2626" stroke="#991B1B" strokeWidth="0.5" />
+            <line x1="24" y1="8.5" x2="37" y2="8.5" stroke="#FFFFFF" strokeWidth="1" />
+            <line x1="24" y1="10.8" x2="37" y2="10.8" stroke="#FFFFFF" strokeWidth="1" />
+            <line x1="24" y1="13.1" x2="37" y2="13.1" stroke="#FFFFFF" strokeWidth="1" />
+            {/* Blue Canton & Historic Star */}
+            <rect x="24" y="7" width="6" height="4.2" fill="#1E3A8A" />
+            <circle cx="27" cy="9.1" r="1.1" fill="#FFFFFF" />
+          </g>
         </svg>
       );
     }
 
-    // Level 12: Crab Feast Champion (Crossed Mallet & Seafood Knife)
+    // Level 12: Crab Feast Champion (Diamond Lozenge Saltire Plaque)
     if (key.includes('subrank-12') || key.includes('feast') || key.includes('mallet') || key.includes('🔨') || key.includes('crab-mallet')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub12-bg" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor="#FFEDD5" />
-              <stop offset="100%" stopColor="#FED7AA" />
+            <linearGradient id="sub12-lozenge-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FEF08A" />
+              <stop offset="35%" stopColor="#F59E0B" />
+              <stop offset="70%" stopColor="#EA580C" />
+              <stop offset="100%" stopColor="#9A3412" />
+            </linearGradient>
+            <radialGradient id="sub12-table-bg" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stopColor="#FFFBEB" />
+              <stop offset="50%" stopColor="#FEF3C7" />
+              <stop offset="100%" stopColor="#FDE68A" />
             </radialGradient>
             <linearGradient id="sub12-wood" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#F59E0B" />
-              <stop offset="60%" stopColor="#D97706" />
-              <stop offset="100%" stopColor="#92400E" />
+              <stop offset="50%" stopColor="#D97706" />
+              <stop offset="100%" stopColor="#78350F" />
             </linearGradient>
             <linearGradient id="sub12-steel" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#FFFFFF" />
               <stop offset="50%" stopColor="#E2E8F0" />
               <stop offset="100%" stopColor="#94A3B8" />
             </linearGradient>
+            <clipPath id="sub12-lozenge-clip">
+              <path d="M24 2 L46 24 L24 46 L2 24 Z" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub12-bg)" stroke="#EA580C" strokeWidth="1.5" />
+          {/* Diamond Lozenge Saltire Plaque Outer Silhouette */}
+          <path
+            d="M24 2 L46 24 L24 46 L2 24 Z"
+            fill="url(#sub12-lozenge-rim)"
+            stroke="#78350F"
+            strokeWidth="1.5"
+          />
 
-          {/* Old Bay Seasoning Dust Flecks */}
-          <circle cx="24" cy="10" r="1.5" fill="#EF4444" />
-          <circle cx="14" cy="36" r="1.8" fill="#F59E0B" />
-          <circle cx="34" cy="34" r="1.8" fill="#DC2626" />
-          <circle cx="38" cy="18" r="1.2" fill="#F59E0B" />
-          <circle cx="10" cy="20" r="1.2" fill="#EF4444" />
+          {/* 4 Cardinal Diamond Studs */}
+          <circle cx="24" cy="3.5" r="1.2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
+          <circle cx="44.5" cy="24" r="1.2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
+          <circle cx="24" cy="44.5" r="1.2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
+          <circle cx="3.5" cy="24" r="1.2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
 
-          {/* Wooden Mallet (Turned Birch Head & Handle) */}
-          <g transform="rotate(45 24 24)">
-            <rect x="22" y="7" width="4.5" height="30" rx="2.2" fill="url(#sub12-wood)" stroke="#78350F" strokeWidth="0.8" />
-            <rect x="15" y="7" width="18.5" height="9" rx="2.5" fill="url(#sub12-wood)" stroke="#78350F" strokeWidth="1" />
-            <line x1="17" y1="11.5" x2="31.5" y2="11.5" stroke="#78350F" strokeWidth="0.8" />
+          {/* Clipped Feast Field */}
+          <g clipPath="url(#sub12-lozenge-clip)">
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub12-table-bg)" />
+
+            {/* Subtle Butcher Paper Crab Feast Table Grid Texture */}
+            <line x1="12" y1="0" x2="12" y2="48" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
+            <line x1="24" y1="0" x2="24" y2="48" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
+            <line x1="36" y1="0" x2="36" y2="48" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
+            <line x1="0" y1="12" x2="48" y2="12" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
+            <line x1="0" y1="24" x2="48" y2="24" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
+            <line x1="0" y1="36" x2="48" y2="36" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
+
+            {/* Old Bay Seasoning Dust Flecks Scatter */}
+            <circle cx="24" cy="9" r="1.2" fill="#EF4444" />
+            <circle cx="13" cy="24" r="1.4" fill="#F59E0B" />
+            <circle cx="35" cy="24" r="1.4" fill="#DC2626" />
+            <circle cx="16" cy="36" r="1" fill="#EF4444" />
+            <circle cx="32" cy="36" r="1" fill="#F59E0B" />
+
+            {/* Wooden Crab Mallet (Turned Birch Head & Lathe-Turned Handle) */}
+            <g transform="rotate(45 24 24)">
+              <rect x="22" y="6" width="4.5" height="32" rx="2.2" fill="url(#sub12-wood)" stroke="#78350F" strokeWidth="0.8" />
+              <rect x="14" y="6" width="20.5" height="9.5" rx="2.8" fill="url(#sub12-wood)" stroke="#78350F" strokeWidth="1" />
+              <line x1="16" y1="10.8" x2="32.5" y2="10.8" stroke="#451A03" strokeWidth="0.8" />
+              {/* Lathe Ring Grooves */}
+              <line x1="22" y1="28" x2="26.5" y2="28" stroke="#451A03" strokeWidth="0.8" />
+              <line x1="22" y1="31" x2="26.5" y2="31" stroke="#451A03" strokeWidth="0.8" />
+            </g>
+
+            {/* Stainless Steel Seafood Crab Knife & Pick */}
+            <g transform="rotate(-45 24 24)">
+              <rect x="22" y="8" width="4.5" height="29" rx="1.5" fill="url(#sub12-steel)" stroke="#64748B" strokeWidth="0.8" />
+              <polygon points="22,8 26.5,8 24.2,3.5" fill="#FFFFFF" stroke="#64748B" strokeWidth="0.8" />
+              {/* Red Grip with Brass Rivets */}
+              <rect x="21" y="26" width="6.5" height="11" rx="1.5" fill="#DC2626" stroke="#991B1B" strokeWidth="0.8" />
+              <circle cx="24.2" cy="29" r="0.8" fill="#FEF08A" />
+              <circle cx="24.2" cy="34" r="0.8" fill="#FEF08A" />
+            </g>
+
+            {/* Steamed Crab Claw Resting Beside Center */}
+            <path d="M14 26 C12 21 16 18 19 20 C22 22 20 26 18 27 Z" fill="#EF4444" stroke="#991B1B" strokeWidth="0.6" />
+            <polygon points="14,24 11,21 15,22" fill="#DC2626" />
+
+            {/* Fresh Sliced Lemon Wedge */}
+            <path d="M30 20 C34 22 36 26 34 29 L28 26 Z" fill="#FDE047" stroke="#CA8A04" strokeWidth="0.6" />
+            <path d="M30 21 C33 23 34.5 26 33 28 L29 26 Z" fill="#FEF08A" />
+
+            {/* Golden Drawn Butter Ramekin Centerpiece */}
+            <ellipse cx="24" cy="24" r="5" fill="#FEF08A" stroke="#EA580C" strokeWidth="1.2" />
+            <circle cx="24" cy="24" r="3" fill="#FBBF24" />
+            {/* Parsley Specks */}
+            <circle cx="23" cy="23.5" r="0.5" fill="#15803D" />
+            <circle cx="25" cy="24.5" r="0.5" fill="#15803D" />
           </g>
-
-          {/* Stainless Steel Seafood Crab Knife & Pick */}
-          <g transform="rotate(-45 24 24)">
-            <rect x="22" y="9" width="4.5" height="28" rx="1.5" fill="url(#sub12-steel)" stroke="#64748B" strokeWidth="0.8" />
-            <polygon points="22,9 26.5,9 24.2,4.5" fill="#FFFFFF" stroke="#64748B" strokeWidth="0.8" />
-            {/* Red Grip */}
-            <rect x="21" y="27" width="6.5" height="10" rx="1.5" fill="#DC2626" stroke="#991B1B" strokeWidth="0.8" />
-          </g>
-
-          {/* Butter Ramekin Accent */}
-          <ellipse cx="24" cy="24" r="4" fill="#FEF08A" stroke="#F59E0B" strokeWidth="1.2" />
-          <circle cx="24" cy="24" r="2" fill="#FBBF24" />
         </svg>
       );
     }
