@@ -15,8 +15,8 @@ export const RankInsigniaArt: React.FC<{
 
   // Helper render for 15 subrank SVGs
   const renderSvg = () => {
-    // Level 1: Fledgling Fencer (Hatching Chick in Golden Homewood Nest)
-    if (key.includes('subrank-1') || key.includes('fledgling') || key.includes('🐣') || key.includes('nestling-hatch') || key.includes('nestling')) {
+    // Level 1: Nestling Hatchling (Homewood Twig Cradle, Porcelain Egg, Aviator Baby Jay & Diploma Scroll)
+    if (key.includes('subrank-1') || key.includes('fledgling') || key.includes('🐣') || key.includes('nestling-hatch')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -25,86 +25,125 @@ export const RankInsigniaArt: React.FC<{
               <stop offset="70%" stopColor="#BAE6FD" />
               <stop offset="100%" stopColor="#7DD3FC" />
             </radialGradient>
+            <linearGradient id="sub1-gold-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFDF0" />
+              <stop offset="35%" stopColor="#FEF08A" />
+              <stop offset="70%" stopColor="#F59E0B" />
+              <stop offset="100%" stopColor="#B45309" />
+            </linearGradient>
             <linearGradient id="sub1-egg" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="60%" stopColor="#FFFBEB" />
+              <stop offset="65%" stopColor="#FFFBEB" />
               <stop offset="100%" stopColor="#E2E8F0" />
             </linearGradient>
             <linearGradient id="sub1-jay" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#38BDF8" />
-              <stop offset="40%" stopColor="#0284C7" />
+              <stop offset="45%" stopColor="#0284C7" />
               <stop offset="100%" stopColor="#002D72" />
             </linearGradient>
-            <linearGradient id="sub1-twig" x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient id="sub1-twig" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#D97706" />
               <stop offset="50%" stopColor="#92400E" />
               <stop offset="100%" stopColor="#451A03" />
             </linearGradient>
+            <linearGradient id="sub1-goggle" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FEF08A" />
+              <stop offset="50%" stopColor="#F59E0B" />
+              <stop offset="100%" stopColor="#92400E" />
+            </linearGradient>
           </defs>
 
           {/* Medallion Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub1-bg)" stroke="#38BDF8" strokeWidth="1.5" />
+          <circle cx="24" cy="24" r="22" fill="url(#sub1-bg)" stroke="url(#sub1-gold-rim)" strokeWidth="1.6" />
           <circle cx="24" cy="24" r="20" stroke="#FFFFFF" strokeWidth="0.8" strokeDasharray="1.5 1.5" fill="none" opacity="0.8" />
 
-          {/* Golden Twig Nest at Base */}
-          <path d="M10 38 Q24 45 38 38" stroke="url(#sub1-twig)" strokeWidth="2.8" strokeLinecap="round" fill="none" />
-          <path d="M12 41 Q24 46 36 41" stroke="#78350F" strokeWidth="2" strokeLinecap="round" fill="none" />
-          <line x1="14" y1="38" x2="20" y2="43" stroke="#B45309" strokeWidth="1.2" strokeLinecap="round" />
-          <line x1="34" y1="38" x2="28" y2="43" stroke="#B45309" strokeWidth="1.2" strokeLinecap="round" />
-          <circle cx="12" cy="38" r="1.5" fill="#059669" />
-          <circle cx="36" cy="38" r="1.5" fill="#059669" />
+          {/* Ambient Inner Glow */}
+          <circle cx="24" cy="22" r="15" fill="#38BDF8" opacity="0.15" />
+
+          {/* Homewood Woven Birch Nest Twig Cradle */}
+          <g>
+            <path d="M10 37 Q24 45 38 37" stroke="url(#sub1-twig)" strokeWidth="3" strokeLinecap="round" fill="none" />
+            <path d="M12 40 Q24 47 36 40" stroke="#78350F" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+            <line x1="14" y1="37" x2="22" y2="43" stroke="#92400E" strokeWidth="1.2" strokeLinecap="round" />
+            <line x1="34" y1="37" x2="26" y2="43" stroke="#92400E" strokeWidth="1.2" strokeLinecap="round" />
+            <line x1="20" y1="38" x2="28" y2="43" stroke="#78350F" strokeWidth="1" strokeLinecap="round" />
+            {/* Green Maryland Ivy Leaves */}
+            <ellipse cx="14" cy="37" rx="1.2" ry="2.2" transform="rotate(-40 14 37)" fill="#059669" />
+            <ellipse cx="34" cy="37" rx="1.2" ry="2.2" transform="rotate(40 34 37)" fill="#059669" />
+          </g>
 
           {/* Cracked Egg Shell Base */}
           <path
-            d="M12 28 C12 38 17 41 24 41 C31 41 36 38 36 28 L32 30.5 L28 27.5 L24 31.5 L20 27.5 L16 30.5 Z"
+            d="M13 28 C13 38 18 41 24 41 C30 41 35 38 35 28 L31 30.5 L28 27.5 L24 31.5 L20 27.5 L16 30.5 Z"
             fill="url(#sub1-egg)"
             stroke="#94A3B8"
             strokeWidth="1.2"
           />
+          {/* Shell Inner Shadow */}
+          <path d="M14 29 L17 31 L20 28 L24 32 L28 28 L31 31 L34 29 C34 31 33 33 31 35 C28 34 20 34 17 35 C15 33 14 31 14 29 Z" fill="#CBD5E1" opacity="0.4" />
           {/* Hopkins Navy Chevron on Egg */}
-          <path d="M16 34 L24 38 L32 34 L30 32.5 L24 35.5 L18 32.5 Z" fill="#002D72" />
-          <polygon points="24,37.5 24.6,38.5 25.8,38.5 24.8,39.2 25.2,40.2 24,39.6 22.8,40.2 23.2,39.2 22.2,38.5 23.4,38.5" fill="#FEF08A" />
+          <path d="M15 33.5 L20 36.5 L24 34.5 L28 36.5 L33 33.5 L32.5 35.5 L28 38.5 L24 36.5 L20 38.5 L15.5 35.5 Z" fill="#002D72" stroke="url(#sub1-gold-rim)" strokeWidth="0.4" />
+          <circle cx="24" cy="35.5" r="0.8" fill="#FEF08A" />
 
           {/* Baby Blue Jay Peeking Out */}
-          <ellipse cx="24" cy="22" rx="9.5" ry="8.5" fill="url(#sub1-jay)" />
-          {/* Chest White Bib */}
-          <path d="M19 23 C19 27 21 29 24 29 C27 29 29 27 29 23 C27 24 21 24 19 23 Z" fill="#FFFFFF" />
+          {/* Jay Torso & Head */}
+          <ellipse cx="24" cy="22" rx="9" ry="8.5" fill="url(#sub1-jay)" />
+
           {/* Blue Jay Head Crest Feathers */}
-          <path d="M22 13 Q24 9 27 11 Q25 14 24 16 Z" fill="#0284C7" />
+          <path d="M22 13 Q24 9 26 11 Q25 14 24 16 Z" fill="#0284C7" />
           <path d="M20 14 Q22 10 24 12 Q23 15 22 16 Z" fill="#002D72" />
+          <path d="M24 13 Q26 10 28 12 Q26 15 25 16 Z" fill="#38BDF8" />
+
+          {/* White Facial Mask & Chin Bib */}
+          <path d="M17 21 Q24 26 31 21 Q24 18 17 21 Z" fill="#FFFFFF" />
+          <path d="M20 23 Q24 28 28 23 Q24 26 20 23 Z" fill="#F8FAFC" />
+          {/* Black Collar Line */}
+          <path d="M18 22 C18 25 21 27 24 27 C27 27 30 25 30 22" stroke="#001438" strokeWidth="0.8" fill="none" />
 
           {/* Rosy Blushing Cheeks */}
-          <circle cx="17.5" cy="23.5" r="2.2" fill="#F472B6" opacity="0.65" />
-          <circle cx="30.5" cy="23.5" r="2.2" fill="#F472B6" opacity="0.65" />
+          <ellipse cx="19" cy="22.5" rx="1.8" ry="1.2" fill="#FDA4AF" opacity="0.75" />
+          <ellipse cx="29" cy="22.5" rx="1.8" ry="1.2" fill="#FDA4AF" opacity="0.75" />
 
-          {/* Sparkling Big Eyes */}
-          <circle cx="19" cy="20" r="2.2" fill="#0F172A" />
-          <circle cx="18.2" cy="19.2" r="0.8" fill="#FFFFFF" />
-          <circle cx="29" cy="20" r="2.2" fill="#0F172A" />
-          <circle cx="28.2" cy="19.2" r="0.8" fill="#FFFFFF" />
+          {/* Sparkling Big Traveler Eyes */}
+          <circle cx="20.5" cy="19.5" r="1.8" fill="#0F172A" />
+          <circle cx="20" cy="19" r="0.6" fill="#FFFFFF" />
+          <circle cx="21" cy="20.2" r="0.3" fill="#FFFFFF" />
+          <circle cx="27.5" cy="19.5" r="1.8" fill="#0F172A" />
+          <circle cx="27" cy="19" r="0.6" fill="#FFFFFF" />
+          <circle cx="28" cy="20.2" r="0.3" fill="#FFFFFF" />
 
-          {/* Mini Brass Aviator Goggles on Forehead */}
-          <rect x="17" y="16" width="14" height="1.8" rx="0.9" fill="#78350F" />
-          <circle cx="20.5" cy="16.5" r="2.8" fill="#D97706" stroke="#451A03" strokeWidth="0.5" />
-          <circle cx="20.5" cy="16.5" r="2" fill="#BAE6FD" />
-          <line x1="19.5" y1="15.5" x2="21.5" y2="17.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
-          <circle cx="27.5" cy="16.5" r="2.8" fill="#D97706" stroke="#451A03" strokeWidth="0.5" />
-          <circle cx="27.5" cy="16.5" r="2" fill="#BAE6FD" />
-          <line x1="26.5" y1="15.5" x2="28.5" y2="17.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
+          {/* Cute Orange Beak */}
+          <polygon points="22,20.5 26,20.5 24,23.5" fill="#F59E0B" stroke="#D97706" strokeWidth="0.5" />
 
-          {/* Cute Orange Beak with Mini Diploma */}
-          <polygon points="22,22 26,22 24,25.5" fill="#F59E0B" />
-          {/* Mini Diploma Scroll */}
-          <rect x="22" y="24" width="8" height="2.5" rx="0.8" transform="rotate(-10 22 24)" fill="#FFFBEB" stroke="#D97706" strokeWidth="0.5" />
-          <line x1="25.5" y1="23.5" x2="25.5" y2="26" stroke="#DC2626" strokeWidth="0.8" />
+          {/* Polished Brass Aviator Goggles on Forehead */}
+          <g>
+            <rect x="17" y="14.8" width="14" height="2" rx="1" fill="#451A03" />
+            <rect x="17.5" y="13.2" width="5.5" height="5.2" rx="2.5" fill="url(#sub1-goggle)" stroke="#78350F" strokeWidth="0.6" />
+            <rect x="18.5" y="14.2" width="3.5" height="3.2" rx="1.6" fill="#38BDF8" />
+            <line x1="19" y1="14.5" x2="21" y2="16.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
 
-          {/* Cracked Egg Top Hat with Golden Pin */}
-          <path d="M17 14 L21 17 L24 13 L27 17 L31 14 C30 9 18 9 17 14 Z" fill="url(#sub1-egg)" stroke="#94A3B8" strokeWidth="0.9" />
-          <polygon points="24,10.5 24.8,12 26.5,12 25.2,13 25.6,14.5 24,13.7 22.4,14.5 22.8,13 21.5,12 23.2,12" fill="#F59E0B" />
+            <rect x="25" y="13.2" width="5.5" height="5.2" rx="2.5" fill="url(#sub1-goggle)" stroke="#78350F" strokeWidth="0.6" />
+            <rect x="26" y="14.2" width="3.5" height="3.2" rx="1.6" fill="#38BDF8" />
+            <line x1="26.5" y1="14.5" x2="28.5" y2="16.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
 
-          {/* Sparkle Stars */}
-          <polygon points="39,9 40,12 43,13 40,14 39,17 38,14 35,13 38,12" fill="#FBBF24" />
-          <circle cx="7" cy="15" r="1.4" fill="#FDE047" />
+            {/* Bridge */}
+            <rect x="23" y="15" width="2" height="1.5" rx="0.5" fill="url(#sub1-goggle)" />
+
+            {/* Little Blue Explorer Feather tucked in goggle */}
+            <path d="M30 14 C33 11 34 7 33 5 C31 8 30 11 29 14 Z" fill="#38BDF8" stroke="#002D72" strokeWidth="0.4" />
+          </g>
+
+          {/* Miniature Hopkins Parchment Diploma Scroll in Wing */}
+          <g transform="rotate(-15 15 30)">
+            <rect x="12" y="27" width="10" height="4" rx="1" fill="#FFFBEB" stroke="#B45309" strokeWidth="0.6" />
+            <circle cx="17" cy="29" r="1.2" fill="#DC2626" />
+            <line x1="17" y1="29" x2="19" y2="31" stroke="#DC2626" strokeWidth="0.6" strokeLinecap="round" />
+            <line x1="13" y1="28.5" x2="16" y2="28.5" stroke="#D97706" strokeWidth="0.4" />
+          </g>
+
+          {/* Sparkle Gold Stars */}
+          <polygon points="38,9 39,11.5 41.5,12 39,12.5 38,15 37,12.5 34.5,12 37,11.5" fill="#FBBF24" />
+          <circle cx="9" cy="15" r="1.2" fill="#FDE047" />
         </svg>
       );
     }
@@ -749,173 +788,665 @@ export const RankInsigniaArt: React.FC<{
       );
     }
 
-    // Level 13: Poe's Raven Disciple (Gothic Raven & Parchment Quill)
+    // Level 13: Poe's Raven Disciple (Pointed Gothic Cathedral Arch, Full Moon Halo & Spread-Wing Raven on Marble Pallas Bust)
     if (key.includes('subrank-13') || key.includes('poe') || key.includes('raven') || key.includes('🪶') || key.includes('poe-raven')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub13-bg" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor="#F8FAFC" />
-              <stop offset="100%" stopColor="#CBD5E1" />
-            </radialGradient>
-            <linearGradient id="sub13-raven" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1E1B4B" />
-              <stop offset="50%" stopColor="#0F172A" />
-              <stop offset="100%" stopColor="#312E81" />
+            {/* Gothic Night Sky Gradient */}
+            <linearGradient id="sub13-gothic-sky" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stopColor="#090514" />
+              <stop offset="40%" stopColor="#120D24" />
+              <stop offset="80%" stopColor="#1E1B4B" />
+              <stop offset="100%" stopColor="#0F172A" />
             </linearGradient>
+            {/* Full Moon Glow */}
+            <radialGradient id="sub13-moon-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="50%" stopColor="#EDE9FE" />
+              <stop offset="80%" stopColor="#C4B5FD" />
+              <stop offset="100%" stopColor="#818CF8" stopOpacity="0" />
+            </radialGradient>
+            {/* Carved Gothic Stone Rim */}
+            <linearGradient id="sub13-stone-border" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#94A3B8" />
+              <stop offset="30%" stopColor="#475569" />
+              <stop offset="70%" stopColor="#334155" />
+              <stop offset="100%" stopColor="#1E293B" />
+            </linearGradient>
+            {/* Iridescent Obsidian Raven Feathers */}
+            <linearGradient id="sub13-raven-plumage" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#312E81" />
+              <stop offset="35%" stopColor="#1E1B4B" />
+              <stop offset="70%" stopColor="#0B0F19" />
+              <stop offset="100%" stopColor="#020617" />
+            </linearGradient>
+            {/* Carved Marble Bust */}
+            <linearGradient id="sub13-marble" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="60%" stopColor="#E2E8F0" />
+              <stop offset="100%" stopColor="#94A3B8" />
+            </linearGradient>
+            {/* Aged Parchment Scroll */}
+            <linearGradient id="sub13-parchment" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FFFBEB" />
+              <stop offset="50%" stopColor="#FEF3C7" />
+              <stop offset="100%" stopColor="#FDE68A" />
+            </linearGradient>
+            {/* Golden Beak / Claw */}
+            <linearGradient id="sub13-gold-acc" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FDE047" />
+              <stop offset="100%" stopColor="#D97706" />
+            </linearGradient>
+            {/* Gothic Arch Clip Path */}
+            <clipPath id="sub13-arch-clip">
+              <path d="M8 44 L8 19 C8 10 16 3 24 3 C32 3 40 10 40 19 L40 44 Z" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub13-bg)" stroke="#475569" strokeWidth="1.5" />
-
-          {/* Carved Marble Bust Pediment of Pallas */}
-          <rect x="12" y="36" width="24" height="4" rx="1" fill="#64748B" stroke="#334155" strokeWidth="0.8" />
-          <polygon points="16,36 32,36 29,32 19,32" fill="#94A3B8" />
-
-          {/* Raven Silhouette & Feathers */}
+          {/* Gothic Cathedral Mausoleum Stele / Pointed Arch Outer Frame */}
+          {/* Shadow / Base */}
           <path
-            d="M15 32 C17 28 19 25 21 22 C19 16 23 8 32 8 C35 8 38 10 38 13 C34 14 31 16 30 19 C34 20 37 23 36 28 C35 32 29 35 21 35 L15 32 Z"
-            fill="url(#sub13-raven)"
-            stroke="#020617"
+            d="M6 45 L6 19 C6 8 15 1 24 1 C33 1 42 8 42 19 L42 45 Z"
+            fill="#0F172A"
+          />
+          {/* Stone Bevel Outer Border */}
+          <path
+            d="M7 44.5 L7 19 C7 9 15.5 2 24 2 C32.5 2 41 9 41 19 L41 44.5 Z"
+            fill="url(#sub13-stone-border)"
+            stroke="#1E293B"
             strokeWidth="0.8"
           />
+          {/* Inner Inset Arch Border */}
+          <path
+            d="M8.5 43.5 L8.5 19 C8.5 10.5 16 3.5 24 3.5 C32 3.5 39.5 10.5 39.5 19 L39.5 43.5 Z"
+            fill="#000000"
+          />
 
-          {/* Layered Iridescent Wing Plumes */}
-          <path d="M23 23 C27 23 31 27 29 32 C26 31 23 27 23 23 Z" fill="#312E81" opacity="0.8" />
-          <path d="M25 25 C29 25 32 28 31 32 C28 31 25 28 25 25 Z" fill="#4338CA" opacity="0.6" />
+          {/* Clipped Gothic Interior Window */}
+          <g clipPath="url(#sub13-arch-clip)">
+            {/* Midnight Sky */}
+            <rect x="6" y="1" width="36" height="44" fill="url(#sub13-gothic-sky)" />
 
-          {/* Sharp Beak */}
-          <polygon points="32,8 43,10 35,13" fill="#F59E0B" stroke="#D97706" strokeWidth="0.6" />
+            {/* Gothic Pointed Trefoil Tracery at Apex */}
+            <path
+              d="M14 18 C14 12 18 8 24 8 C30 8 34 12 34 18"
+              stroke="#475569"
+              strokeWidth="0.8"
+              fill="none"
+              opacity="0.6"
+            />
+            <circle cx="24" cy="7.5" r="2.2" stroke="#64748B" strokeWidth="0.7" fill="none" opacity="0.6" />
+            <circle cx="19" cy="11.5" r="1.4" stroke="#64748B" strokeWidth="0.6" fill="none" opacity="0.5" />
+            <circle cx="29" cy="11.5" r="1.4" stroke="#64748B" strokeWidth="0.6" fill="none" opacity="0.5" />
 
-          {/* Piercing Amber Eye */}
-          <circle cx="31" cy="11.5" r="2" fill="#FBBF24" />
-          <circle cx="31" cy="11.5" r="1" fill="#0F172A" />
-          <circle cx="30.5" cy="11" r="0.4" fill="#FFFFFF" />
+            {/* Radiant Full Moon Halo */}
+            <circle cx="24" cy="17" r="13" fill="url(#sub13-moon-glow)" opacity="0.4" />
+            <circle cx="24" cy="17" r="9" fill="#FFFFFF" opacity="0.9" />
+            {/* Moon craters / textures */}
+            <ellipse cx="22" cy="14" rx="2.5" ry="1.8" fill="#E2E8F0" opacity="0.7" />
+            <circle cx="27" cy="18" r="1.5" fill="#E2E8F0" opacity="0.6" />
+            <circle cx="21" cy="20" r="1.2" fill="#E2E8F0" opacity="0.6" />
 
-          {/* Goose Feather Quill with Ink Droplet */}
-          <path d="M12 26 C16 20 22 16 26 12 C23 18 18 23 14 28 Z" fill="#A855F7" opacity="0.8" />
-          <line x1="12" y1="28" x2="26" y2="12" stroke="#E9D5FF" strokeWidth="0.8" />
-          <circle cx="11.5" cy="29" r="1" fill="#0F172A" />
+            {/* Night Fog / Mist Streaks Across Moon */}
+            <path d="M12 15 Q20 13 28 16 Q36 19 40 17" stroke="#818CF8" strokeWidth="1.2" strokeLinecap="round" opacity="0.3" />
+            <path d="M8 21 Q18 19 28 22 Q38 25 42 22" stroke="#6366F1" strokeWidth="1" strokeLinecap="round" opacity="0.25" />
 
-          {/* Tiny "Nevermore" Scroll Ribbon */}
-          <path d="M12 42 L24 40 L36 42 L34 44 L24 42 L14 44 Z" fill="#FEF3C7" stroke="#94A3B8" strokeWidth="0.6" />
+            {/* Classical Carved Marble Bust of Pallas Athena Pedestal */}
+            {/* Pedestal Base */}
+            <rect x="15" y="34" width="18" height="4" rx="1" fill="url(#sub13-marble)" stroke="#334155" strokeWidth="0.6" />
+            <line x1="16" y1="36" x2="32" y2="36" stroke="#94A3B8" strokeWidth="0.5" />
+            {/* Bust Shoulders & Robe */}
+            <path d="M16 34 C16 30 20 28 24 28 C28 28 32 30 32 34 Z" fill="url(#sub13-marble)" stroke="#475569" strokeWidth="0.6" />
+            {/* Draped folds */}
+            <path d="M21 29 Q24 33 27 29" stroke="#94A3B8" strokeWidth="0.7" fill="none" />
+            <path d="M19 32 Q24 36 29 32" stroke="#94A3B8" strokeWidth="0.7" fill="none" />
+
+            {/* The Imposing Spread-Winged Obsidian Raven Perched atop Pallas */}
+            {/* Raven Perched Talons */}
+            <ellipse cx="21.5" cy="28.5" rx="1.5" ry="1" fill="url(#sub13-gold-acc)" />
+            <ellipse cx="26.5" cy="28.5" rx="1.5" ry="1" fill="url(#sub13-gold-acc)" />
+
+            {/* Left Outstretched Wing with Layered Feather Tufts */}
+            <path
+              d="M20 24 C14 20 10 14 9 10 C9 12 11 16 13 20 C10 17 9 21 12 24 C10 23 11 26 14 27 C16 28 19 27 20 25 Z"
+              fill="url(#sub13-raven-plumage)"
+              stroke="#020617"
+              strokeWidth="0.7"
+            />
+            {/* Left Wing Primary Feather Highlights */}
+            <path d="M11 14 C12 17 14 21 18 24" stroke="#6366F1" strokeWidth="0.6" fill="none" opacity="0.7" />
+            <path d="M13 18 C14 21 16 23 19 25" stroke="#818CF8" strokeWidth="0.5" fill="none" opacity="0.6" />
+
+            {/* Right Outstretched Wing with Layered Feather Tufts */}
+            <path
+              d="M28 24 C34 20 38 14 39 10 C39 12 37 16 35 20 C38 17 39 21 36 24 C38 23 37 26 34 27 C32 28 29 27 28 25 Z"
+              fill="url(#sub13-raven-plumage)"
+              stroke="#020617"
+              strokeWidth="0.7"
+            />
+            {/* Right Wing Primary Feather Highlights */}
+            <path d="M37 14 C36 17 34 21 30 24" stroke="#6366F1" strokeWidth="0.6" fill="none" opacity="0.7" />
+            <path d="M35 18 C34 21 32 23 29 25" stroke="#818CF8" strokeWidth="0.5" fill="none" opacity="0.6" />
+
+            {/* Raven Torso and Throat Hackles */}
+            <ellipse cx="24" cy="23" rx="5" ry="6.5" fill="url(#sub13-raven-plumage)" />
+            {/* Layered Ruffled Neck Feathers */}
+            <path d="M22 18 L23 22 L24 18 L25 22 L26 18" stroke="#4338CA" strokeWidth="0.6" fill="none" />
+
+            {/* Raven Head with Raised Crown Hackles */}
+            <circle cx="24" cy="16.5" r="4.5" fill="url(#sub13-raven-plumage)" />
+            <path d="M22 13 Q24 10.5 25 12 Q24 14 23 15 Z" fill="#312E81" />
+
+            {/* Wicked Sharp Beak */}
+            <polygon points="25.5,15 32,16.5 25.5,18.5" fill="url(#sub13-gold-acc)" stroke="#B45309" strokeWidth="0.5" />
+            <line x1="25.5" y1="16.5" x2="31" y2="16.5" stroke="#78350F" strokeWidth="0.5" />
+
+            {/* Piercing Amber Eye with Glint */}
+            <circle cx="23.5" cy="15.8" r="1.5" fill="#F59E0B" />
+            <circle cx="23.5" cy="15.8" r="0.8" fill="#020617" />
+            <circle cx="23.1" cy="15.4" r="0.35" fill="#FFFFFF" />
+
+            {/* Antique Feather Quill Writing Pen Crossing Foreground */}
+            <g transform="rotate(-30 18 36)">
+              {/* Purple/Violet Raven Feather Vane */}
+              <path d="M12 28 C15 22 20 18 24 15 C21 21 18 26 15 31 Z" fill="#8B5CF6" stroke="#581C87" strokeWidth="0.5" />
+              <path d="M15 31 C18 26 21 21 24 15 C22 22 20 27 17 33 Z" fill="#6D28D9" />
+              {/* Quill Shaft / Shaft Spine */}
+              <line x1="12" y1="36" x2="25" y2="14" stroke="#EDE9FE" strokeWidth="0.7" />
+              {/* Brass Nib */}
+              <polygon points="12,36 10.5,39 13,38" fill="url(#sub13-gold-acc)" stroke="#78350F" strokeWidth="0.4" />
+              {/* Crimson Ink Droplet */}
+              <circle cx="10" cy="40.5" r="0.9" fill="#DC2626" />
+              <path d="M10 39.5 L10.5 40.5 L9.5 40.5 Z" fill="#DC2626" />
+            </g>
+          </g>
+
+          {/* Aged Gothic "NEVERMORE" Banner draped across base */}
+          <g>
+            {/* Banner Fold Drop Shadows */}
+            <polygon points="10,38 12,41 10,43" fill="#78350F" />
+            <polygon points="38,38 36,41 38,43" fill="#78350F" />
+            {/* Main Center Parchment Banner */}
+            <path
+              d="M9 39 L24 37 L39 39 L37 44 L24 42.5 L11 44 Z"
+              fill="url(#sub13-parchment)"
+              stroke="#B45309"
+              strokeWidth="0.8"
+            />
+            {/* Banner Gold Piping */}
+            <path d="M11 40 L24 38.5 L37 40" stroke="#F59E0B" strokeWidth="0.5" fill="none" />
+            {/* "NEVERMORE" Typography */}
+            <text
+              x="24"
+              y="42"
+              textAnchor="middle"
+              fontSize="4.2"
+              fontWeight="900"
+              fill="#451A03"
+              fontFamily="serif"
+              letterSpacing="0.8"
+            >
+              NEVERMORE
+            </text>
+          </g>
+
+          {/* Gothic Wrought-Iron Arch Corner Rosettes */}
+          <circle cx="8" cy="44" r="1.5" fill="#475569" stroke="#1E293B" strokeWidth="0.5" />
+          <circle cx="40" cy="44" r="1.5" fill="#475569" stroke="#1E293B" strokeWidth="0.5" />
+          <circle cx="24" cy="2.5" r="1.5" fill="url(#sub13-gold-acc)" stroke="#78350F" strokeWidth="0.5" />
         </svg>
       );
     }
 
-    // Level 14: Charm City Legend (Imperial Crown with Sapphires)
+    // Level 14: Charm City Legend (Baroque Shield Cartouche, Imperial Sovereign Crown with Ermine Fur, Sapphires & Rubies)
     if (key.includes('subrank-14') || key.includes('legend') || key.includes('crown') || key.includes('👑') || key.includes('charm-crown')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub14-bg" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor="#FEF3C7" />
-              <stop offset="100%" stopColor="#FDE68A" />
-            </radialGradient>
+            {/* 24K Royal Gold Gradient */}
             <linearGradient id="sub14-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FEF08A" />
-              <stop offset="40%" stopColor="#F59E0B" />
-              <stop offset="100%" stopColor="#B45309" />
+              <stop offset="0%" stopColor="#FFFDF0" />
+              <stop offset="25%" stopColor="#FEF08A" />
+              <stop offset="60%" stopColor="#F59E0B" />
+              <stop offset="85%" stopColor="#D97706" />
+              <stop offset="100%" stopColor="#78350F" />
             </linearGradient>
-            <linearGradient id="sub14-velvet" x1="0%" y1="0%" x2="0%" y2="100%">
+            {/* Brilliant Gold Highlight */}
+            <linearGradient id="sub14-gold-bright" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="45%" stopColor="#FEF08A" />
+              <stop offset="100%" stopColor="#F59E0B" />
+            </linearGradient>
+            {/* Imperial Crimson Velvet Damask */}
+            <radialGradient id="sub14-velvet-damask" cx="50%" cy="40%" r="60%">
               <stop offset="0%" stopColor="#DC2626" />
-              <stop offset="100%" stopColor="#7F1D1D" />
-            </linearGradient>
+              <stop offset="45%" stopColor="#B91C1C" />
+              <stop offset="80%" stopColor="#7F1D1D" />
+              <stop offset="100%" stopColor="#450A0A" />
+            </radialGradient>
+            {/* Hopkins Sapphire Jewel */}
+            <radialGradient id="sub14-sapphire" cx="35%" cy="35%" r="65%">
+              <stop offset="0%" stopColor="#93C5FD" />
+              <stop offset="35%" stopColor="#2563EB" />
+              <stop offset="80%" stopColor="#1D4ED8" />
+              <stop offset="100%" stopColor="#002D72" />
+            </radialGradient>
+            {/* Maryland Ruby Jewel */}
+            <radialGradient id="sub14-ruby" cx="35%" cy="35%" r="65%">
+              <stop offset="0%" stopColor="#FCA5A5" />
+              <stop offset="40%" stopColor="#EF4444" />
+              <stop offset="85%" stopColor="#B91C1C" />
+              <stop offset="100%" stopColor="#500724" />
+            </radialGradient>
+            {/* Cartouche Shield Clip Path */}
+            <clipPath id="sub14-cartouche-clip">
+              <path d="M24 3 C36 3 43 8 43 21 C43 33 34 41 24 45.5 C14 41 5 33 5 21 C5 8 12 3 24 3 Z" />
+            </clipPath>
           </defs>
 
-          {/* Disc */}
-          <circle cx="24" cy="24" r="22" fill="url(#sub14-bg)" stroke="#F59E0B" strokeWidth="1.5" />
-
-          {/* Inner Royal Crimson Velvet Cap */}
-          <path d="M11 31 C11 20 37 20 37 31 Z" fill="url(#sub14-velvet)" />
-
-          {/* Chiseled 24K Gold Crown Body */}
+          {/* Baroque Cartouche Shield Outer Frame */}
+          {/* Drop Shadow Base */}
           <path
-            d="M9 31 L9 18 L17 25 L24 13 L31 25 L39 18 L39 31 Z"
+            d="M24 2 C38 2 46 7.5 46 21 C46 34.5 36 43 24 47.5 C12 43 2 34.5 2 21 C2 7.5 10 2 24 2 Z"
+            fill="#450A0A"
+          />
+          {/* Heavy 24K Sculpted Gold Cartouche Rim with Acanthus Flanges */}
+          <path
+            d="M24 2 C37.5 2 45 7.5 45 21 C45 34 35 42 24 46.5 C13 42 3 34 3 21 C3 7.5 10.5 2 24 2 Z"
             fill="url(#sub14-gold)"
-            stroke="#92400E"
+            stroke="#78350F"
             strokeWidth="1.2"
           />
+          {/* Rococo Acanthus Side Scallops & Scrollwork */}
+          <path d="M4 14 C1 18 1 24 4 28 C6 25 6 17 4 14 Z" fill="url(#sub14-gold-bright)" stroke="#78350F" strokeWidth="0.6" />
+          <path d="M44 14 C47 18 47 24 44 28 C42 25 42 17 44 14 Z" fill="url(#sub14-gold-bright)" stroke="#78350F" strokeWidth="0.6" />
 
-          {/* Crown Base Rim */}
-          <rect x="8.5" y="31" width="31" height="5" rx="1.5" fill="url(#sub14-gold)" stroke="#92400E" strokeWidth="1" />
+          {/* Inner Inset Rim */}
+          <path
+            d="M24 4 C35 4 42 9 42 21 C42 32 33 40 24 44.5 C15 40 6 32 6 21 C6 9 13 4 24 4 Z"
+            fill="#78350F"
+          />
 
-          {/* Ermine Trim Dots */}
-          <circle cx="13" cy="33.5" r="1" fill="#002D72" />
-          <circle cx="24" cy="33.5" r="1.2" fill="#FFFFFF" />
-          <circle cx="35" cy="33.5" r="1" fill="#002D72" />
+          {/* Clipped Velvet Field */}
+          <g clipPath="url(#sub14-cartouche-clip)">
+            {/* Deep Royal Crimson Velvet Ground */}
+            <rect x="2" y="2" width="44" height="46" fill="url(#sub14-velvet-damask)" />
 
-          {/* Large Royal Blue Hopkins Sapphires & Ruby Jewels */}
-          <circle cx="9" cy="17" r="2.8" fill="#1D4ED8" stroke="#FFFFFF" strokeWidth="0.8" />
-          <circle cx="8.5" cy="16.5" r="0.8" fill="#93C5FD" />
-          
-          <circle cx="24" cy="12" r="3.6" fill="#DC2626" stroke="#FFFFFF" strokeWidth="1" />
-          <circle cx="23.2" cy="11.2" r="1" fill="#FCA5A5" />
+            {/* Subtle Damask Diamond Quilting Lines */}
+            <path
+              d="M12 12 L24 24 L36 12 M12 24 L24 36 L36 24 M24 12 L36 24 M12 24 L24 12"
+              stroke="#FEF2F2"
+              strokeWidth="0.6"
+              strokeDasharray="1.5 2"
+              opacity="0.15"
+            />
 
-          <circle cx="39" cy="17" r="2.8" fill="#1D4ED8" stroke="#FFFFFF" strokeWidth="0.8" />
-          <circle cx="38.5" cy="16.5" r="0.8" fill="#93C5FD" />
+            {/* Radiant Golden Sunburst Beams Emanating Behind Crown */}
+            {[-45, -30, -15, 0, 15, 30, 45].map((deg, i) => (
+              <line
+                key={i}
+                x1="24"
+                y1="16"
+                x2={24 + 20 * Math.sin((deg * Math.PI) / 180)}
+                y2={16 - 20 * Math.cos((deg * Math.PI) / 180)}
+                stroke="#FEF08A"
+                strokeWidth="0.8"
+                opacity="0.35"
+              />
+            ))}
 
-          {/* Sparkling Diamond Starburst */}
-          <polygon points="24,6 25,9 28,10 25,11 24,14 23,11 20,10 23,9" fill="#FEF08A" />
+            {/* Flanking Golden Victory Laurel Boughs Framing Crown */}
+            {/* Left Laurel Sprig */}
+            <path d="M12 18 C11 25 15 31 20 34" stroke="#D97706" strokeWidth="1" fill="none" />
+            <ellipse cx="12" cy="20" rx="1.5" ry="2.6" transform="rotate(-35 12 20)" fill="url(#sub14-gold)" />
+            <ellipse cx="12.5" cy="25" rx="1.5" ry="2.6" transform="rotate(-15 12.5 25)" fill="url(#sub14-gold)" />
+            <ellipse cx="15" cy="30" rx="1.5" ry="2.6" transform="rotate(20 15 30)" fill="url(#sub14-gold)" />
+            <circle cx="14" cy="23" r="0.9" fill="#DC2626" />
+            <circle cx="16" cy="28" r="0.9" fill="#DC2626" />
+
+            {/* Right Laurel Sprig */}
+            <path d="M36 18 C37 25 33 31 28 34" stroke="#D97706" strokeWidth="1" fill="none" />
+            <ellipse cx="36" cy="20" rx="1.5" ry="2.6" transform="rotate(35 36 20)" fill="url(#sub14-gold)" />
+            <ellipse cx="35.5" cy="25" rx="1.5" ry="2.6" transform="rotate(15 35.5 25)" fill="url(#sub14-gold)" />
+            <ellipse cx="33" cy="30" rx="1.5" ry="2.6" transform="rotate(-20 33 30)" fill="url(#sub14-gold)" />
+            <circle cx="34" cy="23" r="0.9" fill="#DC2626" />
+            <circle cx="32" cy="28" r="0.9" fill="#DC2626" />
+
+            {/* The Grand 3D Imperial Sovereign Crown */}
+            <g>
+              {/* Inner Crimson Velvet Cap rising in the crown interior */}
+              <path
+                d="M14 26 C14 16 34 16 34 26 Z"
+                fill="url(#sub14-velvet-damask)"
+                stroke="#78350F"
+                strokeWidth="0.6"
+              />
+              {/* Crown Cap Velvet Highlight */}
+              <ellipse cx="24" cy="20" rx="6" ry="4" fill="#EF4444" opacity="0.3" />
+
+              {/* Imperial Globus Cruciger (Orb and Cross) Atop Crown */}
+              <circle cx="24" cy="11.5" r="1.6" fill="url(#sub14-gold)" stroke="#78350F" strokeWidth="0.5" />
+              <line x1="24" y1="8.5" x2="24" y2="11" stroke="url(#sub14-gold)" strokeWidth="1" strokeLinecap="round" />
+              <line x1="22.5" y1="9.5" x2="25.5" y2="9.5" stroke="url(#sub14-gold)" strokeWidth="1" strokeLinecap="round" />
+
+              {/* Chiseled 24K Gold 5-Peak Imperial Crown Framework */}
+              <path
+                d="M12 26 L11 18 L16 23 L18 14 L21 21 L24 13 L27 21 L30 14 L32 23 L37 18 L36 26 Z"
+                fill="url(#sub14-gold)"
+                stroke="#78350F"
+                strokeWidth="0.9"
+              />
+
+              {/* Crown Jewels on 5 Peaks */}
+              {/* Center Cross Pattée Jewel */}
+              <circle cx="24" cy="13" r="2.2" fill="url(#sub14-ruby)" stroke="#FFFFFF" strokeWidth="0.5" />
+              <circle cx="23.3" cy="12.3" r="0.6" fill="#FFFFFF" />
+
+              {/* Mid Peaks: Fleur-de-lis Sapphires */}
+              <circle cx="18" cy="14.5" r="1.8" fill="url(#sub14-sapphire)" stroke="#FFFFFF" strokeWidth="0.5" />
+              <circle cx="17.5" cy="14" r="0.5" fill="#FFFFFF" />
+              <circle cx="30" cy="14.5" r="1.8" fill="url(#sub14-sapphire)" stroke="#FFFFFF" strokeWidth="0.5" />
+              <circle cx="29.5" cy="14" r="0.5" fill="#FFFFFF" />
+
+              {/* Outer Finial Pearls */}
+              <circle cx="11" cy="18" r="1.5" fill="#FFFBEB" stroke="#D97706" strokeWidth="0.5" />
+              <circle cx="37" cy="18" r="1.5" fill="#FFFBEB" stroke="#D97706" strokeWidth="0.5" />
+
+              {/* Golden Crown Diadem Base Band */}
+              <rect x="11" y="25" width="26" height="5" rx="1.5" fill="url(#sub14-gold)" stroke="#78350F" strokeWidth="0.8" />
+
+              {/* Alternating Oval Sapphires & Rubies on Diadem Band */}
+              <ellipse cx="14" cy="27.5" rx="1.5" ry="1.2" fill="url(#sub14-ruby)" stroke="#FFFFFF" strokeWidth="0.4" />
+              <ellipse cx="19" cy="27.5" rx="1.5" ry="1.2" fill="url(#sub14-sapphire)" stroke="#FFFFFF" strokeWidth="0.4" />
+              <ellipse cx="24" cy="27.5" rx="1.8" ry="1.4" fill="url(#sub14-ruby)" stroke="#FFFFFF" strokeWidth="0.4" />
+              <ellipse cx="29" cy="27.5" rx="1.5" ry="1.2" fill="url(#sub14-sapphire)" stroke="#FFFFFF" strokeWidth="0.4" />
+              <ellipse cx="34" cy="27.5" rx="1.5" ry="1.2" fill="url(#sub14-ruby)" stroke="#FFFFFF" strokeWidth="0.4" />
+
+              {/* Ermine Fur Trim Band Beneath Gold Diadem */}
+              <rect x="11.5" y="29.8" width="25" height="3" rx="1" fill="#F8FAFC" stroke="#CBD5E1" strokeWidth="0.5" />
+              {/* Black Ermine Tufts */}
+              <polygon points="14.5,30.5 15.5,30.5 15,32" fill="#002D72" />
+              <polygon points="19.5,30.5 20.5,30.5 20,32" fill="#002D72" />
+              <polygon points="24,30.5 25,30.5 24.5,32" fill="#002D72" />
+              <polygon points="28.5,30.5 29.5,30.5 29,32" fill="#002D72" />
+              <polygon points="33.5,30.5 34.5,30.5 34,32" fill="#002D72" />
+            </g>
+          </g>
+
+          {/* Lower 3D Folded Ribbon Banner: CHARM CITY • LEGEND */}
+          <g>
+            {/* Swallowtail Ribbon Ends */}
+            <path d="M7 40 L4 37 L7 34 L10 38 Z" fill="#78350F" stroke="url(#sub14-gold)" strokeWidth="0.6" />
+            <path d="M41 40 L44 37 L41 34 L38 38 Z" fill="#78350F" stroke="url(#sub14-gold)" strokeWidth="0.6" />
+            {/* Ribbon Underside Folds */}
+            <polygon points="9,38 12,38 10,41" fill="#451A03" />
+            <polygon points="39,38 36,38 38,41" fill="#451A03" />
+
+            {/* Main Center Banner Front */}
+            <path
+              d="M8 38 L24 35.5 L40 38 L38 43.5 L24 41.5 L10 43.5 Z"
+              fill="url(#sub14-gold)"
+              stroke="#78350F"
+              strokeWidth="0.9"
+            />
+            {/* Inner Gold Inset Line */}
+            <path d="M10 39 L24 37 L38 39" stroke="#FFFBEB" strokeWidth="0.5" fill="none" />
+
+            {/* Embossed Typography */}
+            <text
+              x="24"
+              y="40.8"
+              textAnchor="middle"
+              fontSize="3.8"
+              fontWeight="900"
+              fill="#451A03"
+              fontFamily="sans-serif"
+              letterSpacing="0.6"
+            >
+              CHARM CITY {"\u2022"} LEGEND
+            </text>
+          </g>
+
+          {/* Faceted Hopkins Sapphire Drop Jewel Pendant at Cartouche Tip */}
+          <polygon points="24,44.5 26.5,46.5 24,48 21.5,46.5" fill="url(#sub14-sapphire)" stroke="url(#sub14-gold)" strokeWidth="0.6" />
+          <polygon points="24,45 25.5,46.5 24,47.5 22.5,46.5" fill="#93C5FD" opacity="0.6" />
         </svg>
       );
     }
 
-    // Level 15: Grand Blue Jay Laureate (8-Point Order Star with Golden Laurel)
+    // Level 15: Grand Blue Jay Laureate (16-Point Maltese Celestial Order Star, Purple Watered-Silk Sash & Soaring Blue Jay with Blazing Veritas Torch)
     return (
       <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
         <defs>
-          <radialGradient id="sub15-bg" cx="50%" cy="40%" r="55%">
-            <stop offset="0%" stopColor="#FEF9C3" />
-            <stop offset="70%" stopColor="#FDE047" />
-            <stop offset="100%" stopColor="#F59E0B" />
-          </radialGradient>
+          {/* Royal Amethyst Watered-Silk Sash Gradient */}
+          <linearGradient id="sub15-silk" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#7E22CE" />
+            <stop offset="35%" stopColor="#581C87" />
+            <stop offset="70%" stopColor="#3B0764" />
+            <stop offset="100%" stopColor="#1E1B4B" />
+          </linearGradient>
+          {/* 24K Mirror Gold Gradient */}
           <linearGradient id="sub15-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FEF08A" />
-            <stop offset="40%" stopColor="#FBBF24" />
-            <stop offset="70%" stopColor="#D97706" />
+            <stop offset="0%" stopColor="#FFFDF0" />
+            <stop offset="25%" stopColor="#FEF08A" />
+            <stop offset="55%" stopColor="#F59E0B" />
+            <stop offset="85%" stopColor="#D97706" />
             <stop offset="100%" stopColor="#78350F" />
           </linearGradient>
-          <linearGradient id="sub15-purple" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#7E22CE" />
-            <stop offset="100%" stopColor="#3B0764" />
+          {/* Chiseled Facet Light Gold */}
+          <linearGradient id="sub15-facet-light" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFFFFF" />
+            <stop offset="50%" stopColor="#FEF08A" />
+            <stop offset="100%" stopColor="#FBBF24" />
+          </linearGradient>
+          {/* Chiseled Facet Dark Gold */}
+          <linearGradient id="sub15-facet-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#D97706" />
+            <stop offset="60%" stopColor="#B45309" />
+            <stop offset="100%" stopColor="#78350F" />
+          </linearGradient>
+          {/* Johns Hopkins Midnight Navy Enamel */}
+          <radialGradient id="sub15-navy-enamel" cx="50%" cy="45%" r="55%">
+            <stop offset="0%" stopColor="#003D99" />
+            <stop offset="60%" stopColor="#002D72" />
+            <stop offset="100%" stopColor="#001438" />
+          </radialGradient>
+          {/* Blazing Torch Flame */}
+          <linearGradient id="sub15-torch-flame" x1="50%" y1="100%" x2="50%" y2="0%">
+            <stop offset="0%" stopColor="#EF4444" />
+            <stop offset="40%" stopColor="#F59E0B" />
+            <stop offset="80%" stopColor="#FDE047" />
+            <stop offset="100%" stopColor="#FFFFFF" />
+          </linearGradient>
+          {/* Jay Cobalt Body */}
+          <linearGradient id="sub15-jay-wing" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#38BDF8" />
+            <stop offset="50%" stopColor="#0284C7" />
+            <stop offset="100%" stopColor="#002D72" />
           </linearGradient>
         </defs>
 
-        {/* Outer Radiant Gold Disc */}
-        <circle cx="24" cy="24" r="22" fill="url(#sub15-bg)" stroke="#B45309" strokeWidth="1.8" />
+        {/* Imperial Purple Watered-Silk Neck Sash Drapery Behind Star */}
+        <path d="M15 1 L24 13 L33 1 L39 1 L28 17 L20 17 L9 1 Z" fill="url(#sub15-silk)" stroke="url(#sub15-gold)" strokeWidth="0.7" />
+        <line x1="17" y1="1" x2="25" y2="13" stroke="#FDE047" strokeWidth="0.6" opacity="0.8" />
+        <line x1="31" y1="1" x2="23" y2="13" stroke="#FDE047" strokeWidth="0.6" opacity="0.8" />
 
-        {/* Purple Watered-Silk Ribbon Drapes */}
-        <path d="M18 2 L24 12 L30 2 L34 2 L26 15 L22 15 L14 2 Z" fill="url(#sub15-purple)" stroke="#F59E0B" strokeWidth="0.8" />
+        {/* 16-Point Radiant Maltese Celestial Order Starburst */}
+        {Array.from({ length: 16 }).map((_, i) => {
+          const angle = (i * 360) / 16;
+          const isLong = i % 2 === 0;
+          const rOuter = isLong ? 23 : 19;
+          const rInner = 14.5;
+          const aRad = (angle * Math.PI) / 180;
+          const aLeft = ((angle - 11.25) * Math.PI) / 180;
+          const aRight = ((angle + 11.25) * Math.PI) / 180;
 
-        {/* Golden Roman Laurel Wreath of Victory */}
-        <path d="M9 24 C9 33 15 39 24 39 C33 39 39 33 39 24" stroke="#D97706" strokeWidth="2.5" fill="none" />
-        <ellipse cx="11" cy="28" rx="2.2" ry="4.5" transform="rotate(-30 11 28)" fill="#F59E0B" />
-        <ellipse cx="15" cy="35" rx="2.2" ry="4.5" transform="rotate(-60 15 35)" fill="#F59E0B" />
-        <ellipse cx="37" cy="28" rx="2.2" ry="4.5" transform="rotate(30 37 28)" fill="#F59E0B" />
-        <ellipse cx="33" cy="35" rx="2.2" ry="4.5" transform="rotate(60 33 35)" fill="#F59E0B" />
-        {/* Laurel Red Berries */}
-        <circle cx="11" cy="24" r="1.5" fill="#DC2626" />
-        <circle cx="37" cy="24" r="1.5" fill="#DC2626" />
-        <circle cx="24" cy="39" r="1.5" fill="#DC2626" />
+          const tipX = 24 + rOuter * Math.cos(aRad);
+          const tipY = 24 + rOuter * Math.sin(aRad);
+          const leftX = 24 + rInner * Math.cos(aLeft);
+          const leftY = 24 + rInner * Math.sin(aLeft);
+          const rightX = 24 + rInner * Math.cos(aRight);
+          const rightY = 24 + rInner * Math.sin(aRight);
 
-        {/* 8-Point Faceted Maltese Order Star */}
-        <polygon
-          points="24,7 27,17 38,14 30,22 37,30 27,27 24,37 21,27 11,30 18,22 10,14 21,17"
-          fill="url(#sub15-gold)"
-          stroke="#78350F"
-          strokeWidth="1"
-        />
-        <polygon
-          points="24,10 26,18 33,16 28,22 32,28 25,26 24,33 23,26 16,28 20,22 15,16 22,18"
-          fill="#FEF08A"
-        />
+          return (
+            <g key={i}>
+              {/* Left Light Facet */}
+              <polygon
+                points={`24,24 ${tipX},${tipY} ${leftX},${leftY}`}
+                fill="url(#sub15-facet-light)"
+                stroke="#78350F"
+                strokeWidth="0.3"
+              />
+              {/* Right Shadow Facet */}
+              <polygon
+                points={`24,24 ${tipX},${tipY} ${rightX},${rightY}`}
+                fill="url(#sub15-facet-dark)"
+                stroke="#78350F"
+                strokeWidth="0.3"
+              />
+            </g>
+          );
+        })}
 
-        {/* Central Johns Hopkins Heritage Navy Medallion */}
-        <circle cx="24" cy="22" r="5" fill="#002D72" stroke="url(#sub15-gold)" strokeWidth="1.2" />
-        {/* Veritas Open Book in Center */}
-        <path d="M21 21 Q24 22 24 25 Q24 22 27 21" stroke="#FFFFFF" strokeWidth="0.8" fill="none" />
-        <circle cx="24" cy="22" r="1" fill="#F59E0B" />
+        {/* Outer Beaded Gemstone Collar (Alternating Diamonds & Sapphires) */}
+        <circle cx="24" cy="24" r="14.8" fill="url(#sub15-gold)" stroke="#78350F" strokeWidth="0.8" />
+        <circle cx="24" cy="24" r="13.2" fill="#001845" stroke="url(#sub15-gold)" strokeWidth="0.6" />
+
+        {/* 12 Concentric Brilliant Jewels */}
+        {Array.from({ length: 12 }).map((_, i) => {
+          const angle = (i * 360) / 12;
+          const rad = (angle * Math.PI) / 180;
+          const x = 24 + 14 * Math.cos(rad);
+          const y = 24 + 14 * Math.sin(rad);
+          const isSapphire = i % 2 === 0;
+          return (
+            <circle
+              key={i}
+              cx={x}
+              cy={y}
+              r="0.9"
+              fill={isSapphire ? '#38BDF8' : '#FFFFFF'}
+              stroke="#78350F"
+              strokeWidth="0.25"
+            />
+          );
+        })}
+
+        {/* Sculpted Roman Laurel Wreath of Victory */}
+        <circle cx="24" cy="24" r="12" fill="url(#sub15-navy-enamel)" stroke="url(#sub15-gold)" strokeWidth="0.9" />
+        <path d="M14 24 C14 29.5 18.5 34 24 34 C29.5 34 34 29.5 34 24 C34 18.5 29.5 14 24 14" stroke="url(#sub15-gold)" strokeWidth="0.8" fill="none" opacity="0.6" />
+
+        {/* Golden Laurel Leaves */}
+        {[-50, -25, 0, 25, 50].map((deg, i) => (
+          <g key={i} transform={`rotate(${deg} 24 24)`}>
+            <ellipse cx="13.5" cy="24" rx="1.1" ry="2.2" transform="rotate(-30 13.5 24)" fill="url(#sub15-facet-light)" stroke="#78350F" strokeWidth="0.3" />
+            <ellipse cx="34.5" cy="24" rx="1.1" ry="2.2" transform="rotate(30 34.5 24)" fill="url(#sub15-facet-light)" stroke="#78350F" strokeWidth="0.3" />
+            <circle cx="14" cy="24" r="0.6" fill="#DC2626" />
+            <circle cx="34" cy="24" r="0.6" fill="#DC2626" />
+          </g>
+        ))}
+
+        {/* Central Masterpiece: Soaring Blue Jay in Full Flight clutching the Veritas Torch */}
+        <g>
+          {/* Radiating Veritas Light Core */}
+          <circle cx="24" cy="22" r="7.5" fill="#002D72" opacity="0.7" />
+          <circle cx="24" cy="22" r="5" fill="#0284C7" opacity="0.35" />
+
+          {/* Broad Outstretched Wings */}
+          {/* Left Wing Layered Feathers */}
+          <path
+            d="M23 21 C18 17 14 16 13 18 C14 20 17 21 20 22 C16 22 15 24 18 24.5 C20 25 22 24 23 23 Z"
+            fill="url(#sub15-jay-wing)"
+            stroke="#001438"
+            strokeWidth="0.5"
+          />
+          <path d="M14 18 C16 19 19 20 22 21" stroke="#FFFFFF" strokeWidth="0.5" fill="none" />
+
+          {/* Right Wing Layered Feathers (Holding High) */}
+          <path
+            d="M25 21 C30 17 34 16 35 18 C34 20 31 21 28 22 C32 22 33 24 30 24.5 C28 25 26 24 25 23 Z"
+            fill="url(#sub15-jay-wing)"
+            stroke="#001438"
+            strokeWidth="0.5"
+          />
+          <path d="M34 18 C32 19 29 20 26 21" stroke="#FFFFFF" strokeWidth="0.5" fill="none" />
+
+          {/* Blue Jay Body in Soaring Posture */}
+          <ellipse cx="24" cy="22.5" rx="3" ry="4" fill="url(#sub15-jay-wing)" stroke="#001438" strokeWidth="0.4" />
+          {/* White Chest Feathers */}
+          <ellipse cx="24" cy="23" rx="1.8" ry="2.2" fill="#FFFFFF" />
+
+          {/* Blue Jay Head with Crest */}
+          <circle cx="24" cy="18.5" r="2.4" fill="url(#sub15-jay-wing)" />
+          {/* Regal Crest Spike */}
+          <path d="M23 17 Q24 14 25 15.5 Q24.5 17 24 18 Z" fill="#38BDF8" />
+          {/* White Face Mark */}
+          <path d="M22.5 18.5 Q24 20 25.5 18.5 Q24 17.5 22.5 18.5 Z" fill="#FFFFFF" />
+          {/* Golden Beak */}
+          <polygon points="23.5,18.5 24.5,18.5 24,20" fill="url(#sub15-gold)" stroke="#78350F" strokeWidth="0.3" />
+          <circle cx="24" cy="18" r="0.5" fill="#001438" />
+
+          {/* Fan Tail Feathers with Navy & White Barring */}
+          <path d="M22.5 25.5 L21 29.5 L24 28 L27 29.5 L25.5 25.5 Z" fill="url(#sub15-jay-wing)" stroke="#001438" strokeWidth="0.4" />
+          <line x1="22" y1="28" x2="26" y2="28" stroke="#FFFFFF" strokeWidth="0.6" />
+
+          {/* Golden Talons clutching the Blazing Veritas Torch */}
+          <ellipse cx="23.2" cy="24.8" rx="0.8" ry="0.6" fill="url(#sub15-gold)" />
+          <ellipse cx="24.8" cy="24.8" rx="0.8" ry="0.6" fill="url(#sub15-gold)" />
+
+          {/* The Blazing Veritas Golden Torch */}
+          {/* Burnished Brass Torch Handle & Fluted Cup */}
+          <path d="M23 25 L25 25 L24.5 29 L23.5 29 Z" fill="url(#sub15-gold)" stroke="#78350F" strokeWidth="0.4" />
+          <path d="M22 25 Q24 26 26 25 L25.5 24 L22.5 24 Z" fill="url(#sub15-gold)" stroke="#78350F" strokeWidth="0.4" />
+          {/* Multi-layered Luminous Blazing Flame */}
+          <path
+            d="M24 17 C22 20 22 23 24 24 C26 23 26 20 24 17 Z"
+            fill="url(#sub15-torch-flame)"
+          />
+          <path
+            d="M24 19 C23 21 23 23 24 23.5 C25 23 25 21 24 19 Z"
+            fill="#FEF08A"
+          />
+          <circle cx="24" cy="22" r="0.9" fill="#FFFFFF" />
+        </g>
+
+        {/* Lower Imperial Golden Banner: SUPREME LAUREATE • XV */}
+        <g>
+          {/* Ribbon Tail Drop Shadow Behind */}
+          <path d="M7 41 L4 38 L7 35 L10 39 Z" fill="#3B0764" stroke="url(#sub15-gold)" strokeWidth="0.5" />
+          <path d="M41 41 L44 38 L41 35 L38 39 Z" fill="#3B0764" stroke="url(#sub15-gold)" strokeWidth="0.5" />
+          {/* Underfolds */}
+          <polygon points="9,39 12,39 10,42" fill="#1E1B4B" />
+          <polygon points="39,39 36,39 38,42" fill="#1E1B4B" />
+
+          {/* Curved Heraldic Front Banner */}
+          <path
+            d="M8 39 L24 36.5 L40 39 L38 44.5 L24 42.5 L10 44.5 Z"
+            fill="url(#sub15-gold)"
+            stroke="#78350F"
+            strokeWidth="0.8"
+          />
+          <path d="M10 40 L24 38 L38 40" stroke="#FFFDF0" strokeWidth="0.5" fill="none" />
+
+          {/* Embossed Typography */}
+          <text
+            x="24"
+            y="41.8"
+            textAnchor="middle"
+            fontSize="3.6"
+            fontWeight="900"
+            fill="#451A03"
+            fontFamily="sans-serif"
+            letterSpacing="0.6"
+          >
+            SUPREME LAUREATE {"\u2022"} XV
+          </text>
+        </g>
+
+        {/* Faceted Ruby Jewel Drop at Lowest Apex */}
+        <polygon points="24,44.5 25.8,46.5 24,48 22.2,46.5" fill="#DC2626" stroke="url(#sub15-gold)" strokeWidth="0.5" />
+        <circle cx="24" cy="46.3" r="0.5" fill="#FEF2F2" />
       </svg>
     );
   };

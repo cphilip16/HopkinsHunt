@@ -6,7 +6,7 @@ import { MarylandRibbon } from './art/MarylandRibbon';
 import { CuteMascot } from './art/CuteMascot';
 import { AirmailStrip } from './art/TravelDecorations';
 import { BabyJaySticker, SparkleStarsSticker } from './art/AnimatedStickers';
-import { RankInsigniaArt, AvatarVectorArt, RankBadgeArt } from './art/VectorArt';
+import { RankInsigniaArt, AvatarVectorArt } from './art/VectorArt';
 
 export const Navbar: React.FC = () => {
   const {
@@ -64,8 +64,8 @@ export const Navbar: React.FC = () => {
           {/* Center: Live Rank & Points Meter (Desktop) */}
           <div className="hidden lg:flex items-center space-x-4 bg-white/5 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10">
             <div className="flex items-center space-x-2.5">
-              <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0 shadow-xs p-0.5">
-                <RankBadgeArt rankId={currentRank.id} size={32} />
+              <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                <RankInsigniaArt insignia={currentSubrank.insignia} size={30} />
               </div>
               <div>
                 <div className="flex items-center space-x-1.5">

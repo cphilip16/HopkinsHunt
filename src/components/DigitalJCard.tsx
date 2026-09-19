@@ -151,10 +151,10 @@ export const DigitalJCard: React.FC = () => {
                     <span className="truncate">{currentSubrank.subrankName}</span>
                   </div>
                   <div
-                    className="w-9 h-9 rounded-xl bg-white/20 border border-white/40 p-0.5 flex items-center justify-center shadow-xs flex-shrink-0"
+                    className="w-8 h-8 rounded-xl bg-white/15 border border-white/30 p-0.5 flex items-center justify-center shadow-xs flex-shrink-0"
                     title={`Rank ${currentRank.id}: ${currentRank.name} Crest`}
                   >
-                    <RankBadgeArt rankId={currentRank.id} size={32} />
+                    <RankBadgeArt rankId={currentRank.id} size={28} />
                   </div>
                 </div>
               </div>
