@@ -62,6 +62,8 @@ export const RankInsigniaArt: React.FC<{
             <clipPath id="sub1-tag-clip">
               <path d="M16 5 L32 5 L38 11 L38 42 C38 43 37 44 36 44 L12 44 C11 44 10 43 10 42 L10 11 Z" />
             </clipPath>
+            {/* Curved Ribbon Text Baseline Path */}
+            <path id="sub1-text-path" d="M 9,42.5 Q 24,39.5 39,42.5" />
           </defs>
 
           {/* Crossed Equipment Extending in Saltire Behind Luggage Tag */}
@@ -233,18 +235,17 @@ export const RankInsigniaArt: React.FC<{
             />
             <path d="M9 41 L24 38.5 L39 41" stroke="#FFFDF0" strokeWidth="0.5" fill="none" />
 
-            {/* Embossed Rookie Typography */}
+            {/* Embossed Rookie Typography (Conforming to Curved Ribbon) */}
             <text
-              x="24"
-              y="41.8"
-              textAnchor="middle"
               fontSize="4.2"
               fontWeight="900"
               fill="#451A03"
               fontFamily="sans-serif"
               letterSpacing="1.2"
             >
-              ROOKIE
+              <textPath href="#sub1-text-path" startOffset="50%" textAnchor="middle">
+                ROOKIE
+              </textPath>
             </text>
           </g>
         </svg>
@@ -768,6 +769,8 @@ export const RankInsigniaArt: React.FC<{
               <stop offset="60%" stopColor="#2E1065" />
               <stop offset="100%" stopColor="#BE185D" />
             </linearGradient>
+            {/* Curved Heart Text Baseline Path */}
+            <path id="sub7-heart-path" d="M 19.5,39.8 Q 24,42.2 28.5,39.8" />
             <clipPath id="sub7-atomic-clip">
               <path d="M24 7 C31 7 38 3 44 8 C46 16 43 27 38 36 C31 43 26 46 24 46 C22 46 17 43 10 36 C5 27 2 16 4 8 C10 3 17 7 24 7 Z" />
             </clipPath>
@@ -842,8 +845,10 @@ export const RankInsigniaArt: React.FC<{
                 stroke="#831843"
                 strokeWidth="0.6"
               />
-              <text x="24" y="40.5" textAnchor="middle" fontSize="3.2" fontWeight="900" fill="#881337" fontFamily="cursive, sans-serif">
-                HON
+              <text fontSize="3.2" fontWeight="900" fill="#881337" fontFamily="cursive, sans-serif">
+                <textPath href="#sub7-heart-path" startOffset="50%" textAnchor="middle">
+                  HON
+                </textPath>
               </text>
             </g>
           </g>
@@ -1076,6 +1081,9 @@ export const RankInsigniaArt: React.FC<{
               <stop offset="50%" stopColor="#F59E0B" stopOpacity="0.25" />
               <stop offset="100%" stopColor="#EA580C" stopOpacity="0" />
             </radialGradient>
+            {/* Curved Tin & Ribbon Text Baseline Paths */}
+            <path id="sub10-tin-path" d="M 14,26.6 Q 24,25.2 34,26.6" />
+            <path id="sub10-ribbon-path" d="M 9,42 Q 24,39.5 39,42" />
           </defs>
 
           {/* Ambient Flavor Glow */}
@@ -1130,9 +1138,11 @@ export const RankInsigniaArt: React.FC<{
           <line x1="13" y1="18.5" x2="35" y2="18.5" stroke="#FACC15" strokeWidth="0.6" />
           <line x1="13" y1="31" x2="35" y2="31" stroke="#FACC15" strokeWidth="0.6" />
 
-          {/* Bold Signature OLD BAY Brand Typography */}
-          <text x="24" y="26.4" textAnchor="middle" fontSize="6.2" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.8">
-            OLD BAY
+          {/* Bold Signature OLD BAY Brand Typography (Conforming to Cylindrical Tin) */}
+          <text fontSize="6.2" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.8">
+            <textPath href="#sub10-tin-path" startOffset="50%" textAnchor="middle">
+              OLD BAY
+            </textPath>
           </text>
 
           {/* Bottom Crimson Red Field */}
@@ -1155,16 +1165,15 @@ export const RankInsigniaArt: React.FC<{
               strokeWidth="0.9"
             />
             <text
-              x="24"
-              y="41.2"
-              textAnchor="middle"
               fontSize="3.8"
               fontWeight="900"
               fill="#451A03"
               fontFamily="sans-serif"
               letterSpacing="0.8"
             >
-              CONNOISSEUR
+              <textPath href="#sub10-ribbon-path" startOffset="50%" textAnchor="middle">
+                CONNOISSEUR
+              </textPath>
             </text>
           </g>
         </svg>
@@ -1202,6 +1211,8 @@ export const RankInsigniaArt: React.FC<{
             <clipPath id="sub11-bastion-clip">
               <polygon points="24,2 31,14.5 45.5,14.5 34,24 38.5,38.5 24,30.5 9.5,38.5 14,24 2.5,14.5 17,14.5" />
             </clipPath>
+            {/* Curved Fort McHenry Ribbon Baseline Path */}
+            <path id="sub11-ribbon-path" d="M 11,39.8 Q 24,37.2 37,39.8" />
           </defs>
 
           {/* Authentic 5-Pointed Star Fort Bastion Outer Heavy Masonry Rim */}
@@ -1300,16 +1311,15 @@ export const RankInsigniaArt: React.FC<{
               strokeWidth="0.8"
             />
             <text
-              x="24"
-              y="39.2"
-              textAnchor="middle"
               fontSize="4.5"
               fontWeight="900"
               fill="#451A03"
               fontFamily="sans-serif"
-              letterSpacing="1.2"
+              letterSpacing="1.4"
             >
-              1814
+              <textPath href="#sub11-ribbon-path" startOffset="50%" textAnchor="middle">
+                1814
+              </textPath>
             </text>
           </g>
         </svg>
@@ -1352,6 +1362,8 @@ export const RankInsigniaArt: React.FC<{
             <clipPath id="sub12-lid-clip">
               <circle cx="24" cy="24" r="21" />
             </clipPath>
+            {/* Curved Crab Feast Ribbon Baseline Path */}
+            <path id="sub12-ribbon-path" d="M 9,41 Q 24,38.5 39,41" />
           </defs>
 
           {/* Crossed Wooden Mallets Protruding Diagonally in Saltire */}
@@ -1447,16 +1459,15 @@ export const RankInsigniaArt: React.FC<{
               strokeWidth="0.9"
             />
             <text
-              x="24"
-              y="40.2"
-              textAnchor="middle"
               fontSize="3.8"
               fontWeight="900"
               fill="#451A03"
               fontFamily="sans-serif"
-              letterSpacing="1"
+              letterSpacing="1.2"
             >
-              CHAMPION
+              <textPath href="#sub12-ribbon-path" startOffset="50%" textAnchor="middle">
+                CHAMPION
+              </textPath>
             </text>
           </g>
         </svg>
@@ -1517,6 +1528,8 @@ export const RankInsigniaArt: React.FC<{
             <clipPath id="sub13-arch-clip">
               <path d="M8 44 L8 19 C8 10 16 3 24 3 C32 3 40 10 40 19 L40 44 Z" />
             </clipPath>
+            {/* Curved Parchment Scroll Baseline Path */}
+            <path id="sub13-scroll-path" d="M 10,42.5 Q 24,40 38,42.5" />
           </defs>
 
           {/* Gothic Cathedral Mausoleum Stele / Pointed Arch Outer Frame */}
@@ -1651,18 +1664,17 @@ export const RankInsigniaArt: React.FC<{
             />
             {/* Banner Gold Piping */}
             <path d="M11 40 L24 38.5 L37 40" stroke="#F59E0B" strokeWidth="0.5" fill="none" />
-            {/* "NEVERMORE" Typography */}
+            {/* "NEVERMORE" Typography (Conforming to Curved Parchment Scroll) */}
             <text
-              x="24"
-              y="42"
-              textAnchor="middle"
               fontSize="4.2"
               fontWeight="900"
               fill="#451A03"
               fontFamily="serif"
-              letterSpacing="0.8"
+              letterSpacing="1"
             >
-              NEVERMORE
+              <textPath href="#sub13-scroll-path" startOffset="50%" textAnchor="middle">
+                NEVERMORE
+              </textPath>
             </text>
           </g>
 
@@ -1718,6 +1730,8 @@ export const RankInsigniaArt: React.FC<{
             <clipPath id="sub14-cartouche-clip">
               <path d="M24 3 C36 3 43 8 43 21 C43 33 34 41 24 45.5 C14 41 5 33 5 21 C5 8 12 3 24 3 Z" />
             </clipPath>
+            {/* Curved Baroque Cartouche Ribbon Baseline Path */}
+            <path id="sub14-ribbon-path" d="M 9,41 Q 24,38.5 39,41" />
           </defs>
 
           {/* Baroque Cartouche Shield Outer Frame */}
@@ -1887,18 +1901,17 @@ export const RankInsigniaArt: React.FC<{
             {/* Inner Gold Inset Line */}
             <path d="M10 39 L24 37 L38 39" stroke="#FFFBEB" strokeWidth="0.5" fill="none" />
 
-            {/* Embossed Typography */}
+            {/* Embossed Typography (Conforming to Curved Ribbon) */}
             <text
-              x="24"
-              y="41"
-              textAnchor="middle"
               fontSize="4.5"
               fontWeight="900"
               fill="#451A03"
               fontFamily="sans-serif"
               letterSpacing="1.4"
             >
-              LEGEND
+              <textPath href="#sub14-ribbon-path" startOffset="50%" textAnchor="middle">
+                LEGEND
+              </textPath>
             </text>
           </g>
 
@@ -1959,6 +1972,8 @@ export const RankInsigniaArt: React.FC<{
             <stop offset="50%" stopColor="#0284C7" />
             <stop offset="100%" stopColor="#002D72" />
           </linearGradient>
+          {/* Ribbon Baseline for Curved Typography */}
+          <path id="sub15-ribbon-path" d="M 9,42 Q 24,39.5 39,42" />
         </defs>
 
         {/* Imperial Purple Watered-Silk Neck Sash Drapery Behind Star */}
@@ -2125,16 +2140,15 @@ export const RankInsigniaArt: React.FC<{
 
           {/* Embossed Typography */}
           <text
-            x="24"
-            y="41.8"
-            textAnchor="middle"
             fontSize="4.2"
             fontWeight="900"
             fill="#451A03"
             fontFamily="sans-serif"
             letterSpacing="1.2"
           >
-            LAUREATE
+            <textPath href="#sub15-ribbon-path" startOffset="50%" textAnchor="middle">
+              LAUREATE
+            </textPath>
           </text>
         </g>
 
@@ -2218,6 +2232,8 @@ export const RankBadgeArt: React.FC<{
               <stop offset="70%" stopColor="#BAE6FD" />
               <stop offset="100%" stopColor="#7DD3FC" />
             </radialGradient>
+            {/* Banner Baseline for Curved Typography */}
+            <path id="nest-banner-path" d="M 16,56.8 Q 32,53.8 48,56.8" />
           </defs>
 
           {/* Top Heraldic Sunburst Rays */}
@@ -2476,18 +2492,17 @@ export const RankBadgeArt: React.FC<{
               fill="none"
               opacity="0.7"
             />
-            {/* Embossed Gold Typography: NESTLING • I */}
+            {/* Embossed Gold Typography: NESTLING */}
             <text
-              x="32"
-              y="56.3"
-              textAnchor="middle"
               fontSize="6.8"
               fontWeight="900"
               fill="#FEF08A"
               fontFamily="sans-serif"
               letterSpacing="1.5"
             >
-              NESTLING
+              <textPath href="#nest-banner-path" startOffset="50%" textAnchor="middle">
+                NESTLING
+              </textPath>
             </text>
 
             {/* Suspended Golden Medal Pendant Under Ribbon */}
@@ -2520,6 +2535,8 @@ export const RankBadgeArt: React.FC<{
               <stop offset="0%" stopColor="#1E3A8A" />
               <stop offset="100%" stopColor="#001845" />
             </linearGradient>
+            {/* Banner Baseline for Curved Typography */}
+            <path id="exp-banner-path" d="M 16,56.8 Q 32,53.8 48,56.8" />
           </defs>
 
           {/* Dual Crossed Vintage Telescopes Behind */}
@@ -2585,10 +2602,12 @@ export const RankBadgeArt: React.FC<{
           <path d="M29.5 28 Q32 29 32 33 Q32 29 34.5 28" stroke="#FFFFFF" strokeWidth="0.8" fill="none" />
           <line x1="32" y1="29" x2="32" y2="33" stroke="url(#exp-gold)" strokeWidth="0.8" />
 
-          {/* Lower Ribbon Banner: EXPLORER II */}
+          {/* Lower Ribbon Banner: EXPLORER */}
           <path d="M14 53 L32 50 L50 53 L47 59 L32 56 L17 59 Z" fill="#78350F" stroke="url(#exp-gold)" strokeWidth="1" />
-          <text x="32" y="56" textAnchor="middle" fontSize="6.8" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.5">
-            EXPLORER
+          <text fontSize="6.8" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.5">
+            <textPath href="#exp-banner-path" startOffset="50%" textAnchor="middle">
+              EXPLORER
+            </textPath>
           </text>
         </svg>
       );
@@ -2612,6 +2631,8 @@ export const RankBadgeArt: React.FC<{
               <stop offset="0%" stopColor="#0D9488" />
               <stop offset="100%" stopColor="#042F2E" />
             </linearGradient>
+            {/* Banner Baseline for Curved Typography */}
+            <path id="nav-banner-path" d="M 14,56.8 Q 32,53.8 50,56.8" />
           </defs>
 
           {/* 8 Ship Helm Turned Spoke Handles */}
@@ -2662,10 +2683,12 @@ export const RankBadgeArt: React.FC<{
           <path d="M26 12 C28 8 36 8 38 12 C35 14 34 16 32 18 C30 16 29 14 26 12 Z" fill="#3B82F6" stroke="#FFFFFF" strokeWidth="0.8" />
           <polygon points="31,18 33,18 32,20" fill="#F59E0B" />
 
-          {/* Lower Naval Banner: NAVIGATOR III */}
+          {/* Lower Naval Banner: NAVIGATOR */}
           <path d="M12 53 L32 50 L52 53 L49 59 L32 56 L15 59 Z" fill="#042F2E" stroke="url(#nav-brass)" strokeWidth="1" />
-          <text x="32" y="56" textAnchor="middle" fontSize="6.5" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.2">
-            NAVIGATOR
+          <text fontSize="6.5" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.2">
+            <textPath href="#nav-banner-path" startOffset="50%" textAnchor="middle">
+              NAVIGATOR
+            </textPath>
           </text>
         </svg>
       );
@@ -2685,6 +2708,8 @@ export const RankBadgeArt: React.FC<{
               <stop offset="50%" stopColor="#B91C1C" />
               <stop offset="100%" stopColor="#450A0A" />
             </linearGradient>
+            {/* Banner Baseline for Curved Typography */}
+            <path id="con-banner-path" d="M 12,57.8 Q 32,54.8 52,57.8" />
           </defs>
 
           {/* Baroque Acanthus Scrollwork Auriole Frame */}
@@ -2766,10 +2791,12 @@ export const RankBadgeArt: React.FC<{
           <polygon points="32,47 36,51 32,56 28,51" fill="url(#con-ruby)" stroke="url(#con-gold)" strokeWidth="1" />
           <polygon points="32,48 34,51 32,54 30,51" fill="#FEF2F2" opacity="0.4" />
 
-          {/* Lower Crimson Banner: CONNOISSEUR IV */}
+          {/* Lower Crimson Banner: CONNOISSEUR */}
           <path d="M10 54 L32 51 L54 54 L50 60 L32 57 L14 60 Z" fill="url(#con-ruby)" stroke="url(#con-gold)" strokeWidth="1" />
-          <text x="32" y="57" textAnchor="middle" fontSize="6.2" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.2">
-            CONNOISSEUR
+          <text fontSize="6.2" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.2">
+            <textPath href="#con-banner-path" startOffset="50%" textAnchor="middle">
+              CONNOISSEUR
+            </textPath>
           </text>
         </svg>
       );
@@ -2796,6 +2823,8 @@ export const RankBadgeArt: React.FC<{
               <stop offset="60%" stopColor="#FEF3C7" />
               <stop offset="100%" stopColor="#FDE68A" />
             </radialGradient>
+            {/* Banner Baseline for Curved Typography */}
+            <path id="lau-banner-path" d="M 10,58.2 Q 32,54.8 54,58.2" />
           </defs>
 
           {/* Royal Purple Watered-Silk Neck Sash Ribbon */}
@@ -2870,8 +2899,10 @@ export const RankBadgeArt: React.FC<{
 
           {/* Lower Imperial Golden Banner: GRAND LAUREATE */}
           <path d="M8 54 L32 51 L56 54 L52 61 L32 57 L12 61 Z" fill="#451A03" stroke="url(#lau-gold)" strokeWidth="1.2" />
-          <text x="32" y="57.5" textAnchor="middle" fontSize="6.5" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.4">
-            LAUREATE
+          <text fontSize="6.5" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.4">
+            <textPath href="#lau-banner-path" startOffset="50%" textAnchor="middle">
+              LAUREATE
+            </textPath>
           </text>
         </svg>
       );
