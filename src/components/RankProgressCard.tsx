@@ -53,10 +53,10 @@ export const RankProgressCard: React.FC = () => {
             {/* Major Rank Crest with Subrank Milestone Pin Overlay */}
             <div className="relative flex items-center flex-shrink-0">
               <div
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep via-hopkins-heritage to-slate-900 flex items-center justify-center p-2 shadow-xl ring-2 sm:ring-4 ring-amber-300 shadow-blue-900/20"
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep via-hopkins-heritage to-slate-900 flex items-center justify-center p-1.5 shadow-xl ring-2 sm:ring-4 ring-amber-300 shadow-blue-900/20"
                 title={`Rank ${currentRank.id}: ${currentRank.name} Crest`}
               >
-                <RankBadgeArt rankId={currentRank.id} size={54} />
+                <RankBadgeArt rankId={currentRank.id} size={58} />
               </div>
 
               {/* Subrank Milestone Pin Overlay */}

@@ -15,8 +15,8 @@ export const RankInsigniaArt: React.FC<{
 
   // Helper render for 15 subrank SVGs
   const renderSvg = () => {
-    // Level 1: Fledgling Fencer (Hatching Chick in Egg)
-    if (key.includes('subrank-1') || key.includes('fledgling') || key.includes('🐣') || key.includes('nestling-hatch')) {
+    // Level 1: Fledgling Fencer (Hatching Chick in Golden Homewood Nest)
+    if (key.includes('subrank-1') || key.includes('fledgling') || key.includes('🐣') || key.includes('nestling-hatch') || key.includes('nestling')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -27,7 +27,7 @@ export const RankInsigniaArt: React.FC<{
             </radialGradient>
             <linearGradient id="sub1-egg" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="85%" stopColor="#FFFBEB" />
+              <stop offset="60%" stopColor="#FFFBEB" />
               <stop offset="100%" stopColor="#E2E8F0" />
             </linearGradient>
             <linearGradient id="sub1-jay" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -35,26 +35,38 @@ export const RankInsigniaArt: React.FC<{
               <stop offset="40%" stopColor="#0284C7" />
               <stop offset="100%" stopColor="#002D72" />
             </linearGradient>
+            <linearGradient id="sub1-twig" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#D97706" />
+              <stop offset="50%" stopColor="#92400E" />
+              <stop offset="100%" stopColor="#451A03" />
+            </linearGradient>
           </defs>
 
           {/* Medallion Disc */}
           <circle cx="24" cy="24" r="22" fill="url(#sub1-bg)" stroke="#38BDF8" strokeWidth="1.5" />
           <circle cx="24" cy="24" r="20" stroke="#FFFFFF" strokeWidth="0.8" strokeDasharray="1.5 1.5" fill="none" opacity="0.8" />
 
+          {/* Golden Twig Nest at Base */}
+          <path d="M10 38 Q24 45 38 38" stroke="url(#sub1-twig)" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+          <path d="M12 41 Q24 46 36 41" stroke="#78350F" strokeWidth="2" strokeLinecap="round" fill="none" />
+          <line x1="14" y1="38" x2="20" y2="43" stroke="#B45309" strokeWidth="1.2" strokeLinecap="round" />
+          <line x1="34" y1="38" x2="28" y2="43" stroke="#B45309" strokeWidth="1.2" strokeLinecap="round" />
+          <circle cx="12" cy="38" r="1.5" fill="#059669" />
+          <circle cx="36" cy="38" r="1.5" fill="#059669" />
+
           {/* Cracked Egg Shell Base */}
           <path
-            d="M11 27 C11 38 17 42 24 42 C31 42 37 38 37 27 L33 29.5 L29 26.5 L24 30.5 L19 26.5 L15 29.5 Z"
+            d="M12 28 C12 38 17 41 24 41 C31 41 36 38 36 28 L32 30.5 L28 27.5 L24 31.5 L20 27.5 L16 30.5 Z"
             fill="url(#sub1-egg)"
             stroke="#94A3B8"
             strokeWidth="1.2"
           />
           {/* Hopkins Navy Chevron on Egg */}
-          <path d="M16 35 L24 39 L32 35 L30 33 L24 36 L18 33 Z" fill="#002D72" />
-          <circle cx="24" cy="38" r="1" fill="#F59E0B" />
+          <path d="M16 34 L24 38 L32 34 L30 32.5 L24 35.5 L18 32.5 Z" fill="#002D72" />
+          <polygon points="24,37.5 24.6,38.5 25.8,38.5 24.8,39.2 25.2,40.2 24,39.6 22.8,40.2 23.2,39.2 22.2,38.5 23.4,38.5" fill="#FEF08A" />
 
           {/* Baby Blue Jay Peeking Out */}
-          {/* Body and Head */}
-          <ellipse cx="24" cy="22" rx="10" ry="9" fill="url(#sub1-jay)" />
+          <ellipse cx="24" cy="22" rx="9.5" ry="8.5" fill="url(#sub1-jay)" />
           {/* Chest White Bib */}
           <path d="M19 23 C19 27 21 29 24 29 C27 29 29 27 29 23 C27 24 21 24 19 23 Z" fill="#FFFFFF" />
           {/* Blue Jay Head Crest Feathers */}
@@ -62,26 +74,37 @@ export const RankInsigniaArt: React.FC<{
           <path d="M20 14 Q22 10 24 12 Q23 15 22 16 Z" fill="#002D72" />
 
           {/* Rosy Blushing Cheeks */}
-          <circle cx="17.5" cy="23.5" r="2" fill="#F472B6" opacity="0.6" />
-          <circle cx="30.5" cy="23.5" r="2" fill="#F472B6" opacity="0.6" />
+          <circle cx="17.5" cy="23.5" r="2.2" fill="#F472B6" opacity="0.65" />
+          <circle cx="30.5" cy="23.5" r="2.2" fill="#F472B6" opacity="0.65" />
 
           {/* Sparkling Big Eyes */}
-          <circle cx="19" cy="20" r="2" fill="#0F172A" />
-          <circle cx="18.3" cy="19.3" r="0.7" fill="#FFFFFF" />
-          <circle cx="29" cy="20" r="2" fill="#0F172A" />
-          <circle cx="28.3" cy="19.3" r="0.7" fill="#FFFFFF" />
+          <circle cx="19" cy="20" r="2.2" fill="#0F172A" />
+          <circle cx="18.2" cy="19.2" r="0.8" fill="#FFFFFF" />
+          <circle cx="29" cy="20" r="2.2" fill="#0F172A" />
+          <circle cx="28.2" cy="19.2" r="0.8" fill="#FFFFFF" />
 
-          {/* Cute Orange Beak with Smile */}
-          <polygon points="21.5,21.5 26.5,21.5 24,25.5" fill="#F59E0B" />
-          <line x1="21.5" y1="21.5" x2="26.5" y2="21.5" stroke="#D97706" strokeWidth="0.8" />
+          {/* Mini Brass Aviator Goggles on Forehead */}
+          <rect x="17" y="16" width="14" height="1.8" rx="0.9" fill="#78350F" />
+          <circle cx="20.5" cy="16.5" r="2.8" fill="#D97706" stroke="#451A03" strokeWidth="0.5" />
+          <circle cx="20.5" cy="16.5" r="2" fill="#BAE6FD" />
+          <line x1="19.5" y1="15.5" x2="21.5" y2="17.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
+          <circle cx="27.5" cy="16.5" r="2.8" fill="#D97706" stroke="#451A03" strokeWidth="0.5" />
+          <circle cx="27.5" cy="16.5" r="2" fill="#BAE6FD" />
+          <line x1="26.5" y1="15.5" x2="28.5" y2="17.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
+
+          {/* Cute Orange Beak with Mini Diploma */}
+          <polygon points="22,22 26,22 24,25.5" fill="#F59E0B" />
+          {/* Mini Diploma Scroll */}
+          <rect x="22" y="24" width="8" height="2.5" rx="0.8" transform="rotate(-10 22 24)" fill="#FFFBEB" stroke="#D97706" strokeWidth="0.5" />
+          <line x1="25.5" y1="23.5" x2="25.5" y2="26" stroke="#DC2626" strokeWidth="0.8" />
 
           {/* Cracked Egg Top Hat with Golden Pin */}
-          <path d="M17 15 L21 18 L24 14 L27 18 L31 15 C30 10 18 10 17 15 Z" fill="url(#sub1-egg)" stroke="#94A3B8" strokeWidth="1" />
-          <polygon points="24,12 25,14 27,14 25.5,15.5 26,17.5 24,16.5 22,17.5 22.5,15.5 21,14 23,14" fill="#F59E0B" />
+          <path d="M17 14 L21 17 L24 13 L27 17 L31 14 C30 9 18 9 17 14 Z" fill="url(#sub1-egg)" stroke="#94A3B8" strokeWidth="0.9" />
+          <polygon points="24,10.5 24.8,12 26.5,12 25.2,13 25.6,14.5 24,13.7 22.4,14.5 22.8,13 21.5,12 23.2,12" fill="#F59E0B" />
 
           {/* Sparkle Stars */}
-          <polygon points="38,10 39,13 42,14 39,15 38,18 37,15 34,14 37,13" fill="#FBBF24" />
-          <circle cx="8" cy="16" r="1.5" fill="#FDE047" />
+          <polygon points="39,9 40,12 43,13 40,14 39,17 38,14 35,13 38,12" fill="#FBBF24" />
+          <circle cx="7" cy="15" r="1.4" fill="#FDE047" />
         </svg>
       );
     }
@@ -911,83 +934,341 @@ export const RankBadgeArt: React.FC<{
 }> = ({ rankId, size = 48, className = '' }) => {
   switch (rankId) {
     case 1:
-      // Rank 1: Hopkins Fledgling Crest (Collegiate Enamel Medallion)
+      // Rank 1: Hopkins Nestling Crest (Collegiate Enamel & Golden Homewood Nest Medallion)
       return (
         <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
           <defs>
-            <linearGradient id="fledgling-navy" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#002D72" />
+            <linearGradient id="nest-gold-main" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFDF0" />
+              <stop offset="20%" stopColor="#FEF08A" />
+              <stop offset="55%" stopColor="#F59E0B" />
+              <stop offset="85%" stopColor="#D97706" />
+              <stop offset="100%" stopColor="#78350F" />
+            </linearGradient>
+            <linearGradient id="nest-gold-bright" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="40%" stopColor="#FEF08A" />
+              <stop offset="100%" stopColor="#F59E0B" />
+            </linearGradient>
+            <radialGradient id="nest-navy-enamel" cx="50%" cy="38%" r="60%">
+              <stop offset="0%" stopColor="#003D99" />
+              <stop offset="50%" stopColor="#002D72" />
+              <stop offset="100%" stopColor="#001438" />
+            </radialGradient>
+            <linearGradient id="nest-porcelain" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="45%" stopColor="#FFFBEB" />
+              <stop offset="85%" stopColor="#E2E8F0" />
+              <stop offset="100%" stopColor="#CBD5E1" />
+            </linearGradient>
+            <linearGradient id="nest-jay-body" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#38BDF8" />
+              <stop offset="35%" stopColor="#0284C7" />
+              <stop offset="75%" stopColor="#002D72" />
               <stop offset="100%" stopColor="#001845" />
             </linearGradient>
-            <linearGradient id="fledgling-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FDE68A" />
-              <stop offset="50%" stopColor="#F59E0B" />
-              <stop offset="100%" stopColor="#B45309" />
+            <linearGradient id="nest-twig-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#D97706" />
+              <stop offset="50%" stopColor="#92400E" />
+              <stop offset="100%" stopColor="#451A03" />
             </linearGradient>
-            <radialGradient id="fledgling-glow" cx="50%" cy="40%" r="50%">
-              <stop offset="0%" stopColor="#E0F2FE" />
-              <stop offset="100%" stopColor="#BAE6FD" />
+            <linearGradient id="nest-goggle-brass" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#FEF08A" />
+              <stop offset="50%" stopColor="#D97706" />
+              <stop offset="100%" stopColor="#78350F" />
+            </linearGradient>
+            <radialGradient id="nest-goggle-lens" cx="35%" cy="35%" r="60%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="30%" stopColor="#BAE6FD" />
+              <stop offset="80%" stopColor="#0284C7" />
+              <stop offset="100%" stopColor="#002D72" />
+            </radialGradient>
+            <linearGradient id="nest-ribbon" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#002D72" />
+              <stop offset="50%" stopColor="#001845" />
+              <stop offset="100%" stopColor="#000E29" />
+            </linearGradient>
+            <radialGradient id="nest-ambient" cx="50%" cy="38%" r="55%">
+              <stop offset="0%" stopColor="#F0F9FF" />
+              <stop offset="70%" stopColor="#BAE6FD" />
+              <stop offset="100%" stopColor="#7DD3FC" />
             </radialGradient>
           </defs>
 
-          {/* Outer Beaded Medallion Rim */}
-          <circle cx="32" cy="30" r="28" fill="url(#fledgling-gold)" />
-          <circle cx="32" cy="30" r="25.5" fill="url(#fledgling-navy)" />
-          
-          {/* 16 Gold Beaded Studs */}
-          {Array.from({ length: 16 }).map((_, i) => {
-            const angle = (i * 360) / 16;
+          {/* Top Heraldic Sunburst Rays */}
+          {[-40, -20, 0, 20, 40].map((angle, i) => {
             const rad = (angle * Math.PI) / 180;
-            const x = 32 + 26.8 * Math.cos(rad);
-            const y = 30 + 26.8 * Math.sin(rad);
-            return <circle key={i} cx={x} cy={y} r="1" fill="#FEF08A" />;
+            const x2 = 32 + 25 * Math.sin(rad);
+            const y2 = 28 - 25 * Math.cos(rad);
+            return (
+              <line
+                key={i}
+                x1="32"
+                y1="18"
+                x2={x2}
+                y2={y2}
+                stroke="#FDE047"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                opacity="0.8"
+              />
+            );
           })}
 
-          {/* Concentric Golden Cable Rope Rim */}
-          <circle cx="32" cy="30" r="23.5" stroke="url(#fledgling-gold)" strokeWidth="1.2" strokeDasharray="2 1.5" fill="none" />
-          
-          {/* Inner Porcelain Glow Disc */}
-          <circle cx="32" cy="30" r="21" fill="url(#fledgling-glow)" />
+          {/* Top Collegiate Coronet Crest with Sapphire */}
+          <g>
+            <path
+              d="M27 7 L32 2 L37 7 L35 10 L29 10 Z"
+              fill="url(#nest-gold-main)"
+              stroke="#78350F"
+              strokeWidth="0.8"
+            />
+            <circle cx="32" cy="6" r="1.5" fill="#2563EB" stroke="#FFFFFF" strokeWidth="0.6" />
+            <circle cx="28" cy="8" r="0.8" fill="#FFFFFF" />
+            <circle cx="36" cy="8" r="0.8" fill="#FFFFFF" />
+          </g>
 
-          {/* Symmetrical Laurel Branches at Base */}
-          <path d="M18 36 C18 42 24 45 32 45 C40 45 46 42 46 36" stroke="#D97706" strokeWidth="1.8" fill="none" />
-          <ellipse cx="20" cy="39" rx="1.8" ry="3" transform="rotate(-35 20 39)" fill="#F59E0B" />
-          <ellipse cx="24" cy="43" rx="1.8" ry="3" transform="rotate(-65 24 43)" fill="#F59E0B" />
-          <ellipse cx="44" cy="39" rx="1.8" ry="3" transform="rotate(35 44 39)" fill="#F59E0B" />
-          <ellipse cx="40" cy="43" rx="1.8" ry="3" transform="rotate(65 40 43)" fill="#F59E0B" />
+          {/* Outer Heavy Coin-Edge Fluted 24K Gold Rim */}
+          <circle cx="32" cy="30" r="28.5" fill="url(#nest-gold-main)" stroke="#78350F" strokeWidth="1" />
+          <circle cx="32" cy="30" r="26.2" fill="url(#nest-navy-enamel)" stroke="url(#nest-gold-main)" strokeWidth="0.8" />
 
-          {/* Cracked Egg Shell Base */}
-          <path d="M20 34 C20 40 24 43 32 43 C40 43 44 40 44 34 L39 36 L35 33 L32 37 L28 33 L24 36 Z" fill="#FFFFFF" stroke="#94A3B8" strokeWidth="1.2" />
-          <line x1="28" y1="38" x2="31" y2="42" stroke="#CBD5E1" strokeWidth="0.8" />
+          {/* 20 Beaded Spherical Studs */}
+          {Array.from({ length: 20 }).map((_, i) => {
+            const angle = (i * 360) / 20;
+            const rad = (angle * Math.PI) / 180;
+            const x = 32 + 27.2 * Math.cos(rad);
+            const y = 30 + 27.2 * Math.sin(rad);
+            return (
+              <circle
+                key={i}
+                cx={x}
+                cy={y}
+                r="1.1"
+                fill="#FEF08A"
+                stroke="#B45309"
+                strokeWidth="0.3"
+              />
+            );
+          })}
 
-          {/* Sculpted Baby Blue Jay Head */}
-          <ellipse cx="32" cy="27" rx="11" ry="10" fill="#002D72" />
-          <ellipse cx="32" cy="24" rx="9" ry="8" fill="#3B82F6" />
-          <path d="M25 24 Q32 29 39 24 Q32 20 25 24 Z" fill="#FFFFFF" />
-          {/* Beak & Golden Diploma */}
-          <polygon points="30,25 34,25 32,29" fill="#F59E0B" />
-          <rect x="29" y="27" width="10" height="3" rx="1" transform="rotate(-15 29 27)" fill="#FEF3C7" stroke="#D97706" strokeWidth="0.6" />
-          <line x1="33" y1="27" x2="33" y2="29" stroke="#DC2626" strokeWidth="0.8" />
-          
-          {/* Big Sparkly Eyes */}
-          <circle cx="28" cy="23" r="2.2" fill="#0F172A" />
-          <circle cx="27.3" cy="22.3" r="0.8" fill="#FFFFFF" />
-          <circle cx="36" cy="23" r="2.2" fill="#0F172A" />
-          <circle cx="35.3" cy="22.3" r="0.8" fill="#FFFFFF" />
+          {/* Concentric Double Braided Cable Rope */}
+          <circle cx="32" cy="30" r="24.2" stroke="url(#nest-gold-main)" strokeWidth="1.2" strokeDasharray="2 1.5" fill="none" />
+          <circle cx="32" cy="30" r="22.8" stroke="url(#nest-gold-bright)" strokeWidth="0.6" fill="none" opacity="0.7" />
 
-          {/* Brass Aviator Goggles on Forehead */}
-          <rect x="24" y="16" width="16" height="2" rx="1" fill="#78350F" />
-          <circle cx="28" cy="17" r="3.2" fill="#BAE6FD" stroke="#D97706" strokeWidth="1.2" />
-          <path d="M26.5 15.5 Q29 16 27.5 18" stroke="#FFFFFF" strokeWidth="0.8" strokeLinecap="round" />
-          <circle cx="36" cy="17" r="3.2" fill="#BAE6FD" stroke="#D97706" strokeWidth="1.2" />
-          <path d="M34.5 15.5 Q37 16 35.5 18" stroke="#FFFFFF" strokeWidth="0.8" strokeLinecap="round" />
-          <rect x="30.5" y="16.2" width="3" height="1.5" fill="#D97706" />
+          {/* Inner Ambient Glow Disc */}
+          <circle cx="32" cy="30" r="21.5" fill="url(#nest-ambient)" />
 
-          {/* Hanging Ribbon Banner: FLEDGLING */}
-          <path d="M16 52 L32 50 L48 52 L45 58 L32 55 L19 58 Z" fill="#001845" stroke="url(#fledgling-gold)" strokeWidth="1" />
-          <text x="32" y="55" textAnchor="middle" fontSize="6.5" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1">
-            FLEDGLING
-          </text>
+          {/* Guilloché Subtle Radial Etching Lines */}
+          {Array.from({ length: 12 }).map((_, i) => {
+            const angle = (i * 360) / 12;
+            const rad = (angle * Math.PI) / 180;
+            return (
+              <line
+                key={i}
+                x1="32"
+                y1="30"
+                x2={32 + 20 * Math.cos(rad)}
+                y2={30 + 20 * Math.sin(rad)}
+                stroke="#38BDF8"
+                strokeWidth="0.6"
+                strokeDasharray="1.5 2"
+                opacity="0.4"
+              />
+            );
+          })}
+
+          {/* Sculpted Golden Laurel Branches Flanking Sides */}
+          {/* Left Laurel Sprig */}
+          <path d="M14 26 C13 32 16 40 22 45" stroke="#D97706" strokeWidth="1.4" fill="none" />
+          <ellipse cx="14" cy="27" rx="1.8" ry="3" transform="rotate(-40 14 27)" fill="url(#nest-gold-main)" />
+          <ellipse cx="13" cy="32" rx="1.8" ry="3.2" transform="rotate(-20 13 32)" fill="url(#nest-gold-main)" />
+          <ellipse cx="15" cy="38" rx="1.8" ry="3.2" transform="rotate(15 15 38)" fill="url(#nest-gold-main)" />
+          <ellipse cx="19" cy="43" rx="1.8" ry="3.2" transform="rotate(45 19 43)" fill="url(#nest-gold-main)" />
+          <circle cx="15.5" cy="35" r="1.1" fill="#DC2626" />
+          <circle cx="17" cy="41" r="1.1" fill="#DC2626" />
+
+          {/* Right Laurel Sprig */}
+          <path d="M50 26 C51 32 48 40 42 45" stroke="#D97706" strokeWidth="1.4" fill="none" />
+          <ellipse cx="50" cy="27" rx="1.8" ry="3" transform="rotate(40 50 27)" fill="url(#nest-gold-main)" />
+          <ellipse cx="51" cy="32" rx="1.8" ry="3.2" transform="rotate(20 51 32)" fill="url(#nest-gold-main)" />
+          <ellipse cx="49" cy="38" rx="1.8" ry="3.2" transform="rotate(-15 49 38)" fill="url(#nest-gold-main)" />
+          <ellipse cx="45" cy="43" rx="1.8" ry="3.2" transform="rotate(-45 45 43)" fill="url(#nest-gold-main)" />
+          <circle cx="48.5" cy="35" r="1.1" fill="#DC2626" />
+          <circle cx="47" cy="41" r="1.1" fill="#DC2626" />
+
+          {/* Woven Homewood Golden Twig & Oak Sprig Nest Cradle */}
+          <g>
+            {/* Base Twigs Arching Across */}
+            <path d="M17 41 Q32 48 47 41" stroke="url(#nest-twig-grad)" strokeWidth="3" strokeLinecap="round" fill="none" />
+            <path d="M19 44 Q32 49 45 44" stroke="url(#nest-twig-grad)" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+            <path d="M21 46 Q32 50 43 46" stroke="#451A03" strokeWidth="2" strokeLinecap="round" fill="none" />
+            {/* Interlaced Twigs */}
+            <line x1="20" y1="41" x2="28" y2="46" stroke="#92400E" strokeWidth="1.4" strokeLinecap="round" />
+            <line x1="44" y1="41" x2="36" y2="46" stroke="#92400E" strokeWidth="1.4" strokeLinecap="round" />
+            <line x1="26" y1="42" x2="34" y2="47" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
+            <line x1="38" y1="42" x2="30" y2="47" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
+            {/* Maryland Ivy / Oak Leaves in Nest */}
+            <ellipse cx="20" cy="40" rx="1.5" ry="3" transform="rotate(-50 20 40)" fill="#059669" />
+            <ellipse cx="44" cy="40" rx="1.5" ry="3" transform="rotate(50 44 40)" fill="#059669" />
+            <ellipse cx="32" cy="48" rx="2" ry="1.2" fill="#D97706" />
+          </g>
+
+          {/* Imperial Porcelain Cracked Eggshell */}
+          <g>
+            {/* Eggshell Body */}
+            <path
+              d="M19 33 C19 42 24 45 32 45 C40 45 45 42 45 33 L40 36 L36 32.5 L32 37 L28 32.5 L24 36 Z"
+              fill="url(#nest-porcelain)"
+              stroke="#94A3B8"
+              strokeWidth="1.4"
+            />
+            {/* Inner Shell Shadow */}
+            <path
+              d="M20 34 L24 36 L28 33 L32 37 L36 33 L40 36 L44 34 C44 36 43 38 41 40 C38 38 26 38 23 40 C21 38 20 36 20 34 Z"
+              fill="#CBD5E1"
+              opacity="0.4"
+            />
+            {/* Hopkins Navy Chevron Band Across Shell */}
+            <path
+              d="M21 38.5 L27 41.5 L32 39.5 L37 41.5 L43 38.5 L42.5 40.5 L37 43.5 L32 41.5 L27 43.5 L21.5 40.5 Z"
+              fill="#002D72"
+              stroke="url(#nest-gold-main)"
+              strokeWidth="0.5"
+            />
+            {/* 3 Gold Stars on Egg Band */}
+            <polygon points="32,39.5 32.8,40.8 34.2,40.8 33.1,41.7 33.5,43 32,42.2 30.5,43 30.9,41.7 29.8,40.8 31.2,40.8" fill="#FEF08A" />
+            <circle cx="26.5" cy="41.5" r="0.8" fill="#FEF08A" />
+            <circle cx="37.5" cy="41.5" r="0.8" fill="#FEF08A" />
+            {/* Realistic Shell Fractures */}
+            <path d="M26 35 L28 39 L27 42" stroke="#94A3B8" strokeWidth="0.7" fill="none" opacity="0.7" />
+          </g>
+
+          {/* Heroic Baby Blue Jay Pioneer Peeking Out */}
+          <g>
+            {/* Wing Shoulders resting on Shell Edge */}
+            <ellipse cx="21" cy="33" rx="3.5" ry="2.2" transform="rotate(-25 21 33)" fill="url(#nest-jay-body)" stroke="#001845" strokeWidth="0.6" />
+            <ellipse cx="43" cy="33" rx="3.5" ry="2.2" transform="rotate(25 43 33)" fill="url(#nest-jay-body)" stroke="#001845" strokeWidth="0.6" />
+            <line x1="19" y1="33" x2="23" y2="33" stroke="#93C5FD" strokeWidth="0.7" strokeLinecap="round" />
+            <line x1="41" y1="33" x2="45" y2="33" stroke="#93C5FD" strokeWidth="0.7" strokeLinecap="round" />
+
+            {/* Blue Jay Head */}
+            <ellipse cx="32" cy="25" rx="11" ry="10" fill="url(#nest-jay-body)" />
+
+            {/* Layered Crest Feathers on Head */}
+            <path d="M30 14 Q32 10 35 12 Q33 15 32 17 Z" fill="#0284C7" />
+            <path d="M28 15 Q30 11 32 13 Q31 16 30 17 Z" fill="#002D72" />
+            <path d="M32 14 Q35 11 37 13 Q35 16 34 17 Z" fill="#38BDF8" />
+
+            {/* White Facial Mask & Chin Bib */}
+            <path d="M23 24 Q32 30 41 24 Q32 20 23 24 Z" fill="#FFFFFF" />
+            <path d="M27 27 Q32 32 37 27 Q32 30 27 27 Z" fill="#F8FAFC" />
+            {/* Jay Black Collar / Bridle Markings */}
+            <path d="M23 25 C23 29 27 32 32 32 C37 32 41 29 41 25" stroke="#001438" strokeWidth="1.2" fill="none" />
+
+            {/* Rosy Pink Blushing Cheeks */}
+            <ellipse cx="25" cy="26" rx="2.5" ry="1.6" fill="#FDA4AF" opacity="0.65" />
+            <ellipse cx="39" cy="26" rx="2.5" ry="1.6" fill="#FDA4AF" opacity="0.65" />
+
+            {/* Big Expressive Sparkling Traveler Eyes */}
+            {/* Left Eye */}
+            <circle cx="27.5" cy="22.5" r="2.6" fill="#0F172A" />
+            <circle cx="27.5" cy="22.5" r="2.2" fill="#002D72" />
+            <circle cx="27.5" cy="22.5" r="1.6" fill="#0F172A" />
+            <circle cx="26.6" cy="21.6" r="0.9" fill="#FFFFFF" />
+            <circle cx="28.4" cy="23.3" r="0.4" fill="#FFFFFF" />
+
+            {/* Right Eye */}
+            <circle cx="36.5" cy="22.5" r="2.6" fill="#0F172A" />
+            <circle cx="36.5" cy="22.5" r="2.2" fill="#002D72" />
+            <circle cx="36.5" cy="22.5" r="1.6" fill="#0F172A" />
+            <circle cx="35.6" cy="21.6" r="0.9" fill="#FFFFFF" />
+            <circle cx="37.4" cy="23.3" r="0.4" fill="#FFFFFF" />
+
+            {/* Cute Golden-Orange Beak */}
+            <polygon points="29.5,24 34.5,24 32,28.5" fill="#F59E0B" stroke="#D97706" strokeWidth="0.6" />
+            <line x1="29.5" y1="24" x2="34.5" y2="24" stroke="#B45309" strokeWidth="0.7" />
+
+            {/* Illuminated Parchment Diploma Scroll Held in Beak */}
+            <g transform="rotate(-12 32 27)">
+              <rect x="27" y="26.5" width="13" height="4" rx="1.2" fill="#FFFBEB" stroke="#D97706" strokeWidth="0.8" />
+              {/* Gold script lines on scroll */}
+              <line x1="29" y1="28" x2="33" y2="28" stroke="#D97706" strokeWidth="0.6" />
+              <line x1="29" y1="29.3" x2="32" y2="29.3" stroke="#D97706" strokeWidth="0.6" />
+              {/* Crimson Ribbon & Wax Seal */}
+              <rect x="34" y="26.2" width="2" height="4.6" fill="#DC2626" />
+              <circle cx="35" cy="28.5" r="1.2" fill="#991B1B" />
+              <circle cx="35" cy="28.5" r="0.6" fill="#F59E0B" />
+              <path d="M35 30.5 L33.5 33 L35 32 L36.5 33 Z" fill="#DC2626" />
+            </g>
+
+            {/* Vintage Brass Aviator Goggles on Forehead */}
+            <g>
+              {/* Leather Strap */}
+              <path d="M22 17 Q32 19 42 17" stroke="#78350F" strokeWidth="2" strokeLinecap="round" fill="none" />
+              {/* Left Lens & Rim */}
+              <circle cx="27" cy="16.5" r="4.2" fill="url(#nest-goggle-brass)" stroke="#451A03" strokeWidth="0.8" />
+              <circle cx="27" cy="16.5" r="3.2" fill="url(#nest-goggle-lens)" />
+              <line x1="25" y1="15" x2="28" y2="18" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" opacity="0.9" />
+              <circle cx="27" cy="13.2" r="0.5" fill="#FEF08A" />
+
+              {/* Right Lens & Rim */}
+              <circle cx="37" cy="16.5" r="4.2" fill="url(#nest-goggle-brass)" stroke="#451A03" strokeWidth="0.8" />
+              <circle cx="37" cy="16.5" r="3.2" fill="url(#nest-goggle-lens)" />
+              <line x1="35" y1="15" x2="38" y2="18" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" opacity="0.9" />
+              <circle cx="37" cy="13.2" r="0.5" fill="#FEF08A" />
+
+              {/* Center Bridge & Screw */}
+              <rect x="30" y="15.5" width="4" height="2" rx="0.5" fill="url(#nest-goggle-brass)" stroke="#78350F" strokeWidth="0.6" />
+              <circle cx="32" cy="16.5" r="0.6" fill="#451A03" />
+
+              {/* Explorer Feather Tucked in Goggle */}
+              <path d="M39 15 C42 11 44 6 43 3 C41 7 40 10 39 14 Z" fill="#38BDF8" stroke="#002D72" strokeWidth="0.6" />
+              <line x1="42" y1="5" x2="39" y2="15" stroke="#FFFFFF" strokeWidth="0.5" />
+            </g>
+          </g>
+
+          {/* Majestic 3D Folded Ribbon Banner: NESTLING • I */}
+          <g>
+            {/* Left & Right Swallowtail Ribbon Tails Behind */}
+            <path d="M12 55 L7 52 L12 49 L16 53 Z" fill="#001845" stroke="url(#nest-gold-main)" strokeWidth="0.8" />
+            <path d="M52 55 L57 52 L52 49 L48 53 Z" fill="#001845" stroke="url(#nest-gold-main)" strokeWidth="0.8" />
+            {/* Ribbon Folds Shadow Under */}
+            <polygon points="15,53 18,53 16,56" fill="#000E29" />
+            <polygon points="49,53 46,53 48,56" fill="#000E29" />
+
+            {/* Main Center Banner Front */}
+            <path
+              d="M14 53 L32 50.5 L50 53 L47 59.5 L32 57 L17 59.5 Z"
+              fill="url(#nest-ribbon)"
+              stroke="url(#nest-gold-main)"
+              strokeWidth="1.2"
+            />
+            {/* Banner Inner Gold Piping */}
+            <path
+              d="M17 54 L32 52 L47 54"
+              stroke="#FEF08A"
+              strokeWidth="0.6"
+              fill="none"
+              opacity="0.7"
+            />
+            {/* Embossed Gold Typography: NESTLING • I */}
+            <text
+              x="32"
+              y="56.3"
+              textAnchor="middle"
+              fontSize="6.2"
+              fontWeight="900"
+              fill="#FEF08A"
+              fontFamily="sans-serif"
+              letterSpacing="1.2"
+            >
+              NESTLING &bull; I
+            </text>
+
+            {/* Suspended Golden Medal Pendant Under Ribbon */}
+            <polygon points="32,58 33.5,60 36,60 34,61.5 35,63.5 32,62 29,63.5 30,61.5 28,60 30.5,60" fill="url(#nest-gold-main)" stroke="#78350F" strokeWidth="0.4" />
+            <circle cx="32" cy="61" r="0.8" fill="#2563EB" />
+          </g>
         </svg>
       );
 
