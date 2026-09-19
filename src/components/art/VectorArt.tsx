@@ -15,155 +15,228 @@ export const RankInsigniaArt: React.FC<{
 
   // Helper render for 15 subrank SVGs
   const renderSvg = () => {
-    // Level 1: Fledgling Fencer (Collegiate Heater Shield, Crossed Fencing Foils & Masked Baby Jay)
+    // Level 1: Fledgling Fencer (Rookie Freshman Target Plaque, Oversized Pushed-Up Mask, Wide-Eyed Baby Jay & Practice Foil)
     if (/\bsubrank-1\b/.test(key) || key.includes('fledgling') || key.includes('fencer') || key.includes('nestling-hatch')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
+            {/* Collegiate Gold Trim Gradient */}
             <linearGradient id="sub1-gold-frame" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#FFFDF0" />
               <stop offset="25%" stopColor="#FEF08A" />
               <stop offset="65%" stopColor="#F59E0B" />
               <stop offset="100%" stopColor="#92400E" />
             </linearGradient>
-            <radialGradient id="sub1-shield-bg" cx="50%" cy="30%" r="65%">
+            {/* Target Ring Radial Field */}
+            <radialGradient id="sub1-target-bg" cx="50%" cy="45%" r="60%">
               <stop offset="0%" stopColor="#003D99" />
               <stop offset="60%" stopColor="#002D72" />
               <stop offset="100%" stopColor="#001438" />
             </radialGradient>
+            {/* Practice Spring Steel Blade */}
             <linearGradient id="sub1-steel-blade" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#FFFFFF" />
               <stop offset="45%" stopColor="#E2E8F0" />
               <stop offset="85%" stopColor="#94A3B8" />
               <stop offset="100%" stopColor="#475569" />
             </linearGradient>
+            {/* Brass Bell Guard */}
             <radialGradient id="sub1-bell-guard" cx="40%" cy="40%" r="60%">
               <stop offset="0%" stopColor="#FEF08A" />
               <stop offset="50%" stopColor="#F59E0B" />
               <stop offset="100%" stopColor="#78350F" />
             </radialGradient>
+            {/* Diamond-Quilted Rookie Plastron */}
             <linearGradient id="sub1-plastron" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#FFFFFF" />
               <stop offset="70%" stopColor="#F1F5F9" />
               <stop offset="100%" stopColor="#CBD5E1" />
             </linearGradient>
-            <clipPath id="sub1-shield-clip">
-              <path d="M10 6 H38 V26 C38 35 24 43 24 43 C24 43 10 35 10 26 Z" />
+            {/* Fluffy Blue Jay Feathers */}
+            <linearGradient id="sub1-fluff-jay" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#7DD3FC" />
+              <stop offset="50%" stopColor="#0284C7" />
+              <stop offset="100%" stopColor="#002D72" />
+            </linearGradient>
+            {/* Target Plaque Clip */}
+            <clipPath id="sub1-target-clip">
+              <circle cx="24" cy="21" r="18" />
             </clipPath>
           </defs>
 
-          {/* Crossed Fencing Foils Extending in Diagonal Saltire Behind Shield */}
-          {/* Foil 1: Top-Left to Bottom-Right */}
+          {/* Tangled Curly Electric Body Sensor Cord Trailing Behind */}
+          <path
+            d="M14 36 C10 40 15 45 20 42 C25 39 23 46 29 44 C34 42 38 39 35 34"
+            stroke="#F59E0B"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            fill="none"
+          />
+          <path
+            d="M14 36 C10 40 15 45 20 42 C25 39 23 46 29 44 C34 42 38 39 35 34"
+            stroke="#D97706"
+            strokeWidth="1"
+            strokeDasharray="1.5 1.5"
+            fill="none"
+          />
+          {/* 3-Prong Sensor Plug Dangling */}
+          <rect x="34" y="33" width="3.5" height="2" rx="0.5" fill="#1E293B" transform="rotate(-25 34 33)" />
+          <line x1="36.5" y1="32.5" x2="38" y2="31.8" stroke="#FEF08A" strokeWidth="0.8" />
+
+          {/* Crossed Rookie Practice Foils Extending in Saltire Behind Target */}
+          {/* Practice Foil 1: Top-Left to Bottom-Right */}
           <g>
             <line x1="5" y1="5" x2="43" y2="43" stroke="url(#sub1-steel-blade)" strokeWidth="1.8" strokeLinecap="round" />
             <line x1="5.5" y1="5.5" x2="42.5" y2="42.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
-            <circle cx="5" cy="5" r="1.3" fill="#DC2626" stroke="#991B1B" strokeWidth="0.4" />
+            {/* Oversized Red Rubber Practice Safety Stopper Knob */}
+            <circle cx="5" cy="5" r="2.4" fill="#EF4444" stroke="#991B1B" strokeWidth="0.5" />
+            <circle cx="4.2" cy="4.2" r="0.7" fill="#FECACA" />
+            {/* Bell Guard & Grip */}
             <circle cx="39" cy="39" r="3.2" fill="url(#sub1-bell-guard)" stroke="#451A03" strokeWidth="0.6" />
             <line x1="39" y1="39" x2="44" y2="44" stroke="#1E293B" strokeWidth="2.2" strokeLinecap="round" />
             <circle cx="44.5" cy="44.5" r="1.2" fill="url(#sub1-bell-guard)" />
           </g>
 
-          {/* Foil 2: Top-Right to Bottom-Left */}
+          {/* Practice Foil 2: Top-Right to Bottom-Left */}
           <g>
             <line x1="43" y1="5" x2="5" y2="43" stroke="url(#sub1-steel-blade)" strokeWidth="1.8" strokeLinecap="round" />
             <line x1="42.5" y1="5.5" x2="5.5" y2="42.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
-            <circle cx="43" cy="5" r="1.3" fill="#DC2626" stroke="#991B1B" strokeWidth="0.4" />
+            {/* Oversized Red Rubber Practice Safety Stopper Knob */}
+            <circle cx="43" cy="5" r="2.4" fill="#EF4444" stroke="#991B1B" strokeWidth="0.5" />
+            <circle cx="42.2" cy="4.2" r="0.7" fill="#FECACA" />
+            {/* Bell Guard & Grip */}
             <circle cx="9" cy="39" r="3.2" fill="url(#sub1-bell-guard)" stroke="#451A03" strokeWidth="0.6" />
             <line x1="9" y1="39" x2="4" y2="44" stroke="#1E293B" strokeWidth="2.2" strokeLinecap="round" />
             <circle cx="3.5" cy="44.5" r="1.2" fill="url(#sub1-bell-guard)" />
           </g>
 
-          {/* Collegiate French Heater Shield Outline & Gold Rim */}
-          <path
-            d="M9 5 H39 V26 C39 36 24 44.5 24 44.5 C24 44.5 9 36 9 26 Z"
-            fill="url(#sub1-gold-frame)"
-            stroke="#451A03"
-            strokeWidth="1.3"
-          />
-          {/* Inner Inset Rim */}
-          <path
-            d="M10.5 6.5 H37.5 V25.5 C37.5 34.5 24 42.5 24 42.5 C24 42.5 10.5 34.5 10.5 25.5 Z"
-            fill="#001845"
-            stroke="url(#sub1-gold-frame)"
-            strokeWidth="0.6"
-          />
+          {/* Collegiate Rookie Practice Target Plaque */}
+          <circle cx="24" cy="21" r="19" fill="url(#sub1-gold-frame)" stroke="#451A03" strokeWidth="1.2" />
+          <circle cx="24" cy="21" r="18" fill="#001845" stroke="url(#sub1-gold-frame)" strokeWidth="0.6" />
 
-          {/* Clipped Shield Interior */}
-          <g clipPath="url(#sub1-shield-clip)">
-            {/* Navy Background */}
-            <rect x="10" y="6" width="28" height="38" fill="url(#sub1-shield-bg)" />
+          {/* Clipped Practice Target Interior */}
+          <g clipPath="url(#sub1-target-clip)">
+            <rect x="5" y="2" width="38" height="38" fill="url(#sub1-target-bg)" />
 
-            {/* Silver & White Fencing Chevron Bands */}
-            <polygon points="10,12 24,19 38,12 38,16 24,23 10,16" fill="#F8FAFC" opacity="0.25" />
-            <polygon points="10,17 24,24 38,17 38,20 24,27 10,20" fill="#38BDF8" opacity="0.2" />
+            {/* Fencing Practice Target Rings (Hopkins Blue & White) */}
+            <circle cx="24" cy="21" r="14.5" stroke="#38BDF8" strokeWidth="1.4" fill="none" opacity="0.4" />
+            <circle cx="24" cy="21" r="10.5" stroke="#F8FAFC" strokeWidth="1.2" strokeDasharray="2 1.5" fill="none" opacity="0.35" />
+            <circle cx="24" cy="21" r="6" stroke="#FEF08A" strokeWidth="1" fill="none" opacity="0.3" />
 
-            {/* Hero Character: Baby Jay in White Fencing Uniform & Mask */}
-            {/* Torso in White Fencing Jacket (Plastron) */}
-            <path d="M17 26 C17 23 20 21 24 21 C28 21 31 23 31 26 L30 34 C30 37 27 38 24 38 C21 38 18 37 18 34 Z" fill="url(#sub1-plastron)" stroke="#94A3B8" strokeWidth="0.8" />
-            {/* Diagonal Plastron Seam */}
-            <path d="M21 21 L28 35" stroke="#CBD5E1" strokeWidth="0.8" strokeDasharray="1.5 1" />
-            {/* Hopkins Navy Shield Badge on Heart */}
-            <path d="M19 25 H22 V28 C22 30 20.5 31 20.5 31 C20.5 31 19 30 19 28 Z" fill="#002D72" stroke="#FEF08A" strokeWidth="0.4" />
+            {/* Rookie Chalk Practice Hit Marks on Target */}
+            <g stroke="#F8FAFC" strokeWidth="1" strokeLinecap="round" opacity="0.7">
+              <line x1="12" y1="13" x2="16" y2="17" />
+              <line x1="16" y1="13" x2="12" y2="17" />
+              <line x1="32" y1="12" x2="36" y2="16" />
+              <line x1="36" y1="12" x2="32" y2="16" />
+            </g>
 
-            {/* Right Wing in En-Garde Pose holding Forward Foil */}
-            <path d="M28 25 Q35 22 36 19" stroke="#0284C7" strokeWidth="2.4" strokeLinecap="round" fill="none" />
-            <circle cx="36" cy="19" r="1.6" fill="url(#sub1-bell-guard)" stroke="#451A03" strokeWidth="0.4" />
-            <line x1="36" y1="19" x2="41" y2="13" stroke="url(#sub1-steel-blade)" strokeWidth="1.2" strokeLinecap="round" />
-            <circle cx="41" cy="13" r="0.7" fill="#DC2626" />
-
-            {/* Left Arm Tucked Behind in Classic Foil Stance */}
-            <path d="M18 26 Q14 27 15 31" stroke="#0284C7" strokeWidth="2" strokeLinecap="round" fill="none" />
-
-            {/* The Fencing Mask (Steel Wire Mesh with Polished Gold Bib & Frame) */}
-            <ellipse cx="24" cy="16.5" rx="6.5" ry="7.5" fill="#0F172A" stroke="url(#sub1-gold-frame)" strokeWidth="1" />
-            {/* Wire Mesh Grid Texture */}
-            <line x1="20" y1="13" x2="28" y2="13" stroke="#475569" strokeWidth="0.5" strokeDasharray="1 1" />
-            <line x1="19" y1="15" x2="29" y2="15" stroke="#64748B" strokeWidth="0.6" strokeDasharray="1 1" />
-            <line x1="18.5" y1="17" x2="29.5" y2="17" stroke="#94A3B8" strokeWidth="0.6" strokeDasharray="1 1" />
-            <line x1="19" y1="19" x2="29" y2="19" stroke="#64748B" strokeWidth="0.6" strokeDasharray="1 1" />
-            <line x1="20" y1="21" x2="28" y2="21" stroke="#475569" strokeWidth="0.5" strokeDasharray="1 1" />
-            <line x1="22" y1="10" x2="22" y2="23" stroke="#64748B" strokeWidth="0.6" strokeDasharray="1 1" />
-            <line x1="24" y1="9.5" x2="24" y2="23.5" stroke="#94A3B8" strokeWidth="0.7" strokeDasharray="1 1" />
-            <line x1="26" y1="10" x2="26" y2="23" stroke="#64748B" strokeWidth="0.6" strokeDasharray="1 1" />
-
-            {/* Mask White Protective Fabric Bib */}
-            <path d="M19.5 22 C19.5 25 21.5 26.5 24 26.5 C26.5 26.5 28.5 25 28.5 22 Z" fill="#F8FAFC" stroke="#94A3B8" strokeWidth="0.6" />
-
-            {/* Determined Blue Jay Eyes Glowing Through Mask */}
-            <circle cx="21.5" cy="16.5" r="1.4" fill="#38BDF8" opacity="0.8" />
-            <circle cx="21.5" cy="16.5" r="0.7" fill="#FFFFFF" />
-            <circle cx="26.5" cy="16.5" r="1.4" fill="#38BDF8" opacity="0.8" />
-            <circle cx="26.5" cy="16.5" r="0.7" fill="#FFFFFF" />
-
-            {/* Perky Blue Feather Crest Poking Out Top of Mask */}
-            <path d="M23 9.5 Q24 5 26 6.5 Q25 8.5 24 9.5 Z" fill="#38BDF8" stroke="#002D72" strokeWidth="0.5" />
-            <path d="M21.5 9.8 Q22 7 23.5 8 Q23 9.2 22.5 10 Z" fill="#002D72" />
-          </g>
-
-          {/* Lower Collegiate Ribbon Scroll: EN GARDE • JHU */}
-          <g>
+            {/* Hero Character: Fluffy Newbie Baby Jay */}
+            {/* Quilted Padded White Practice Plastron (Beginner Jacket) */}
             <path
-              d="M11 38 L24 35.5 L37 38 L35 43 L24 41 L13 43 Z"
-              fill="url(#sub1-gold-frame)"
-              stroke="#451A03"
+              d="M17 26 C17 22.5 20 21 24 21 C28 21 31 22.5 31 26 L30 35 C30 38 27 39 24 39 C21 39 18 38 18 35 Z"
+              fill="url(#sub1-plastron)"
+              stroke="#94A3B8"
               strokeWidth="0.8"
             />
+            {/* Diamond Quilt Stitching Lines */}
+            <line x1="18" y1="28" x2="28" y2="37" stroke="#CBD5E1" strokeWidth="0.6" strokeDasharray="1 1" />
+            <line x1="20" y1="25" x2="30" y2="34" stroke="#CBD5E1" strokeWidth="0.6" strokeDasharray="1 1" />
+            <line x1="30" y1="28" x2="20" y2="37" stroke="#CBD5E1" strokeWidth="0.6" strokeDasharray="1 1" />
+            <line x1="28" y1="25" x2="18" y2="34" stroke="#CBD5E1" strokeWidth="0.6" strokeDasharray="1 1" />
+
+            {/* Rookie Blue Tape Nametag on Jacket */}
+            <rect x="22" y="27" width="7" height="3" rx="0.5" fill="#0284C7" stroke="#002D72" strokeWidth="0.4" />
+            <line x1="23.5" y1="28.5" x2="27.5" y2="28.5" stroke="#FFFFFF" strokeWidth="0.6" />
+
+            {/* Cute Crossed Band-Aid on Plastron */}
+            <g transform="translate(19, 31)">
+              <rect x="-1" y="-2" width="2" height="4" rx="0.5" fill="#FED7AA" stroke="#D97706" strokeWidth="0.3" transform="rotate(45)" />
+              <rect x="-1" y="-2" width="2" height="4" rx="0.5" fill="#FED7AA" stroke="#D97706" strokeWidth="0.3" transform="rotate(-45)" />
+            </g>
+
+            {/* Left Wing Raised in Adorable Wobbly Novice Balance */}
+            <path d="M18 26 Q13 24 14 29 Q17 31 19 28 Z" fill="url(#sub1-fluff-jay)" stroke="#002D72" strokeWidth="0.6" />
+
+            {/* Right Wing En-Garde Holding Baby Practice Foil */}
+            <path d="M28 26 Q35 24 36 21" stroke="#0284C7" strokeWidth="2.6" strokeLinecap="round" fill="none" />
+            <circle cx="36" cy="21" r="1.6" fill="url(#sub1-bell-guard)" stroke="#451A03" strokeWidth="0.4" />
+            {/* Forward Training Blade with Safety Knob */}
+            <line x1="36" y1="21" x2="42" y2="15" stroke="url(#sub1-steel-blade)" strokeWidth="1.3" strokeLinecap="round" />
+            <circle cx="42" cy="15" r="1.5" fill="#EF4444" stroke="#991B1B" strokeWidth="0.4" />
+            <circle cx="41.5" cy="14.5" r="0.4" fill="#FFFFFF" />
+
+            {/* Round Fluffy Baby Jay Head */}
+            <circle cx="24" cy="18" r="6.2" fill="url(#sub1-fluff-jay)" stroke="#001438" strokeWidth="0.5" />
+            {/* Cute Chubby Cheeks (White Face Feathers) */}
+            <ellipse cx="24" cy="19.2" rx="4.8" ry="3.5" fill="#FFFFFF" />
+
+            {/* Wide, Enthusiastic Curious Rookie Eyes */}
+            {/* Left Eye */}
+            <circle cx="21.5" cy="18.5" r="1.9" fill="#001438" />
+            <circle cx="21.2" cy="18" r="0.8" fill="#FFFFFF" />
+            <circle cx="22.2" cy="19.1" r="0.35" fill="#38BDF8" />
+            {/* Right Eye */}
+            <circle cx="26.5" cy="18.5" r="1.9" fill="#001438" />
+            <circle cx="26.2" cy="18" r="0.8" fill="#FFFFFF" />
+            <circle cx="27.2" cy="19.1" r="0.35" fill="#38BDF8" />
+
+            {/* Perky Chick Beak Opened in Cheerful Smile */}
+            <polygon points="23,19.2 25,19.2 24,21.5" fill="#F59E0B" stroke="#B45309" strokeWidth="0.3" />
+            <path d="M23.3 20.6 Q24 22 24.7 20.6 Z" fill="#EF4444" />
+
+            {/* Fluffy Blue Chick Feathers Poofing Out Top */}
+            <path d="M23 11.8 Q24 8.5 25.5 10 Q24.8 11.5 24 12 Z" fill="#38BDF8" stroke="#002D72" strokeWidth="0.4" />
+            <path d="M25 11.2 Q26.8 8.8 27.5 11 Q26.5 12 25.5 12.2 Z" fill="#0284C7" />
+
+            {/* The Oversized Fencing Mask Pushed Back Up onto Forehead */}
+            <g transform="rotate(-8 24 11.5)">
+              {/* Oval Mesh Mask Cap Tilted Back Jauntily */}
+              <ellipse cx="24" cy="11.5" rx="6.2" ry="4.2" fill="#0F172A" stroke="url(#sub1-gold-frame)" strokeWidth="0.9" />
+              {/* Wire Grid Mesh on Mask */}
+              <line x1="20" y1="10" x2="28" y2="10" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
+              <line x1="19.5" y1="11.5" x2="28.5" y2="11.5" stroke="#94A3B8" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
+              <line x1="20" y1="13" x2="28" y2="13" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
+              <line x1="22" y1="8.5" x2="22" y2="14.5" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
+              <line x1="24" y1="8" x2="24" y2="15" stroke="#94A3B8" strokeWidth="0.6" strokeDasharray="0.8 0.8" />
+              <line x1="26" y1="8.5" x2="26" y2="14.5" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
+              {/* Padded White Mask Bib Lifted Above Face */}
+              <path d="M19.5 13.5 Q24 16 28.5 13.5" stroke="#F8FAFC" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+            </g>
+          </g>
+
+          {/* Lower Collegiate Rookie Ribbon Banner: ROOKIE • EN GARDE */}
+          <g>
+            {/* Swallowtail Underfolds */}
+            <polygon points="8,40 11,40 9,43" fill="#451A03" />
+            <polygon points="40,40 37,40 39,43" fill="#451A03" />
+
+            {/* Front Curved Ribbon Banner */}
+            <path
+              d="M7 40 L24 37 L41 40 L39 45 L24 43 L9 45 Z"
+              fill="url(#sub1-gold-frame)"
+              stroke="#451A03"
+              strokeWidth="0.9"
+            />
+            <path d="M9 41 L24 38.5 L39 41" stroke="#FFFDF0" strokeWidth="0.5" fill="none" />
+
+            {/* Embossed Rookie Typography */}
             <text
               x="24"
-              y="39.8"
+              y="41.8"
               textAnchor="middle"
-              fontSize="3.2"
+              fontSize="3.4"
               fontWeight="900"
               fill="#451A03"
               fontFamily="sans-serif"
               letterSpacing="0.6"
             >
-              EN GARDE {"\u2022"} JHU
+              ROOKIE {"\u2022"} EN GARDE
             </text>
           </g>
 
-          {/* Top Shield Star */}
-          <polygon points="24,2 25,4.5 27.5,5 25,5.5 24,8 23,5.5 20.5,5 23,4.5" fill="#FEF08A" stroke="#B45309" strokeWidth="0.4" />
+          {/* Top Rookie Target Pip */}
+          <circle cx="24" cy="2" r="1.4" fill="#FEF08A" stroke="#B45309" strokeWidth="0.4" />
         </svg>
       );
     }
