@@ -225,13 +225,13 @@ export const RankInsigniaArt: React.FC<{
               x="24"
               y="41.8"
               textAnchor="middle"
-              fontSize="3.4"
+              fontSize="4.2"
               fontWeight="900"
               fill="#451A03"
               fontFamily="sans-serif"
-              letterSpacing="0.6"
+              letterSpacing="1.2"
             >
-              ROOKIE {"\u2022"} EN GARDE
+              ROOKIE
             </text>
           </g>
 
@@ -615,8 +615,8 @@ export const RankInsigniaArt: React.FC<{
             <line x1="14.5" y1="18" x2="19.5" y2="23" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" opacity="0.8" />
 
             {/* Illuminated Green LED Destination Sign */}
-            <rect x="13" y="15" width="22" height="1.8" rx="0.5" fill="#047857" />
-            <text x="24" y="16.5" textAnchor="middle" fontSize="1.5" fontWeight="bold" fill="#34D399" fontFamily="monospace">JHMI EXPRESS</text>
+            <rect x="15" y="15" width="18" height="1.8" rx="0.5" fill="#047857" />
+            <text x="24" y="16.5" textAnchor="middle" fontSize="1.6" fontWeight="bold" fill="#34D399" fontFamily="monospace" letterSpacing="0.5">JHMI</text>
 
             {/* Chrome Headlights */}
             <circle cx="12" cy="28" r="1.6" fill="#FBBF24" stroke="#D97706" strokeWidth="0.5" />
@@ -1110,30 +1110,25 @@ export const RankInsigniaArt: React.FC<{
           <circle cx="8" cy="23" r="0.8" fill="#DC2626" />
           <circle cx="40" cy="24" r="0.7" fill="#FBBF24" />
 
-          {/* Can Face Label Art: Tricolor Old Bay Branding */}
+          {/* Can Face Label Art: Clean Iconic Tricolor Old Bay Branding */}
           <rect x="13" y="12" width="22" height="6.5" fill="#FACC15" />
-          <text x="24" y="16.2" textAnchor="middle" fontSize="2.4" fontWeight="900" fill="#002D72" fontFamily="sans-serif" letterSpacing="0.4">
-            FOR SEAFOOD &bull; POULTRY
-          </text>
+          <line x1="16" y1="15.2" x2="32" y2="15.2" stroke="#002D72" strokeWidth="0.8" />
+          <circle cx="24" cy="15.2" r="1.1" fill="#DC2626" />
 
           {/* Center Signature Navy Blue Diagonal Banner */}
           <polygon points="13,18.5 35,18.5 35,31 13,31" fill="url(#sub10-blue-band)" />
           <line x1="13" y1="18.5" x2="35" y2="18.5" stroke="#FACC15" strokeWidth="0.6" />
           <line x1="13" y1="31" x2="35" y2="31" stroke="#FACC15" strokeWidth="0.6" />
 
-          {/* Bold OLD BAY Typography */}
-          <text x="24" y="24" textAnchor="middle" fontSize="5.2" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.8">
+          {/* Bold Signature OLD BAY Brand Typography */}
+          <text x="24" y="26.4" textAnchor="middle" fontSize="6.2" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.8">
             OLD BAY
-          </text>
-          <text x="24" y="28.2" textAnchor="middle" fontSize="2.8" fontWeight="800" fill="#FFFFFF" fontFamily="sans-serif" letterSpacing="1">
-            SEASONING
           </text>
 
           {/* Bottom Crimson Red Field */}
           <rect x="13" y="31" width="22" height="6.5" fill="#DC2626" />
-          <text x="24" y="35.5" textAnchor="middle" fontSize="2.4" fontWeight="800" fill="#FFFBEB" fontFamily="sans-serif" letterSpacing="0.5">
-            BALTIMORE, MD &bull; 1939
-          </text>
+          <line x1="16" y1="34.2" x2="32" y2="34.2" stroke="#FEF08A" strokeWidth="0.8" />
+          <circle cx="24" cy="34.2" r="1.1" fill="#FEF08A" />
 
           {/* Tin Metal Corner Rivets */}
           <circle cx="14.5" cy="14" r="0.6" fill="#A16207" />
@@ -1153,13 +1148,13 @@ export const RankInsigniaArt: React.FC<{
               x="24"
               y="41.2"
               textAnchor="middle"
-              fontSize="3.2"
+              fontSize="3.8"
               fontWeight="900"
               fill="#451A03"
               fontFamily="sans-serif"
-              letterSpacing="0.6"
+              letterSpacing="0.8"
             >
-              OLD BAY {"\u2022"} CONNOISSEUR
+              CONNOISSEUR
             </text>
           </g>
         </svg>
@@ -1296,15 +1291,15 @@ export const RankInsigniaArt: React.FC<{
             />
             <text
               x="24"
-              y="39"
+              y="39.2"
               textAnchor="middle"
-              fontSize="3.2"
+              fontSize="4.5"
               fontWeight="900"
               fill="#451A03"
               fontFamily="sans-serif"
-              letterSpacing="0.6"
+              letterSpacing="1.2"
             >
-              DEFENDER {"\u2022"} 1814
+              1814
             </text>
           </g>
         </svg>
@@ -1443,15 +1438,15 @@ export const RankInsigniaArt: React.FC<{
             />
             <text
               x="24"
-              y="40"
+              y="40.2"
               textAnchor="middle"
-              fontSize="3.2"
+              fontSize="3.8"
               fontWeight="900"
               fill="#451A03"
               fontFamily="sans-serif"
-              letterSpacing="0.5"
+              letterSpacing="1"
             >
-              CRAB FEAST {"\u2022"} CHAMPION
+              CHAMPION
             </text>
           </g>
         </svg>
@@ -1885,15 +1880,15 @@ export const RankInsigniaArt: React.FC<{
             {/* Embossed Typography */}
             <text
               x="24"
-              y="40.8"
+              y="41"
               textAnchor="middle"
-              fontSize="3.8"
+              fontSize="4.5"
               fontWeight="900"
               fill="#451A03"
               fontFamily="sans-serif"
-              letterSpacing="0.6"
+              letterSpacing="1.4"
             >
-              CHARM CITY {"\u2022"} LEGEND
+              LEGEND
             </text>
           </g>
 
@@ -2123,13 +2118,13 @@ export const RankInsigniaArt: React.FC<{
             x="24"
             y="41.8"
             textAnchor="middle"
-            fontSize="3.6"
+            fontSize="4.2"
             fontWeight="900"
             fill="#451A03"
             fontFamily="sans-serif"
-            letterSpacing="0.6"
+            letterSpacing="1.2"
           >
-            SUPREME LAUREATE {"\u2022"} XV
+            LAUREATE
           </text>
         </g>
 
@@ -2476,13 +2471,13 @@ export const RankBadgeArt: React.FC<{
               x="32"
               y="56.3"
               textAnchor="middle"
-              fontSize="6.2"
+              fontSize="6.8"
               fontWeight="900"
               fill="#FEF08A"
               fontFamily="sans-serif"
-              letterSpacing="1.2"
+              letterSpacing="1.5"
             >
-              NESTLING &bull; I
+              NESTLING
             </text>
 
             {/* Suspended Golden Medal Pendant Under Ribbon */}
@@ -2582,8 +2577,8 @@ export const RankBadgeArt: React.FC<{
 
           {/* Lower Ribbon Banner: EXPLORER II */}
           <path d="M14 53 L32 50 L50 53 L47 59 L32 56 L17 59 Z" fill="#78350F" stroke="url(#exp-gold)" strokeWidth="1" />
-          <text x="32" y="56" textAnchor="middle" fontSize="6" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1">
-            EXPLORER &bull; II
+          <text x="32" y="56" textAnchor="middle" fontSize="6.8" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.5">
+            EXPLORER
           </text>
         </svg>
       );
@@ -2659,8 +2654,8 @@ export const RankBadgeArt: React.FC<{
 
           {/* Lower Naval Banner: NAVIGATOR III */}
           <path d="M12 53 L32 50 L52 53 L49 59 L32 56 L15 59 Z" fill="#042F2E" stroke="url(#nav-brass)" strokeWidth="1" />
-          <text x="32" y="56" textAnchor="middle" fontSize="5.8" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1">
-            NAVIGATOR &bull; III
+          <text x="32" y="56" textAnchor="middle" fontSize="6.5" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.2">
+            NAVIGATOR
           </text>
         </svg>
       );
@@ -2763,8 +2758,8 @@ export const RankBadgeArt: React.FC<{
 
           {/* Lower Crimson Banner: CONNOISSEUR IV */}
           <path d="M10 54 L32 51 L54 54 L50 60 L32 57 L14 60 Z" fill="url(#con-ruby)" stroke="url(#con-gold)" strokeWidth="1" />
-          <text x="32" y="57" textAnchor="middle" fontSize="5.5" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.8">
-            CONNOISSEUR &bull; IV
+          <text x="32" y="57" textAnchor="middle" fontSize="6.2" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.2">
+            CONNOISSEUR
           </text>
         </svg>
       );
@@ -2865,8 +2860,8 @@ export const RankBadgeArt: React.FC<{
 
           {/* Lower Imperial Golden Banner: GRAND LAUREATE */}
           <path d="M8 54 L32 51 L56 54 L52 61 L32 57 L12 61 Z" fill="#451A03" stroke="url(#lau-gold)" strokeWidth="1.2" />
-          <text x="32" y="57.5" textAnchor="middle" fontSize="5.2" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.8">
-            GRAND LAUREATE &bull; V
+          <text x="32" y="57.5" textAnchor="middle" fontSize="6.5" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="1.4">
+            LAUREATE
           </text>
         </svg>
       );
