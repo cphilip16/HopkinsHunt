@@ -44,6 +44,23 @@ export const QuestsView: React.FC = () => {
     return <LuggageAirmailSticker size={24} />;
   };
 
+  const getQuestCardBg = (difficulty: string, completed: boolean) => {
+    if (completed) {
+      return 'bg-gradient-to-br from-emerald-50 via-teal-50/60 to-emerald-100/40 border-2 border-emerald-400 ring-2 ring-emerald-300/60 shadow-emerald-500/15';
+    }
+    switch (difficulty) {
+      case 'Easy':
+        return 'bg-gradient-to-br from-sky-50 via-blue-50/60 to-indigo-50/40 border-2 border-sky-300 hover:border-sky-400 hover:shadow-lg hover:shadow-sky-500/10';
+      case 'Moderate':
+        return 'bg-gradient-to-br from-amber-50 via-yellow-50/60 to-orange-50/40 border-2 border-amber-300 hover:border-amber-400 hover:shadow-lg hover:shadow-amber-500/10';
+      case 'Legendary':
+      case 'Hard':
+        return 'bg-gradient-to-br from-purple-50 via-fuchsia-50/60 to-pink-50/40 border-2 border-purple-300 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/10';
+      default:
+        return 'bg-gradient-to-br from-white via-slate-50 to-blue-50/30 border-2 border-slate-300';
+    }
+  };
+
   return (
     <div className="space-y-6">
       
@@ -98,11 +115,7 @@ export const QuestsView: React.FC = () => {
           return (
             <div
               key={quest.id}
-              className={`relative rounded-3xl border-2 p-4 sm:p-6 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-lg pt-6 ${
-                isCompleted
-                  ? 'bg-[#FAF7EE] border-emerald-300 ring-2 ring-emerald-200/70 shadow-emerald-100'
-                  : 'bg-[#FFFDF9] border-amber-200/80 shadow-stone-100'
-              }`}
+              className={`relative rounded-3xl p-4 sm:p-6 flex flex-col justify-between transition-all duration-300 shadow-card-high hover:-translate-y-1 pt-6 ${getQuestCardBg(quest.difficulty, isCompleted)}`}
             >
               {/* Top Washi Tape Scrapbook Accent */}
               <WashiTape color={tapeColor as any} angle={quest.difficulty === 'Easy' ? -2 : quest.difficulty === 'Moderate' ? 1.5 : -1.5} className="-top-3 left-8 z-20" />
@@ -174,21 +187,21 @@ export const QuestsView: React.FC = () => {
                 </p>
 
                 {/* Progress bar */}
-                <div className="mt-4 pt-3 border-t border-slate-100">
-                  <div className="flex items-center justify-between text-xs font-bold mb-1.5">
-                    <span className="text-slate-600">
+                <div className="mt-4 pt-3 border-t border-slate-200/60">
+                  <div className="flex items-center justify-between text-xs font-black mb-1.5">
+                    <span className="text-slate-700">
                       Expedition Progress: {completedCount} / {quest.placeIds.length} spots
                     </span>
-                    <span className={isCompleted ? 'text-emerald-600' : 'text-hopkins-heritage'}>
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-black ${isCompleted ? 'bg-emerald-500 text-white' : 'bg-blue-600 text-white'}`}>
                       {progressPercent}%
                     </span>
                   </div>
-                  <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div className="w-full h-3 bg-white/80 border border-slate-200/90 rounded-full overflow-hidden p-0.5 shadow-inner">
                     <div
-                      className={`h-full rounded-full transition-all duration-500 ${
+                      className={`h-full rounded-full transition-all duration-500 shadow-xs ${
                         isCompleted
-                          ? 'bg-emerald-500'
-                          : 'bg-gradient-to-r from-hopkins-spirit to-hopkins-heritage'
+                          ? 'bg-gradient-to-r from-emerald-500 to-teal-500'
+                          : 'bg-gradient-to-r from-sky-400 via-blue-600 to-indigo-600'
                       }`}
                       style={{ width: `${progressPercent}%` }}
                     />
@@ -197,7 +210,7 @@ export const QuestsView: React.FC = () => {
 
                 {/* Places checklist */}
                 <div className="mt-4 space-y-2">
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                  <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider">
                     Required Locations
                   </span>
                   <div className="space-y-1.5">
@@ -208,10 +221,10 @@ export const QuestsView: React.FC = () => {
                       return (
                         <div
                           key={place.id}
-                          className={`flex items-center justify-between p-2 rounded-xl text-xs border transition-all ${
+                          className={`flex items-center justify-between p-2.5 rounded-xl text-xs border transition-all ${
                             placeVisited
-                              ? 'bg-emerald-50/60 border-emerald-200 text-emerald-900 font-semibold'
-                              : 'bg-slate-50 border-slate-200 text-slate-700'
+                              ? 'bg-emerald-100/70 border-emerald-300 text-emerald-950 font-bold shadow-2xs'
+                              : 'bg-white/90 border-slate-200 text-slate-800 hover:bg-white hover:border-slate-300 shadow-2xs'
                           }`}
                         >
                           <div

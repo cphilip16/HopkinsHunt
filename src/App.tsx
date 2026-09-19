@@ -77,7 +77,12 @@ const AppContent: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 font-sans">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-sky-50/70 via-slate-50 to-blue-50/40 font-sans relative selection:bg-amber-300 selection:text-hopkins-deep overflow-x-hidden">
+      {/* Atmospheric Background Ambient Color Blobs */}
+      <div className="fixed top-12 left-1/4 w-96 h-96 bg-gradient-to-tr from-sky-300/15 via-blue-400/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="fixed top-1/3 right-10 w-96 h-96 bg-gradient-to-bl from-amber-300/15 via-yellow-200/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="fixed bottom-20 left-10 w-80 h-80 bg-gradient-to-tr from-emerald-300/12 via-teal-200/8 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-3.5 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-6 sm:space-y-8 pb-28 md:pb-12">
@@ -91,15 +96,26 @@ const AppContent: React.FC = () => {
             <PlaceFilter />
 
             {/* Results Count Header */}
-            <div className="flex items-center justify-between px-1">
-              <div className="flex items-center space-x-2">
-                <Compass className="w-5 h-5 text-hopkins-heritage" />
-                <h2 className="text-lg font-black text-slate-900 tracking-tight">
-                  Baltimore Recommendations ({filteredPlaces.length})
-                </h2>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-1 gap-2">
+              <div className="flex items-center space-x-2.5">
+                <div className="p-2 rounded-xl bg-gradient-to-tr from-blue-600 via-hopkins-heritage to-indigo-700 text-white shadow-md shadow-blue-600/25">
+                  <Compass className="w-5 h-5 text-amber-300" />
+                </div>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                    <span>Baltimore Recommendations</span>
+                    <span className="text-xs font-black bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 px-2.5 py-0.5 rounded-full shadow-xs">
+                      {filteredPlaces.length}
+                    </span>
+                  </h2>
+                  <p className="text-xs font-semibold text-slate-500">
+                    Curated spots across Baltimore & JHU campus routes
+                  </p>
+                </div>
               </div>
-              <span className="text-xs font-semibold text-slate-500">
-                Sorted by distance from Homewood & points tier
+              <span className="text-xs font-bold px-3 py-1 rounded-xl bg-white border border-blue-200/80 text-blue-900 shadow-2xs flex items-center space-x-1">
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                <span>Sorted by proximity & points tier</span>
               </span>
             </div>
 

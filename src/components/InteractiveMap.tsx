@@ -109,50 +109,72 @@ export const InteractiveMap: React.FC = () => {
           className="w-full h-full object-contain"
           preserveAspectRatio="none"
         >
-          {/* Waterway: Baltimore Inner Harbor & Patapsco River */}
+          <defs>
+            <linearGradient id="harborGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#0369a1" stopOpacity="0.85" />
+              <stop offset="50%" stopColor="#0f2b48" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#0284c7" stopOpacity="0.9" />
+            </linearGradient>
+            <linearGradient id="parkGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#047857" stopOpacity="0.85" />
+              <stop offset="100%" stopColor="#064e3b" stopOpacity="0.9" />
+            </linearGradient>
+            <linearGradient id="shuttleGlow" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#38bdf8" />
+              <stop offset="100%" stopColor="#a78bfa" />
+            </linearGradient>
+          </defs>
+
+          {/* Waterway: Baltimore Inner Harbor & Patapsco River with Gradient Fill */}
           <path
             d="M 50 60 Q 55 56 60 55 Q 68 55 75 58 Q 85 62 90 70 Q 95 80 100 85 L 100 100 L 50 100 Z"
-            fill="#0f2b48"
-            opacity="0.9"
+            fill="url(#harborGradient)"
+            stroke="#38bdf8"
+            strokeWidth="0.4"
+            opacity="0.95"
           />
           <path
             d="M 50 60 Q 58 52 64 54 Q 72 56 80 52 L 100 52 L 100 100 L 50 100 Z"
             fill="#0c233b"
-            opacity="0.8"
+            opacity="0.75"
           />
 
+          {/* Water Shimmer Waves */}
+          <path d="M 58 64 Q 65 62 72 65" fill="none" stroke="#38bdf8" strokeWidth="0.3" strokeDasharray="1, 1.5" opacity="0.6" />
+          <path d="M 75 75 Q 82 73 90 76" fill="none" stroke="#67e8f9" strokeWidth="0.3" strokeDasharray="1.2, 2" opacity="0.6" />
+
           {/* Northwest Greenery: Druid Hill Park */}
-          <ellipse cx="20" cy="22" rx="14" ry="10" fill="#143622" opacity="0.6" />
-          <text x="14" y="23" fill="#4ade80" fontSize="2.2" opacity="0.7" fontWeight="bold">
+          <ellipse cx="20" cy="22" rx="14" ry="10" fill="url(#parkGradient)" stroke="#10b981" strokeWidth="0.3" />
+          <text x="14" y="23" fill="#6ee7b7" fontSize="2.3" opacity="0.9" fontWeight="bold">
             Druid Hill Park
           </text>
 
           {/* East Greenery: Patterson Park */}
-          <rect x="80" y="48" width="12" height="10" rx="2" fill="#143622" opacity="0.6" />
-          <text x="82" y="54" fill="#4ade80" fontSize="2.2" opacity="0.7" fontWeight="bold">
+          <rect x="80" y="48" width="12" height="10" rx="2" fill="url(#parkGradient)" stroke="#10b981" strokeWidth="0.3" />
+          <text x="82" y="54" fill="#6ee7b7" fontSize="2.3" opacity="0.9" fontWeight="bold">
             Patterson Park
           </text>
 
           {/* Neighborhood Region Labels */}
-          <text x="38" y="12" fill="#94a3b8" fontSize="2.4" fontWeight="600" opacity="0.7">
+          <text x="38" y="12" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
             Charles Village
           </text>
-          <text x="24" y="14" fill="#94a3b8" fontSize="2.4" fontWeight="600" opacity="0.7">
+          <text x="24" y="14" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
             Hampden
           </text>
-          <text x="44" y="36" fill="#94a3b8" fontSize="2.4" fontWeight="600" opacity="0.7">
+          <text x="44" y="36" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
             Mount Vernon
           </text>
-          <text x="42" y="50" fill="#94a3b8" fontSize="2.4" fontWeight="600" opacity="0.7">
+          <text x="42" y="50" fill="#38bdf8" fontSize="2.4" fontWeight="bold" opacity="0.9">
             Inner Harbor
           </text>
-          <text x="68" y="52" fill="#94a3b8" fontSize="2.4" fontWeight="600" opacity="0.7">
+          <text x="68" y="52" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
             Fells Point
           </text>
-          <text x="48" y="66" fill="#94a3b8" fontSize="2.4" fontWeight="600" opacity="0.7">
+          <text x="48" y="66" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
             Federal Hill
           </text>
-          <text x="74" y="74" fill="#94a3b8" fontSize="2.4" fontWeight="600" opacity="0.7">
+          <text x="74" y="74" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
             Locust Point & Fort
           </text>
 
@@ -160,31 +182,34 @@ export const InteractiveMap: React.FC = () => {
           <path
             d="M 47 18 L 48 32 L 51 40 Q 56 41 74 41"
             fill="none"
-            stroke="#38bdf8"
-            strokeWidth="0.7"
-            strokeDasharray="1.5, 1"
-            opacity="0.85"
+            stroke="url(#shuttleGlow)"
+            strokeWidth="0.9"
+            strokeDasharray="1.8, 1.2"
+            opacity="0.95"
           />
-          <text x="52" y="32" fill="#38bdf8" fontSize="1.8" fontStyle="italic" opacity="0.9">
+          <text x="52" y="32" fill="#38bdf8" fontSize="1.9" fontStyle="italic" fontWeight="bold" opacity="0.95">
             JHMI Shuttle Route
           </text>
 
-          {/* JHU Campus Anchors */}
+          {/* JHU Campus Anchors with Pulsing Luminous Halos */}
           {/* Homewood Campus */}
+          <circle cx="47" cy="18" r="3.4" fill="#38bdf8" fillOpacity="0.2" className="animate-pulse" />
           <circle cx="47" cy="18" r="2.2" fill="#002D72" stroke="#68ACE5" strokeWidth="0.8" />
-          <text x="49.5" y="18.5" fill="#68ACE5" fontSize="2.5" fontWeight="bold">
+          <text x="49.5" y="18.5" fill="#93c5fd" fontSize="2.5" fontWeight="bold">
             Homewood Campus (JHU)
           </text>
 
           {/* Peabody Institute */}
-          <circle cx="51" cy="40" r="1.8" fill="#002D72" stroke="#F1C400" strokeWidth="0.7" />
-          <text x="53.5" y="40.5" fill="#F1C400" fontSize="2.2" fontWeight="bold">
+          <circle cx="51" cy="40" r="3.0" fill="#facc15" fillOpacity="0.2" className="animate-pulse" />
+          <circle cx="51" cy="40" r="1.8" fill="#002D72" stroke="#F1C400" strokeWidth="0.8" />
+          <text x="53.5" y="40.5" fill="#fde047" fontSize="2.3" fontWeight="bold">
             Peabody Institute
           </text>
 
           {/* Johns Hopkins Hospital / Med Campus */}
+          <circle cx="74" cy="41" r="3.2" fill="#f87171" fillOpacity="0.2" className="animate-pulse" />
           <circle cx="74" cy="41" r="2" fill="#002D72" stroke="#E03A3E" strokeWidth="0.8" />
-          <text x="76.5" y="41.5" fill="#E03A3E" fontSize="2.2" fontWeight="bold">
+          <text x="76.5" y="41.5" fill="#fca5a5" fontSize="2.3" fontWeight="bold">
             JHU Medical Campus
           </text>
 

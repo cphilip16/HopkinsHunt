@@ -180,10 +180,10 @@ export const Navbar: React.FC = () => {
         <nav className="hidden md:flex space-x-1 sm:space-x-2 py-2 overflow-x-auto no-scrollbar border-t border-white/10">
           <button
             onClick={() => setActiveTab('explore')}
-            className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+            className={`flex items-center space-x-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm transition-all whitespace-nowrap ${
               activeTab === 'explore'
-                ? 'bg-white text-hopkins-deep shadow-md font-bold'
-                : 'text-blue-100/90 hover:text-white hover:bg-white/10'
+                ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white shadow-lg shadow-blue-500/30 ring-1 ring-white/40 font-black'
+                : 'text-blue-100/90 hover:text-white hover:bg-white/10 font-semibold'
             }`}
           >
             <Compass className="w-4 h-4" />
@@ -192,10 +192,10 @@ export const Navbar: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('map')}
-            className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+            className={`flex items-center space-x-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm transition-all whitespace-nowrap ${
               activeTab === 'map'
-                ? 'bg-white text-hopkins-deep shadow-md font-bold'
-                : 'text-blue-100/90 hover:text-white hover:bg-white/10'
+                ? 'bg-gradient-to-r from-teal-500 via-emerald-600 to-teal-700 text-white shadow-lg shadow-emerald-500/30 ring-1 ring-white/40 font-black'
+                : 'text-blue-100/90 hover:text-white hover:bg-white/10 font-semibold'
             }`}
           >
             <MapPin className="w-4 h-4" />
@@ -204,40 +204,40 @@ export const Navbar: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('trips')}
-            className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+            className={`flex items-center space-x-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm transition-all whitespace-nowrap ${
               activeTab === 'trips'
-                ? 'bg-white text-hopkins-deep shadow-md font-bold'
-                : 'text-blue-100/90 hover:text-white hover:bg-white/10'
+                ? 'bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white shadow-lg shadow-purple-500/30 ring-1 ring-white/40 font-black'
+                : 'text-blue-100/90 hover:text-white hover:bg-white/10 font-semibold'
             }`}
           >
             <Users className="w-4 h-4" />
             <span>Flock Trips</span>
-            <span className="ml-1 px-1.5 py-0.2 text-[10px] font-black bg-sky-400 text-hopkins-deep rounded-full">
+            <span className="ml-1 px-1.5 py-0.2 text-[10px] font-black bg-pink-400 text-slate-950 rounded-full shadow-xs">
               Pods
             </span>
           </button>
 
           <button
             onClick={() => setActiveTab('quests')}
-            className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+            className={`flex items-center space-x-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm transition-all whitespace-nowrap ${
               activeTab === 'quests'
-                ? 'bg-white text-hopkins-deep shadow-md font-bold'
-                : 'text-blue-100/90 hover:text-white hover:bg-white/10'
+                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-slate-950 shadow-lg shadow-amber-400/30 ring-1 ring-white/50 font-black'
+                : 'text-blue-100/90 hover:text-white hover:bg-white/10 font-semibold'
             }`}
           >
             <Award className="w-4 h-4" />
             <span>Student Quests</span>
-            <span className="ml-1 px-1.5 py-0.2 text-[10px] font-black bg-amber-400 text-hopkins-deep rounded-full">
+            <span className="ml-1 px-1.5 py-0.2 text-[10px] font-black bg-amber-400 text-hopkins-deep rounded-full shadow-xs">
               Bonus PTS
             </span>
           </button>
 
           <button
             onClick={() => setActiveTab('camera')}
-            className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+            className={`flex items-center space-x-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm transition-all whitespace-nowrap ${
               activeTab === 'camera'
-                ? 'bg-white text-hopkins-deep shadow-md font-bold'
-                : 'text-blue-100/90 hover:text-white hover:bg-white/10'
+                ? 'bg-gradient-to-r from-rose-500 via-pink-600 to-rose-600 text-white shadow-lg shadow-rose-500/30 ring-1 ring-white/40 font-black'
+                : 'text-blue-100/90 hover:text-white hover:bg-white/10 font-semibold'
             }`}
           >
             <Camera className="w-4 h-4" />
@@ -246,16 +246,16 @@ export const Navbar: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('passport')}
-            className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+            className={`flex items-center space-x-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm transition-all whitespace-nowrap ${
               activeTab === 'passport'
-                ? 'bg-white text-hopkins-deep shadow-md font-bold'
-                : 'text-blue-100/90 hover:text-white hover:bg-white/10'
+                ? 'bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-hopkins-deep shadow-lg shadow-amber-400/30 ring-1 ring-white/50 font-black'
+                : 'text-blue-100/90 hover:text-white hover:bg-white/10 font-semibold'
             }`}
           >
             <BookOpen className="w-4 h-4" />
             <span>Digital J-Card Pass</span>
             {profile.visitedPlaceIds.length > 0 && (
-              <span className="ml-1 px-1.5 py-0.2 text-[10px] font-black bg-emerald-400 text-slate-900 rounded-full">
+              <span className="ml-1 px-1.5 py-0.2 text-[10px] font-black bg-emerald-400 text-slate-900 rounded-full shadow-xs">
                 {profile.visitedPlaceIds.length} Visited
               </span>
             )}

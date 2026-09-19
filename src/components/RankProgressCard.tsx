@@ -30,7 +30,7 @@ export const RankProgressCard: React.FC = () => {
   const completedQuestsCount = profile.completedQuestIds.length;
 
   return (
-    <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-card-high border-2 border-slate-200 relative overflow-hidden">
+    <div className="bg-gradient-to-br from-white via-sky-50/50 to-amber-50/40 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-card-high border-2 border-amber-300/80 relative overflow-hidden">
       
       {/* Top Maryland & Baltimore Ribbon Accent */}
       <div className="absolute top-0 inset-x-0">
@@ -40,16 +40,17 @@ export const RankProgressCard: React.FC = () => {
       {/* Subtle background Gilman Hall & Campus Skyline Watermark */}
       <CampusSkyline
         className="absolute -bottom-2 inset-x-0 text-hopkins-heritage"
-        opacity={0.10}
+        opacity={0.08}
       />
       
-      {/* Radial ambient glow */}
-      <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 rounded-full bg-gradient-to-br from-hopkins-spirit/15 to-transparent pointer-events-none blur-2xl" />
+      {/* Radial ambient glows for warmth and vibrancy */}
+      <div className="absolute top-0 right-0 -mt-10 -mr-10 w-80 h-80 rounded-full bg-gradient-to-br from-sky-400/20 via-blue-500/10 to-transparent pointer-events-none blur-3xl" />
+      <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-80 h-80 rounded-full bg-gradient-to-tr from-amber-400/20 via-yellow-300/10 to-transparent pointer-events-none blur-3xl" />
 
       <div className="relative z-10">
         
         {/* Top Header: Current Rank Badge, Chibi Mascot & Point Counter */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-slate-200">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-amber-200/60">
           
           <div className="flex items-center space-x-3 sm:space-x-4">
             {/* Major Rank Crest with Subrank Milestone Pin Overlay */}
@@ -57,7 +58,7 @@ export const RankProgressCard: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setInspectingRank(currentRank)}
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep via-hopkins-heritage to-slate-900 flex items-center justify-center p-2 shadow-xl ring-2 sm:ring-4 ring-amber-300 shadow-blue-900/20 hover:scale-105 transition-all cursor-pointer focus:outline-none focus:ring-4 focus:ring-amber-400"
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep via-hopkins-heritage to-blue-900 flex items-center justify-center p-2 shadow-xl ring-2 sm:ring-4 ring-amber-300 shadow-blue-900/30 hover:scale-105 transition-all cursor-pointer focus:outline-none focus:ring-4 focus:ring-amber-400"
                 title={`Click to inspect Rank ${currentRank.id}: ${currentRank.name} Crest`}
               >
                 <RankBadgeArt rankId={currentRank.id} size={54} />
@@ -67,7 +68,7 @@ export const RankProgressCard: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setInspectingSubrank(currentSubrank)}
-                className="absolute -bottom-1.5 -right-1.5 sm:-bottom-2 sm:-right-2 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white shadow-md border-2 border-amber-400 flex items-center justify-center p-0.5 z-10 hover:scale-110 transition-all cursor-pointer focus:outline-none"
+                className="absolute -bottom-1.5 -right-1.5 sm:-bottom-2 sm:-right-2 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white shadow-md border-2 border-amber-400 flex items-center justify-center p-0.5 z-10 hover:scale-110 transition-all cursor-pointer focus:outline-none ring-2 ring-white"
                 title={`Click to inspect Level ${currentSubrank.levelNumber}: ${currentSubrank.subrankName} Insignia`}
               >
                 <RankInsigniaArt insignia={currentSubrank.insignia} id={currentSubrank.id} size={26} />
@@ -81,16 +82,16 @@ export const RankProgressCard: React.FC = () => {
 
             <div>
               <div className="flex items-center space-x-1.5 sm:space-x-2">
-                <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-hopkins-heritage text-white flex items-center space-x-1.5 shadow-xs">
-                  <Compass className="w-3.5 h-3.5 text-sky-200" />
+                <span className="px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-gradient-to-r from-blue-700 via-hopkins-heritage to-indigo-800 text-white flex items-center space-x-1.5 shadow-md shadow-blue-900/20 ring-1 ring-white/30">
+                  <Compass className="w-3.5 h-3.5 text-amber-300" />
                   <span>Rank {currentRank.id}: {currentRank.name}</span>
                 </span>
-                <span className="text-[11px] sm:text-xs font-bold text-slate-500">
+                <span className="text-[11px] sm:text-xs font-black px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs">
                   Lv {currentSubrank.levelNumber} of 15
                 </span>
               </div>
 
-              <h2 className="text-xl sm:text-3xl font-heading font-black text-slate-900 mt-1 tracking-tight">
+              <h2 className="text-xl sm:text-3xl font-heading font-black text-slate-900 mt-1.5 tracking-tight">
                 {currentSubrank.subrankName}
               </h2>
 
@@ -101,18 +102,19 @@ export const RankProgressCard: React.FC = () => {
           </div>
 
           {/* Points display */}
-          <div className="bg-slate-50 px-5 py-4 rounded-2xl border-2 border-amber-300 shadow-sm flex md:flex-col items-center justify-between md:items-end min-w-[180px]">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-600">
-              Exploration Points
+          <div className="bg-gradient-to-br from-amber-50 via-yellow-50/80 to-amber-100/70 px-5 py-4 rounded-2xl border-2 border-amber-300 shadow-md shadow-amber-400/15 flex md:flex-col items-center justify-between md:items-end min-w-[190px]">
+            <span className="text-xs font-black uppercase tracking-wider text-amber-900 flex items-center space-x-1">
+              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <span>Exploration Score</span>
             </span>
             <div className="flex items-baseline space-x-1.5">
-              <span className="text-3xl sm:text-4xl font-heading font-black text-hopkins-heritage">
+              <span className="text-3xl sm:text-4xl font-heading font-black bg-gradient-to-r from-hopkins-deep to-blue-700 bg-clip-text text-transparent">
                 {totalPoints}
               </span>
-              <span className="text-sm font-black text-slate-500">PTS</span>
+              <span className="text-sm font-black text-amber-700">PTS</span>
             </div>
             {profile.bonusPoints > 0 && (
-              <span className="text-[11px] font-semibold text-emerald-600">
+              <span className="text-[11px] font-black text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full mt-0.5">
                 +{profile.bonusPoints} bonus quest pts
               </span>
             )}
@@ -145,41 +147,41 @@ export const RankProgressCard: React.FC = () => {
           </div>
 
           {/* Bar track styled like flight journey */}
-          <div className="w-full h-4 bg-slate-200/80 rounded-full overflow-hidden p-0.5 border border-amber-200/70 shadow-inner">
+          <div className="w-full h-4 bg-slate-200/90 rounded-full overflow-hidden p-0.5 border-2 border-amber-300/80 shadow-inner">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-sky-400 via-blue-500 to-hopkins-heritage transition-all duration-700 ease-out relative"
+              className="h-full rounded-full bg-gradient-to-r from-sky-400 via-blue-600 to-amber-400 transition-all duration-700 ease-out relative shadow-sm"
               style={{ width: `${progressPercent}%` }}
             >
-              <div className="absolute inset-0 bg-white/25 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse" />
             </div>
           </div>
 
           {/* Perks & Unlock Preview */}
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            <div className="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-3 flex items-start space-x-2.5 shadow-2xs">
+            <div className="bg-gradient-to-br from-emerald-50 via-teal-50/60 to-emerald-100/50 border-2 border-emerald-200 rounded-2xl p-3 flex items-start space-x-2.5 shadow-2xs">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold text-emerald-900">Active Traveler Perk:</span>
-                <p className="text-emerald-800 mt-0.5">{currentSubrank.unlockedPerk}</p>
+                <span className="font-black text-emerald-950">Active Traveler Perk:</span>
+                <p className="text-emerald-900 mt-0.5 font-medium">{currentSubrank.unlockedPerk}</p>
               </div>
             </div>
 
             {nextSubrank ? (
-              <div className="bg-sky-50/80 border border-sky-200 rounded-2xl p-3 flex items-start space-x-2.5 shadow-2xs">
+              <div className="bg-gradient-to-br from-sky-50 via-blue-50/60 to-indigo-100/50 border-2 border-sky-200 rounded-2xl p-3 flex items-start space-x-2.5 shadow-2xs">
                 <Trophy className="w-4 h-4 text-hopkins-heritage flex-shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-hopkins-deep">
+                  <span className="font-black text-hopkins-deep">
                     Next Perk Unlock ({nextSubrank.minPoints} pts):
                   </span>
-                  <p className="text-blue-900 mt-0.5">{nextSubrank.unlockedPerk}</p>
+                  <p className="text-blue-900 mt-0.5 font-medium">{nextSubrank.unlockedPerk}</p>
                 </div>
               </div>
             ) : (
-              <div className="bg-amber-50/80 border border-amber-200 rounded-2xl p-3 flex items-start space-x-2.5 shadow-2xs">
+              <div className="bg-gradient-to-br from-amber-50 via-yellow-50/60 to-amber-100/50 border-2 border-amber-200 rounded-2xl p-3 flex items-start space-x-2.5 shadow-2xs">
                 <Trophy className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-amber-900">Grand Laureate:</span>
-                  <p className="text-amber-800 mt-0.5">
+                  <span className="font-black text-amber-950">Grand Laureate:</span>
+                  <p className="text-amber-900 mt-0.5 font-medium">
                     You have unlocked all traveler perks across Johns Hopkins & Baltimore!
                   </p>
                 </div>
@@ -188,57 +190,57 @@ export const RankProgressCard: React.FC = () => {
           </div>
         </div>
 
-        {/* Cutesy Quick Stats Grid */}
+        {/* Cutesy Quick Stats Grid - 4 Jewel-Toned Cards */}
         <div className="mt-6 pt-6 border-t border-amber-200/60 grid grid-cols-2 sm:grid-cols-4 gap-3">
           
-          <div className="bg-white/90 p-3.5 rounded-2xl border border-amber-200/80 shadow-xs">
-            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1.5">
+          <div className="bg-gradient-to-br from-blue-50/90 via-sky-50/80 to-indigo-100/60 p-3.5 rounded-2xl border-2 border-blue-200/90 shadow-sm hover:scale-[1.02] transition-transform">
+            <span className="text-[11px] font-black text-blue-900 uppercase tracking-wider block flex items-center space-x-1.5">
               <Map className="w-3.5 h-3.5 text-blue-600" />
               <span>Passport Stamps</span>
             </span>
-            <div className="text-xl font-black text-slate-900 mt-1">
-              {visitedCount} <span className="text-xs font-semibold text-slate-400">/ {totalPlaces}</span>
+            <div className="text-xl font-black text-blue-950 mt-1">
+              {visitedCount} <span className="text-xs font-semibold text-blue-600">/ {totalPlaces}</span>
             </div>
-            <div className="text-[11px] text-emerald-600 font-bold mt-0.5">
+            <div className="text-[11px] text-emerald-700 font-bold mt-0.5">
               {Math.round((visitedCount / totalPlaces) * 100)}% Charm City
             </div>
           </div>
 
-          <div className="bg-white/90 p-3.5 rounded-2xl border border-amber-200/80 shadow-xs">
-            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1.5">
+          <div className="bg-gradient-to-br from-amber-50/90 via-yellow-50/80 to-orange-100/60 p-3.5 rounded-2xl border-2 border-amber-200/90 shadow-sm hover:scale-[1.02] transition-transform">
+            <span className="text-[11px] font-black text-amber-900 uppercase tracking-wider block flex items-center space-x-1.5">
               <Briefcase className="w-3.5 h-3.5 text-amber-600" />
               <span>Expeditions</span>
             </span>
-            <div className="text-xl font-black text-slate-900 mt-1">
-              {completedQuestsCount} <span className="text-xs font-semibold text-slate-400">/ 6</span>
+            <div className="text-xl font-black text-amber-950 mt-1">
+              {completedQuestsCount} <span className="text-xs font-semibold text-amber-600">/ 6</span>
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">
+            <div className="text-[11px] text-amber-800 font-bold mt-0.5">
               Quests completed
             </div>
           </div>
 
-          <div className="bg-white/90 p-3.5 rounded-2xl border border-amber-200/80 shadow-xs">
-            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1.5">
+          <div className="bg-gradient-to-br from-emerald-50/90 via-teal-50/80 to-green-100/60 p-3.5 rounded-2xl border-2 border-emerald-200/90 shadow-sm hover:scale-[1.02] transition-transform">
+            <span className="text-[11px] font-black text-emerald-900 uppercase tracking-wider block flex items-center space-x-1.5">
               <Landmark className="w-3.5 h-3.5 text-emerald-600" />
               <span>Homebase</span>
             </span>
-            <div className="text-base font-black text-hopkins-heritage truncate mt-1">
+            <div className="text-base font-black text-emerald-950 truncate mt-1">
               {profile.campus}
             </div>
-            <div className="text-[11px] text-slate-400 mt-0.5 truncate">
+            <div className="text-[11px] text-emerald-700 font-bold mt-0.5 truncate">
               {profile.classYear}
             </div>
           </div>
 
-          <div className="bg-white/90 p-3.5 rounded-2xl border border-amber-200/80 shadow-xs">
-            <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider block flex items-center space-x-1.5">
+          <div className="bg-gradient-to-br from-purple-50/90 via-fuchsia-50/80 to-pink-100/60 p-3.5 rounded-2xl border-2 border-purple-200/90 shadow-sm hover:scale-[1.02] transition-transform">
+            <span className="text-[11px] font-black text-purple-900 uppercase tracking-wider block flex items-center space-x-1.5">
               <Award className="w-3.5 h-3.5 text-purple-600" />
               <span>Travel Level</span>
             </span>
-            <div className="text-base font-black text-amber-800 truncate mt-1">
+            <div className="text-base font-black text-purple-950 truncate mt-1">
               Lv {currentSubrank.levelNumber} &bull; {currentRank.name}
             </div>
-            <div className="text-[11px] text-emerald-600 font-bold mt-0.5 flex items-center space-x-1">
+            <div className="text-[11px] text-purple-700 font-bold mt-0.5 flex items-center space-x-1">
               <span>● {profile.jCardId}</span>
             </div>
           </div>

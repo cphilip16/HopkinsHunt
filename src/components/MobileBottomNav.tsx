@@ -39,14 +39,14 @@ export const MobileBottomNav: React.FC = () => {
             onClick={() => setActiveTab('explore')}
             className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
               activeTab === 'explore'
-                ? 'text-sky-300 scale-105'
-                : 'text-blue-200/70 hover:text-white'
+                ? 'text-sky-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
             }`}
           >
-            <div className={`p-1 rounded-xl transition-colors ${activeTab === 'explore' ? 'bg-hopkins-spirit/20 ring-1 ring-sky-300/40' : ''}`}>
+            <div className={`p-1.5 rounded-xl transition-all ${activeTab === 'explore' ? 'bg-gradient-to-tr from-blue-600 to-sky-400 text-white shadow-md shadow-sky-400/30 ring-2 ring-white/60' : ''}`}>
               <Compass className="w-5 h-5" />
             </div>
-            <span className="text-[10px] font-extrabold mt-0.5 tracking-tight">Places</span>
+            <span className="text-[10px] mt-0.5 tracking-tight">Places</span>
           </button>
 
           {/* Map Tab */}
@@ -54,14 +54,14 @@ export const MobileBottomNav: React.FC = () => {
             onClick={() => setActiveTab('map')}
             className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
               activeTab === 'map'
-                ? 'text-sky-300 scale-105'
-                : 'text-blue-200/70 hover:text-white'
+                ? 'text-emerald-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
             }`}
           >
-            <div className={`p-1 rounded-xl transition-colors ${activeTab === 'map' ? 'bg-hopkins-spirit/20 ring-1 ring-sky-300/40' : ''}`}>
+            <div className={`p-1.5 rounded-xl transition-all ${activeTab === 'map' ? 'bg-gradient-to-tr from-emerald-600 to-teal-400 text-white shadow-md shadow-emerald-400/30 ring-2 ring-white/60' : ''}`}>
               <MapPin className="w-5 h-5" />
             </div>
-            <span className="text-[10px] font-extrabold mt-0.5 tracking-tight">Map</span>
+            <span className="text-[10px] mt-0.5 tracking-tight">Map</span>
           </button>
 
           {/* Flock Trips Tab */}
@@ -69,16 +69,16 @@ export const MobileBottomNav: React.FC = () => {
             onClick={() => setActiveTab('trips')}
             className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
               activeTab === 'trips'
-                ? 'text-sky-300 scale-105'
-                : 'text-blue-200/70 hover:text-white'
+                ? 'text-pink-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
             }`}
           >
-            <div className={`p-1 rounded-xl transition-colors ${activeTab === 'trips' ? 'bg-sky-400/20 ring-1 ring-sky-300/40' : ''}`}>
+            <div className={`p-1.5 rounded-xl transition-all ${activeTab === 'trips' ? 'bg-gradient-to-tr from-purple-600 to-pink-500 text-white shadow-md shadow-pink-400/30 ring-2 ring-white/60' : ''}`}>
               <Users className="w-5 h-5" />
             </div>
-            <span className="text-[10px] font-extrabold mt-0.5 tracking-tight">Flocks</span>
+            <span className="text-[10px] mt-0.5 tracking-tight">Flocks</span>
             {myTripsCount > 0 && (
-              <span className="absolute top-1 right-2 w-2 h-2 rounded-full bg-sky-400 ring-2 ring-hopkins-deep" />
+              <span className="absolute top-1 right-2 w-2 h-2 rounded-full bg-pink-400 ring-2 ring-hopkins-deep" />
             )}
           </button>
 
@@ -87,14 +87,14 @@ export const MobileBottomNav: React.FC = () => {
             onClick={() => setActiveTab('quests')}
             className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
               activeTab === 'quests'
-                ? 'text-amber-300 scale-105'
-                : 'text-blue-200/70 hover:text-white'
+                ? 'text-amber-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
             }`}
           >
-            <div className={`p-1 rounded-xl transition-colors ${activeTab === 'quests' ? 'bg-amber-400/20 ring-1 ring-amber-300/40' : ''}`}>
+            <div className={`p-1.5 rounded-xl transition-all ${activeTab === 'quests' ? 'bg-gradient-to-tr from-amber-500 to-yellow-400 text-slate-950 shadow-md shadow-amber-400/30 ring-2 ring-white/60' : ''}`}>
               <Award className="w-5 h-5" />
             </div>
-            <span className="text-[10px] font-extrabold mt-0.5 tracking-tight">Quests</span>
+            <span className="text-[10px] mt-0.5 tracking-tight">Quests</span>
             {completedQuestsCount < quests.length && (
               <span className="absolute top-1 right-2.5 w-2 h-2 rounded-full bg-amber-400 animate-pulse ring-2 ring-hopkins-deep" />
             )}
@@ -105,16 +105,16 @@ export const MobileBottomNav: React.FC = () => {
             onClick={() => setActiveTab('passport')}
             className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
               activeTab === 'passport'
-                ? 'text-sky-300 scale-105'
-                : 'text-blue-200/70 hover:text-white'
+                ? 'text-yellow-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
             }`}
           >
-            <div className={`p-1 rounded-xl transition-colors flex items-center justify-center ${activeTab === 'passport' ? 'bg-sky-400/20 ring-1 ring-sky-300/40' : ''}`}>
+            <div className={`p-1.5 rounded-xl transition-all flex items-center justify-center ${activeTab === 'passport' ? 'bg-gradient-to-tr from-amber-400 to-orange-400 text-slate-950 shadow-md shadow-amber-400/30 ring-2 ring-white/60' : ''}`}>
               <AvatarVectorArt avatarId={profile.avatar} size={20} />
             </div>
-            <span className="text-[10px] font-extrabold mt-0.5 tracking-tight">J-Card</span>
+            <span className="text-[10px] mt-0.5 tracking-tight">J-Card</span>
             {visitedCount > 0 && (
-              <span className="absolute top-1 right-1.5 bg-emerald-500 text-white font-black text-[9px] px-1 py-0.2 rounded-full leading-none ring-1 ring-hopkins-deep">
+              <span className="absolute top-1 right-1.5 bg-emerald-500 text-white font-black text-[9px] px-1.5 py-0.2 rounded-full leading-none ring-1 ring-hopkins-deep shadow-xs">
                 {visitedCount}
               </span>
             )}

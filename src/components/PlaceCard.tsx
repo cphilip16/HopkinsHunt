@@ -16,6 +16,31 @@ interface PlaceCardProps {
   place: Place;
 }
 
+const getNeighborhoodBadgeStyle = (nh: string) => {
+  switch (nh) {
+    case 'Charles Village':
+      return 'bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white shadow-orange-500/30 ring-1 ring-white/30';
+    case 'Mount Vernon':
+      return 'bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-800 text-white shadow-indigo-500/30 ring-1 ring-white/30';
+    case 'Hampden':
+      return 'bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-600 text-white shadow-pink-500/30 ring-1 ring-white/30';
+    case 'Inner Harbor':
+      return 'bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-700 text-white shadow-cyan-500/30 ring-1 ring-white/30';
+    case 'Fells Point':
+      return 'bg-gradient-to-r from-teal-600 via-cyan-700 to-blue-800 text-white shadow-teal-500/30 ring-1 ring-white/30';
+    case 'Federal Hill':
+      return 'bg-gradient-to-r from-orange-600 via-amber-600 to-red-600 text-white shadow-orange-500/30 ring-1 ring-white/30';
+    case 'Station North':
+      return 'bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 text-white shadow-purple-500/30 ring-1 ring-white/30';
+    case 'Druid Hill & West':
+      return 'bg-gradient-to-r from-emerald-600 via-teal-600 to-green-700 text-white shadow-emerald-500/30 ring-1 ring-white/30';
+    case 'Locust Point & Fort':
+      return 'bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white shadow-red-500/30 ring-1 ring-white/30';
+    default:
+      return 'bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-blue-500/30 ring-1 ring-white/30';
+  }
+};
+
 export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
   const { profile, toggleCheckIn, setSelectedPlace, openCameraForPlace, getPlaceDistanceInfo } = useApp();
   const isVisited = profile.visitedPlaceIds.includes(place.id);
@@ -34,9 +59,9 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
 
   return (
     <div
-      className={`group rounded-3xl bg-white border-2 transition-all duration-300 flex flex-col overflow-hidden shadow-card-high hover:shadow-2xl hover:-translate-y-1 relative ${
+      className={`group rounded-3xl bg-white border-2 transition-all duration-300 flex flex-col overflow-hidden shadow-card-high hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1 relative ${
         isVisited
-          ? 'border-emerald-400 ring-2 ring-emerald-200'
+          ? 'border-emerald-400 ring-2 ring-emerald-300/60 shadow-emerald-500/10'
           : 'border-slate-200 hover:border-hopkins-spirit'
       }`}
     >
@@ -69,7 +94,7 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
           {/* Top Badges: Neighborhood Pill & Postage Stamp Points */}
           <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10">
             <div className="flex items-center space-x-1.5">
-              <span className="px-3 py-1 rounded-full text-[11px] font-extrabold bg-black/70 backdrop-blur-md text-white border border-white/20 flex items-center space-x-1.5 shadow-sm">
+              <span className={`px-3 py-1 rounded-full text-[11px] font-black border border-white/40 flex items-center space-x-1.5 shadow-md ${getNeighborhoodBadgeStyle(place.neighborhood)}`}>
                 <MapPin className="w-3 h-3 text-white" />
                 <span>{place.neighborhood}</span>
               </span>
@@ -103,18 +128,20 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
           {/* Bottom Snapshot Overlay: Destination Name & Tagline */}
           <div className="absolute bottom-2.5 inset-x-3 text-white">
             <div className="flex items-center space-x-1.5 text-[11px] font-bold text-sky-200 mb-0.5 flex-wrap gap-y-1">
-              <span className="capitalize">{place.category}</span>
+              <span className="capitalize px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-white/20 backdrop-blur-md text-white border border-white/30">
+                {place.category}
+              </span>
               <span>&bull;</span>
-              <span className="flex items-center">
-                <Clock className="w-3 h-3 mr-0.5" />
+              <span className="flex items-center bg-black/40 backdrop-blur-md px-2 py-0.5 rounded-full text-[10px] font-bold text-white border border-white/20">
+                <Clock className="w-3 h-3 mr-0.5 text-amber-300" />
                 {place.estimatedTime}
               </span>
               <span>&bull;</span>
               {distanceInfo.hasLocation && (
                 <span
-                  className={`inline-flex items-center space-x-1 px-1.5 py-0.5 rounded-md text-[10px] font-black ${
+                  className={`inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-black backdrop-blur-md shadow-xs ${
                     distanceInfo.isWithinRadius
-                      ? 'bg-emerald-500/95 text-white shadow-xs'
+                      ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white ring-1 ring-white/40'
                       : 'bg-black/60 text-amber-300 border border-white/20'
                   }`}
                 >
@@ -158,26 +185,26 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
           </p>
 
           {/* Hopkins Student Lore Quote */}
-          <div className="p-2.5 rounded-xl bg-blue-50/80 border border-blue-200/80 text-[11px] text-hopkins-deep">
-            <div className="font-extrabold flex items-center space-x-1.5 text-hopkins-heritage mb-0.5">
+          <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-50 via-sky-50/70 to-indigo-50/50 border border-blue-200/90 text-[11px] text-hopkins-deep shadow-xs">
+            <div className="font-black flex items-center space-x-1.5 text-hopkins-heritage mb-0.5 tracking-tight">
               <BabyJaySticker size={18} />
               <span>Hopkins Lore:</span>
             </div>
-            <p className="line-clamp-2 italic text-slate-800 font-medium">
+            <p className="line-clamp-2 italic text-slate-800 font-medium leading-relaxed">
               "{place.hopkinsLore}"
             </p>
           </div>
 
           {/* Transit Advice */}
-          <div className="flex items-start space-x-1.5 text-[11px] text-slate-700 bg-slate-100/90 p-2 rounded-xl border border-slate-200/60 font-medium">
+          <div className="flex items-start space-x-1.5 text-[11px] text-slate-700 bg-gradient-to-r from-slate-50 to-blue-50/50 p-2.5 rounded-xl border border-blue-100/80 font-medium">
             <Bus className="w-3.5 h-3.5 text-hopkins-heritage flex-shrink-0 mt-0.5" />
-            <span className="line-clamp-1">{place.transitTip}</span>
+            <span className="line-clamp-1 font-semibold">{place.transitTip}</span>
           </div>
 
           {/* Student Perk if available */}
           {place.studentPerk && (
-            <div className="flex items-center space-x-1 text-[11px] font-bold text-emerald-800">
-              <Award className="w-3.5 h-3.5 flex-shrink-0" />
+            <div className="flex items-center space-x-1 text-[11px] font-bold text-emerald-800 bg-emerald-50/80 px-2 py-1 rounded-lg border border-emerald-200/60">
+              <Award className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
               <span className="line-clamp-1">{place.studentPerk}</span>
             </div>
           )}
@@ -190,10 +217,10 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
             onClick={() => toggleCheckIn(place.id)}
             className={`flex-1 py-3 px-4 min-h-[44px] rounded-xl text-xs font-heading font-black transition-all flex items-center justify-center space-x-2 shadow-sm ${
               isVisited
-                ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20'
+                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-emerald-600/30 ring-1 ring-white/30'
                 : distanceInfo.isWithinRadius
-                ? 'bg-gradient-to-r from-hopkins-heritage to-hopkins-deep hover:from-blue-800 hover:to-hopkins-heritage text-white shadow-blue-900/20 ring-2 ring-emerald-400/50'
-                : 'bg-amber-50/90 hover:bg-amber-100 text-amber-950 border border-amber-300'
+                ? 'bg-gradient-to-r from-blue-600 via-hopkins-heritage to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white shadow-blue-600/30 ring-2 ring-emerald-400'
+                : 'bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black shadow-amber-400/25 border border-amber-300'
             }`}
             title={
               isVisited
@@ -215,7 +242,7 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
               </>
             ) : (
               <>
-                <Navigation className="w-4 h-4 text-amber-700" />
+                <Navigation className="w-4 h-4 text-slate-950" />
                 <span>Check In ({distanceInfo.formattedDistance})</span>
               </>
             )}
@@ -224,11 +251,11 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
           {/* Photo Proof Snap Button */}
           <button
             onClick={() => openCameraForPlace(place)}
-            className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl border border-slate-300 hover:border-amber-400 text-slate-700 hover:text-amber-700 bg-white hover:bg-amber-50 shadow-xs transition-colors"
+            className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl border border-amber-300 hover:border-amber-400 text-amber-900 hover:text-amber-950 bg-gradient-to-br from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 shadow-xs transition-colors"
             title="Snap Photo Proof with Field Camera"
             aria-label={`Snap photo at ${place.name}`}
           >
-            <Camera className="w-4 h-4 text-hopkins-heritage" />
+            <Camera className="w-4 h-4 text-amber-700" />
           </button>
 
           {/* Details Button */}
