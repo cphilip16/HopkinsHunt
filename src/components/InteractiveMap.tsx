@@ -1,24 +1,38 @@
 import React, { useState } from 'react';
-import { MapPin, Navigation, Bus, Check, Sparkles, X, ChevronRight } from 'lucide-react';
+import { MapPin, Navigation, Bus, Check, Sparkles, X, ChevronRight, Crosshair, Radio, ShieldCheck } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Place } from '../types';
 import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { HotAirBalloonSticker, CompassRoseSticker, BinocularsSticker } from './art/AnimatedStickers';
 import { PassportStamp } from './art/PassportStamp';
+import { projectGeoToMapCoords, metersToMapRadiusPercent, formatDistance } from '../utils/geoUtils';
 
 export const InteractiveMap: React.FC = () => {
   const {
     places,
     profile,
     toggleCheckIn,
+    verifyAndCheckIn,
     setSelectedPlace,
     selectedNeighborhood,
     transitFilter,
     freeOnlyFilter,
+    userLocation,
+    locationStatus,
+    isSimulatedLocation,
+    simulatedPresetName,
+    checkInRadiusMeters,
+    getPlaceDistanceInfo,
+    simulateLocation,
   } = useApp();
 
   const [activePin, setActivePin] = useState<Place | null>(null);
+
+  // User projected coordinates on map canvas
+  const userMapPos = userLocation
+    ? projectGeoToMapCoords(userLocation.lat, userLocation.lng)
+    : null;
 
   // Filter places for map pins
   const visiblePlaces = places.filter((p) => {
@@ -47,7 +61,7 @@ export const InteractiveMap: React.FC = () => {
               <span className="hidden md:inline-block"><CompassRoseSticker size={20} /></span>
             </h3>
             <p className="text-xs text-blue-200">
-              Pins show travel spots across Baltimore. The dashed blue line traces the free JHMI Shuttle route!
+              Pins show travel spots across Baltimore with 250m GPS geofencing verification. The dashed line traces the free JHMI Shuttle route!
             </p>
           </div>
         </div>
@@ -173,6 +187,117 @@ export const InteractiveMap: React.FC = () => {
           <text x="76.5" y="41.5" fill="#E03A3E" fontSize="2.2" fontWeight="bold">
             JHU Medical Campus
           </text>
+
+          {/* Active Pin 250m Geofence Radius */}
+          {activePin && (
+            <g className="pointer-events-none">
+              <circle
+                cx={activePin.coordinates.mapX}
+                cy={activePin.coordinates.mapY}
+                r={metersToMapRadiusPercent(checkInRadiusMeters)}
+                fill="#38bdf8"
+                fillOpacity="0.18"
+                stroke="#38bdf8"
+                strokeWidth="0.5"
+                strokeDasharray="1.2, 1"
+              />
+              <circle
+                cx={activePin.coordinates.mapX}
+                cy={activePin.coordinates.mapY}
+                r={metersToMapRadiusPercent(checkInRadiusMeters) * 1.05}
+                fill="none"
+                stroke="#60a5fa"
+                strokeWidth="0.2"
+                opacity="0.5"
+              />
+              <text
+                x={activePin.coordinates.mapX}
+                y={activePin.coordinates.mapY + metersToMapRadiusPercent(checkInRadiusMeters) + 2}
+                textAnchor="middle"
+                fill="#38bdf8"
+                fontSize="1.7"
+                fontWeight="600"
+                opacity="0.9"
+              >
+                250m Check-in Radius
+              </text>
+            </g>
+          )}
+
+          {/* Navigation Line Connecting User to Selected Pin */}
+          {userMapPos && activePin && (
+            <line
+              x1={userMapPos.mapX}
+              y1={userMapPos.mapY}
+              x2={activePin.coordinates.mapX}
+              y2={activePin.coordinates.mapY}
+              stroke="#38bdf8"
+              strokeWidth="0.4"
+              strokeDasharray="1, 1"
+              opacity="0.75"
+              className="pointer-events-none"
+            />
+          )}
+
+          {/* Live User Location Beacon */}
+          {userMapPos && (
+            <g className="user-beacon pointer-events-none">
+              <circle
+                cx={userMapPos.mapX}
+                cy={userMapPos.mapY}
+                r="4.2"
+                fill="#38bdf8"
+                fillOpacity="0.2"
+                stroke="#60a5fa"
+                strokeWidth="0.3"
+                strokeDasharray="1, 0.8"
+              />
+              <circle
+                cx={userMapPos.mapX}
+                cy={userMapPos.mapY}
+                r="2.5"
+                fill="#0284c7"
+                fillOpacity="0.4"
+              />
+              <circle
+                cx={userMapPos.mapX}
+                cy={userMapPos.mapY}
+                r="1.4"
+                fill="#2563eb"
+                stroke="#ffffff"
+                strokeWidth="0.4"
+              />
+              <circle
+                cx={userMapPos.mapX}
+                cy={userMapPos.mapY}
+                r="0.5"
+                fill="#ffffff"
+              />
+              <g transform={`translate(${userMapPos.mapX}, ${userMapPos.mapY - 2.8})`}>
+                <rect
+                  x="-9"
+                  y="-3.2"
+                  width="18"
+                  height="3.8"
+                  rx="1.9"
+                  fill="#0f172a"
+                  fillOpacity="0.9"
+                  stroke="#38bdf8"
+                  strokeWidth="0.25"
+                />
+                <text
+                  x="0"
+                  y="-0.8"
+                  textAnchor="middle"
+                  fill="#68ace5"
+                  fontSize="1.7"
+                  fontWeight="bold"
+                >
+                  {isSimulatedLocation ? 'Simulated Spot' : 'You Are Here'}
+                </text>
+              </g>
+            </g>
+          )}
         </svg>
 
         {/* Interactive Place Pins (Absolute HTML overlays with touch target padding) */}
@@ -218,56 +343,117 @@ export const InteractiveMap: React.FC = () => {
         })}
 
         {/* Selected Pin Popup Card */}
-        {activePin && (
-          <div className="absolute bottom-3 inset-x-3 sm:inset-x-auto sm:bottom-4 sm:right-4 sm:w-80 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-slate-200 z-30 animate-in fade-in slide-in-from-bottom-2">
-            <div className="flex items-start justify-between">
-              <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-slate-100 text-slate-700">
-                {activePin.neighborhood}
-              </span>
-              <button
-                onClick={() => setActivePin(null)}
-                className="text-slate-400 hover:text-slate-600 p-1 min-w-[36px] min-h-[36px] flex items-center justify-center"
-                aria-label="Close pin preview"
-              >
-                <X className="w-4 h-4" />
-              </button>
+        {activePin && (() => {
+          const distanceInfo = getPlaceDistanceInfo(activePin);
+          const isVisited = profile.visitedPlaceIds.includes(activePin.id);
+
+          return (
+            <div className="absolute bottom-3 inset-x-3 sm:inset-x-auto sm:bottom-4 sm:right-4 sm:w-80 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-slate-200 z-30 animate-in fade-in slide-in-from-bottom-2">
+              <div className="flex items-start justify-between">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-slate-100 text-slate-700">
+                  {activePin.neighborhood}
+                </span>
+                <button
+                  onClick={() => setActivePin(null)}
+                  className="text-slate-400 hover:text-slate-600 p-1 min-w-[36px] min-h-[36px] flex items-center justify-center"
+                  aria-label="Close pin preview"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <h4 className="text-sm font-extrabold text-slate-900 mt-1.5 leading-snug">
+                {activePin.name}
+              </h4>
+              <p className="text-xs text-slate-600 line-clamp-2 mt-1">
+                {activePin.tagline}
+              </p>
+
+              {/* Proximity / Distance Badge */}
+              {distanceInfo && (
+                <div
+                  className={`mt-2 flex items-center justify-between text-xs px-2.5 py-1.5 rounded-lg border ${
+                    distanceInfo.isWithinRadius
+                      ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                      : 'bg-amber-50 border-amber-200 text-amber-800'
+                  }`}
+                >
+                  <div className="flex items-center space-x-1.5 font-semibold">
+                    <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span>{formatDistance(distanceInfo.distanceMeters)} away</span>
+                  </div>
+                  <span
+                    className={`text-[10px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded ${
+                      distanceInfo.isWithinRadius
+                        ? 'bg-emerald-200/80 text-emerald-900'
+                        : 'bg-amber-200/80 text-amber-900'
+                    }`}
+                  >
+                    {distanceInfo.isWithinRadius ? 'In Range (≤250m)' : 'Out of Range'}
+                  </span>
+                </div>
+              )}
+
+              <div className="mt-2 text-[11px] text-hopkins-heritage bg-blue-50 p-2 rounded-lg flex items-center space-x-1.5 font-medium">
+                <Bus className="w-3.5 h-3.5 flex-shrink-0" />
+                <span className="line-clamp-1">{activePin.transitTip}</span>
+              </div>
+
+              <div className="mt-3 flex items-center justify-between gap-2 pt-2 border-t border-slate-100">
+                <button
+                  onClick={() => toggleCheckIn(activePin.id)}
+                  className={`flex-1 py-2.5 px-3 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center justify-center space-x-1.5 ${
+                    isVisited
+                      ? 'bg-emerald-100 hover:bg-emerald-200 text-emerald-800'
+                      : distanceInfo?.isWithinRadius
+                      ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-md'
+                      : 'bg-hopkins-heritage hover:bg-hopkins-deep text-white shadow-sm'
+                  }`}
+                >
+                  {isVisited ? (
+                    <>
+                      <Check className="w-4 h-4 stroke-[2.5]" />
+                      <span>Visited</span>
+                    </>
+                  ) : distanceInfo?.isWithinRadius ? (
+                    <>
+                      <ShieldCheck className="w-4 h-4 text-emerald-200" />
+                      <span>Verify & Stamp (+{activePin.points} pts)</span>
+                    </>
+                  ) : (
+                    <>
+                      <Crosshair className="w-3.5 h-3.5" />
+                      <span>Check In (+{activePin.points} pts)</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={() => setSelectedPlace(activePin)}
+                  className="py-2.5 px-3.5 min-h-[40px] bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center space-x-1"
+                >
+                  <span>Full Lore</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              {!isVisited && distanceInfo && !distanceInfo.isWithinRadius && (
+                <button
+                  onClick={() =>
+                    simulateLocation(
+                      { lat: activePin.coordinates.lat, lng: activePin.coordinates.lng },
+                      activePin.name
+                    )
+                  }
+                  className="mt-2 w-full py-1.5 px-2 bg-blue-50 hover:bg-blue-100 text-hopkins-heritage border border-blue-200 rounded-lg text-[10px] font-semibold flex items-center justify-center space-x-1 transition-colors"
+                >
+                  <Radio className="w-3 h-3 text-blue-600" />
+                  <span>Teleport Here (Test 250m Arrival)</span>
+                </button>
+              )}
             </div>
-
-            <h4 className="text-sm font-extrabold text-slate-900 mt-1.5 leading-snug">
-              {activePin.name}
-            </h4>
-            <p className="text-xs text-slate-600 line-clamp-2 mt-1">
-              {activePin.tagline}
-            </p>
-
-            <div className="mt-2 text-[11px] text-hopkins-heritage bg-blue-50 p-2 rounded-lg flex items-center space-x-1.5 font-medium">
-              <Bus className="w-3.5 h-3.5 flex-shrink-0" />
-              <span className="line-clamp-1">{activePin.transitTip}</span>
-            </div>
-
-            <div className="mt-3 flex items-center justify-between gap-2 pt-2 border-t border-slate-100">
-              <button
-                onClick={() => toggleCheckIn(activePin.id)}
-                className={`flex-1 py-2.5 px-3 min-h-[40px] rounded-xl text-xs font-bold transition-all ${
-                  profile.visitedPlaceIds.includes(activePin.id)
-                    ? 'bg-emerald-100 text-emerald-800'
-                    : 'bg-hopkins-heritage hover:bg-hopkins-deep text-white shadow-sm'
-                }`}
-              >
-                {profile.visitedPlaceIds.includes(activePin.id)
-                  ? '✓ Visited'
-                  : `Check In (+${activePin.points} pts)`}
-              </button>
-
-              <button
-                onClick={() => setSelectedPlace(activePin)}
-                className="py-2.5 px-4 min-h-[40px] bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold"
-              >
-                Full Lore
-              </button>
-            </div>
-          </div>
-        )}
+          );
+        })()}
 
       </div>
     </div>

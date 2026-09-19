@@ -1,12 +1,30 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { Place, UserProfile, Subrank, Rank, Quest, Badge, GroupTrip, ScrapbookPhoto } from '../types';
+import {
+  Place,
+  UserProfile,
+  Subrank,
+  Rank,
+  Quest,
+  Badge,
+  GroupTrip,
+  ScrapbookPhoto,
+  UserLocation,
+  LocationStatus,
+  PlaceDistanceInfo,
+  LocationVerificationTarget,
+} from '../types';
 import { PLACES } from '../data/placesData';
 import { SUBRANKS, getRankAndSubrank } from '../data/ranksData';
 import { QUESTS } from '../data/questsData';
 import { BADGES } from '../data/badgesData';
 import { INITIAL_GROUP_TRIPS } from '../data/groupTripsData';
 import { INITIAL_SCRAPBOOK_PHOTOS } from '../data/scrapbookData';
+import {
+  calculateDistanceMeters,
+  formatDistance,
+  DEFAULT_CHECK_IN_RADIUS_METERS,
+} from '../utils/geoUtils';
 
 interface LevelUpData {
   subrank: Subrank;
@@ -52,6 +70,20 @@ interface AppContextType {
   setTransitFilter: (val: boolean) => void;
   freeOnlyFilter: boolean;
   setFreeOnlyFilter: (val: boolean) => void;
+
+  // Geolocation Tracking & Verification
+  userLocation: UserLocation | null;
+  locationStatus: LocationStatus;
+  isSimulatedLocation: boolean;
+  simulatedPresetName: string | null;
+  checkInRadiusMeters: number;
+  locationVerificationTarget: LocationVerificationTarget | null;
+  setLocationVerificationTarget: (target: LocationVerificationTarget | null) => void;
+  startLocationTracking: () => void;
+  stopLocationTracking: () => void;
+  simulateLocation: (coords: { lat: number; lng: number } | null, presetName?: string) => void;
+  getPlaceDistanceInfo: (place: Place) => PlaceDistanceInfo;
+  verifyAndCheckIn: (placeId: string, bypassRadius?: boolean) => { success: boolean; isWithinRadius: boolean; distanceMeters?: number };
 
   // Flock Expeditions (Group Trips)
   groupTrips: GroupTrip[];
@@ -168,6 +200,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [transitFilter, setTransitFilter] = useState(false);
   const [freeOnlyFilter, setFreeOnlyFilter] = useState(false);
+
+  // Geolocation states
+  const [userLocation, setUserLocation] = useState<UserLocation | null>(() => {
+    // Default initial location: Homewood Campus (Gilman Hall)
+    return {
+      lat: 39.3299,
+      lng: -76.6205,
+      accuracy: 15,
+      timestamp: Date.now(),
+    };
+  });
+  const [locationStatus, setLocationStatus] = useState<LocationStatus>('active');
+  const [isSimulatedLocation, setIsSimulatedLocation] = useState<boolean>(true);
+  const [simulatedPresetName, setSimulatedPresetName] = useState<string | null>('Homewood Campus (Gilman)');
+  const [checkInRadiusMeters] = useState<number>(DEFAULT_CHECK_IN_RADIUS_METERS);
+  const [locationVerificationTarget, setLocationVerificationTarget] = useState<LocationVerificationTarget | null>(null);
 
   // Save profile changes
   useEffect(() => {
@@ -369,8 +417,102 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   };
 
-  // Check in action
-  const toggleCheckIn = (placeId: string) => {
+  // Location tracking methods
+  const startLocationTracking = () => {
+    if (typeof window === 'undefined' || !navigator.geolocation) {
+      setLocationStatus('unavailable');
+      return;
+    }
+    setLocationStatus('requesting');
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserLocation({
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+          accuracy: pos.coords.accuracy,
+          timestamp: pos.timestamp,
+        });
+        setLocationStatus('active');
+        setIsSimulatedLocation(false);
+        setSimulatedPresetName(null);
+      },
+      (err) => {
+        console.warn('Geolocation error:', err.message);
+        if (err.code === 1) { // PERMISSION_DENIED
+          setLocationStatus('denied');
+        } else {
+          setLocationStatus('unavailable');
+        }
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 10000 }
+    );
+  };
+
+  const stopLocationTracking = () => {
+    setLocationStatus('idle');
+  };
+
+  const simulateLocation = (coords: { lat: number; lng: number } | null, presetName?: string) => {
+    if (!coords) {
+      setIsSimulatedLocation(false);
+      setSimulatedPresetName(null);
+      startLocationTracking();
+      return;
+    }
+    const newLoc: UserLocation = {
+      lat: coords.lat,
+      lng: coords.lng,
+      accuracy: 6,
+      timestamp: Date.now(),
+    };
+    setUserLocation(newLoc);
+    setIsSimulatedLocation(true);
+    setSimulatedPresetName(presetName || 'Custom Teleport');
+    setLocationStatus('active');
+
+    // If verification target modal is open, immediately recalculate its distance
+    if (locationVerificationTarget) {
+      const dist = calculateDistanceMeters(
+        coords.lat,
+        coords.lng,
+        locationVerificationTarget.place.coordinates.lat,
+        locationVerificationTarget.place.coordinates.lng
+      );
+      setLocationVerificationTarget({
+        ...locationVerificationTarget,
+        distanceMeters: dist,
+        isWithinRadius: dist <= checkInRadiusMeters,
+      });
+    }
+  };
+
+  const getPlaceDistanceInfo = (place: Place): PlaceDistanceInfo => {
+    if (!userLocation) {
+      return {
+        distanceMeters: Infinity,
+        formattedDistance: 'Location needed',
+        isWithinRadius: false,
+        hasLocation: false,
+        requiredRadiusMeters: checkInRadiusMeters,
+      };
+    }
+    const dist = calculateDistanceMeters(
+      userLocation.lat,
+      userLocation.lng,
+      place.coordinates.lat,
+      place.coordinates.lng
+    );
+    return {
+      distanceMeters: dist,
+      formattedDistance: formatDistance(dist),
+      isWithinRadius: dist <= checkInRadiusMeters,
+      hasLocation: true,
+      requiredRadiusMeters: checkInRadiusMeters,
+    };
+  };
+
+  // Internal execution of check-in state mutation
+  const executeToggleVisited = (placeId: string) => {
     const isAlreadyVisited = profile.visitedPlaceIds.includes(placeId);
     const targetPlace = PLACES.find((p) => p.id === placeId);
     if (!targetPlace) return;
@@ -467,6 +609,53 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           isMajorRankUp,
         });
       }
+    }
+  };
+
+  // Location verified check-in
+  const verifyAndCheckIn = (placeId: string, bypassRadius: boolean = false) => {
+    const isAlreadyVisited = profile.visitedPlaceIds.includes(placeId);
+    if (isAlreadyVisited) {
+      executeToggleVisited(placeId);
+      return { success: true, isWithinRadius: true, distanceMeters: 0 };
+    }
+
+    const targetPlace = PLACES.find((p) => p.id === placeId);
+    if (!targetPlace) return { success: false, isWithinRadius: false };
+
+    const distance = userLocation
+      ? calculateDistanceMeters(
+          userLocation.lat,
+          userLocation.lng,
+          targetPlace.coordinates.lat,
+          targetPlace.coordinates.lng
+        )
+      : Infinity;
+
+    const inRange = bypassRadius || distance <= checkInRadiusMeters;
+
+    if (!inRange) {
+      setLocationVerificationTarget({
+        place: targetPlace,
+        distanceMeters: distance,
+        requiredRadiusMeters: checkInRadiusMeters,
+        isWithinRadius: false,
+      });
+      return { success: false, isWithinRadius: false, distanceMeters: distance };
+    }
+
+    // Within verified radius!
+    executeToggleVisited(placeId);
+    return { success: true, isWithinRadius: true, distanceMeters: distance };
+  };
+
+  // Public check in action
+  const toggleCheckIn = (placeId: string) => {
+    const isAlreadyVisited = profile.visitedPlaceIds.includes(placeId);
+    if (isAlreadyVisited) {
+      executeToggleVisited(placeId);
+    } else {
+      verifyAndCheckIn(placeId);
     }
   };
 
@@ -744,6 +933,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setTransitFilter,
         freeOnlyFilter,
         setFreeOnlyFilter,
+        userLocation,
+        locationStatus,
+        isSimulatedLocation,
+        simulatedPresetName,
+        checkInRadiusMeters,
+        locationVerificationTarget,
+        setLocationVerificationTarget,
+        startLocationTracking,
+        stopLocationTracking,
+        simulateLocation,
+        getPlaceDistanceInfo,
+        verifyAndCheckIn,
         groupTrips,
         joinGroupTrip,
         leaveGroupTrip,

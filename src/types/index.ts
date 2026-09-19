@@ -164,3 +164,27 @@ export interface UserProfile {
   verificationDate?: string;
   verificationMethod?: 'email_code' | 'jhed_sso';
 }
+
+export interface UserLocation {
+  lat: number;
+  lng: number;
+  accuracy: number;
+  timestamp: number;
+}
+
+export type LocationStatus = 'idle' | 'requesting' | 'active' | 'denied' | 'unavailable';
+
+export interface PlaceDistanceInfo {
+  distanceMeters: number;
+  formattedDistance: string;
+  isWithinRadius: boolean;
+  hasLocation: boolean;
+  requiredRadiusMeters: number;
+}
+
+export interface LocationVerificationTarget {
+  place: Place;
+  distanceMeters: number;
+  requiredRadiusMeters: number;
+  isWithinRadius: boolean;
+}

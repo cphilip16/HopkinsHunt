@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, MapPin, Bus, Clock, DollarSign, Award, Sparkles, Check, Star, Calendar, Save, Stamp, Heart, Mail, Compass, BookOpen, Camera, Users } from 'lucide-react';
+import { X, MapPin, Bus, Clock, DollarSign, Award, Sparkles, Check, Star, Calendar, Save, Stamp, Heart, Mail, Compass, BookOpen, Camera, Users, Navigation, Radio, AlertTriangle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { CuteMascot } from './art/CuteMascot';
@@ -21,6 +21,8 @@ export const PlaceDetailModal: React.FC = () => {
     updateReview,
     openCameraForPlace,
     setIsCreateTripModalOpen,
+    getPlaceDistanceInfo,
+    simulateLocation,
   } = useApp();
 
   if (!selectedPlace) return null;
@@ -131,42 +133,82 @@ export const PlaceDetailModal: React.FC = () => {
         <div className="p-5 sm:p-8 space-y-5 overflow-y-auto flex-1 pb-8 sm:pb-8 bg-[#FFFDF9]">
           
           {/* Action Row: Passport Check-In Desk */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-4 rounded-2xl bg-gradient-to-r from-amber-50 via-sky-50/50 to-amber-50 border-2 border-dashed border-amber-300 shadow-sm">
-            <div>
-              <div className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider flex items-center space-x-1">
-                <Stamp className="w-3.5 h-3.5 text-hopkins-heritage" />
-                <span>Customs & Stamp Status</span>
-              </div>
-              <div className="text-sm font-black text-slate-900 mt-0.5">
-                {isVisited ? (
-                  <span className="text-emerald-700 flex items-center space-x-1.5">
-                    <Check className="w-4 h-4 text-emerald-600 stroke-[3]" />
-                    <span>Official Rubber Stamp Inked (+{selectedPlace.points} PTS)</span>
-                  </span>
-                ) : (
-                  <span className="text-slate-600 font-semibold">Unstamped &bull; Ready for your expedition!</span>
+          {(() => {
+            const distanceInfo = getPlaceDistanceInfo(selectedPlace);
+            return (
+              <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-50 via-sky-50/50 to-amber-50 border-2 border-dashed border-amber-300 shadow-sm space-y-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                  <div>
+                    <div className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider flex items-center space-x-1">
+                      <Stamp className="w-3.5 h-3.5 text-hopkins-heritage" />
+                      <span>Customs & Stamp Status</span>
+                    </div>
+                    <div className="text-sm font-black text-slate-900 mt-0.5">
+                      {isVisited ? (
+                        <span className="text-emerald-700 flex items-center space-x-1.5">
+                          <Check className="w-4 h-4 text-emerald-600 stroke-[3]" />
+                          <span>Official Rubber Stamp Inked (+{selectedPlace.points} PTS)</span>
+                        </span>
+                      ) : distanceInfo.isWithinRadius ? (
+                        <span className="text-emerald-700 flex items-center space-x-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                          <span>Verified In Range ({distanceInfo.formattedDistance}) &bull; Ready to Stamp!</span>
+                        </span>
+                      ) : (
+                        <span className="text-amber-900 font-semibold flex items-center space-x-1.5">
+                          <Navigation className="w-3.5 h-3.5 text-amber-700 flex-shrink-0" />
+                          <span>{distanceInfo.formattedDistance} away &bull; Must be within 250m to stamp</span>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleToggleStamp}
+                    className={`py-3 px-5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center space-x-2 shadow-md ${
+                      isVisited
+                        ? 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-300'
+                        : distanceInfo.isWithinRadius
+                        ? 'bg-gradient-to-r from-hopkins-heritage to-hopkins-deep hover:from-blue-800 hover:to-hopkins-heritage text-white shadow-blue-900/20 ring-2 ring-emerald-400/60'
+                        : 'bg-amber-100 hover:bg-amber-200 text-amber-950 border border-amber-300'
+                    }`}
+                  >
+                    {isVisited ? (
+                      <span>Undo Stamp</span>
+                    ) : distanceInfo.isWithinRadius ? (
+                      <>
+                        <Stamp className="w-4 h-4 text-emerald-300" />
+                        <span>Stamp My Passport (+{selectedPlace.points} PTS)</span>
+                      </>
+                    ) : (
+                      <>
+                        <Navigation className="w-4 h-4 text-amber-800" />
+                        <span>Check In ({distanceInfo.formattedDistance})</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {!isVisited && !distanceInfo.isWithinRadius && (
+                  <div className="pt-2 border-t border-amber-200/80 flex items-center justify-between text-[11px]">
+                    <span className="text-slate-500">Testing on laptop or grading indoors?</span>
+                    <button
+                      onClick={() =>
+                        simulateLocation(
+                          { lat: selectedPlace.coordinates.lat, lng: selectedPlace.coordinates.lng },
+                          `${selectedPlace.name} (Direct Arrival)`
+                        )
+                      }
+                      className="font-bold text-hopkins-heritage hover:text-hopkins-deep hover:underline flex items-center space-x-1"
+                    >
+                      <Compass className="w-3 h-3 text-amber-600" />
+                      <span>Simulate GPS Arrival Here</span>
+                    </button>
+                  </div>
                 )}
               </div>
-            </div>
-
-            <button
-              onClick={handleToggleStamp}
-              className={`py-3 px-5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center space-x-2 shadow-md ${
-                isVisited
-                  ? 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-300'
-                  : 'bg-gradient-to-r from-hopkins-heritage to-hopkins-deep hover:from-blue-800 hover:to-hopkins-heritage text-white shadow-blue-900/20'
-              }`}
-            >
-              {isVisited ? (
-                <span>Undo Stamp</span>
-              ) : (
-                <>
-                  <Stamp className="w-4 h-4" />
-                  <span>Stamp My Passport (+{selectedPlace.points} PTS)</span>
-                </>
-              )}
-            </button>
-          </div>
+            );
+          })()}
 
           {/* Quick Expedition Actions: Camera Snap & Flock Trip */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Bus, Check, Plus, Sparkles, Clock, DollarSign, Award, ChevronRight, Heart, Pin, Camera } from 'lucide-react';
+import { MapPin, Bus, Check, Plus, Sparkles, Clock, DollarSign, Award, ChevronRight, Heart, Pin, Camera, Navigation, Radio } from 'lucide-react';
 import { Place } from '../types';
 import { useApp } from '../context/AppContext';
 import { PassportStamp } from './art/PassportStamp';
@@ -17,9 +17,10 @@ interface PlaceCardProps {
 }
 
 export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
-  const { profile, toggleCheckIn, setSelectedPlace, openCameraForPlace } = useApp();
+  const { profile, toggleCheckIn, setSelectedPlace, openCameraForPlace, getPlaceDistanceInfo } = useApp();
   const isVisited = profile.visitedPlaceIds.includes(place.id);
   const userReview = profile.placeReviews[place.id];
+  const distanceInfo = getPlaceDistanceInfo(place);
 
   // Pick cute pastel tape color based on category
   const washiColor =
@@ -101,7 +102,7 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
 
           {/* Bottom Snapshot Overlay: Destination Name & Tagline */}
           <div className="absolute bottom-2.5 inset-x-3 text-white">
-            <div className="flex items-center space-x-1.5 text-[11px] font-bold text-sky-200 mb-0.5">
+            <div className="flex items-center space-x-1.5 text-[11px] font-bold text-sky-200 mb-0.5 flex-wrap gap-y-1">
               <span className="capitalize">{place.category}</span>
               <span>&bull;</span>
               <span className="flex items-center">
@@ -109,7 +110,22 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
                 {place.estimatedTime}
               </span>
               <span>&bull;</span>
-              <span>{place.cost}</span>
+              {distanceInfo.hasLocation && (
+                <span
+                  className={`inline-flex items-center space-x-1 px-1.5 py-0.5 rounded-md text-[10px] font-black ${
+                    distanceInfo.isWithinRadius
+                      ? 'bg-emerald-500/95 text-white shadow-xs'
+                      : 'bg-black/60 text-amber-300 border border-white/20'
+                  }`}
+                >
+                  <Navigation className="w-2.5 h-2.5" />
+                  <span>
+                    {distanceInfo.isWithinRadius
+                      ? `In Range (${distanceInfo.formattedDistance})`
+                      : distanceInfo.formattedDistance}
+                  </span>
+                </span>
+              )}
             </div>
             <h3 className="text-lg sm:text-xl font-heading font-black tracking-tight text-white leading-snug drop-shadow-md">
               {place.name}
@@ -174,19 +190,33 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
             onClick={() => toggleCheckIn(place.id)}
             className={`flex-1 py-3 px-4 min-h-[44px] rounded-xl text-xs font-heading font-black transition-all flex items-center justify-center space-x-2 shadow-sm ${
               isVisited
-                ? 'bg-emerald-600 text-white shadow-emerald-600/20'
-                : 'bg-hopkins-heritage hover:bg-hopkins-deep text-white shadow-blue-900/15'
+                ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20'
+                : distanceInfo.isWithinRadius
+                ? 'bg-gradient-to-r from-hopkins-heritage to-hopkins-deep hover:from-blue-800 hover:to-hopkins-heritage text-white shadow-blue-900/20 ring-2 ring-emerald-400/50'
+                : 'bg-amber-50/90 hover:bg-amber-100 text-amber-950 border border-amber-300'
             }`}
+            title={
+              isVisited
+                ? 'Stamped in your passport (click to undo)'
+                : distanceInfo.isWithinRadius
+                ? `You are within 250m! Click to stamp passport (+${place.points} PTS)`
+                : `You are ${distanceInfo.formattedDistance} away. Must be within 250m to stamp.`
+            }
           >
             {isVisited ? (
               <>
                 <Check className="w-4 h-4 stroke-[3]" />
                 <span>Stamped in Passport</span>
               </>
+            ) : distanceInfo.isWithinRadius ? (
+              <>
+                <Check className="w-4 h-4 stroke-[3] text-emerald-300" />
+                <span>Stamp Verified Visit (+{place.points} PTS)</span>
+              </>
             ) : (
               <>
-                <Plus className="w-4 h-4 stroke-[3]" />
-                <span>Stamp Location (+{place.points} PTS)</span>
+                <Navigation className="w-4 h-4 text-amber-700" />
+                <span>Check In ({distanceInfo.formattedDistance})</span>
               </>
             )}
           </button>

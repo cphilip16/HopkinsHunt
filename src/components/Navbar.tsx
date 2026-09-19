@@ -7,6 +7,8 @@ import { CuteMascot } from './art/CuteMascot';
 import { AirmailStrip } from './art/TravelDecorations';
 import { BabyJaySticker, SparkleStarsSticker } from './art/AnimatedStickers';
 import { RankInsigniaArt, AvatarVectorArt } from './art/VectorArt';
+import { PassportStamp } from './art/PassportStamp';
+import { LocationControlBar } from './LocationControlBar';
 
 export const Navbar: React.FC = () => {
   const {
@@ -101,6 +103,9 @@ export const Navbar: React.FC = () => {
               <Sparkles className="w-3 h-3 text-amber-300" />
               <span>{totalPoints}p</span>
             </div>
+
+            {/* GPS Location & Teleport Control Chip */}
+            <LocationControlBar />
 
             {/* Field Camera Quick Snap Button */}
             <button

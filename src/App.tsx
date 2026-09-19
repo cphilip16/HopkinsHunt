@@ -13,6 +13,7 @@ import { CameraModal } from './components/CameraModal';
 import { CreateTripModal } from './components/CreateTripModal';
 import { LevelUpModal } from './components/LevelUpModal';
 import { PlaceDetailModal } from './components/PlaceDetailModal';
+import { LocationVerificationModal } from './components/LocationVerificationModal';
 import { LoginModal } from './components/LoginModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { FeatherCelebration } from './components/FeatherCelebration';
@@ -163,6 +164,7 @@ const AppContent: React.FC = () => {
       {/* Global Celebratory, Detail, Camera & Auth Modals */}
       <LevelUpModal />
       <PlaceDetailModal />
+      <LocationVerificationModal />
       <LoginModal />
       <CameraModal />
       <CreateTripModal />
