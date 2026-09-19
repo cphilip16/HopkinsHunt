@@ -1,29 +1,99 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useApp } from '../context/AppContext';
 
-interface CelebrationParticle {
+interface CanvasParticle {
   id: number;
-  type: 'feather' | 'star' | 'stamp' | 'heart';
+  type: 'feather' | 'star' | 'stamp' | 'heart' | 'ribbon';
   x: number;
   y: number;
+  vx: number;
+  vy: number;
   rotation: number;
+  vRotation: number;
   scale: number;
   color: string;
-  speedY: number;
-  speedX: number;
-  rotationSpeed: number;
+  wobblePhase: number;
   wobbleSpeed: number;
-  wobbleOffset: number;
+  wobbleAmp: number;
+  cosWobble: number;
+  cosWobbleSpeed: number;
+  opacity: number;
+}
+
+// Helper to draw a 5-point star on canvas
+function drawStar(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  spikes: number,
+  outerRadius: number,
+  innerRadius: number,
+  fillColor: string,
+  strokeColor: string
+) {
+  let rot = (Math.PI / 2) * 3;
+  let x = cx;
+  let y = cy;
+  const step = Math.PI / spikes;
+
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - outerRadius);
+  for (let i = 0; i < spikes; i++) {
+    x = cx + Math.cos(rot) * outerRadius;
+    y = cy + Math.sin(rot) * outerRadius;
+    ctx.lineTo(x, y);
+    rot += step;
+
+    x = cx + Math.cos(rot) * innerRadius;
+    y = cy + Math.sin(rot) * innerRadius;
+    ctx.lineTo(x, y);
+    rot += step;
+  }
+  ctx.lineTo(cx, cy - outerRadius);
+  ctx.closePath();
+  ctx.fillStyle = fillColor;
+  ctx.fill();
+  ctx.strokeStyle = strokeColor;
+  ctx.lineWidth = 1;
+  ctx.stroke();
 }
 
 export const FeatherCelebration: React.FC = () => {
   const { profile } = useApp();
-  const [particles, setParticles] = useState<CelebrationParticle[]>([]);
-  const [prevCount, setPrevCount] = useState(profile.visitedPlaceIds.length);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const particlesRef = useRef<CanvasParticle[]>([]);
+  const animFrameRef = useRef<number | null>(null);
+  const prevCountRef = useRef(profile.visitedPlaceIds.length);
 
-  const triggerCelebration = () => {
-    const colors = ['#68ACE5', '#002D72', '#F1C400', '#0056B3', '#A4D2F6', '#FB7185'];
-    const types: ('feather' | 'star' | 'stamp' | 'heart')[] = [
+  // Resize canvas to match display viewport with HiDPI support
+  const resizeCanvas = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2); // Cap at 2x to save GPU memory
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    if (canvas.width !== width * dpr || canvas.height !== height * dpr) {
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.scale(dpr, dpr);
+      }
+    }
+  };
+
+  const spawnParticles = () => {
+    // Respect user reduced-motion preference
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const width = window.innerWidth;
+    const colors = ['#68ACE5', '#002D72', '#F1C400', '#0056B3', '#10B981', '#FB7185', '#F59E0B'];
+    const types: ('feather' | 'star' | 'stamp' | 'heart' | 'ribbon')[] = [
       'feather',
       'feather',
       'feather',
@@ -31,130 +101,214 @@ export const FeatherCelebration: React.FC = () => {
       'star',
       'stamp',
       'heart',
+      'ribbon',
+      'ribbon',
     ];
-    const newParticles: CelebrationParticle[] = [];
 
-    for (let i = 0; i < 32; i++) {
+    const count = 28; // Optimal balance: rich festive atmosphere with zero frame drops
+    const newParticles: CanvasParticle[] = [];
+
+    for (let i = 0; i < count; i++) {
+      const type = types[Math.floor(Math.random() * types.length)];
       newParticles.push({
-        id: Date.now() + i,
-        type: types[Math.floor(Math.random() * types.length)],
-        x: Math.random() * 92 + 4, // 4% to 96% of viewport width
-        y: Math.random() * -25 - 5, // Just above viewport
-        rotation: Math.random() * 360,
-        scale: Math.random() * 0.5 + 0.7, // 0.7 to 1.2 scale
+        id: Date.now() + i + Math.random(),
+        type,
+        x: Math.random() * (width - 40) + 20,
+        y: Math.random() * -60 - 20, // Staggered entry above screen
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: Math.random() * 1.8 + 1.8, // Smooth terminal velocity
+        rotation: Math.random() * Math.PI * 2,
+        vRotation: (Math.random() - 0.5) * 0.05,
+        scale: Math.random() * 0.4 + 0.8,
         color: colors[Math.floor(Math.random() * colors.length)],
-        speedY: Math.random() * 2.2 + 2.0, // Gentle falling speed
-        speedX: (Math.random() - 0.5) * 1.8,
-        rotationSpeed: (Math.random() - 0.5) * 4,
-        wobbleSpeed: Math.random() * 0.08 + 0.04,
-        wobbleOffset: Math.random() * Math.PI * 2,
+        wobblePhase: Math.random() * Math.PI * 2,
+        wobbleSpeed: Math.random() * 0.04 + 0.02,
+        wobbleAmp: Math.random() * 1.2 + 0.8,
+        cosWobble: Math.random() * Math.PI,
+        cosWobbleSpeed: Math.random() * 0.06 + 0.03,
+        opacity: 1,
       });
     }
 
-    setParticles((prev) => [...prev, ...newParticles]);
+    particlesRef.current = [...particlesRef.current, ...newParticles];
+
+    // Ensure animation loop is running
+    if (!animFrameRef.current) {
+      startRenderLoop();
+    }
   };
 
-  // Trigger whenever visited places count increases
+  const startRenderLoop = () => {
+    const render = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      ctx.clearRect(0, 0, width, height);
+
+      const activeParticles: CanvasParticle[] = [];
+
+      for (let i = 0; i < particlesRef.current.length; i++) {
+        const p = particlesRef.current[i];
+
+        // Physics step
+        p.wobblePhase += p.wobbleSpeed;
+        p.cosWobble += p.cosWobbleSpeed;
+        p.x += p.vx + Math.sin(p.wobblePhase) * p.wobbleAmp;
+        p.y += p.vy;
+        p.rotation += p.vRotation;
+
+        // Fade out slightly near the bottom edge
+        if (p.y > height - 80) {
+          p.opacity -= 0.025;
+        }
+
+        if (p.y < height + 60 && p.opacity > 0.01) {
+          activeParticles.push(p);
+
+          // Render Particle
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, p.opacity);
+
+          if (p.type === 'feather') {
+            // Blue Jay Feather
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation);
+            const flipScale = Math.cos(p.cosWobble);
+            ctx.scale(p.scale * flipScale, p.scale);
+
+            // Outer Vane
+            ctx.beginPath();
+            ctx.moveTo(0, -22);
+            ctx.bezierCurveTo(-12, -10, -14, 12, 0, 22);
+            ctx.bezierCurveTo(14, 12, 12, -10, 0, -22);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+
+            // Inner Translucent Highlights
+            ctx.beginPath();
+            ctx.moveTo(0, -20);
+            ctx.bezierCurveTo(-6, -10, -6, 4, 0, 10);
+            ctx.bezierCurveTo(6, 4, 6, -10, 0, -20);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.fill();
+
+            // White Central Shaft / Rachis
+            ctx.beginPath();
+            ctx.moveTo(0, -24);
+            ctx.lineTo(0, 25);
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = 1.6;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            // Gold Calamus Quill Tip
+            ctx.beginPath();
+            ctx.moveTo(0, 21);
+            ctx.lineTo(0, 28);
+            ctx.strokeStyle = '#F1C400';
+            ctx.lineWidth = 2.2;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+          } else if (p.type === 'star') {
+            // Golden Sparkle Star
+            drawStar(ctx, p.x, p.y, 5, 11 * p.scale, 5 * p.scale, '#FDE047', '#D97706');
+          } else if (p.type === 'stamp') {
+            // Passport Stamp Seal
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation);
+            ctx.scale(p.scale, p.scale);
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 10, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(209, 250, 229, 0.92)';
+            ctx.fill();
+            ctx.lineWidth = 1.8;
+            ctx.strokeStyle = '#059669';
+            ctx.setLineDash([3, 2]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Checkmark
+            ctx.beginPath();
+            ctx.moveTo(-4, 0);
+            ctx.lineTo(-1, 3.5);
+            ctx.lineTo(4.5, -3.5);
+            ctx.strokeStyle = '#047857';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+          } else if (p.type === 'heart') {
+            // Celebratory Heart
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation);
+            ctx.scale(p.scale * 0.85, p.scale * 0.85);
+
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.moveTo(0, 3);
+            ctx.bezierCurveTo(-7, -7, -13, 2, 0, 12);
+            ctx.bezierCurveTo(13, 2, 7, -7, 0, 3);
+            ctx.fill();
+          } else {
+            // Ribbon Confetti Flitter (3D perspective flip)
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation);
+            const flipScale = Math.cos(p.cosWobble);
+            ctx.scale(p.scale * flipScale, p.scale);
+
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-6, -3.5, 12, 7);
+          }
+
+          ctx.restore();
+        }
+      }
+
+      particlesRef.current = activeParticles;
+
+      // Continue or gracefully terminate loop when empty
+      if (activeParticles.length > 0) {
+        animFrameRef.current = requestAnimationFrame(render);
+      } else {
+        ctx.clearRect(0, 0, width, height);
+        animFrameRef.current = null;
+      }
+    };
+
+    animFrameRef.current = requestAnimationFrame(render);
+  };
+
+  // Check for visited places count increase
   useEffect(() => {
-    if (profile.visitedPlaceIds.length > prevCount) {
-      triggerCelebration();
+    if (profile.visitedPlaceIds.length > prevCountRef.current) {
+      resizeCanvas();
+      spawnParticles();
     }
-    setPrevCount(profile.visitedPlaceIds.length);
+    prevCountRef.current = profile.visitedPlaceIds.length;
   }, [profile.visitedPlaceIds.length]);
 
-  // Animate particles physics loop
+  // Window resize listener
   useEffect(() => {
-    if (particles.length === 0) return;
-
-    const interval = setInterval(() => {
-      setParticles((prev) =>
-        prev
-          .map((p) => ({
-            ...p,
-            y: p.y + p.speedY,
-            x: p.x + p.speedX + Math.sin(p.y * p.wobbleSpeed + p.wobbleOffset) * 0.4,
-            rotation: p.rotation + p.rotationSpeed,
-          }))
-          .filter((p) => p.y < 112) // Remove once off bottom
-      );
-    }, 32);
-
-    return () => clearInterval(interval);
-  }, [particles.length]);
-
-  if (particles.length === 0) return null;
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      if (animFrameRef.current) {
+        cancelAnimationFrame(animFrameRef.current);
+      }
+    };
+  }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden select-none">
-      {particles.map((p) => (
-        <div
-          key={p.id}
-          className="absolute will-change-transform"
-          style={{
-            left: `${p.x}vw`,
-            top: `${p.y}vh`,
-            transform: `rotate(${p.rotation}deg) scale(${p.scale})`,
-          }}
-        >
-          {/* TYPE 1: BLUE JAY FEATHER */}
-          {p.type === 'feather' && (
-            <svg
-              width="30"
-              height="52"
-              viewBox="0 0 30 52"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="filter drop-shadow-sm opacity-95"
-            >
-              <path
-                d="M 15 0 C 5 12 1 30 15 44 C 29 30 25 12 15 0 Z"
-                fill={p.color}
-                opacity="0.95"
-              />
-              <path
-                d="M 15 0 C 10 6 7 15 15 22 C 23 15 20 6 15 0 Z"
-                fill="#FFFFFF"
-                opacity="0.35"
-              />
-              <line x1="15" y1="0" x2="15" y2="52" stroke="#FFFFFF" strokeWidth="1.6" strokeLinecap="round" />
-              <line x1="15" y1="44" x2="15" y2="52" stroke="#F1C400" strokeWidth="2.2" strokeLinecap="round" />
-            </svg>
-          )}
-
-          {/* TYPE 2: GOLDEN STAR BURST */}
-          {p.type === 'star' && (
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="filter drop-shadow-md"
-            >
-              <polygon
-                points="12,2 15,9 22,10 17,15 18,22 12,18 6,22 7,15 2,10 9,9"
-                fill="#FDE047"
-                stroke="#D97706"
-                strokeWidth="1"
-              />
-            </svg>
-          )}
-
-          {/* TYPE 3: PASSPORT STAMP DISK */}
-          {p.type === 'stamp' && (
-            <div className="w-6 h-6 rounded-full border-2 border-dashed border-emerald-500 bg-emerald-100/90 flex items-center justify-center text-[10px] font-black text-emerald-800 shadow-sm">
-              ✓
-            </div>
-          )}
-
-          {/* TYPE 4: CONFETTI VECTOR HEART */}
-          {p.type === 'heart' && (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill={p.color} className="filter drop-shadow-sm">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-            </svg>
-          )}
-        </div>
-      ))}
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-50 select-none"
+      aria-hidden="true"
+    />
   );
 };

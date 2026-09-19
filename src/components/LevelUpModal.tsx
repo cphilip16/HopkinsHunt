@@ -16,8 +16,8 @@ export const LevelUpModal: React.FC = () => {
   const { subrank, rank, isMajorRankUp } = levelUpData;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="relative w-full max-w-lg bg-[#FFFDF9] rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-amber-300 overflow-hidden text-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-lg bg-[#FFFDF9] rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-amber-300 overflow-hidden text-center transform-gpu will-change-transform">
         
         {/* Top Washi Tape Accents */}
         <WashiTape color="amber" angle={-2} className="-top-3 left-12 z-30" />
@@ -40,7 +40,7 @@ export const LevelUpModal: React.FC = () => {
         {/* Celebratory Chibi Baby Jay Mascot Cheer & Insignia Burst */}
         <div className="relative my-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           {/* Ambient spirit glow */}
-          <div className="absolute w-44 h-44 rounded-full bg-gradient-to-tr from-amber-300/40 via-sky-300/30 to-rose-200/40 blur-2xl animate-pulse" />
+          <div className="absolute w-44 h-44 rounded-full bg-gradient-to-tr from-amber-300/30 via-sky-300/20 to-rose-200/30 blur-xl pointer-events-none transform-gpu" />
           
           <div className="relative flex items-center justify-center space-x-3">
             <CuteMascot

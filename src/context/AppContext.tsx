@@ -320,10 +320,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     // Confetti celebration for verified status!
     try {
       confetti({
-        particleCount: 80,
+        particleCount: 50,
         spread: 60,
         origin: { y: 0.5 },
         colors: ['#002D72', '#68ACE5', '#F1C400', '#10B981'],
+        disableForReducedMotion: true,
       });
     } catch (e) {
       // ignore
@@ -407,10 +408,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     try {
       confetti({
-        particleCount: 70,
+        particleCount: 45,
         spread: 60,
         origin: { y: 0.5 },
         colors: ['#002D72', '#68ACE5', '#F1C400', '#10B981'],
+        disableForReducedMotion: true,
       });
     } catch (e) {
       // ignore
@@ -592,10 +594,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (newLevelInfo.currentSubrank.levelNumber > oldSubrank.levelNumber) {
         try {
           confetti({
-            particleCount: 100,
+            particleCount: 55,
             spread: 70,
             origin: { y: 0.6 },
             colors: ['#002D72', '#68ACE5', '#F1C400', '#D9381E'],
+            disableForReducedMotion: true,
           });
         } catch (e) {
           // ignore if canvas not supported
@@ -759,10 +762,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     try {
       confetti({
-        particleCount: 40,
+        particleCount: 35,
         spread: 60,
         origin: { y: 0.7 },
         colors: ['#002D72', '#68ACE5', '#F1C400', '#E03A3E'],
+        disableForReducedMotion: true,
       });
     } catch (e) {
       // ignore
@@ -821,10 +825,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     try {
       confetti({
-        particleCount: 65,
-        spread: 80,
+        particleCount: 45,
+        spread: 70,
         origin: { y: 0.6 },
         colors: ['#002D72', '#68ACE5', '#F1C400', '#E03A3E'],
+        disableForReducedMotion: true,
       });
     } catch (e) {
       // ignore
@@ -847,10 +852,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     try {
       confetti({
-        particleCount: 80,
-        spread: 100,
+        particleCount: 50,
+        spread: 80,
         origin: { y: 0.5 },
         colors: ['#002D72', '#68ACE5', '#F1C400', '#E03A3E', '#22C55E'],
+        disableForReducedMotion: true,
       });
     } catch (e) {
       // ignore
@@ -874,10 +880,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     try {
       confetti({
-        particleCount: 45,
-        spread: 70,
+        particleCount: 35,
+        spread: 60,
         origin: { y: 0.7 },
         colors: ['#68ACE5', '#F1C400', '#FFFFFF', '#002D72'],
+        disableForReducedMotion: true,
       });
     } catch (e) {
       // ignore

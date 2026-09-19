@@ -22,7 +22,7 @@ export const PassportStamp: React.FC<PassportStampProps> = ({
   animate = false,
 }) => {
   const displayDate = visitedDate || date;
-  
+
   const colorMap = {
     emerald: {
       primary: '#059669',
@@ -51,14 +51,16 @@ export const PassportStamp: React.FC<PassportStampProps> = ({
   };
 
   const activeColor = colorMap[color];
-  const uniqueFilterId = `stamp-ink-${color}-${Math.floor(size)}`;
 
   return (
     <div
-      className={`inline-flex items-center justify-center select-none pointer-events-none ${
+      className={`inline-flex items-center justify-center select-none pointer-events-none transform-gpu ${
         animate ? 'animate-stamp-slam' : ''
       } ${className}`}
-      style={{ transform: `rotate(${rotation}deg)` }}
+      style={{
+        transform: `rotate(${rotation}deg)`,
+        transformOrigin: 'center center',
+      }}
     >
       <svg
         width={size}
@@ -66,32 +68,25 @@ export const PassportStamp: React.FC<PassportStampProps> = ({
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="filter drop-shadow-sm opacity-90 transition-transform duration-300 hover:scale-105"
+        className="opacity-95 transition-transform duration-300 hover:scale-105"
       >
         <style>
           {`
             @keyframes stampSlamDown {
-              0% { transform: scale(2.2) rotate(-35deg); opacity: 0; }
-              60% { transform: scale(0.92) rotate(${rotation}deg); opacity: 1; }
-              80% { transform: scale(1.05) rotate(${rotation}deg); }
+              0% { transform: scale(2.0) rotate(-28deg); opacity: 0; }
+              65% { transform: scale(0.96) rotate(${rotation}deg); opacity: 1; }
+              85% { transform: scale(1.02) rotate(${rotation}deg); }
               100% { transform: scale(1) rotate(${rotation}deg); opacity: 0.95; }
             }
             .animate-stamp-slam {
-              animation: stampSlamDown 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+              animation: stampSlamDown 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+              will-change: transform, opacity;
             }
           `}
         </style>
 
-        <defs>
-          {/* Authentic Porous Rubber Ink Bleed Filter */}
-          <filter id={uniqueFilterId} x="-10%" y="-10%" width="120%" height="120%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" result="grungeNoise" />
-            <feDisplacementMap in="SourceGraphic" in2="grungeNoise" scale="1.8" xChannelSelector="R" yChannelSelector="G" />
-          </filter>
-        </defs>
-
-        {/* Group with Ink Distress Filter Applied */}
-        <g filter={`url(#${uniqueFilterId})`}>
+        {/* Group with Lightweight Hardware-Accelerated Vector Weathering */}
+        <g>
           {/* Weathered Outer Stamped Circle */}
           <circle
             cx="50"
@@ -112,6 +107,12 @@ export const PassportStamp: React.FC<PassportStampProps> = ({
             strokeWidth="1.4"
             strokeDasharray="5 2"
           />
+
+          {/* Subtle Authentic Ink Distress Specks (Zero filter overhead) */}
+          <circle cx="16" cy="48" r="0.8" fill={activeColor.primary} opacity="0.6" />
+          <circle cx="84" cy="52" r="0.7" fill={activeColor.primary} opacity="0.6" />
+          <circle cx="50" cy="12" r="0.9" fill={activeColor.primary} opacity="0.5" />
+          <circle cx="48" cy="88" r="0.8" fill={activeColor.primary} opacity="0.6" />
 
           {/* Curved Stamp Header Text Path */}
           <path
