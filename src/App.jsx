@@ -6,45 +6,53 @@ const places = [
   {
     id: 'brody',
     name: 'Brody Learning Commons',
+    formalName: 'Brody Learning Commons',
+    address: '3400 N Charles St, Baltimore, MD 21218',
     area: 'Homewood Campus',
     type: 'On campus',
     points: 25,
     icon: '📚',
     color: 'blue',
     description: 'The 24/7 glass-walled hub for marathon study sessions, whiteboard brainstorming, and group grind before midterms.',
-    image: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=85',
+    image: '/places/brody-learning-commons.jpg',
     x: 42,
     y: 28,
   },
   {
     id: 'gilman',
     name: 'Gilman Hall Reading Room',
+    formalName: 'Gilman Memorial Reading Room (Hutzler Reading Room)',
+    address: '3400 N Charles St (Gilman Hall Rm 110), Baltimore, MD 21218',
     area: 'Homewood Campus',
     type: 'On campus',
     points: 30,
     icon: '🏛️',
     color: 'gold',
     description: 'Bask in scholarly splendor beneath soaring stained-glass memorial windows. Whispering only, majestic desks, and pure academic motivation.',
-    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=900&q=85',
+    image: '/places/gilman-reading-room.jpg',
     x: 48,
     y: 22,
   },
   {
     id: 'bloomberg',
     name: 'Bloomberg Student Center',
+    formalName: 'Bloomberg Center & Hopkins Student Hub',
+    address: '3400 N Charles St, Baltimore, MD 21218',
     area: 'Homewood Campus',
     type: 'On campus',
     points: 20,
     icon: '☕',
     color: 'coral',
     description: 'The social heartbeat of student life! Grab a quick caffeine recharge, meet up with your project team, or relax between classes.',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85',
+    image: '/places/bloomberg-student-center.webp',
     x: 38,
     y: 34,
   },
   {
     id: 'sherwood',
     name: 'Sherwood Gardens',
+    formalName: 'Sherwood Gardens',
+    address: '4310 Underwood Rd, Baltimore, MD 21218',
     area: 'Guilford / North Campus',
     type: 'On campus',
     points: 35,
@@ -58,6 +66,8 @@ const places = [
   {
     id: 'beach',
     name: 'The Beach',
+    formalName: 'The Johns Hopkins Beach (Homewood)',
+    address: '3300 N Charles St, Baltimore, MD 21218',
     area: 'Homewood Campus',
     type: 'On campus',
     points: 20,
@@ -73,6 +83,8 @@ const places = [
   {
     id: 'peabody',
     name: 'Peabody Library',
+    formalName: 'George Peabody Library',
+    address: '17 E Mount Vernon Pl, Baltimore, MD 21202',
     area: 'Mount Vernon',
     type: 'Near campus',
     points: 60,
@@ -86,19 +98,23 @@ const places = [
   {
     id: 'bma',
     name: 'Baltimore Museum of Art',
+    formalName: 'The Baltimore Museum of Art (BMA)',
+    address: '10 Art Museum Dr, Baltimore, MD 21218',
     area: 'Charles Village',
     type: 'Near campus',
     points: 45,
     icon: '🎨',
     color: 'purple',
     description: 'Right on the doorstep of Homewood with totally free admission! Marvel at world-famous Matisse masterpieces and a peaceful outdoor sculpture garden.',
-    image: 'https://images.unsplash.com/photo-1564399579883-451a5d44ec08?auto=format&fit=crop&w=900&q=85',
+    image: '/places/baltimore-museum-of-art.webp',
     x: 58,
     y: 35,
   },
   {
     id: 'farmers-market',
     name: "Farmer's Market",
+    formalName: '32nd Street Farmers Market',
+    address: '400 E 32nd St, Baltimore, MD 21218',
     area: 'Waverly / 32nd St',
     type: 'Near campus',
     points: 40,
@@ -112,6 +128,8 @@ const places = [
   {
     id: 'charmery',
     name: 'The Charmery',
+    formalName: 'The Charmery (Hampden)',
+    address: '801 W 36th St, Baltimore, MD 21211',
     area: 'Hampden',
     type: 'Near campus',
     points: 35,
@@ -125,6 +143,8 @@ const places = [
   {
     id: 'wyman-park',
     name: 'Wyman Park',
+    formalName: 'Wyman Park Dell',
+    address: '2929 N Charles St, Baltimore, MD 21218',
     area: 'Charles Village',
     type: 'Near campus',
     points: 30,
@@ -140,6 +160,8 @@ const places = [
   {
     id: 'kong',
     name: 'Kong Restaurant',
+    formalName: 'Kong Pocha Restaurant',
+    address: '12 W 20th St, Baltimore, MD 21218',
     area: 'Station North',
     type: 'Off campus',
     points: 70,
@@ -153,6 +175,8 @@ const places = [
   {
     id: 'harbor-tandoor',
     name: 'Harbor Tandoor',
+    formalName: 'Harbor Tandoor Indian Restaurant',
+    address: '803 E Fort Ave, Baltimore, MD 21230',
     area: 'Inner Harbor',
     type: 'Off campus',
     points: 75,
@@ -166,6 +190,8 @@ const places = [
   {
     id: 'inner-harbor',
     name: 'Inner Harbor',
+    formalName: 'Baltimore Inner Harbor Promenade',
+    address: '201 E Pratt St, Baltimore, MD 21202',
     area: 'Downtown Baltimore',
     type: 'Off campus',
     points: 80,
@@ -179,19 +205,23 @@ const places = [
   {
     id: 'aquarium',
     name: 'Baltimore Aquarium',
+    formalName: 'National Aquarium',
+    address: '501 E Pratt St, Pier 3, Baltimore, MD 21202',
     area: 'Inner Harbor / Pier 3',
     type: 'Off campus',
     points: 90,
     icon: '🐬',
     color: 'navy',
     description: 'An aquatic wonderland! Wander through the spiral coral reef, immerse yourself in the rooftop rainforest, and say hello to puffins and sharks.',
-    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85',
+    image: '/places/baltimore-aquarium.jpg',
     x: 78,
     y: 73,
   },
   {
     id: 'hard-rock',
     name: 'Hard Rock Cafe',
+    formalName: 'Hard Rock Cafe Baltimore',
+    address: '601 E Pratt St, Pier 4 Power Plant, Baltimore, MD 21202',
     area: 'Inner Harbor / Pier 4',
     type: 'Off campus',
     points: 65,
@@ -225,17 +255,111 @@ const ranks = [
   'Local Legend',
 ]
 
+// Interactive Blue Jay Cartoon Component with Click-to-Emote
+function InteractiveBlueJay({ posClass }) {
+  const [emote, setEmote] = useState('idle')
+  const [quote, setQuote] = useState('')
+
+  const emotes = [
+    {
+      type: 'flap',
+      quote: '🪽 Flapping my wings! Go Blue Jays! 💙',
+    },
+    {
+      type: 'dance',
+      quote: '🎵 Blue Jay dance party! Wiggle wiggle! 🎶',
+    },
+    {
+      type: 'spin',
+      quote: '🌟 360 Victory Flip! You can beat your friends! 🚀',
+    },
+    {
+      type: 'dance',
+      quote: '✨ Chirp chirp! Level up time! 🏆',
+    },
+  ]
+
+  function triggerEmote() {
+    const next = emotes[Math.floor(Math.random() * emotes.length)]
+    setEmote(next.type)
+    setQuote(next.quote)
+    setTimeout(() => {
+      setEmote('idle')
+      setQuote('')
+    }, 2400)
+  }
+
+  return (
+    <div
+      className={`blue-jay-interactive-container ${posClass}`}
+      onClick={triggerEmote}
+      title="Click me to flap wings or dance!"
+    >
+      {quote && <div className="jay-speech-bubble">{quote}</div>}
+      <img
+        className={`blue-jay-img emote-${emote}`}
+        src="/blue-jay.svg"
+        alt="Cartoon Blue Jay mascot - Click to emote"
+      />
+      <span className="jay-click-hint">Click me! 🐦</span>
+    </div>
+  )
+}
+
 function App() {
   const [visited, setVisited] = useState([])
   const [filter, setFilter] = useState('All spots')
   const [search, setSearch] = useState('')
-  const [selectedPlace, setSelectedPlace] = useState(places[4]) // Default to The Beach
+  const [selectedPlace, setSelectedPlace] = useState(places[4]) // The Beach
   const [authOpen, setAuthOpen] = useState(false)
   const [authStep, setAuthStep] = useState('credentials')
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
   const [loggedIn, setLoggedIn] = useState(false)
   const [authError, setAuthError] = useState('')
+
+  // Friends & Leaderboard State
+  const [friends, setFriends] = useState([
+    {
+      id: 'sofia-r',
+      name: 'Sofia Rodriguez',
+      email: 'sofia.r@jh.edu',
+      rank: 'Local Legend',
+      points: 620,
+      visitedCount: 13,
+      cheers: 8,
+    },
+    {
+      id: 'jordan-p',
+      name: 'Jordan Patel',
+      email: 'jordan.p@jh.edu',
+      rank: 'Weekend Warrior',
+      points: 380,
+      visitedCount: 8,
+      cheers: 5,
+    },
+    {
+      id: 'maya-l',
+      name: 'Maya Lin',
+      email: 'maya.l@jh.edu',
+      rank: 'Blue Jay',
+      points: 140,
+      visitedCount: 3,
+      cheers: 3,
+    },
+    {
+      id: 'alex-c',
+      name: 'Alex Chen',
+      email: 'alex.c@jh.edu',
+      rank: 'First Flight',
+      points: 65,
+      visitedCount: 2,
+      cheers: 2,
+    },
+  ])
+  const [newFriendName, setNewFriendName] = useState('')
+  const [newFriendEmail, setNewFriendEmail] = useState('')
+  const [friendToast, setFriendToast] = useState('')
 
   const totalPoints = visited.reduce((sum, id) => {
     const item = places.find((place) => place.id === id)
@@ -246,6 +370,53 @@ function App() {
   const currentRank = ranks[rankIndex]
   const nextRank = ranks[rankIndex + 1]
   const progress = nextRank ? ((totalPoints % 50) / 50) * 100 : 100
+
+  // Combine user with friends and sort by points descending
+  const currentUserEntry = {
+    id: 'current-user',
+    name: loggedIn ? (email ? email.split('@')[0] : 'You (Sofia)') : 'You (Student Explorer)',
+    email: loggedIn ? email || 'you@jh.edu' : 'you@jh.edu (Unverified)',
+    rank: currentRank,
+    points: totalPoints,
+    visitedCount: visited.length,
+    isUser: true,
+    cheers: 12,
+  }
+
+  const allParticipants = [...friends, currentUserEntry].sort((a, b) => b.points - a.points)
+  const userStanding = allParticipants.findIndex((p) => p.id === 'current-user') + 1
+
+  function handleAddFriend(e) {
+    e.preventDefault()
+    if (!newFriendName.trim() || !newFriendEmail.trim()) return
+
+    const starterPoints = Math.floor(Math.random() * 200) + 40
+    const starterRankIndex = Math.min(ranks.length - 1, Math.floor(starterPoints / 50))
+
+    const newFriend = {
+      id: `friend-${Date.now()}`,
+      name: newFriendName.trim(),
+      email: newFriendEmail.trim().toLowerCase().includes('@jh.edu')
+        ? newFriendEmail.trim().toLowerCase()
+        : `${newFriendEmail.trim().toLowerCase()}@jh.edu`,
+      rank: ranks[starterRankIndex],
+      points: starterPoints,
+      visitedCount: Math.floor(starterPoints / 30),
+      cheers: 1,
+    }
+
+    setFriends((prev) => [...prev, newFriend])
+    setFriendToast(`Added ${newFriend.name} to your friends leaderboard! 🎉`)
+    setNewFriendName('')
+    setNewFriendEmail('')
+    setTimeout(() => setFriendToast(''), 4000)
+  }
+
+  function cheerFriend(id) {
+    setFriends((prev) =>
+      prev.map((f) => (f.id === id ? { ...f, cheers: f.cheers + 1 } : f)),
+    )
+  }
 
   const quests = [
     {
@@ -280,7 +451,9 @@ function App() {
   const visiblePlaces = places.filter(
     (place) =>
       (filter === 'All spots' || place.type === filter) &&
-      `${place.name} ${place.area} ${place.description}`.toLowerCase().includes(search.toLowerCase()),
+      `${place.name} ${place.formalName} ${place.area} ${place.address} ${place.description}`
+        .toLowerCase()
+        .includes(search.toLowerCase()),
   )
 
   function toggleVisited(id) {
@@ -318,6 +491,7 @@ function App() {
           <a className="active" href="#recommendations">Explore</a>
           <a href="#map">Map</a>
           <a href="#quests">Quests</a>
+          <a href="#friends">Friends</a>
           <a href="#passport">Passport</a>
         </nav>
         <button className="profile-button" type="button" onClick={() => setAuthOpen(true)}>
@@ -332,21 +506,42 @@ function App() {
           <div>
             <p className="eyebrow">JHU STUDENT ADVENTURE LOG</p>
             <h1>Make the city<br /><em>your campus.</em></h1>
+
+            {/* Core App Goal Banner */}
+            <div className="goal-banner">
+              <span className="goal-banner-icon">🎯</span>
+              <div className="goal-banner-body">
+                <strong>THE HUNT GOAL: LEVEL UP & COMPETE WITH FRIENDS</strong>
+                <p>
+                  Explore 15 iconic Baltimore spots, stamp your passport to earn points, level up through <em>15 Blue Jay ranks</em>, and climb the live student leaderboard!
+                </p>
+              </div>
+            </div>
+
+            {/* 3-Step Game Loop Pills */}
+            <div className="game-loop-strip">
+              <span className="game-loop-pill">📍 1. Stamp 15 Spots</span>
+              <span className="game-loop-pill">⚡ 2. Level Up (15 Ranks)</span>
+              <span className="game-loop-pill">👥 3. Beat Your Friends</span>
+            </div>
+
             <p className="hero-description">
-              Find your next favorite Baltimore spot, complete campus quests, and level up from Newbie to Local Legend across 15 iconic locations!
+              Find your next favorite Baltimore spot, complete student quests, and see how you stack up against classmates across campus and the city!
             </p>
+
             <div className="hero-actions">
               <a className="primary-button" href="#recommendations">
                 Explore spots <span>↓</span>
               </a>
-              <button className="text-button" type="button" onClick={() => setAuthOpen(true)}>
-                {loggedIn ? 'View verified pass' : 'Log in to save progress'} <span>→</span>
-              </button>
+              <a className="text-button" href="#friends">
+                View Friends Leaderboard <span>→</span>
+              </a>
             </div>
           </div>
 
+          {/* Interactive Bubbly Hero Score Orb */}
           <div className="hero-score">
-            <img className="blue-jay hero-jay" src="/blue-jay.svg" alt="Cartoon blue jay mascot" />
+            <InteractiveBlueJay posClass="hero-jay-pos" />
             <div className="score-orbit">
               <span className="orbit-dot"></span>
               <strong>{totalPoints}</strong>
@@ -376,9 +571,9 @@ function App() {
             <span>level {rankIndex + 1} of 15</span>
           </div>
           <div>
-            <span className="stat-label">J-CARD STATUS</span>
-            <strong className={loggedIn ? 'status-on' : ''}>{loggedIn ? 'Verified' : 'Unverified'}</strong>
-            <span>{loggedIn ? 'identity confirmed' : 'log in to activate'}</span>
+            <span className="stat-label">LEADERBOARD STANDING</span>
+            <strong className="status-on">#{userStanding} of {allParticipants.length}</strong>
+            <span>among your friends</span>
           </div>
         </section>
 
@@ -391,7 +586,7 @@ function App() {
             </div>
             <p className="section-note">
               Organized by distance: On campus, Near campus, and Off campus.<br />
-              The farther you roam, the higher the bounty!
+              Check in at spots to rise on the leaderboard!
             </p>
           </div>
 
@@ -414,7 +609,7 @@ function App() {
               <input
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-                placeholder="Search spots or areas"
+                placeholder="Search name, address, or area"
               />
             </label>
           </div>
@@ -436,6 +631,10 @@ function App() {
                         <span>{place.area}</span>
                       </div>
                       <h3>{place.name}</h3>
+                      <span className="place-formal-name">🏛️ {place.formalName}</span>
+                      <div className="place-address" title="Full Street Address">
+                        <span>📍</span> {place.address}
+                      </div>
                       <p>{place.description}</p>
                     </div>
                     <button
@@ -461,7 +660,7 @@ function App() {
               <h2>One campus.<br /><em>Many directions.</em></h2>
             </div>
             <p className="section-note">
-              Click any bubbly pin to preview coordinates.<br />
+              Click any bubbly pin to preview formal names & street addresses.<br />
               Spans Homewood, neighborhood gems, and the harbor.
             </p>
           </div>
@@ -492,6 +691,8 @@ function App() {
                 <span className="detail-kicker">SELECTED DESTINATION</span>
                 <div className={`detail-icon ${selectedPlace.color}`}>{selectedPlace.icon}</div>
                 <h3>{selectedPlace.name}</h3>
+                <div className="map-detail-formal">🏛️ {selectedPlace.formalName}</div>
+                <div className="map-detail-address">📍 {selectedPlace.address}</div>
                 <p>{selectedPlace.description}</p>
                 <div className="detail-row">
                   <span>{selectedPlace.type} • {selectedPlace.area}</span>
@@ -546,10 +747,124 @@ function App() {
           </div>
         </section>
 
+        {/* Friends & Leaderboard Section */}
+        <section className="friends-section" id="friends">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">04 / SQUAD & LEADERBOARD</p>
+              <h2>Compete with friends.<br /><em>Climb the ranks.</em></h2>
+            </div>
+            <p className="section-note">
+              Add your classmates to compare points and see who holds the highest Blue Jay rank!
+            </p>
+          </div>
+
+          {/* User Standing Banner */}
+          <div className="user-standing-banner">
+            <div className="standing-badge">
+              <span className="trophy">🏆</span>
+              <div className="standing-text">
+                <strong>You are currently ranked #{userStanding} of {allParticipants.length} Blue Jays!</strong>
+                <span>Level up from {currentRank} to climb higher on your friend circle leaderboard.</span>
+              </div>
+            </div>
+            <a className="primary-button" href="#recommendations">
+              Stamp more spots <span>+</span>
+            </a>
+          </div>
+
+          <div className="friends-layout">
+            {/* Live Leaderboard */}
+            <div className="leaderboard-card">
+              <div className="leaderboard-header">
+                <span>RANK & STUDENT</span>
+                <span>LEVEL & POINTS</span>
+              </div>
+              <div className="leaderboard-list">
+                {allParticipants.map((person, idx) => {
+                  const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${idx + 1}`
+                  return (
+                    <div
+                      key={person.id}
+                      className={`leaderboard-row ${person.isUser ? 'user-row' : ''}`}
+                    >
+                      <div className="row-left">
+                        <span className="row-rank-num">{medal}</span>
+                        <div className={`row-avatar ${person.isUser ? 'avatar-user' : ''}`}>
+                          {person.name[0]}
+                        </div>
+                        <div className="row-info">
+                          <strong>
+                            {person.name}
+                            {person.isUser && <span className="row-badge">YOU</span>}
+                          </strong>
+                          <span className="row-email">{person.email}</span>
+                        </div>
+                      </div>
+
+                      <div className="row-right">
+                        <div className="row-stats">
+                          <strong>{person.points} pts</strong>
+                          <small>{person.rank} • {person.visitedCount} spots</small>
+                        </div>
+                        {!person.isUser && (
+                          <button
+                            type="button"
+                            className="cheer-btn"
+                            onClick={() => cheerFriend(person.id)}
+                            title="Cheer your friend on!"
+                          >
+                            👏 {person.cheers}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* Add Friend Card */}
+            <div className="add-friend-card">
+              <div>
+                <h3>Add a Friend</h3>
+                <p>
+                  Invite your Hopkins study buddy or roommate to see where they rank and challenge them to explore Baltimore!
+                </p>
+                <form className="add-friend-form" onSubmit={handleAddFriend}>
+                  <label>Friend's Name</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Samira Patel"
+                    value={newFriendName}
+                    onChange={(e) => setNewFriendName(e.target.value)}
+                  />
+
+                  <label>Hopkins Email (@jh.edu)</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. spatel@jh.edu"
+                    value={newFriendEmail}
+                    onChange={(e) => setNewFriendEmail(e.target.value)}
+                  />
+
+                  <button type="submit" className="add-friend-btn">
+                    Add to Leaderboard +
+                  </button>
+                </form>
+
+                {friendToast && <div className="friend-added-toast">{friendToast}</div>}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Passport Section */}
         <section className="passport-section" id="passport">
           <div className="passport-card">
-            <img className="blue-jay passport-jay" src="/blue-jay.svg" alt="Cartoon blue jay mascot" />
+            <InteractiveBlueJay posClass="passport-jay-pos" />
             <div className="passport-top">
               <span className="passport-kicker">JOHNS HOPKINS UNIVERSITY</span>
               <span className="passport-mark">HH</span>
@@ -571,7 +886,7 @@ function App() {
           </div>
 
           <div className="passport-copy">
-            <p className="eyebrow">04 / TRAVEL PASSPORT</p>
+            <p className="eyebrow">05 / TRAVEL PASSPORT</p>
             <h2>Keep your<br /><em>story moving.</em></h2>
             <p>
               Your passport collects every spot you visit across Homewood and Charm City. Log in to make your adventure log portable and unlock your digital J-Card seal!
