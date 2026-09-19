@@ -15,7 +15,7 @@ export const RankInsigniaArt: React.FC<{
 
   // Helper render for 15 subrank SVGs
   const renderSvg = () => {
-    // Level 1: Fledgling Fencer (Rookie Freshman Target Plaque, Oversized Pushed-Up Mask, Wide-Eyed Baby Jay & Practice Foil)
+    // Level 1: Fledgling Fencer (Newbie Traveler Plaque, Explorer Knapsack, Open Passport, Practice Foil & Map Scroll)
     if (/\bsubrank-1\b/.test(key) || key.includes('fledgling') || key.includes('fencer') || key.includes('nestling-hatch')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
@@ -27,8 +27,8 @@ export const RankInsigniaArt: React.FC<{
               <stop offset="65%" stopColor="#F59E0B" />
               <stop offset="100%" stopColor="#92400E" />
             </linearGradient>
-            {/* Target Ring Radial Field */}
-            <radialGradient id="sub1-target-bg" cx="50%" cy="45%" r="60%">
+            {/* Luggage Tag Field Gradient */}
+            <radialGradient id="sub1-travel-bg" cx="50%" cy="40%" r="65%">
               <stop offset="0%" stopColor="#003D99" />
               <stop offset="60%" stopColor="#002D72" />
               <stop offset="100%" stopColor="#001438" />
@@ -58,33 +58,26 @@ export const RankInsigniaArt: React.FC<{
               <stop offset="50%" stopColor="#0284C7" />
               <stop offset="100%" stopColor="#002D72" />
             </linearGradient>
-            {/* Target Plaque Clip */}
-            <clipPath id="sub1-target-clip">
-              <circle cx="24" cy="21" r="18" />
+            {/* Travel Luggage Tag Clip */}
+            <clipPath id="sub1-tag-clip">
+              <path d="M16 5 L32 5 L38 11 L38 42 C38 43 37 44 36 44 L12 44 C11 44 10 43 10 42 L10 11 Z" />
             </clipPath>
           </defs>
 
-          {/* Tangled Curly Electric Body Sensor Cord Trailing Behind */}
-          <path
-            d="M14 36 C10 40 15 45 20 42 C25 39 23 46 29 44 C34 42 38 39 35 34"
-            stroke="#F59E0B"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            fill="none"
-          />
-          <path
-            d="M14 36 C10 40 15 45 20 42 C25 39 23 46 29 44 C34 42 38 39 35 34"
-            stroke="#D97706"
-            strokeWidth="1"
-            strokeDasharray="1.5 1.5"
-            fill="none"
-          />
-          {/* 3-Prong Sensor Plug Dangling */}
-          <rect x="34" y="33" width="3.5" height="2" rx="0.5" fill="#1E293B" transform="rotate(-25 34 33)" />
-          <line x1="36.5" y1="32.5" x2="38" y2="31.8" stroke="#FEF08A" strokeWidth="0.8" />
+          {/* Crossed Equipment Extending in Saltire Behind Luggage Tag */}
+          {/* Item 1: Rolled Vintage Campus Map Scroll (Top-Right to Bottom-Left) */}
+          <g>
+            <line x1="42" y1="6" x2="8" y2="40" stroke="#FEF3C7" strokeWidth="3.4" strokeLinecap="round" />
+            <line x1="42" y1="6" x2="8" y2="40" stroke="#FDE68A" strokeWidth="1.8" strokeLinecap="round" />
+            <line x1="42" y1="6" x2="8" y2="40" stroke="#D97706" strokeWidth="0.5" strokeDasharray="1 1.5" />
+            {/* Curled Scroll Ends */}
+            <circle cx="42.5" cy="5.5" r="1.5" fill="#FBBF24" stroke="#78350F" strokeWidth="0.4" />
+            <circle cx="7.5" cy="40.5" r="1.5" fill="#FBBF24" stroke="#78350F" strokeWidth="0.4" />
+            {/* Red Ribbon Tie Binding Scroll */}
+            <rect x="23.5" y="21.5" width="2.4" height="4" rx="0.5" fill="#DC2626" transform="rotate(45 24 23)" />
+          </g>
 
-          {/* Crossed Rookie Practice Foils Extending in Saltire Behind Target */}
-          {/* Practice Foil 1: Top-Left to Bottom-Right */}
+          {/* Item 2: Flexible Practice Fencing Foil (Top-Left to Bottom-Right) */}
           <g>
             <line x1="5" y1="5" x2="43" y2="43" stroke="url(#sub1-steel-blade)" strokeWidth="1.8" strokeLinecap="round" />
             <line x1="5.5" y1="5.5" x2="42.5" y2="42.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
@@ -97,68 +90,79 @@ export const RankInsigniaArt: React.FC<{
             <circle cx="44.5" cy="44.5" r="1.2" fill="url(#sub1-bell-guard)" />
           </g>
 
-          {/* Practice Foil 2: Top-Right to Bottom-Left */}
-          <g>
-            <line x1="43" y1="5" x2="5" y2="43" stroke="url(#sub1-steel-blade)" strokeWidth="1.8" strokeLinecap="round" />
-            <line x1="42.5" y1="5.5" x2="5.5" y2="42.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
-            {/* Oversized Red Rubber Practice Safety Stopper Knob */}
-            <circle cx="43" cy="5" r="2.4" fill="#EF4444" stroke="#991B1B" strokeWidth="0.5" />
-            <circle cx="42.2" cy="4.2" r="0.7" fill="#FECACA" />
-            {/* Bell Guard & Grip */}
-            <circle cx="9" cy="39" r="3.2" fill="url(#sub1-bell-guard)" stroke="#451A03" strokeWidth="0.6" />
-            <line x1="9" y1="39" x2="4" y2="44" stroke="#1E293B" strokeWidth="2.2" strokeLinecap="round" />
-            <circle cx="3.5" cy="44.5" r="1.2" fill="url(#sub1-bell-guard)" />
-          </g>
+          {/* Vintage Travel Luggage Tag / Passport Visa Plaque */}
+          <path
+            d="M16 5 L32 5 L38 11 L38 42 C38 43 37 44 36 44 L12 44 C11 44 10 43 10 42 L10 11 Z"
+            fill="url(#sub1-gold-frame)"
+            stroke="#451A03"
+            strokeWidth="1.2"
+          />
+          <path
+            d="M16.5 6 L31.5 6 L37 11.5 L37 41.5 C37 42.5 36.5 43 35.5 43 L12.5 43 C11.5 43 11 42.5 11 41.5 L11 11.5 Z"
+            fill="#001845"
+            stroke="url(#sub1-gold-frame)"
+            strokeWidth="0.5"
+          />
 
-          {/* Collegiate Rookie Practice Target Plaque */}
-          <circle cx="24" cy="21" r="19" fill="url(#sub1-gold-frame)" stroke="#451A03" strokeWidth="1.2" />
-          <circle cx="24" cy="21" r="18" fill="#001845" stroke="url(#sub1-gold-frame)" strokeWidth="0.6" />
+          {/* Clipped Luggage Tag Interior */}
+          <g clipPath="url(#sub1-tag-clip)">
+            <rect x="10" y="5" width="28" height="39" fill="url(#sub1-travel-bg)" />
 
-          {/* Clipped Practice Target Interior */}
-          <g clipPath="url(#sub1-target-clip)">
-            <rect x="5" y="2" width="38" height="38" fill="url(#sub1-target-bg)" />
+            {/* Travel Passport Perforated Perimeter Stitching */}
+            <path
+              d="M17 7 L31 7 L36 12 L36 41 L12 41 L12 12 Z"
+              stroke="url(#sub1-gold-frame)"
+              strokeWidth="0.6"
+              strokeDasharray="1.5 1.5"
+              fill="none"
+              opacity="0.5"
+            />
 
-            {/* Fencing Practice Target Rings (Hopkins Blue & White) */}
-            <circle cx="24" cy="21" r="14.5" stroke="#38BDF8" strokeWidth="1.4" fill="none" opacity="0.4" />
-            <circle cx="24" cy="21" r="10.5" stroke="#F8FAFC" strokeWidth="1.2" strokeDasharray="2 1.5" fill="none" opacity="0.35" />
-            <circle cx="24" cy="21" r="6" stroke="#FEF08A" strokeWidth="1" fill="none" opacity="0.3" />
+            {/* Faint Compass Rose Grid in Background */}
+            <circle cx="24" cy="22" r="12" stroke="#38BDF8" strokeWidth="0.6" strokeDasharray="2 2" fill="none" opacity="0.3" />
+            <line x1="24" y1="10" x2="24" y2="34" stroke="#38BDF8" strokeWidth="0.4" opacity="0.25" />
+            <line x1="12" y1="22" x2="36" y2="22" stroke="#38BDF8" strokeWidth="0.4" opacity="0.25" />
 
-            {/* Rookie Chalk Practice Hit Marks on Target */}
-            <g stroke="#F8FAFC" strokeWidth="1" strokeLinecap="round" opacity="0.7">
-              <line x1="12" y1="13" x2="16" y2="17" />
-              <line x1="16" y1="13" x2="12" y2="17" />
-              <line x1="32" y1="12" x2="36" y2="16" />
-              <line x1="36" y1="12" x2="32" y2="16" />
-            </g>
+            {/* Hero Character: Fluffy Newbie Baby Jay Traveler */}
+            {/* Blue Explorer Knapsack / Daypack visible behind shoulders */}
+            <path d="M15 25 C14 21 34 21 33 25 L34 34 C34 37 14 37 14 34 Z" fill="#0369A1" stroke="#001845" strokeWidth="0.6" />
+            {/* Orange Sleeping Mat / Rolled Daypack Bedroll atop backpack */}
+            <rect x="17.5" y="20.5" width="13" height="3" rx="1.5" fill="#EA580C" stroke="#7C2D12" strokeWidth="0.4" />
+            <line x1="21" y1="20.5" x2="21" y2="23.5" stroke="#7C2D12" strokeWidth="0.5" />
+            <line x1="27" y1="20.5" x2="27" y2="23.5" stroke="#7C2D12" strokeWidth="0.5" />
 
-            {/* Hero Character: Fluffy Newbie Baby Jay */}
-            {/* Quilted Padded White Practice Plastron (Beginner Jacket) */}
+            {/* Quilted Padded White Practice Plastron (Travel Uniform) */}
             <path
               d="M17 26 C17 22.5 20 21 24 21 C28 21 31 22.5 31 26 L30 35 C30 38 27 39 24 39 C21 39 18 38 18 35 Z"
               fill="url(#sub1-plastron)"
               stroke="#94A3B8"
               strokeWidth="0.8"
             />
-            {/* Diamond Quilt Stitching Lines */}
+            {/* Diamond Quilt Stitching */}
             <line x1="18" y1="28" x2="28" y2="37" stroke="#CBD5E1" strokeWidth="0.6" strokeDasharray="1 1" />
-            <line x1="20" y1="25" x2="30" y2="34" stroke="#CBD5E1" strokeWidth="0.6" strokeDasharray="1 1" />
-            <line x1="30" y1="28" x2="20" y2="37" stroke="#CBD5E1" strokeWidth="0.6" strokeDasharray="1 1" />
             <line x1="28" y1="25" x2="18" y2="34" stroke="#CBD5E1" strokeWidth="0.6" strokeDasharray="1 1" />
 
-            {/* Rookie Blue Tape Nametag on Jacket */}
-            <rect x="22" y="27" width="7" height="3" rx="0.5" fill="#0284C7" stroke="#002D72" strokeWidth="0.4" />
-            <line x1="23.5" y1="28.5" x2="27.5" y2="28.5" stroke="#FFFFFF" strokeWidth="0.6" />
+            {/* Explorer Knapsack Shoulder Straps Crossing Front */}
+            <line x1="19.5" y1="22" x2="20.5" y2="36" stroke="#B45309" strokeWidth="1.2" />
+            <line x1="28.5" y1="22" x2="27.5" y2="36" stroke="#B45309" strokeWidth="1.2" />
+            {/* Brass Shoulder Strap Buckles */}
+            <rect x="18.8" y="28" width="2.4" height="2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.3" />
+            <rect x="26.8" y="28" width="2.4" height="2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.3" />
 
-            {/* Cute Crossed Band-Aid on Plastron */}
-            <g transform="translate(19, 31)">
-              <rect x="-1" y="-2" width="2" height="4" rx="0.5" fill="#FED7AA" stroke="#D97706" strokeWidth="0.3" transform="rotate(45)" />
-              <rect x="-1" y="-2" width="2" height="4" rx="0.5" fill="#FED7AA" stroke="#D97706" strokeWidth="0.3" transform="rotate(-45)" />
-            </g>
+            {/* Left Wing Proudly Holding Open Hopkins Travel Passport Booklet */}
+            <path d="M18 26 Q13 25 14 30" stroke="#0284C7" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+            {/* Navy Travel Passport Cover */}
+            <rect x="9.5" y="25" width="7.5" height="9" rx="0.8" fill="#002D72" stroke="#FEF08A" strokeWidth="0.5" transform="rotate(-18 10 25)" />
+            {/* Golden University Crest Seal on Passport Cover */}
+            <circle cx="12" cy="29" r="1.3" fill="#FEF08A" />
+            <circle cx="12" cy="29" r="0.7" fill="#002D72" />
+            {/* Open White Visa Pages Peeking Out */}
+            <rect x="11.5" y="24" width="7" height="8.5" rx="0.6" fill="#F8FAFC" stroke="#CBD5E1" strokeWidth="0.4" transform="rotate(-6 12 24)" />
+            {/* Cyan Travel Stamp Cancellation Mark on Visa Page */}
+            <circle cx="14.8" cy="28.2" r="1.2" stroke="#0284C7" strokeWidth="0.5" fill="none" strokeDasharray="0.8 0.5" />
+            <circle cx="14.8" cy="28.2" r="0.4" fill="#0284C7" />
 
-            {/* Left Wing Raised in Adorable Wobbly Novice Balance */}
-            <path d="M18 26 Q13 24 14 29 Q17 31 19 28 Z" fill="url(#sub1-fluff-jay)" stroke="#002D72" strokeWidth="0.6" />
-
-            {/* Right Wing En-Garde Holding Baby Practice Foil */}
+            {/* Right Wing Holding Training Foil as Explorer Trail Pointer */}
             <path d="M28 26 Q35 24 36 21" stroke="#0284C7" strokeWidth="2.6" strokeLinecap="round" fill="none" />
             <circle cx="36" cy="21" r="1.6" fill="url(#sub1-bell-guard)" stroke="#451A03" strokeWidth="0.4" />
             {/* Forward Training Blade with Safety Knob */}
@@ -171,7 +175,7 @@ export const RankInsigniaArt: React.FC<{
             {/* Cute Chubby Cheeks (White Face Feathers) */}
             <ellipse cx="24" cy="19.2" rx="4.8" ry="3.5" fill="#FFFFFF" />
 
-            {/* Wide, Enthusiastic Curious Rookie Eyes */}
+            {/* Wide, Enthusiastic Curious Rookie Explorer Eyes */}
             {/* Left Eye */}
             <circle cx="21.5" cy="18.5" r="1.9" fill="#001438" />
             <circle cx="21.2" cy="18" r="0.8" fill="#FFFFFF" />
@@ -185,27 +189,36 @@ export const RankInsigniaArt: React.FC<{
             <polygon points="23,19.2 25,19.2 24,21.5" fill="#F59E0B" stroke="#B45309" strokeWidth="0.3" />
             <path d="M23.3 20.6 Q24 22 24.7 20.6 Z" fill="#EF4444" />
 
+            {/* Cute Crossed Band-Aid on Cheek */}
+            <g transform="translate(28, 20.2)">
+              <rect x="-0.8" y="-1.6" width="1.6" height="3.2" rx="0.4" fill="#FED7AA" stroke="#D97706" strokeWidth="0.25" transform="rotate(45)" />
+              <rect x="-0.8" y="-1.6" width="1.6" height="3.2" rx="0.4" fill="#FED7AA" stroke="#D97706" strokeWidth="0.25" transform="rotate(-45)" />
+            </g>
+
             {/* Fluffy Blue Chick Feathers Poofing Out Top */}
             <path d="M23 11.8 Q24 8.5 25.5 10 Q24.8 11.5 24 12 Z" fill="#38BDF8" stroke="#002D72" strokeWidth="0.4" />
             <path d="M25 11.2 Q26.8 8.8 27.5 11 Q26.5 12 25.5 12.2 Z" fill="#0284C7" />
 
             {/* The Oversized Fencing Mask Pushed Back Up onto Forehead */}
             <g transform="rotate(-8 24 11.5)">
-              {/* Oval Mesh Mask Cap Tilted Back Jauntily */}
               <ellipse cx="24" cy="11.5" rx="6.2" ry="4.2" fill="#0F172A" stroke="url(#sub1-gold-frame)" strokeWidth="0.9" />
-              {/* Wire Grid Mesh on Mask */}
               <line x1="20" y1="10" x2="28" y2="10" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
               <line x1="19.5" y1="11.5" x2="28.5" y2="11.5" stroke="#94A3B8" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
               <line x1="20" y1="13" x2="28" y2="13" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
               <line x1="22" y1="8.5" x2="22" y2="14.5" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
               <line x1="24" y1="8" x2="24" y2="15" stroke="#94A3B8" strokeWidth="0.6" strokeDasharray="0.8 0.8" />
               <line x1="26" y1="8.5" x2="26" y2="14.5" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
-              {/* Padded White Mask Bib Lifted Above Face */}
               <path d="M19.5 13.5 Q24 16 28.5 13.5" stroke="#F8FAFC" strokeWidth="1.2" strokeLinecap="round" fill="none" />
             </g>
           </g>
 
-          {/* Lower Collegiate Rookie Ribbon Banner: ROOKIE • EN GARDE */}
+          {/* Brass Grommet Eyelet & Luggage Twine String at Top of Tag */}
+          <circle cx="24" cy="7.8" r="2.2" fill="#001845" stroke="url(#sub1-gold-frame)" strokeWidth="1" />
+          <circle cx="24" cy="7.8" r="1.1" fill="#001438" />
+          <path d="M24 6.6 C24 2 21 2 21 3.8 C21 5.5 24 5.5 24 7" stroke="#FEF3C7" strokeWidth="0.9" fill="none" />
+          <path d="M24 6.6 C24 2 27 2 27 3.8 C27 5.5 24 5.5 24 7" stroke="#FEF3C7" strokeWidth="0.9" fill="none" />
+
+          {/* Lower Collegiate Rookie Ribbon Banner: ROOKIE */}
           <g>
             {/* Swallowtail Underfolds */}
             <polygon points="8,40 11,40 9,43" fill="#451A03" />
@@ -234,9 +247,6 @@ export const RankInsigniaArt: React.FC<{
               ROOKIE
             </text>
           </g>
-
-          {/* Top Rookie Target Pip */}
-          <circle cx="24" cy="2" r="1.4" fill="#FEF08A" stroke="#B45309" strokeWidth="0.4" />
         </svg>
       );
     }
