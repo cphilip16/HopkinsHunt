@@ -15,150 +15,161 @@ export const RankInsigniaArt: React.FC<{
 
   // Helper render for 15 subrank SVGs
   const renderSvg = () => {
-    // Level 1: Nestling Hatchling (Homewood Twig Cradle & Egg Oval Silhouette)
-    if (key.includes('subrank-1') || key.includes('fledgling') || key.includes('🐣') || key.includes('nestling-hatch')) {
+    // Level 1: Fledgling Fencer (Collegiate Heater Shield, Crossed Fencing Foils & Masked Baby Jay)
+    if (/\bsubrank-1\b/.test(key) || key.includes('fledgling') || key.includes('fencer') || key.includes('nestling-hatch')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <radialGradient id="sub1-bg" cx="50%" cy="38%" r="55%">
-              <stop offset="0%" stopColor="#F0F9FF" />
-              <stop offset="70%" stopColor="#BAE6FD" />
-              <stop offset="100%" stopColor="#7DD3FC" />
-            </radialGradient>
-            <linearGradient id="sub1-gold-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="sub1-gold-frame" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#FFFDF0" />
-              <stop offset="35%" stopColor="#FEF08A" />
-              <stop offset="70%" stopColor="#F59E0B" />
-              <stop offset="100%" stopColor="#B45309" />
-            </linearGradient>
-            <linearGradient id="sub1-egg" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="65%" stopColor="#FFFBEB" />
-              <stop offset="100%" stopColor="#E2E8F0" />
-            </linearGradient>
-            <linearGradient id="sub1-jay" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#38BDF8" />
-              <stop offset="45%" stopColor="#0284C7" />
-              <stop offset="100%" stopColor="#002D72" />
-            </linearGradient>
-            <linearGradient id="sub1-twig" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#D97706" />
-              <stop offset="50%" stopColor="#92400E" />
-              <stop offset="100%" stopColor="#451A03" />
-            </linearGradient>
-            <linearGradient id="sub1-goggle" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FEF08A" />
-              <stop offset="50%" stopColor="#F59E0B" />
+              <stop offset="25%" stopColor="#FEF08A" />
+              <stop offset="65%" stopColor="#F59E0B" />
               <stop offset="100%" stopColor="#92400E" />
             </linearGradient>
-            <clipPath id="sub1-nest-clip">
-              <path d="M12 28 C10 40 38 40 36 28 C38 16 28 6 24 4 C20 6 10 16 12 28 Z" />
+            <radialGradient id="sub1-shield-bg" cx="50%" cy="30%" r="65%">
+              <stop offset="0%" stopColor="#003D99" />
+              <stop offset="60%" stopColor="#002D72" />
+              <stop offset="100%" stopColor="#001438" />
+            </radialGradient>
+            <linearGradient id="sub1-steel-blade" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="45%" stopColor="#E2E8F0" />
+              <stop offset="85%" stopColor="#94A3B8" />
+              <stop offset="100%" stopColor="#475569" />
+            </linearGradient>
+            <radialGradient id="sub1-bell-guard" cx="40%" cy="40%" r="60%">
+              <stop offset="0%" stopColor="#FEF08A" />
+              <stop offset="50%" stopColor="#F59E0B" />
+              <stop offset="100%" stopColor="#78350F" />
+            </radialGradient>
+            <linearGradient id="sub1-plastron" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="70%" stopColor="#F1F5F9" />
+              <stop offset="100%" stopColor="#CBD5E1" />
+            </linearGradient>
+            <clipPath id="sub1-shield-clip">
+              <path d="M10 6 H38 V26 C38 35 24 43 24 43 C24 43 10 35 10 26 Z" />
             </clipPath>
           </defs>
 
-          {/* Organic Egg & Nest Cradle Silhouette Outer Contour */}
-          {/* Outer Gold Rim & Birch Frame */}
+          {/* Crossed Fencing Foils Extending in Diagonal Saltire Behind Shield */}
+          {/* Foil 1: Top-Left to Bottom-Right */}
+          <g>
+            <line x1="5" y1="5" x2="43" y2="43" stroke="url(#sub1-steel-blade)" strokeWidth="1.8" strokeLinecap="round" />
+            <line x1="5.5" y1="5.5" x2="42.5" y2="42.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
+            <circle cx="5" cy="5" r="1.3" fill="#DC2626" stroke="#991B1B" strokeWidth="0.4" />
+            <circle cx="39" cy="39" r="3.2" fill="url(#sub1-bell-guard)" stroke="#451A03" strokeWidth="0.6" />
+            <line x1="39" y1="39" x2="44" y2="44" stroke="#1E293B" strokeWidth="2.2" strokeLinecap="round" />
+            <circle cx="44.5" cy="44.5" r="1.2" fill="url(#sub1-bell-guard)" />
+          </g>
+
+          {/* Foil 2: Top-Right to Bottom-Left */}
+          <g>
+            <line x1="43" y1="5" x2="5" y2="43" stroke="url(#sub1-steel-blade)" strokeWidth="1.8" strokeLinecap="round" />
+            <line x1="42.5" y1="5.5" x2="5.5" y2="42.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
+            <circle cx="43" cy="5" r="1.3" fill="#DC2626" stroke="#991B1B" strokeWidth="0.4" />
+            <circle cx="9" cy="39" r="3.2" fill="url(#sub1-bell-guard)" stroke="#451A03" strokeWidth="0.6" />
+            <line x1="9" y1="39" x2="4" y2="44" stroke="#1E293B" strokeWidth="2.2" strokeLinecap="round" />
+            <circle cx="3.5" cy="44.5" r="1.2" fill="url(#sub1-bell-guard)" />
+          </g>
+
+          {/* Collegiate French Heater Shield Outline & Gold Rim */}
           <path
-            d="M12 28 C10 40 38 40 36 28 C38 16 28 6 24 4 C20 6 10 16 12 28 Z"
-            fill="url(#sub1-gold-rim)"
-            stroke="#78350F"
-            strokeWidth="1.2"
+            d="M9 5 H39 V26 C39 36 24 44.5 24 44.5 C24 44.5 9 36 9 26 Z"
+            fill="url(#sub1-gold-frame)"
+            stroke="#451A03"
+            strokeWidth="1.3"
+          />
+          {/* Inner Inset Rim */}
+          <path
+            d="M10.5 6.5 H37.5 V25.5 C37.5 34.5 24 42.5 24 42.5 C24 42.5 10.5 34.5 10.5 25.5 Z"
+            fill="#001845"
+            stroke="url(#sub1-gold-frame)"
+            strokeWidth="0.6"
           />
 
-          {/* Clipped Sky Interior */}
-          <g clipPath="url(#sub1-nest-clip)">
-            <rect x="0" y="0" width="48" height="48" fill="url(#sub1-bg)" />
-            {/* Ambient Morning Light */}
-            <circle cx="24" cy="18" r="14" fill="#38BDF8" opacity="0.25" />
+          {/* Clipped Shield Interior */}
+          <g clipPath="url(#sub1-shield-clip)">
+            {/* Navy Background */}
+            <rect x="10" y="6" width="28" height="38" fill="url(#sub1-shield-bg)" />
 
-            {/* Cracked Egg Shell Base */}
-            <path
-              d="M13 28 C13 38 18 41 24 41 C30 41 35 38 35 28 L31 30.5 L28 27.5 L24 31.5 L20 27.5 L16 30.5 Z"
-              fill="url(#sub1-egg)"
-              stroke="#94A3B8"
-              strokeWidth="1.2"
-            />
-            {/* Shell Inner Shadow */}
-            <path d="M14 29 L17 31 L20 28 L24 32 L28 28 L31 31 L34 29 C34 31 33 33 31 35 C28 34 20 34 17 35 C15 33 14 31 14 29 Z" fill="#CBD5E1" opacity="0.4" />
-            {/* Hopkins Navy Chevron on Egg */}
-            <path d="M15 33.5 L20 36.5 L24 34.5 L28 36.5 L33 33.5 L32.5 35.5 L28 38.5 L24 36.5 L20 38.5 L15.5 35.5 Z" fill="#002D72" stroke="url(#sub1-gold-rim)" strokeWidth="0.4" />
-            <circle cx="24" cy="35.5" r="0.8" fill="#FEF08A" />
+            {/* Silver & White Fencing Chevron Bands */}
+            <polygon points="10,12 24,19 38,12 38,16 24,23 10,16" fill="#F8FAFC" opacity="0.25" />
+            <polygon points="10,17 24,24 38,17 38,20 24,27 10,20" fill="#38BDF8" opacity="0.2" />
 
-            {/* Baby Blue Jay Peeking Out */}
-            <ellipse cx="24" cy="22" rx="9" ry="8.5" fill="url(#sub1-jay)" />
+            {/* Hero Character: Baby Jay in White Fencing Uniform & Mask */}
+            {/* Torso in White Fencing Jacket (Plastron) */}
+            <path d="M17 26 C17 23 20 21 24 21 C28 21 31 23 31 26 L30 34 C30 37 27 38 24 38 C21 38 18 37 18 34 Z" fill="url(#sub1-plastron)" stroke="#94A3B8" strokeWidth="0.8" />
+            {/* Diagonal Plastron Seam */}
+            <path d="M21 21 L28 35" stroke="#CBD5E1" strokeWidth="0.8" strokeDasharray="1.5 1" />
+            {/* Hopkins Navy Shield Badge on Heart */}
+            <path d="M19 25 H22 V28 C22 30 20.5 31 20.5 31 C20.5 31 19 30 19 28 Z" fill="#002D72" stroke="#FEF08A" strokeWidth="0.4" />
 
-            {/* Blue Jay Head Crest Feathers */}
-            <path d="M22 13 Q24 9 26 11 Q25 14 24 16 Z" fill="#0284C7" />
-            <path d="M20 14 Q22 10 24 12 Q23 15 22 16 Z" fill="#002D72" />
-            <path d="M24 13 Q26 10 28 12 Q26 15 25 16 Z" fill="#38BDF8" />
+            {/* Right Wing in En-Garde Pose holding Forward Foil */}
+            <path d="M28 25 Q35 22 36 19" stroke="#0284C7" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+            <circle cx="36" cy="19" r="1.6" fill="url(#sub1-bell-guard)" stroke="#451A03" strokeWidth="0.4" />
+            <line x1="36" y1="19" x2="41" y2="13" stroke="url(#sub1-steel-blade)" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="41" cy="13" r="0.7" fill="#DC2626" />
 
-            {/* White Facial Mask & Chin Bib */}
-            <path d="M17 21 Q24 26 31 21 Q24 18 17 21 Z" fill="#FFFFFF" />
-            <path d="M20 23 Q24 28 28 23 Q24 26 20 23 Z" fill="#F8FAFC" />
-            <path d="M18 22 C18 25 21 27 24 27 C27 27 30 25 30 22" stroke="#001438" strokeWidth="0.8" fill="none" />
+            {/* Left Arm Tucked Behind in Classic Foil Stance */}
+            <path d="M18 26 Q14 27 15 31" stroke="#0284C7" strokeWidth="2" strokeLinecap="round" fill="none" />
 
-            {/* Rosy Blushing Cheeks */}
-            <ellipse cx="19" cy="22.5" rx="1.8" ry="1.2" fill="#FDA4AF" opacity="0.75" />
-            <ellipse cx="29" cy="22.5" rx="1.8" ry="1.2" fill="#FDA4AF" opacity="0.75" />
+            {/* The Fencing Mask (Steel Wire Mesh with Polished Gold Bib & Frame) */}
+            <ellipse cx="24" cy="16.5" rx="6.5" ry="7.5" fill="#0F172A" stroke="url(#sub1-gold-frame)" strokeWidth="1" />
+            {/* Wire Mesh Grid Texture */}
+            <line x1="20" y1="13" x2="28" y2="13" stroke="#475569" strokeWidth="0.5" strokeDasharray="1 1" />
+            <line x1="19" y1="15" x2="29" y2="15" stroke="#64748B" strokeWidth="0.6" strokeDasharray="1 1" />
+            <line x1="18.5" y1="17" x2="29.5" y2="17" stroke="#94A3B8" strokeWidth="0.6" strokeDasharray="1 1" />
+            <line x1="19" y1="19" x2="29" y2="19" stroke="#64748B" strokeWidth="0.6" strokeDasharray="1 1" />
+            <line x1="20" y1="21" x2="28" y2="21" stroke="#475569" strokeWidth="0.5" strokeDasharray="1 1" />
+            <line x1="22" y1="10" x2="22" y2="23" stroke="#64748B" strokeWidth="0.6" strokeDasharray="1 1" />
+            <line x1="24" y1="9.5" x2="24" y2="23.5" stroke="#94A3B8" strokeWidth="0.7" strokeDasharray="1 1" />
+            <line x1="26" y1="10" x2="26" y2="23" stroke="#64748B" strokeWidth="0.6" strokeDasharray="1 1" />
 
-            {/* Sparkling Big Traveler Eyes */}
-            <circle cx="20.5" cy="19.5" r="1.8" fill="#0F172A" />
-            <circle cx="20" cy="19" r="0.6" fill="#FFFFFF" />
-            <circle cx="21" cy="20.2" r="0.3" fill="#FFFFFF" />
-            <circle cx="27.5" cy="19.5" r="1.8" fill="#0F172A" />
-            <circle cx="27" cy="19" r="0.6" fill="#FFFFFF" />
-            <circle cx="28" cy="20.2" r="0.3" fill="#FFFFFF" />
+            {/* Mask White Protective Fabric Bib */}
+            <path d="M19.5 22 C19.5 25 21.5 26.5 24 26.5 C26.5 26.5 28.5 25 28.5 22 Z" fill="#F8FAFC" stroke="#94A3B8" strokeWidth="0.6" />
 
-            {/* Cute Orange Beak */}
-            <polygon points="22,20.5 26,20.5 24,23.5" fill="#F59E0B" stroke="#D97706" strokeWidth="0.5" />
+            {/* Determined Blue Jay Eyes Glowing Through Mask */}
+            <circle cx="21.5" cy="16.5" r="1.4" fill="#38BDF8" opacity="0.8" />
+            <circle cx="21.5" cy="16.5" r="0.7" fill="#FFFFFF" />
+            <circle cx="26.5" cy="16.5" r="1.4" fill="#38BDF8" opacity="0.8" />
+            <circle cx="26.5" cy="16.5" r="0.7" fill="#FFFFFF" />
 
-            {/* Polished Brass Aviator Goggles on Forehead */}
-            <g>
-              <rect x="17" y="14.8" width="14" height="2" rx="1" fill="#451A03" />
-              <rect x="17.5" y="13.2" width="5.5" height="5.2" rx="2.5" fill="url(#sub1-goggle)" stroke="#78350F" strokeWidth="0.6" />
-              <rect x="18.5" y="14.2" width="3.5" height="3.2" rx="1.6" fill="#38BDF8" />
-              <line x1="19" y1="14.5" x2="21" y2="16.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
-
-              <rect x="25" y="13.2" width="5.5" height="5.2" rx="2.5" fill="url(#sub1-goggle)" stroke="#78350F" strokeWidth="0.6" />
-              <rect x="26" y="14.2" width="3.5" height="3.2" rx="1.6" fill="#38BDF8" />
-              <line x1="26.5" y1="14.5" x2="28.5" y2="16.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
-
-              {/* Bridge */}
-              <rect x="23" y="15" width="2" height="1.5" rx="0.5" fill="url(#sub1-goggle)" />
-
-              {/* Little Blue Explorer Feather tucked in goggle */}
-              <path d="M30 14 C33 11 34 7 33 5 C31 8 30 11 29 14 Z" fill="#38BDF8" stroke="#002D72" strokeWidth="0.4" />
-            </g>
-
-            {/* Miniature Hopkins Parchment Diploma Scroll in Wing */}
-            <g transform="rotate(-15 15 30)">
-              <rect x="12" y="27" width="10" height="4" rx="1" fill="#FFFBEB" stroke="#B45309" strokeWidth="0.6" />
-              <circle cx="17" cy="29" r="1.2" fill="#DC2626" />
-              <line x1="17" y1="29" x2="19" y2="31" stroke="#DC2626" strokeWidth="0.6" strokeLinecap="round" />
-            </g>
+            {/* Perky Blue Feather Crest Poking Out Top of Mask */}
+            <path d="M23 9.5 Q24 5 26 6.5 Q25 8.5 24 9.5 Z" fill="#38BDF8" stroke="#002D72" strokeWidth="0.5" />
+            <path d="M21.5 9.8 Q22 7 23.5 8 Q23 9.2 22.5 10 Z" fill="#002D72" />
           </g>
 
-          {/* Woven Homewood Birch Nest Twigs Surrounding Cradle Base */}
+          {/* Lower Collegiate Ribbon Scroll: EN GARDE • JHU */}
           <g>
-            <path d="M10 33 Q24 43 38 33" stroke="url(#sub1-twig)" strokeWidth="3" strokeLinecap="round" fill="none" />
-            <path d="M12 36 Q24 45 36 36" stroke="#78350F" strokeWidth="2.4" strokeLinecap="round" fill="none" />
-            <line x1="13" y1="33" x2="21" y2="40" stroke="#92400E" strokeWidth="1.3" strokeLinecap="round" />
-            <line x1="35" y1="33" x2="27" y2="40" stroke="#92400E" strokeWidth="1.3" strokeLinecap="round" />
-            <line x1="19" y1="35" x2="28" y2="41" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-
-            {/* Maryland Green Oak & Ivy Leaves at Nest Flanks */}
-            <ellipse cx="10" cy="31" rx="1.5" ry="2.8" transform="rotate(-40 10 31)" fill="#059669" stroke="#064E3B" strokeWidth="0.4" />
-            <ellipse cx="38" cy="31" rx="1.5" ry="2.8" transform="rotate(40 38 31)" fill="#059669" stroke="#064E3B" strokeWidth="0.4" />
+            <path
+              d="M11 38 L24 35.5 L37 38 L35 43 L24 41 L13 43 Z"
+              fill="url(#sub1-gold-frame)"
+              stroke="#451A03"
+              strokeWidth="0.8"
+            />
+            <text
+              x="24"
+              y="39.8"
+              textAnchor="middle"
+              fontSize="3.2"
+              fontWeight="900"
+              fill="#451A03"
+              fontFamily="sans-serif"
+              letterSpacing="0.6"
+            >
+              EN GARDE {"\u2022"} JHU
+            </text>
           </g>
 
-          {/* Sparkle Gold Star at Apex */}
-          <polygon points="24,3 25,5.5 27.5,6 25,6.5 24,9 23,6.5 20.5,6 23,5.5" fill="#FEF08A" />
+          {/* Top Shield Star */}
+          <polygon points="24,2 25,4.5 27.5,5 25,5.5 24,8 23,5.5 20.5,5 23,4.5" fill="#FEF08A" stroke="#B45309" strokeWidth="0.4" />
         </svg>
       );
     }
 
     // Level 2: Brody Stalker (Archival Open Leather Tome / Bookplate Silhouette)
-    if (key.includes('subrank-2') || key.includes('brody') || key.includes('📚') || key.includes('brody-books')) {
+    if (key.includes('subrank-2') || key.includes('brody') || key.includes('brody-books') || key.includes('stalker')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -267,7 +278,7 @@ export const RankInsigniaArt: React.FC<{
     }
 
     // Level 3: Charles Street Sprinter (Aerodynamic Winged Speed Shield Silhouette)
-    if (key.includes('subrank-3') || key.includes('charles') || key.includes('🏃') || key.includes('charles-runner')) {
+    if (key.includes('subrank-3') || key.includes('charles') || key.includes('charles-runner') || key.includes('sprinter')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -362,7 +373,7 @@ export const RankInsigniaArt: React.FC<{
     }
 
     // Level 4: Wyman Park Wanderer (Botanical Gothic Quatrefoil Silhouette)
-    if (key.includes('subrank-4') || key.includes('wyman') || key.includes('🌿') || key.includes('wyman-dell')) {
+    if (key.includes('subrank-4') || key.includes('wyman') || key.includes('wyman-dell') || key.includes('wanderer')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -459,7 +470,7 @@ export const RankInsigniaArt: React.FC<{
     }
 
     // Level 5: JHMI Shuttle Veteran (Notched Transit Ticket / Keystone Plaque Silhouette)
-    if (key.includes('subrank-5') || key.includes('shuttle') || key.includes('🚌') || key.includes('jhmi-shuttle')) {
+    if (key.includes('subrank-5') || key.includes('shuttle') || key.includes('jhmi-shuttle') || key.includes('transit')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -553,7 +564,7 @@ export const RankInsigniaArt: React.FC<{
     }
 
     // Level 6: Peabody Harmonizer (Classical Concert Lyre / Music Harp Silhouette)
-    if (key.includes('subrank-6') || key.includes('peabody') || key.includes('🎻') || key.includes('peabody-violin')) {
+    if (key.includes('subrank-6') || key.includes('peabody') || key.includes('peabody-violin') || key.includes('harmonizer')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -644,7 +655,7 @@ export const RankInsigniaArt: React.FC<{
     }
 
     // Level 7: Hampden "Hon" Hunter (Atomic 1960s Hon Harlequin / Winged Cat-Eye Cartouche)
-    if (key.includes('subrank-7') || key.includes('hampden') || key.includes('hon') || key.includes('🕶️') || key.includes('hampden-shades')) {
+    if (key.includes('subrank-7') || key.includes('hampden') || key.includes('hon') || key.includes('hampden-shades') || key.includes('hunter')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -758,7 +769,7 @@ export const RankInsigniaArt: React.FC<{
     }
 
     // Level 8: Inner Harbor Helmsman (Admiralty Heavy Naval Anchor Plaque)
-    if (key.includes('subrank-8') || key.includes('harbor') || key.includes('helmsman') || key.includes('⚓') || key.includes('harbor-anchor')) {
+    if (key.includes('subrank-8') || key.includes('harbor') || key.includes('helmsman') || key.includes('harbor-anchor') || key.includes('anchor')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -852,7 +863,7 @@ export const RankInsigniaArt: React.FC<{
     }
 
     // Level 9: Fells Point Pathologist (Clipper Prow / Triangular Nautical Shield)
-    if (key.includes('subrank-9') || key.includes('fells') || key.includes('⛵') || key.includes('fells-sailboat')) {
+    if (key.includes('subrank-9') || key.includes('fells') || key.includes('fells-sailboat') || key.includes('pathologist')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -950,313 +961,432 @@ export const RankInsigniaArt: React.FC<{
       );
     }
 
-    // Level 10: Old Bay Connoisseur (Chamfered Octagonal Old Bay Spice Tin)
-    if (key.includes('subrank-10') || key.includes('old bay') || key.includes('🦀') || key.includes('old-bay-crab')) {
+    // Level 10: Old Bay Connoisseur (Iconic Yellow/Blue Old Bay Spice Canister & Seasoning Shower)
+    if (key.includes('subrank-10') || key.includes('old bay') || key.includes('connoisseur') || key.includes('old-bay-crab')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <linearGradient id="sub10-tin-rim" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FEF08A" />
-              <stop offset="35%" stopColor="#F59E0B" />
-              <stop offset="70%" stopColor="#B45309" />
-              <stop offset="100%" stopColor="#78350F" />
+            <linearGradient id="sub10-tin-metal" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#CA8A04" />
+              <stop offset="15%" stopColor="#FACC15" />
+              <stop offset="60%" stopColor="#FEF08A" />
+              <stop offset="85%" stopColor="#EAB308" />
+              <stop offset="100%" stopColor="#A16207" />
             </linearGradient>
-            <linearGradient id="sub10-shell" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0E7490" />
-              <stop offset="45%" stopColor="#047857" />
-              <stop offset="100%" stopColor="#064E3B" />
-            </linearGradient>
-            <linearGradient id="sub10-claw" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="sub10-red-lid" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#EF4444" />
               <stop offset="50%" stopColor="#DC2626" />
               <stop offset="100%" stopColor="#991B1B" />
             </linearGradient>
-            <clipPath id="sub10-tin-clip">
-              <polygon points="13,3 35,3 45,13 45,35 35,45 13,45 3,35 3,13" />
-            </clipPath>
+            <linearGradient id="sub10-blue-band" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#0284C7" />
+              <stop offset="40%" stopColor="#002D72" />
+              <stop offset="100%" stopColor="#001438" />
+            </linearGradient>
+            <linearGradient id="sub10-spoon" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="45%" stopColor="#E2E8F0" />
+              <stop offset="100%" stopColor="#94A3B8" />
+            </linearGradient>
+            <radialGradient id="sub10-flavor-glow" cx="50%" cy="40%" r="55%">
+              <stop offset="0%" stopColor="#FEF08A" stopOpacity="0.6" />
+              <stop offset="50%" stopColor="#F59E0B" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#EA580C" stopOpacity="0" />
+            </radialGradient>
           </defs>
 
-          {/* Chamfered Octagonal Old Bay Tin Outer Silhouette */}
-          <polygon
-            points="13,3 35,3 45,13 45,35 35,45 13,45 3,35 3,13"
-            fill="url(#sub10-tin-rim)"
-            stroke="#451A03"
-            strokeWidth="1.4"
-          />
+          {/* Ambient Flavor Glow */}
+          <circle cx="24" cy="24" r="22" fill="url(#sub10-flavor-glow)" />
 
-          {/* 8 Chamfered Corner Gold Rivets */}
-          {[
-            [13, 4.5], [35, 4.5], [43.5, 13], [43.5, 35],
-            [35, 43.5], [13, 43.5], [4.5, 35], [4.5, 13]
-          ].map(([x, y], i) => (
-            <circle key={i} cx={x} cy={y} r="1" fill="#FEF08A" stroke="#78350F" strokeWidth="0.3" />
-          ))}
+          {/* Crossed Gourmet Seasoning Spoons in Saltire Behind the Canister */}
+          {/* Spoon 1: Top-Left to Bottom-Right */}
+          <g>
+            <line x1="6" y1="6" x2="42" y2="42" stroke="url(#sub10-spoon)" strokeWidth="2" strokeLinecap="round" />
+            <ellipse cx="7" cy="7" rx="3.5" ry="4.5" transform="rotate(-45 7 7)" fill="url(#sub10-spoon)" stroke="#64748B" strokeWidth="0.6" />
+            <ellipse cx="7" cy="7" rx="2" ry="2.8" transform="rotate(-45 7 7)" fill="#DC2626" />
+            <circle cx="6.5" cy="6.5" r="0.8" fill="#FACC15" />
+          </g>
 
-          {/* Clipped Old Bay Tricolor Tin Field */}
-          <g clipPath="url(#sub10-tin-clip)">
-            {/* Top Band: Iconic Canary Yellow */}
-            <rect x="0" y="0" width="48" height="15" fill="#FBBF24" />
-            {/* Mid Band: Chesapeake Navy Blue */}
-            <rect x="0" y="15" width="48" height="18" fill="#002D72" />
-            {/* Lower Band: Crimson Red */}
-            <rect x="0" y="33" width="48" height="15" fill="#DC2626" />
+          {/* Spoon 2: Top-Right to Bottom-Left */}
+          <g>
+            <line x1="42" y1="6" x2="6" y2="42" stroke="url(#sub10-spoon)" strokeWidth="2" strokeLinecap="round" />
+            <ellipse cx="41" cy="7" rx="3.5" ry="4.5" transform="rotate(45 41 7)" fill="url(#sub10-spoon)" stroke="#64748B" strokeWidth="0.6" />
+            <ellipse cx="41" cy="7" rx="2" ry="2.8" transform="rotate(45 41 7)" fill="#DC2626" />
+            <circle cx="41.5" cy="6.5" r="0.8" fill="#FACC15" />
+          </g>
 
-            {/* Gold Pinstripe Dividers */}
-            <line x1="0" y1="15" x2="48" y2="15" stroke="#FEF08A" strokeWidth="0.8" />
-            <line x1="0" y1="33" x2="48" y2="33" stroke="#FEF08A" strokeWidth="0.8" />
+          {/* The Iconic Rectangular Old Bay Spice Tin Container */}
+          <rect x="12" y="8" width="24" height="31" rx="3.5" fill="url(#sub10-tin-metal)" stroke="#451A03" strokeWidth="1.2" />
 
-            {/* Top Seal Stamp: OLD BAY */}
-            <rect x="15" y="6" width="18" height="6.5" rx="1.5" fill="#002D72" stroke="#FEF08A" strokeWidth="0.6" />
-            <text x="24" y="11" textAnchor="middle" fontSize="3.8" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.8">
-              OLD BAY
+          {/* Tin Header: Iconic Red Snap-Cap Shaker Lid */}
+          <rect x="13.5" y="7" width="21" height="5" rx="2" fill="url(#sub10-red-lid)" stroke="#450A0A" strokeWidth="0.8" />
+          {/* Perforated Spice Shaker Dispenser Holes */}
+          <circle cx="17" cy="9.5" r="0.7" fill="#450A0A" />
+          <circle cx="20.5" cy="9.5" r="0.7" fill="#450A0A" />
+          <circle cx="24" cy="9.5" r="0.7" fill="#450A0A" />
+          <circle cx="27.5" cy="9.5" r="0.7" fill="#450A0A" />
+          <circle cx="31" cy="9.5" r="0.7" fill="#450A0A" />
+
+          {/* Drifting Golden & Paprika Spice Flakes Falling in Flavor Shower */}
+          <circle cx="16" cy="4" r="0.9" fill="#DC2626" />
+          <circle cx="21" cy="3" r="0.7" fill="#F59E0B" />
+          <circle cx="27" cy="4" r="0.8" fill="#DC2626" />
+          <circle cx="32" cy="2.5" r="0.9" fill="#FBBF24" />
+          <circle cx="9" cy="15" r="0.7" fill="#DC2626" />
+          <circle cx="39" cy="15" r="0.8" fill="#F59E0B" />
+          <circle cx="8" cy="23" r="0.8" fill="#DC2626" />
+          <circle cx="40" cy="24" r="0.7" fill="#FBBF24" />
+
+          {/* Can Face Label Art: Tricolor Old Bay Branding */}
+          <rect x="13" y="12" width="22" height="6.5" fill="#FACC15" />
+          <text x="24" y="16.2" textAnchor="middle" fontSize="2.4" fontWeight="900" fill="#002D72" fontFamily="sans-serif" letterSpacing="0.4">
+            FOR SEAFOOD &bull; POULTRY
+          </text>
+
+          {/* Center Signature Navy Blue Diagonal Banner */}
+          <polygon points="13,18.5 35,18.5 35,31 13,31" fill="url(#sub10-blue-band)" />
+          <line x1="13" y1="18.5" x2="35" y2="18.5" stroke="#FACC15" strokeWidth="0.6" />
+          <line x1="13" y1="31" x2="35" y2="31" stroke="#FACC15" strokeWidth="0.6" />
+
+          {/* Bold OLD BAY Typography */}
+          <text x="24" y="24" textAnchor="middle" fontSize="5.2" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.8">
+            OLD BAY
+          </text>
+          <text x="24" y="28.2" textAnchor="middle" fontSize="2.8" fontWeight="800" fill="#FFFFFF" fontFamily="sans-serif" letterSpacing="1">
+            SEASONING
+          </text>
+
+          {/* Bottom Crimson Red Field */}
+          <rect x="13" y="31" width="22" height="6.5" fill="#DC2626" />
+          <text x="24" y="35.5" textAnchor="middle" fontSize="2.4" fontWeight="800" fill="#FFFBEB" fontFamily="sans-serif" letterSpacing="0.5">
+            BALTIMORE, MD &bull; 1939
+          </text>
+
+          {/* Tin Metal Corner Rivets */}
+          <circle cx="14.5" cy="14" r="0.6" fill="#A16207" />
+          <circle cx="33.5" cy="14" r="0.6" fill="#A16207" />
+          <circle cx="14.5" cy="36" r="0.6" fill="#A16207" />
+          <circle cx="33.5" cy="36" r="0.6" fill="#A16207" />
+
+          {/* Lower 3D Connoisseur Ribbon Banner */}
+          <g>
+            <path
+              d="M7 39 L24 36.5 L41 39 L39 44.5 L24 42.5 L9 44.5 Z"
+              fill="url(#sub10-tin-metal)"
+              stroke="#451A03"
+              strokeWidth="0.9"
+            />
+            <text
+              x="24"
+              y="41.2"
+              textAnchor="middle"
+              fontSize="3.2"
+              fontWeight="900"
+              fill="#451A03"
+              fontFamily="sans-serif"
+              letterSpacing="0.6"
+            >
+              OLD BAY {"\u2022"} CONNOISSEUR
             </text>
-
-            {/* Chesapeake Cerulean Blue Walking Legs */}
-            <path d="M13 25 L6 27 M14 29 L8 34 M16 33 L11 39" stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="round" />
-            <path d="M35 25 L42 27 M34 29 L40 34 M32 33 L37 39" stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="round" />
-
-            {/* Swimming Back Flippers */}
-            <ellipse cx="10" cy="39" rx="2.6" ry="1.5" transform="rotate(-30 10 39)" fill="#0284C7" stroke="#0369A1" strokeWidth="0.5" />
-            <ellipse cx="38" cy="39" rx="2.6" ry="1.5" transform="rotate(30 38 39)" fill="#0284C7" stroke="#0369A1" strokeWidth="0.5" />
-
-            {/* Mottled Textured Carapace Shell */}
-            <ellipse cx="24" cy="27" rx="12" ry="8" fill="url(#sub10-shell)" stroke="#042F2E" strokeWidth="1" />
-            {/* Lateral Spines */}
-            <polygon points="12,27 7,27 13,25" fill="#064E3B" stroke="#042F2E" strokeWidth="0.5" />
-            <polygon points="36,27 41,27 35,25" fill="#064E3B" stroke="#042F2E" strokeWidth="0.5" />
-
-            {/* Front Pincer Arms */}
-            <path d="M17 23 Q12 18 10 13" stroke="#0284C7" strokeWidth="3" strokeLinecap="round" fill="none" />
-            <path d="M31 23 Q36 18 38 13" stroke="#0284C7" strokeWidth="3" strokeLinecap="round" fill="none" />
-
-            {/* Signature Scarlet Red Claw Tips */}
-            <path d="M10 13 C7 10 8 6 12 7 C14 9 12 12 10 13 Z" fill="url(#sub10-claw)" />
-            <path d="M10 13 C6 15 6 19 9 19 C11 17 11 14 10 13 Z" fill="#0284C7" />
-            <path d="M38 13 C41 10 40 6 36 7 C34 9 36 12 38 13 Z" fill="url(#sub10-claw)" />
-            <path d="M38 13 C42 15 42 19 39 19 C37 17 37 14 38 13 Z" fill="#0284C7" />
-
-            {/* Eyestalks */}
-            <circle cx="21.5" cy="19.5" r="1.8" fill="#FFFFFF" />
-            <circle cx="21.5" cy="19.5" r="1" fill="#0F172A" />
-            <circle cx="26.5" cy="19.5" r="1.8" fill="#FFFFFF" />
-            <circle cx="26.5" cy="19.5" r="1" fill="#0F172A" />
-
-            {/* Floating Old Bay Spice Flecks */}
-            <circle cx="16" cy="19" r="1" fill="#EF4444" />
-            <circle cx="32" cy="19" r="0.9" fill="#FEF08A" />
-            <circle cx="24" cy="37" r="1.1" fill="#FEF08A" />
-            <circle cx="18" cy="40" r="0.8" fill="#FBBF24" />
-            <circle cx="30" cy="41" r="0.8" fill="#FBBF24" />
           </g>
         </svg>
       );
     }
 
-    // Level 11: Fort McHenry Defender (Authentic 5-Pointed Star Fort Bastion Fortress)
-    if (key.includes('subrank-11') || key.includes('mchenry') || key.includes('fort') || key.includes('🏰') || key.includes('fort-mchenry')) {
+    // Level 11: Fort McHenry Defender (Authentic 1814 Star Fort Bastion, Bronze Siege Cannon & Star-Spangled Banner)
+    if (key.includes('subrank-11') || key.includes('mchenry') || key.includes('fort') || key.includes('defender') || key.includes('fort-mchenry')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <linearGradient id="sub11-star-rim" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FEF08A" />
+            <linearGradient id="sub11-bastion-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFDF0" />
               <stop offset="30%" stopColor="#F59E0B" />
               <stop offset="70%" stopColor="#B45309" />
               <stop offset="100%" stopColor="#78350F" />
             </linearGradient>
-            <radialGradient id="sub11-dawn" cx="50%" cy="30%" r="65%">
+            <radialGradient id="sub11-dawn-sky" cx="50%" cy="25%" r="70%">
               <stop offset="0%" stopColor="#FFFBEB" />
-              <stop offset="40%" stopColor="#FED7AA" />
-              <stop offset="75%" stopColor="#FDBA74" />
-              <stop offset="100%" stopColor="#EA580C" />
+              <stop offset="30%" stopColor="#FED7AA" />
+              <stop offset="65%" stopColor="#FB923C" />
+              <stop offset="100%" stopColor="#1E293B" />
             </radialGradient>
-            <linearGradient id="sub11-brick" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="sub11-brickwork" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#B45309" />
-              <stop offset="50%" stopColor="#991B1B" />
-              <stop offset="100%" stopColor="#78350F" />
+              <stop offset="40%" stopColor="#991B1B" />
+              <stop offset="85%" stopColor="#7F1D1D" />
+              <stop offset="100%" stopColor="#450A0A" />
             </linearGradient>
-            <clipPath id="sub11-star-clip">
-              <polygon points="24,2 30.5,15 45,15 33.5,24.5 38,39 24,30.5 10,39 14.5,24.5 3,15 17.5,15" />
+            <linearGradient id="sub11-cannon-bronze" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#D97706" />
+              <stop offset="50%" stopColor="#92400E" />
+              <stop offset="100%" stopColor="#451A03" />
+            </linearGradient>
+            <clipPath id="sub11-bastion-clip">
+              <polygon points="24,2 31,14.5 45.5,14.5 34,24 38.5,38.5 24,30.5 9.5,38.5 14,24 2.5,14.5 17,14.5" />
             </clipPath>
           </defs>
 
-          {/* Authentic 5-Pointed Star Fort Bastion Outer Silhouette */}
+          {/* Authentic 5-Pointed Star Fort Bastion Outer Heavy Masonry Rim */}
           <polygon
-            points="24,2 30.5,15 45,15 33.5,24.5 38,39 24,30.5 10,39 14.5,24.5 3,15 17.5,15"
-            fill="url(#sub11-star-rim)"
+            points="24,2 31,14.5 45.5,14.5 34,24 38.5,38.5 24,30.5 9.5,38.5 14,24 2.5,14.5 17,14.5"
+            fill="url(#sub11-bastion-gold)"
             stroke="#451A03"
             strokeWidth="1.5"
           />
 
-          {/* 5 Star Apex Studs */}
+          {/* 5 Bastion Apex Heavy Brass Studs */}
           {[
-            [24, 3.8], [43, 15.5], [36.5, 37.5], [11.5, 37.5], [5, 15.5]
+            [24, 4], [43.5, 15.2], [37, 36.8], [11, 36.8], [4.5, 15.2]
           ].map(([x, y], i) => (
-            <circle key={i} cx={x} cy={y} r="1" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
+            <circle key={i} cx={x} cy={y} r="1.1" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
           ))}
 
-          {/* Clipped Dawn Citadel Field */}
-          <g clipPath="url(#sub11-star-clip)">
-            <rect x="0" y="0" width="48" height="48" fill="url(#sub11-dawn)" />
+          {/* Clipped Fortress & Sky Interior */}
+          <g clipPath="url(#sub11-bastion-clip)">
+            {/* "Dawn's Early Light" Sky over Patapsco River */}
+            <rect x="0" y="0" width="48" height="48" fill="url(#sub11-dawn-sky)" />
 
-            {/* "Dawn's Early Light" Sunburst Rays */}
-            {[-45, -25, -5, 15, 35, 55].map((angle, i) => (
+            {/* Dawn Sunburst Light Beams */}
+            {[-40, -20, 0, 20, 40].map((deg, i) => (
               <line
                 key={i}
                 x1="24"
-                y1="14"
-                x2={24 + 20 * Math.sin((angle * Math.PI) / 180)}
-                y2={14 - 20 * Math.cos((angle * Math.PI) / 180)}
+                y1="12"
+                x2={24 + 22 * Math.sin((deg * Math.PI) / 180)}
+                y2={12 - 22 * Math.cos((deg * Math.PI) / 180)}
                 stroke="#FEF08A"
                 strokeWidth="1.2"
                 strokeLinecap="round"
-                opacity="0.85"
+                opacity="0.8"
               />
             ))}
 
-            {/* Mortar Rocket Sparks in the Sky */}
-            <polygon points="12,12 13,13.5 15,14 13,14.5 12,16 11,14.5 9,14 11,13.5" fill="#EF4444" />
-            <polygon points="36,12 37,13.5 39,14 37,14.5 36,16 35,14.5 33,14 35,13.5" fill="#EF4444" />
+            {/* "Rockets' Red Glare" & Bombs Bursting in Air */}
+            <circle cx="12" cy="11" r="2" fill="#EF4444" opacity="0.8" />
+            <polygon points="12,7 13.5,10 16,11 13.5,12 12,15 10.5,12 8,11 10.5,10" fill="#FEF08A" />
+            <path d="M12 11 Q15 14 18 19" stroke="#F59E0B" strokeWidth="0.8" strokeDasharray="1.5 1.5" fill="none" opacity="0.8" />
 
-            {/* Historic Star-Fort Brick Ramparts & Battlements */}
+            {/* Patapsco River Deep Harbor Water Basin */}
+            <path d="M0 32 Q24 29 48 32 L48 48 L0 48 Z" fill="#0F172A" />
+            <path d="M0 33 Q24 30 48 33" stroke="#38BDF8" strokeWidth="0.6" fill="none" opacity="0.4" />
+
+            {/* The Earthen Grass Berms & Ramparts of Fort McHenry */}
+            <path d="M6 35 L12 25 L36 25 L42 35 Z" fill="#14532D" stroke="#052E16" strokeWidth="0.8" />
+            {/* Georgian Red Brick Battery Wall Embrasures */}
             <path
-              d="M9 37 L13 25 L17 25 L17 29 L21 29 L21 25 L27 25 L27 29 L31 29 L31 25 L35 25 L39 37 Z"
-              fill="url(#sub11-brick)"
-              stroke="#451A03"
-              strokeWidth="1.2"
+              d="M10 36 L14 26 L17 26 L17 29.5 L20 29.5 L20 26 L28 26 L28 29.5 L31 29.5 L31 26 L34 26 L38 36 Z"
+              fill="url(#sub11-brickwork)"
+              stroke="#450A0A"
+              strokeWidth="0.8"
             />
-            {/* Mortar Brick Pattern */}
-            <line x1="12" y1="31" x2="36" y2="31" stroke="#FEF3C7" strokeWidth="0.8" strokeDasharray="3 2" opacity="0.7" />
-            <line x1="15" y1="34" x2="33" y2="34" stroke="#FEF3C7" strokeWidth="0.8" strokeDasharray="3 2" opacity="0.7" />
+            {/* Mortar Lines */}
+            <line x1="14" y1="31" x2="34" y2="31" stroke="#FEF3C7" strokeWidth="0.6" strokeDasharray="3 1.5" opacity="0.5" />
+            <line x1="12" y1="34" x2="36" y2="34" stroke="#FEF3C7" strokeWidth="0.6" strokeDasharray="3 1.5" opacity="0.5" />
 
-            {/* Center Bastion Apex Flagmount */}
-            <polygon points="24,18 28,25 20,25" fill="#78350F" stroke="#451A03" strokeWidth="0.8" />
+            {/* Heavy Cast Bronze Naval Siege Cannon aiming out to sea */}
+            <g transform="translate(14, 20)">
+              <path d="M2 7 L12 4 L12 1 L2 3 Z" fill="url(#sub11-cannon-bronze)" stroke="#1E293B" strokeWidth="0.6" />
+              <circle cx="6" cy="5" r="1.2" fill="#F59E0B" stroke="#78350F" strokeWidth="0.3" />
+              <rect x="4" y="5" width="6" height="4" rx="1" fill="#78350F" stroke="#451A03" strokeWidth="0.5" />
+              <circle cx="8" cy="8" r="2.8" fill="#334155" stroke="#0F172A" strokeWidth="0.6" />
+              <circle cx="8" cy="8" r="1" fill="#94A3B8" />
+              {/* Gunpowder Muzzle Smoke Billow */}
+              <circle cx="1" cy="5" r="2.5" fill="#F8FAFC" opacity="0.75" />
+              <circle cx="-1" cy="4" r="1.8" fill="#CBD5E1" opacity="0.6" />
+              <polygon points="1,4.5 3,5 1,5.5" fill="#F59E0B" />
+            </g>
 
-            {/* Cast Bronze Harbor Defense Cannon Trained to Port */}
-            <line x1="18" y1="22" x2="10" y2="19" stroke="#1E293B" strokeWidth="3.2" strokeLinecap="round" />
-            <circle cx="18" cy="22" r="2.2" fill="#64748B" stroke="#0F172A" strokeWidth="0.8" />
-            <circle cx="18" cy="22" r="0.8" fill="#FEF08A" />
+            {/* The Great 1814 Star-Spangled Banner Flag atop Ramparts */}
+            <line x1="26" y1="4" x2="26" y2="24" stroke="#78350F" strokeWidth="1.4" strokeLinecap="round" />
+            <circle cx="26" cy="4" r="1" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
+            <g>
+              <rect x="26" y="5.5" width="14" height="8.5" fill="#DC2626" stroke="#7F1D1D" strokeWidth="0.4" />
+              <line x1="26" y1="7.2" x2="40" y2="7.2" stroke="#FFFFFF" strokeWidth="1.1" />
+              <line x1="26" y1="9.8" x2="40" y2="9.8" stroke="#FFFFFF" strokeWidth="1.1" />
+              <line x1="26" y1="12.4" x2="40" y2="12.4" stroke="#FFFFFF" strokeWidth="1.1" />
+              <rect x="26" y="5.5" width="6.5" height="5" fill="#002D72" />
+              <circle cx="28" cy="7" r="0.6" fill="#FFFFFF" />
+              <circle cx="30" cy="7" r="0.6" fill="#FFFFFF" />
+              <circle cx="28" cy="9" r="0.6" fill="#FFFFFF" />
+              <circle cx="30" cy="9" r="0.6" fill="#FFFFFF" />
+              <circle cx="31.5" cy="8" r="0.6" fill="#FFFFFF" />
+            </g>
+          </g>
 
-            {/* Star-Spangled Banner 15-Star Flag Flying Proud */}
-            <line x1="24" y1="6" x2="24" y2="20" stroke="#78350F" strokeWidth="1.6" />
-            <circle cx="24" cy="6" r="1" fill="#FEF08A" />
-            {/* Flag Stripes */}
-            <rect x="24" y="7" width="13" height="7.5" fill="#DC2626" stroke="#991B1B" strokeWidth="0.5" />
-            <line x1="24" y1="8.5" x2="37" y2="8.5" stroke="#FFFFFF" strokeWidth="1" />
-            <line x1="24" y1="10.8" x2="37" y2="10.8" stroke="#FFFFFF" strokeWidth="1" />
-            <line x1="24" y1="13.1" x2="37" y2="13.1" stroke="#FFFFFF" strokeWidth="1" />
-            {/* Blue Canton & Historic Star */}
-            <rect x="24" y="7" width="6" height="4.2" fill="#1E3A8A" />
-            <circle cx="27" cy="9.1" r="1.1" fill="#FFFFFF" />
+          {/* Lower Patriotic Defender Ribbon Banner: DEFENDER • 1814 */}
+          <g>
+            <path
+              d="M9 37 L24 34.5 L39 37 L37 42.5 L24 40.5 L11 42.5 Z"
+              fill="url(#sub11-bastion-gold)"
+              stroke="#451A03"
+              strokeWidth="0.8"
+            />
+            <text
+              x="24"
+              y="39"
+              textAnchor="middle"
+              fontSize="3.2"
+              fontWeight="900"
+              fill="#451A03"
+              fontFamily="sans-serif"
+              letterSpacing="0.6"
+            >
+              DEFENDER {"\u2022"} 1814
+            </text>
           </g>
         </svg>
       );
     }
 
-    // Level 12: Crab Feast Champion (Diamond Lozenge Saltire Plaque)
-    if (key.includes('subrank-12') || key.includes('feast') || key.includes('mallet') || key.includes('🔨') || key.includes('crab-mallet')) {
+    // Level 12: Crab Feast Champion (Round Bushel Barrel Lid, Crossed Wooden Mallets & Steamed Jumbo Blue Crab)
+    if (key.includes('subrank-12') || key.includes('feast') || key.includes('mallet') || key.includes('champion') || key.includes('crab-mallet')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            <linearGradient id="sub12-lozenge-rim" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FEF08A" />
-              <stop offset="35%" stopColor="#F59E0B" />
-              <stop offset="70%" stopColor="#EA580C" />
-              <stop offset="100%" stopColor="#9A3412" />
-            </linearGradient>
-            <radialGradient id="sub12-table-bg" cx="50%" cy="50%" r="60%">
-              <stop offset="0%" stopColor="#FFFBEB" />
-              <stop offset="50%" stopColor="#FEF3C7" />
-              <stop offset="100%" stopColor="#FDE68A" />
+            <radialGradient id="sub12-barrel-wood" cx="50%" cy="45%" r="55%">
+              <stop offset="0%" stopColor="#FEF3C7" />
+              <stop offset="35%" stopColor="#FDE68A" />
+              <stop offset="70%" stopColor="#D97706" />
+              <stop offset="100%" stopColor="#78350F" />
             </radialGradient>
-            <linearGradient id="sub12-wood" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#F59E0B" />
-              <stop offset="50%" stopColor="#D97706" />
+            <linearGradient id="sub12-iron-hoop" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#64748B" />
+              <stop offset="50%" stopColor="#334155" />
+              <stop offset="100%" stopColor="#0F172A" />
+            </linearGradient>
+            <linearGradient id="sub12-mallet" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FDE68A" />
+              <stop offset="40%" stopColor="#F59E0B" />
+              <stop offset="85%" stopColor="#B45309" />
               <stop offset="100%" stopColor="#78350F" />
             </linearGradient>
-            <linearGradient id="sub12-steel" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="50%" stopColor="#E2E8F0" />
-              <stop offset="100%" stopColor="#94A3B8" />
+            <linearGradient id="sub12-steamed-shell" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#F87171" />
+              <stop offset="40%" stopColor="#EF4444" />
+              <stop offset="75%" stopColor="#DC2626" />
+              <stop offset="100%" stopColor="#991B1B" />
             </linearGradient>
-            <clipPath id="sub12-lozenge-clip">
-              <path d="M24 2 L46 24 L24 46 L2 24 Z" />
+            <linearGradient id="sub12-blue-claw" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#38BDF8" />
+              <stop offset="50%" stopColor="#0284C7" />
+              <stop offset="100%" stopColor="#0369A1" />
+            </linearGradient>
+            <clipPath id="sub12-lid-clip">
+              <circle cx="24" cy="24" r="21" />
             </clipPath>
           </defs>
 
-          {/* Diamond Lozenge Saltire Plaque Outer Silhouette */}
-          <path
-            d="M24 2 L46 24 L24 46 L2 24 Z"
-            fill="url(#sub12-lozenge-rim)"
-            stroke="#78350F"
-            strokeWidth="1.5"
-          />
+          {/* Crossed Wooden Mallets Protruding Diagonally in Saltire */}
+          {/* Mallet 1: Top-Left to Bottom-Right */}
+          <g transform="rotate(-38 24 24)">
+            <rect x="22" y="2" width="4" height="44" rx="2" fill="url(#sub12-mallet)" stroke="#451A03" strokeWidth="0.8" />
+            <rect x="13.5" y="3" width="21" height="9.5" rx="2.5" fill="url(#sub12-mallet)" stroke="#451A03" strokeWidth="1" />
+            <line x1="16" y1="7.8" x2="32" y2="7.8" stroke="#78350F" strokeWidth="0.8" />
+          </g>
 
-          {/* 4 Cardinal Diamond Studs */}
-          <circle cx="24" cy="3.5" r="1.2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
-          <circle cx="44.5" cy="24" r="1.2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
-          <circle cx="24" cy="44.5" r="1.2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
-          <circle cx="3.5" cy="24" r="1.2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.4" />
+          {/* Mallet 2: Top-Right to Bottom-Left */}
+          <g transform="rotate(38 24 24)">
+            <rect x="22" y="2" width="4" height="44" rx="2" fill="url(#sub12-mallet)" stroke="#451A03" strokeWidth="0.8" />
+            <rect x="13.5" y="3" width="21" height="9.5" rx="2.5" fill="url(#sub12-mallet)" stroke="#451A03" strokeWidth="1" />
+            <line x1="16" y1="7.8" x2="32" y2="7.8" stroke="#78350F" strokeWidth="0.8" />
+          </g>
 
-          {/* Clipped Feast Field */}
-          <g clipPath="url(#sub12-lozenge-clip)">
-            <rect x="0" y="0" width="48" height="48" fill="url(#sub12-table-bg)" />
+          {/* Round Wooden Bushel Basket Barrel Lid Outer Plaque */}
+          <circle cx="24" cy="24" r="21.5" fill="url(#sub12-iron-hoop)" stroke="#0F172A" strokeWidth="1.2" />
+          <circle cx="24" cy="24" r="20" fill="url(#sub12-barrel-wood)" stroke="#78350F" strokeWidth="0.8" />
 
-            {/* Subtle Butcher Paper Crab Feast Table Grid Texture */}
-            <line x1="12" y1="0" x2="12" y2="48" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
-            <line x1="24" y1="0" x2="24" y2="48" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
-            <line x1="36" y1="0" x2="36" y2="48" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
-            <line x1="0" y1="12" x2="48" y2="12" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
-            <line x1="0" y1="24" x2="48" y2="24" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
-            <line x1="0" y1="36" x2="48" y2="36" stroke="#FBBF24" strokeWidth="0.5" opacity="0.3" />
+          {/* 8 Outer Iron Strap Rivets */}
+          {Array.from({ length: 8 }).map((_, i) => {
+            const rad = (i * 45 * Math.PI) / 180;
+            return (
+              <circle
+                key={i}
+                cx={24 + 20.8 * Math.cos(rad)}
+                cy={24 + 20.8 * Math.sin(rad)}
+                r="0.8"
+                fill="#CBD5E1"
+                stroke="#0F172A"
+                strokeWidth="0.3"
+              />
+            );
+          })}
 
-            {/* Old Bay Seasoning Dust Flecks Scatter */}
-            <circle cx="24" cy="9" r="1.2" fill="#EF4444" />
-            <circle cx="13" cy="24" r="1.4" fill="#F59E0B" />
-            <circle cx="35" cy="24" r="1.4" fill="#DC2626" />
-            <circle cx="16" cy="36" r="1" fill="#EF4444" />
-            <circle cx="32" cy="36" r="1" fill="#F59E0B" />
+          {/* Clipped Bushel Lid Planks */}
+          <g clipPath="url(#sub12-lid-clip)">
+            {/* Wood Plank Grooves */}
+            <line x1="14" y1="4" x2="14" y2="44" stroke="#78350F" strokeWidth="0.8" opacity="0.4" />
+            <line x1="24" y1="3" x2="24" y2="45" stroke="#78350F" strokeWidth="0.8" opacity="0.4" />
+            <line x1="34" y1="4" x2="34" y2="44" stroke="#78350F" strokeWidth="0.8" opacity="0.4" />
 
-            {/* Wooden Crab Mallet (Turned Birch Head & Lathe-Turned Handle) */}
-            <g transform="rotate(45 24 24)">
-              <rect x="22" y="6" width="4.5" height="32" rx="2.2" fill="url(#sub12-wood)" stroke="#78350F" strokeWidth="0.8" />
-              <rect x="14" y="6" width="20.5" height="9.5" rx="2.8" fill="url(#sub12-wood)" stroke="#78350F" strokeWidth="1" />
-              <line x1="16" y1="10.8" x2="32.5" y2="10.8" stroke="#451A03" strokeWidth="0.8" />
-              {/* Lathe Ring Grooves */}
-              <line x1="22" y1="28" x2="26.5" y2="28" stroke="#451A03" strokeWidth="0.8" />
-              <line x1="22" y1="31" x2="26.5" y2="31" stroke="#451A03" strokeWidth="0.8" />
-            </g>
+            {/* Steamed Jumbo Blue Crab (Cooked Fiery Coral-Red with Blue Claw Stems) */}
+            <ellipse cx="12" cy="31" rx="3" ry="1.6" transform="rotate(-35 12 31)" fill="url(#sub12-blue-claw)" stroke="#0284C7" strokeWidth="0.4" />
+            <ellipse cx="36" cy="31" rx="3" ry="1.6" transform="rotate(35 36 31)" fill="url(#sub12-blue-claw)" stroke="#0284C7" strokeWidth="0.4" />
 
-            {/* Stainless Steel Seafood Crab Knife & Pick */}
-            <g transform="rotate(-45 24 24)">
-              <rect x="22" y="8" width="4.5" height="29" rx="1.5" fill="url(#sub12-steel)" stroke="#64748B" strokeWidth="0.8" />
-              <polygon points="22,8 26.5,8 24.2,3.5" fill="#FFFFFF" stroke="#64748B" strokeWidth="0.8" />
-              {/* Red Grip with Brass Rivets */}
-              <rect x="21" y="26" width="6.5" height="11" rx="1.5" fill="#DC2626" stroke="#991B1B" strokeWidth="0.8" />
-              <circle cx="24.2" cy="29" r="0.8" fill="#FEF08A" />
-              <circle cx="24.2" cy="34" r="0.8" fill="#FEF08A" />
-            </g>
+            {/* Walking Legs on Sides */}
+            <path d="M14 23 L7 24 M15 26 L9 29 M16 29 L12 33" stroke="url(#sub12-steamed-shell)" strokeWidth="1.8" strokeLinecap="round" />
+            <path d="M34 23 L41 24 M33 26 L39 29 M32 29 L36 33" stroke="url(#sub12-steamed-shell)" strokeWidth="1.8" strokeLinecap="round" />
 
-            {/* Steamed Crab Claw Resting Beside Center */}
-            <path d="M14 26 C12 21 16 18 19 20 C22 22 20 26 18 27 Z" fill="#EF4444" stroke="#991B1B" strokeWidth="0.6" />
-            <polygon points="14,24 11,21 15,22" fill="#DC2626" />
+            {/* Broad Cooked Carapace Shell */}
+            <ellipse cx="24" cy="25" rx="11" ry="7.5" fill="url(#sub12-steamed-shell)" stroke="#7F1D1D" strokeWidth="0.9" />
+            {/* Pointed Lateral Spines */}
+            <polygon points="13,25 7,24 14,23" fill="#DC2626" />
+            <polygon points="35,25 41,24 34,23" fill="#DC2626" />
 
-            {/* Fresh Sliced Lemon Wedge */}
-            <path d="M30 20 C34 22 36 26 34 29 L28 26 Z" fill="#FDE047" stroke="#CA8A04" strokeWidth="0.6" />
-            <path d="M30 21 C33 23 34.5 26 33 28 L29 26 Z" fill="#FEF08A" />
+            {/* Crab Front Pincer Arms */}
+            <path d="M18 22 Q12 18 10 13" stroke="url(#sub12-steamed-shell)" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+            <path d="M30 22 Q36 18 38 13" stroke="url(#sub12-steamed-shell)" strokeWidth="2.8" strokeLinecap="round" fill="none" />
 
-            {/* Golden Drawn Butter Ramekin Centerpiece */}
-            <ellipse cx="24" cy="24" r="5" fill="#FEF08A" stroke="#EA580C" strokeWidth="1.2" />
-            <circle cx="24" cy="24" r="3" fill="#FBBF24" />
-            {/* Parsley Specks */}
-            <circle cx="23" cy="23.5" r="0.5" fill="#15803D" />
-            <circle cx="25" cy="24.5" r="0.5" fill="#15803D" />
+            {/* Brilliant Blue & Scarlet Pincer Claws */}
+            <path d="M10 13 C7 10 8 7 11 8 C13 10 12 12 10 13 Z" fill="#DC2626" stroke="#7F1D1D" strokeWidth="0.4" />
+            <path d="M10 13 C7 15 8 18 11 17 C12 15 11 13 10 13 Z" fill="url(#sub12-blue-claw)" />
+            <path d="M38 13 C41 10 40 7 37 8 C35 10 36 12 38 13 Z" fill="#DC2626" stroke="#7F1D1D" strokeWidth="0.4" />
+            <path d="M38 13 C41 15 40 18 37 17 C36 15 37 13 38 13 Z" fill="url(#sub12-blue-claw)" />
+
+            {/* Steamed Crab Eyes */}
+            <circle cx="21.5" cy="18.5" r="1.3" fill="#0F172A" />
+            <circle cx="21.3" cy="18.2" r="0.4" fill="#FFFFFF" />
+            <circle cx="26.5" cy="18.5" r="1.3" fill="#0F172A" />
+            <circle cx="26.3" cy="18.2" r="0.4" fill="#FFFFFF" />
+
+            {/* Fresh Cut Lemon Wedge on Side */}
+            <path d="M31 16 C35 18 37 22 35 25 L29 22 Z" fill="#FDE047" stroke="#CA8A04" strokeWidth="0.5" />
+            <path d="M31 17 C34 19 35.5 22 34 24 L30 22 Z" fill="#FEF08A" />
+
+            {/* Coarse Sea Salt & Cracked Seasoning Specks */}
+            <circle cx="20" cy="23" r="0.7" fill="#FFFFFF" />
+            <circle cx="28" cy="24" r="0.7" fill="#FFFFFF" />
+            <circle cx="24" cy="27" r="0.8" fill="#FEF08A" />
+            <circle cx="17" cy="26" r="0.6" fill="#F59E0B" />
+            <circle cx="31" cy="27" r="0.6" fill="#F59E0B" />
+          </g>
+
+          {/* Lower Champion Ribbon Scroll: CRAB FEAST • CHAMPION */}
+          <g>
+            <path
+              d="M7 38 L24 35.5 L41 38 L39 43.5 L24 41.5 L9 43.5 Z"
+              fill="url(#sub12-mallet)"
+              stroke="#451A03"
+              strokeWidth="0.9"
+            />
+            <text
+              x="24"
+              y="40"
+              textAnchor="middle"
+              fontSize="3.2"
+              fontWeight="900"
+              fill="#451A03"
+              fontFamily="sans-serif"
+              letterSpacing="0.5"
+            >
+              CRAB FEAST {"\u2022"} CHAMPION
+            </text>
           </g>
         </svg>
       );
     }
 
     // Level 13: Poe's Raven Disciple (Pointed Gothic Cathedral Arch, Full Moon Halo & Spread-Wing Raven on Marble Pallas Bust)
-    if (key.includes('subrank-13') || key.includes('poe') || key.includes('raven') || key.includes('🪶') || key.includes('poe-raven')) {
+    if (key.includes('subrank-13') || key.includes('poe') || key.includes('raven') || key.includes('disciple') || key.includes('poe-raven')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -1466,8 +1596,8 @@ export const RankInsigniaArt: React.FC<{
       );
     }
 
-    // Level 14: Charm City Legend (Baroque Shield Cartouche, Imperial Sovereign Crown with Ermine Fur, Sapphires & Rubies)
-    if (key.includes('subrank-14') || key.includes('legend') || key.includes('crown') || key.includes('👑') || key.includes('charm-crown')) {
+    // Level 14: Charm City Legend (Baroque Shield Cartouche, Crossed Golden Keys to the City & Imperial Sovereign Crown)
+    if (key.includes('subrank-14') || key.includes('legend') || key.includes('crown') || key.includes('charm-crown')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
@@ -1563,8 +1693,28 @@ export const RankInsigniaArt: React.FC<{
               />
             ))}
 
+            {/* Crossed 24K Golden Keys to the City of Baltimore in Saltire */}
+            {/* Key 1: Top-Left to Bottom-Right */}
+            <g>
+              <line x1="12" y1="12" x2="36" y2="36" stroke="url(#sub14-gold)" strokeWidth="1.8" strokeLinecap="round" />
+              {/* Ornate Trefoil Openwork Bow */}
+              <circle cx="12" cy="12" r="3.2" fill="none" stroke="url(#sub14-gold)" strokeWidth="1.2" />
+              <circle cx="12" cy="12" r="1.3" fill="none" stroke="url(#sub14-gold)" strokeWidth="0.6" />
+              {/* Notched Bit/Ward */}
+              <path d="M34 34 L38 38 L37 39 L35 37 L34 38 L33 37" stroke="url(#sub14-gold)" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+            </g>
+
+            {/* Key 2: Top-Right to Bottom-Left */}
+            <g>
+              <line x1="36" y1="12" x2="12" y2="36" stroke="url(#sub14-gold)" strokeWidth="1.8" strokeLinecap="round" />
+              {/* Ornate Trefoil Openwork Bow */}
+              <circle cx="36" cy="12" r="3.2" fill="none" stroke="url(#sub14-gold)" strokeWidth="1.2" />
+              <circle cx="36" cy="12" r="1.3" fill="none" stroke="url(#sub14-gold)" strokeWidth="0.6" />
+              {/* Notched Bit/Ward */}
+              <path d="M14 34 L10 38 L11 39 L13 37 L14 38 L15 37" stroke="url(#sub14-gold)" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+            </g>
+
             {/* Flanking Golden Victory Laurel Boughs Framing Crown */}
-            {/* Left Laurel Sprig */}
             <path d="M12 18 C11 25 15 31 20 34" stroke="#D97706" strokeWidth="1" fill="none" />
             <ellipse cx="12" cy="20" rx="1.5" ry="2.6" transform="rotate(-35 12 20)" fill="url(#sub14-gold)" />
             <ellipse cx="12.5" cy="25" rx="1.5" ry="2.6" transform="rotate(-15 12.5 25)" fill="url(#sub14-gold)" />
@@ -1572,7 +1722,6 @@ export const RankInsigniaArt: React.FC<{
             <circle cx="14" cy="23" r="0.9" fill="#DC2626" />
             <circle cx="16" cy="28" r="0.9" fill="#DC2626" />
 
-            {/* Right Laurel Sprig */}
             <path d="M36 18 C37 25 33 31 28 34" stroke="#D97706" strokeWidth="1" fill="none" />
             <ellipse cx="36" cy="20" rx="1.5" ry="2.6" transform="rotate(35 36 20)" fill="url(#sub14-gold)" />
             <ellipse cx="35.5" cy="25" rx="1.5" ry="2.6" transform="rotate(15 35.5 25)" fill="url(#sub14-gold)" />
@@ -2945,14 +3094,14 @@ export const AvatarVectorArt: React.FC<{
 }> = ({ avatarId = 'baby-jay', size = 48, className = '' }) => {
   // Normalize legacy emojis or string ids
   let id = avatarId.toLowerCase();
-  if (id === '🐦' || id.includes('blue-jay') || id.includes('baby-jay')) id = 'baby-jay';
-  if (id === '🎓' || id.includes('scholar')) id = 'scholar-jay';
-  if (id === '🦀' || id.includes('crab')) id = 'maryland-crab';
-  if (id === '🎻' || id.includes('violin') || id.includes('peabody')) id = 'peabody-violin';
-  if (id === '🔬' || id.includes('microscope') || id.includes('med')) id = 'med-microscope';
-  if (id === '🦉' || id.includes('lacrosse')) id = 'lacrosse-jay';
-  if (id === '🚀' || id.includes('star') || id.includes('astronomy')) id = 'astronomy-star';
-  if (id === '🎨' || id.includes('camera') || id.includes('vintage')) id = 'vintage-camera';
+  if (id.includes('blue-jay') || id.includes('baby-jay')) id = 'baby-jay';
+  if (id.includes('scholar')) id = 'scholar-jay';
+  if (id.includes('crab')) id = 'maryland-crab';
+  if (id.includes('violin') || id.includes('peabody')) id = 'peabody-violin';
+  if (id.includes('microscope') || id.includes('med')) id = 'med-microscope';
+  if (id.includes('lacrosse') || id.includes('owl')) id = 'lacrosse-jay';
+  if (id.includes('star') || id.includes('astronomy') || id.includes('rocket')) id = 'astronomy-star';
+  if (id.includes('camera') || id.includes('vintage') || id.includes('art')) id = 'vintage-camera';
 
   switch (id) {
     case 'scholar-jay':
