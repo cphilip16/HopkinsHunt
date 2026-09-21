@@ -327,15 +327,15 @@ function InteractiveBlueJay({ posClass }) {
     <div
       className={`blue-jay-interactive-container ${posClass}`}
       onClick={triggerEmote}
-      title="Click me to flap wings or dance!"
+      title="Meet Hoppy the Blue Jay — click to flap wings or dance!"
     >
       {quote && <div className="jay-speech-bubble">{quote}</div>}
       <img
         className={`blue-jay-img emote-${emote}`}
         src="/blue-jay-mascot.png"
-        alt="Cartoon Blue Jay mascot - Click to emote"
+        alt="Hoppy the Blue Jay mascot - Click to emote"
       />
-      <span className="jay-click-hint">Click me! 🐦</span>
+      <span className="jay-click-hint">Meet Hoppy! 🐦</span>
     </div>
   )
 }
