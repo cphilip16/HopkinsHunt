@@ -271,23 +271,15 @@ const questDefinitions = [
   },
 ]
 
-const ranks = [
-  'Newbie',
-  'First Flight',
-  'Blue Jay',
-  'Campus Scout',
-  'Homewood Guide',
-  'Neighborhood Pro',
-  'Charm City Wanderer',
-  'Weekend Warrior',
-  'Baltimore Insider',
-  'Hunt Captain',
-  'Urban Explorer',
-  'Trailblazer',
-  'JHU Legend',
-  'City Connector',
-  'Local Legend',
+const rankTiers = [
+  { name: 'Nestling', subranks: ['Fledgling Fencer', 'Brody Stalker', 'Charles Street Sprinter'] },
+  { name: 'Homewood Hopper', subranks: ['Wyman Park Wanderer', 'JHMI Shuttle Veteran', 'Peabody Harmonizer'] },
+  { name: 'Charm City Scout', subranks: ['Hampden "Hon" Hunter', 'Inner Harbor Helmsman', 'Fells Point Pathologist'] },
+  { name: 'Bmore Blue Jay', subranks: ['Old Bay Connoisseur', 'Fort McHenry Defender', 'Crab Feast Champion'] },
+  { name: 'Charm City Laureate', subranks: ["Poe's Raven Disciple", 'Charm City Legend', 'Grand Blue Jay Laureate'] },
 ]
+const ranks = rankTiers.flatMap((tier) => tier.subranks)
+const rankForPoints = (points) => ranks[Math.min(ranks.length - 1, Math.floor(points / 50))]
 
 // Interactive Blue Jay Cartoon Component with Click-to-Emote
 function InteractiveBlueJay({ posClass }) {
@@ -360,7 +352,6 @@ function App() {
       id: 'sofia-r',
       name: 'Sofia Rodriguez',
       email: 'sofia.r@jh.edu',
-      rank: 'Local Legend',
       points: 620,
       visitedCount: 13,
       cheers: 8,
@@ -369,7 +360,6 @@ function App() {
       id: 'jordan-p',
       name: 'Jordan Patel',
       email: 'jordan.p@jh.edu',
-      rank: 'Weekend Warrior',
       points: 380,
       visitedCount: 8,
       cheers: 5,
@@ -378,7 +368,6 @@ function App() {
       id: 'maya-l',
       name: 'Maya Lin',
       email: 'maya.l@jh.edu',
-      rank: 'Blue Jay',
       points: 140,
       visitedCount: 3,
       cheers: 3,
@@ -387,7 +376,6 @@ function App() {
       id: 'alex-c',
       name: 'Alex Chen',
       email: 'alex.c@jh.edu',
-      rank: 'First Flight',
       points: 65,
       visitedCount: 2,
       cheers: 2,
@@ -423,6 +411,8 @@ function App() {
 
   const rankIndex = Math.min(ranks.length - 1, Math.floor(totalPoints / 50))
   const currentRank = ranks[rankIndex]
+  const currentTierIndex = Math.floor(rankIndex / 3)
+  const currentTier = rankTiers[currentTierIndex]
   const nextRank = ranks[rankIndex + 1]
   const progress = nextRank ? ((totalPoints % 50) / 50) * 100 : 100
 
@@ -446,15 +436,12 @@ function App() {
     if (!newFriendName.trim() || !newFriendEmail.trim()) return
 
     const starterPoints = Math.floor(Math.random() * 200) + 40
-    const starterRankIndex = Math.min(ranks.length - 1, Math.floor(starterPoints / 50))
-
     const newFriend = {
       id: `friend-${Date.now()}`,
       name: newFriendName.trim(),
       email: newFriendEmail.trim().toLowerCase().includes('@jh.edu')
         ? newFriendEmail.trim().toLowerCase()
         : `${newFriendEmail.trim().toLowerCase()}@jh.edu`,
-      rank: ranks[starterRankIndex],
       points: starterPoints,
       visitedCount: Math.floor(starterPoints / 30),
       cheers: 1,
@@ -588,7 +575,7 @@ function App() {
             {/* 3-Step Game Loop Pills */}
             <div className="game-loop-strip">
               <span className="game-loop-pill">📍 1. Stamp Spots</span>
-              <span className="game-loop-pill">⚡ 2. Level Up (15 Ranks)</span>
+              <span className="game-loop-pill">⚡ 2. Level Up (5 Ranks)</span>
               <span className="game-loop-pill">👥 3. Beat Your Friends</span>
             </div>
 
@@ -610,8 +597,8 @@ function App() {
               <strong>{totalPoints}</strong>
               <small>POINTS</small>
             </div>
-            <span className="score-rank">RANK {String(rankIndex + 1).padStart(2, '0')} / 15</span>
-            <b>{currentRank}</b>
+            <span className="score-rank">RANK {currentTierIndex + 1} / {rankTiers.length} · SUBRANK {(rankIndex % 3) + 1} / 3</span>
+            <b>{currentTier.name}</b>
             <div className="score-progress">
               <span style={{ width: `${progress}%` }}></span>
             </div>
@@ -630,13 +617,38 @@ function App() {
           </div>
           <div>
             <span className="stat-label">CURRENT RANK</span>
-            <strong>{currentRank}</strong>
-            <span>level {rankIndex + 1} of 15</span>
+            <strong>{currentTier.name}</strong>
+            <span>{currentRank} · level {rankIndex + 1} of {ranks.length}</span>
           </div>
           <div>
             <span className="stat-label">LEADERBOARD STANDING</span>
             <strong className="status-on">#{userStanding} of {allParticipants.length}</strong>
             <span>among your friends</span>
+          </div>
+        </section>
+
+        <section className="rank-guide" aria-labelledby="rank-guide-title">
+          <div className="rank-guide-heading">
+            <div>
+              <p className="eyebrow">YOUR BLUE JAY JOURNEY</p>
+              <h2 id="rank-guide-title">Explore the ranks.</h2>
+            </div>
+            <p>Earn a new subrank every 50 points. Complete all three to reach the next rank.</p>
+          </div>
+          <div className="rank-guide-grid">
+            {rankTiers.map((tier, tierIndex) => (
+              <div className={`rank-tier ${tierIndex === currentTierIndex ? 'rank-tier-current' : ''}`} key={tier.name}>
+                <span className="rank-tier-number">RANK {tierIndex + 1}</span>
+                <h3>{tier.name}</h3>
+                <ol>
+                  {tier.subranks.map((subrank, subrankIndex) => (
+                    <li className={tierIndex * 3 + subrankIndex === rankIndex ? 'current-subrank' : ''} key={subrank}>
+                      {subrank}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -923,7 +935,7 @@ function App() {
                       <div className="row-right">
                         <div className="row-stats">
                           <strong>{person.points} pts</strong>
-                          <small>{person.rank} • {person.visitedCount} spots</small>
+                          <small>{rankForPoints(person.points)} • {person.visitedCount} spots</small>
                         </div>
                         {!person.isUser && (
                           <button

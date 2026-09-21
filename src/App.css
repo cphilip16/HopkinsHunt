@@ -640,6 +640,78 @@ nav a.active {
   font-weight: 600;
 }
 
+.rank-guide {
+  padding: 48px clamp(24px, 6vw, 72px);
+  background: #f3f9ff;
+}
+
+.rank-guide-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+
+.rank-guide-heading h2 {
+  margin: 0;
+}
+
+.rank-guide-heading > p {
+  max-width: 350px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.rank-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.rank-tier {
+  padding: 20px;
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 5px 0 rgba(15, 48, 92, 0.08);
+}
+
+.rank-tier-current {
+  border-color: var(--jay-sky);
+  background: #e9f7ff;
+}
+
+.rank-tier-number {
+  font-family: var(--bubbly);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #17649b;
+}
+
+.rank-tier h3 {
+  margin: 8px 0 14px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.rank-tier ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.rank-tier li {
+  margin: 8px 0;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.rank-tier li.current-subrank {
+  font-weight: 800;
+  color: #075985;
+}
+
 .status-on {
   color: #6ee7b7 !important;
 }
@@ -2137,6 +2209,13 @@ footer .brand-mark {
 
 /* Responsive */
 @media (max-width: 900px) {
+  .rank-guide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rank-guide-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
   .dashboard-hero {
     grid-template-columns: 1fr;
     padding-top: 60px;
@@ -2181,5 +2260,11 @@ footer .brand-mark {
   }
   .topbar nav {
     display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .rank-guide-grid {
+    grid-template-columns: 1fr;
   }
 }
