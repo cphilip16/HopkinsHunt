@@ -999,6 +999,15 @@ nav a.active {
   box-shadow: 0 10px 0 #a3d9f3, 0 20px 40px rgba(14, 41, 75, 0.15);
 }
 
+.campus-map::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.45;
+  background-image: repeating-linear-gradient(90deg, transparent 0 66px, rgba(14, 41, 75, 0.07) 67px 68px);
+}
+
 .map-water {
   position: absolute;
   right: -8%;
@@ -1033,6 +1042,34 @@ nav a.active {
   top: 20%;
   transform: rotate(42deg);
 }
+
+.road-three {
+  width: 52%;
+  left: 2%;
+  top: 36%;
+  transform: rotate(5deg);
+}
+
+.road-four {
+  width: 60%;
+  right: -8%;
+  bottom: 25%;
+  transform: rotate(-10deg);
+}
+
+.street-label {
+  position: absolute;
+  z-index: 2;
+  color: rgba(14, 41, 75, 0.5);
+  font-family: var(--bubbly);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.charles { left: 30%; top: 53%; transform: rotate(-18deg); }
+.\33 3rd { left: 20%; top: 31%; transform: rotate(5deg); }
+.pratt { right: 10%; bottom: 27%; color: white; transform: rotate(-10deg); }
 
 .map-label {
   position: absolute;
@@ -1072,6 +1109,85 @@ nav a.active {
   display: grid;
   place-items: center;
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.map-compass {
+  position: absolute;
+  z-index: 12;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(14, 41, 75, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--jhu-deep);
+  box-shadow: 0 3px 8px rgba(14, 41, 75, 0.16);
+}
+
+.map-compass b { position: absolute; top: 3px; font-size: 10px; }
+.map-compass span { color: #ef4444; font-size: 23px; transform: rotate(-30deg); }
+
+.map-scale {
+  position: absolute;
+  z-index: 12;
+  bottom: 18px;
+  left: 18px;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--jhu-deep);
+  font-family: var(--bubbly);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.map-scale span { display: inline-block; width: 36px; margin-right: 6px; border-top: 3px solid var(--jhu-deep); vertical-align: middle; }
+
+.map-locate {
+  position: absolute;
+  z-index: 12;
+  bottom: 17px;
+  right: 18px;
+  border: 2px solid white;
+  border-radius: 999px;
+  padding: 8px 11px;
+  background: var(--jhu-blue);
+  color: white;
+  cursor: pointer;
+  font-family: var(--bubbly);
+  font-size: 10px;
+  font-weight: 700;
+  box-shadow: 0 3px 0 #08274a;
+}
+
+.map-locate:hover { background: var(--jay-cyan); }
+.map-locate span { font-size: 14px; vertical-align: -1px; }
+
+.gps-user-marker {
+  position: absolute;
+  z-index: 18;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border: 4px solid white;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #2563eb;
+  font-size: 0;
+  box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.25), 0 3px 8px rgba(14, 41, 75, 0.3);
+}
+
+.gps-note {
+  margin: 14px 0 0;
+  color: #42637e;
+  font-family: var(--bubbly);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .map-pin:hover, .map-pin.selected {
@@ -1191,6 +1307,104 @@ nav a.active {
   border-color: #fcd34d;
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
 }
+
+.spot-submission {
+  margin-top: 32px;
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.4fr;
+  gap: 28px;
+  align-items: center;
+  background: white;
+  border: 3px solid #a3d9f3;
+  border-radius: 26px;
+  box-shadow: 0 7px 0 #a3d9f3;
+}
+
+.submission-kicker {
+  color: var(--jay-cyan);
+  font-family: var(--bubbly);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.spot-submission h3 {
+  margin: 5px 0 7px;
+  color: var(--jhu-deep);
+  font-size: 21px;
+}
+
+.spot-submission p {
+  margin: 0;
+  color: #315779;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.spot-submission p strong { color: #c77800; }
+
+.spot-submission-fields {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr auto;
+  gap: 10px;
+}
+
+.spot-submission input {
+  min-width: 0;
+  padding: 12px 14px;
+  border: 2px solid #b9ddf1;
+  border-radius: 14px;
+  color: var(--jhu-deep);
+  font: 600 13px var(--sans);
+  outline: none;
+}
+
+.spot-submission input:focus { border-color: var(--jay-cyan); }
+
+.spot-submission button,
+.submission-status button {
+  border: 0;
+  border-radius: 14px;
+  background: var(--jhu-blue);
+  color: white;
+  cursor: pointer;
+  font-family: var(--bubbly);
+  font-weight: 700;
+}
+
+.spot-submission button {
+  padding: 0 17px;
+  white-space: nowrap;
+}
+
+.submission-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.submission-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #b9ddf1;
+  border-radius: 17px;
+}
+
+.submission-item strong,
+.submission-item span { display: block; }
+.submission-item strong { color: var(--jhu-deep); font-size: 14px; }
+.submission-item > div > span { color: #52718d; font-size: 12px; margin-top: 3px; }
+.submission-status { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.submission-status > span { font-family: var(--bubbly); font-size: 11px; font-weight: 700; }
+.submission-status .pending { color: #a76700; }
+.submission-status .approved { color: #06764f; }
+.submission-status button { padding: 8px 11px; font-size: 11px; }
 
 /* Quests Section */
 .quests-section {
@@ -1682,29 +1896,6 @@ nav a.active {
   margin: 0;
 }
 
-.verification-seal {
-  display: grid;
-  place-items: center;
-  width: 78px;
-  height: 78px;
-  border: 3px dashed #fcd34d;
-  border-radius: 50%;
-  color: #fcd34d;
-  font-family: var(--bubbly);
-  font-weight: 700;
-  font-size: 38px;
-  transform: rotate(8deg);
-  background: rgba(252, 211, 77, 0.12);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.verification-seal.verified {
-  background: #10b981;
-  color: white;
-  border: 3px solid white;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-}
-
 .passport-bottom {
   padding-top: 18px;
   border-top: 2px solid rgba(255, 255, 255, 0.18);
@@ -1955,6 +2146,19 @@ footer .brand-mark {
   }
   .map-layout, .passport-section, .friends-layout {
     grid-template-columns: 1fr;
+  }
+  .spot-submission {
+    grid-template-columns: 1fr;
+  }
+  .spot-submission-fields {
+    grid-template-columns: 1fr;
+  }
+  .spot-submission button {
+    min-height: 44px;
+  }
+  .submission-item {
+    align-items: flex-start;
+    flex-direction: column;
   }
   .stat-strip {
     grid-template-columns: 1fr;

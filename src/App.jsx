@@ -59,7 +59,7 @@ const places = [
     icon: '🌷',
     color: 'green',
     description: 'A magical neighborhood floral sanctuary famous for 80,000 blooming spring tulips. The sweetest picnic escape right beside campus.',
-    image: 'https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=900&q=85',
+    image: '/places/sherwood-gardens.webp',
     x: 52,
     y: 15,
   },
@@ -74,7 +74,7 @@ const places = [
     icon: '☀️',
     color: 'blue',
     description: 'Zero waves, 100% good vibes! The sun-drenched grassy knoll on North Charles where Hopkins students lounge, play spikeball, and tan all spring.',
-    image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85',
+    image: '/places/the-beach.webp',
     x: 46,
     y: 30,
   },
@@ -91,7 +91,7 @@ const places = [
     icon: '📖',
     color: 'gold',
     description: 'A jaw-dropping, six-tier "cathedral of books" rising 61 feet in historic Mount Vernon. An easy hop on the free JHMI shuttle!',
-    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=900&q=85',
+    image: '/places/peabody-library.webp',
     x: 32,
     y: 48,
   },
@@ -151,7 +151,7 @@ const places = [
     icon: '🌳',
     color: 'green',
     description: 'A wooded natural dell tucked right below campus. Ideal for dog-spotting, hammock hangs, trail runs, and decompressing after exams.',
-    image: 'https://images.unsplash.com/photo-1473445361085-b9a07f55608b?auto=format&fit=crop&w=900&q=85',
+    image: '/places/wyman-park.webp',
     x: 50,
     y: 42,
   },
@@ -168,7 +168,7 @@ const places = [
     icon: '🍗',
     color: 'coral',
     description: 'Late-night Korean pocha staple for crispy double-fried chicken, bubbling spicy stews, and celebratory post-exam dinners with friends.',
-    image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=900&q=85',
+    image: '/places/kong-pocha.jpg',
     x: 40,
     y: 56,
   },
@@ -198,7 +198,7 @@ const places = [
     icon: '⛵',
     color: 'blue',
     description: 'The historic centerpiece of Charm City! Stroll the scenic waterfront promenade, watch the dragon paddle boats, and feel the sea breeze.',
-    image: 'https://images.unsplash.com/photo-1509822929063-6b6cfc9b42f2?auto=format&fit=crop&w=900&q=85',
+    image: '/places/inner-harbor.jpg',
     x: 68,
     y: 75,
   },
@@ -228,7 +228,7 @@ const places = [
     icon: '🎸',
     color: 'purple',
     description: 'Rock memorabilia, juicy burgers, and harbor breezes inside an old power plant building right on Pier 4 under the giant glowing guitar.',
-    image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=900&q=85',
+    image: '/places/hard-rock-cafe.jpg',
     x: 82,
     y: 78,
   },
@@ -236,6 +236,40 @@ const places = [
 
 const mapPlaces = places
 const filterTabs = ['All spots', 'On campus', 'Near campus', 'Off campus']
+
+const gpsMapBounds = {
+  north: 39.35,
+  south: 39.25,
+  west: -76.65,
+  east: -76.58,
+}
+
+const questDefinitions = [
+  {
+    id: 'thinker-pose',
+    title: 'Thinker’s Pose',
+    detail: 'Take a “thinking” photo beside Auguste Rodin’s The Thinker at the BMA.',
+    points: 75,
+    icon: '🤔',
+    placeId: 'bma',
+  },
+  {
+    id: 'brody-brain-boost',
+    title: 'Brody Brain Boost',
+    detail: 'Find Brody’s bright blue study pod and snap your most focused study selfie.',
+    points: 60,
+    icon: '📚',
+    placeId: 'brody',
+  },
+  {
+    id: 'harbor-captain',
+    title: 'Harbor Captain',
+    detail: 'Find the USS Constellation at the Inner Harbor and strike your best captain pose.',
+    points: 90,
+    icon: '⚓',
+    placeId: 'inner-harbor',
+  },
+]
 
 const ranks = [
   'Newbie',
@@ -298,7 +332,7 @@ function InteractiveBlueJay({ posClass }) {
       {quote && <div className="jay-speech-bubble">{quote}</div>}
       <img
         className={`blue-jay-img emote-${emote}`}
-        src="/blue-jay.svg"
+        src="/blue-jay-mascot.png"
         alt="Cartoon Blue Jay mascot - Click to emote"
       />
       <span className="jay-click-hint">Click me! 🐦</span>
@@ -311,6 +345,8 @@ function App() {
   const [filter, setFilter] = useState('All spots')
   const [search, setSearch] = useState('')
   const [selectedPlace, setSelectedPlace] = useState(places[4]) // The Beach
+  const [userLocation, setUserLocation] = useState(null)
+  const [locationStatus, setLocationStatus] = useState('')
   const [authOpen, setAuthOpen] = useState(false)
   const [authStep, setAuthStep] = useState('credentials')
   const [email, setEmail] = useState('')
@@ -360,11 +396,30 @@ function App() {
   const [newFriendName, setNewFriendName] = useState('')
   const [newFriendEmail, setNewFriendEmail] = useState('')
   const [friendToast, setFriendToast] = useState('')
+  const [spotName, setSpotName] = useState('')
+  const [spotReason, setSpotReason] = useState('')
+  const [spotSubmissions, setSpotSubmissions] = useState([])
+
+  const isCreator = loggedIn && email.trim().toLowerCase() === 'creator@jh.edu'
+
+  const quests = questDefinitions.map((quest) => ({
+    ...quest,
+    progress: visited.includes(quest.placeId) ? 1 : 0,
+    total: 1,
+  }))
+
+  const gpsMarkerStyle = userLocation
+    ? {
+        left: `${Math.min(95, Math.max(5, ((userLocation.longitude - gpsMapBounds.west) / (gpsMapBounds.east - gpsMapBounds.west)) * 100))}%`,
+        top: `${Math.min(95, Math.max(5, ((gpsMapBounds.north - userLocation.latitude) / (gpsMapBounds.north - gpsMapBounds.south)) * 100))}%`,
+      }
+    : null
 
   const totalPoints = visited.reduce((sum, id) => {
     const item = places.find((place) => place.id === id)
     return sum + (item ? item.points : 0)
-  }, 0)
+  }, 0) + quests.reduce((sum, quest) => sum + (quest.progress === quest.total ? quest.points : 0), 0) +
+    spotSubmissions.filter((submission) => submission.status === 'approved').length * 300
 
   const rankIndex = Math.min(ranks.length - 1, Math.floor(totalPoints / 50))
   const currentRank = ranks[rankIndex]
@@ -418,35 +473,47 @@ function App() {
     )
   }
 
-  const quests = [
-    {
-      id: 'campus-loop',
-      title: 'Homewood Explorer',
-      detail: 'Visit three spots on campus',
-      points: 75,
-      icon: '◎',
-      progress: Math.min(3, visited.filter((id) => places.find((p) => p.id === id)?.type === 'On campus').length),
-      total: 3,
-    },
-    {
-      id: 'near-loop',
-      title: 'Neighborhood Adventurer',
-      detail: 'Explore two spots near campus',
-      points: 90,
-      icon: '◈',
-      progress: Math.min(2, visited.filter((id) => places.find((p) => p.id === id)?.type === 'Near campus').length),
-      total: 2,
-    },
-    {
-      id: 'city-lights',
-      title: 'Charm City Trekker',
-      detail: 'Complete one spot off campus in Baltimore',
-      points: 120,
-      icon: '✦',
-      progress: Math.min(1, visited.filter((id) => places.find((p) => p.id === id)?.type === 'Off campus').length),
-      total: 1,
-    },
-  ]
+  function submitSpot(event) {
+    event.preventDefault()
+    if (!spotName.trim() || !spotReason.trim()) return
+
+    setSpotSubmissions((current) => [
+      ...current,
+      {
+        id: `spot-${Date.now()}`,
+        name: spotName.trim(),
+        reason: spotReason.trim(),
+        status: 'pending',
+      },
+    ])
+    setSpotName('')
+    setSpotReason('')
+  }
+
+  function approveSpot(id) {
+    setSpotSubmissions((current) =>
+      current.map((submission) =>
+        submission.id === id ? { ...submission, status: 'approved' } : submission,
+      ),
+    )
+  }
+
+  function requestLocation() {
+    if (!navigator.geolocation) {
+      setLocationStatus('GPS is not available in this browser.')
+      return
+    }
+
+    setLocationStatus('Finding your location…')
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        setUserLocation({ latitude: coords.latitude, longitude: coords.longitude })
+        setLocationStatus('You are on the map!')
+      },
+      () => setLocationStatus('Location was unavailable. You can still explore every pin.'),
+      { enableHighAccuracy: true, timeout: 10000 },
+    )
+  }
 
   const visiblePlaces = places.filter(
     (place) =>
@@ -513,21 +580,17 @@ function App() {
               <div className="goal-banner-body">
                 <strong>THE HUNT GOAL: LEVEL UP & COMPETE WITH FRIENDS</strong>
                 <p>
-                  Explore 15 iconic Baltimore spots, stamp your passport to earn points, level up through <em>15 Blue Jay ranks</em>, and climb the live student leaderboard!
+                  Explore Baltimore favorites, stamp your passport, earn points, and race your friends up the leaderboard!
                 </p>
               </div>
             </div>
 
             {/* 3-Step Game Loop Pills */}
             <div className="game-loop-strip">
-              <span className="game-loop-pill">📍 1. Stamp 15 Spots</span>
+              <span className="game-loop-pill">📍 1. Stamp Spots</span>
               <span className="game-loop-pill">⚡ 2. Level Up (15 Ranks)</span>
               <span className="game-loop-pill">👥 3. Beat Your Friends</span>
             </div>
-
-            <p className="hero-description">
-              Find your next favorite Baltimore spot, complete student quests, and see how you stack up against classmates across campus and the city!
-            </p>
 
             <div className="hero-actions">
               <a className="primary-button" href="#recommendations">
@@ -670,8 +733,19 @@ function App() {
               <div className="map-water"></div>
               <div className="map-road road-one"></div>
               <div className="map-road road-two"></div>
+              <div className="map-road road-three"></div>
+              <div className="map-road road-four"></div>
+              <span className="street-label charles">N CHARLES ST</span>
+              <span className="street-label 33rd">W 33RD ST</span>
+              <span className="street-label pratt">E PRATT ST</span>
               <span className="map-label homewood">HOMEWOOD CAMPUS</span>
               <span className="map-label baltimore">INNER HARBOR</span>
+              <div className="map-compass" aria-label="Map orientation"><b>N</b><span>⌁</span></div>
+              <div className="map-scale"><span></span>1 mi</div>
+              <button className="map-locate" type="button" onClick={requestLocation}>
+                <span>◎</span> Use my location
+              </button>
+              {gpsMarkerStyle && <span className="gps-user-marker" style={gpsMarkerStyle} title="Your GPS location">●</span>}
               {mapPlaces.map((place) => (
                 <button
                   className={`map-pin ${selectedPlace.id === place.id ? 'selected' : ''}`}
@@ -709,6 +783,49 @@ function App() {
               </button>
             </aside>
           </div>
+          <p className="gps-note">{locationStatus || 'GPS-style map • Tap a pin for destination details'}</p>
+
+          <form className="spot-submission" onSubmit={submitSpot}>
+            <div className="spot-submission-copy">
+              <span className="submission-kicker">COMMUNITY PICK</span>
+              <h3>Know a spot we should hunt next?</h3>
+              <p>Suggest a Baltimore favorite for creator review. Approved additions earn you <strong>+300 points</strong>.</p>
+            </div>
+            <div className="spot-submission-fields">
+              <input
+                value={spotName}
+                onChange={(event) => setSpotName(event.target.value)}
+                placeholder="Place name"
+                aria-label="Suggested place name"
+              />
+              <input
+                value={spotReason}
+                onChange={(event) => setSpotReason(event.target.value)}
+                placeholder="Why should students try it?"
+                aria-label="Why students should try this place"
+              />
+              <button type="submit">Submit spot <span>→</span></button>
+            </div>
+          </form>
+
+          {spotSubmissions.length > 0 && (
+            <div className="submission-list" aria-live="polite">
+              {spotSubmissions.map((submission) => (
+                <article className="submission-item" key={submission.id}>
+                  <div>
+                    <strong>{submission.name}</strong>
+                    <span>{submission.reason}</span>
+                  </div>
+                  <div className="submission-status">
+                    <span className={submission.status}>{submission.status === 'approved' ? 'Approved • +300 pts' : 'Pending creator review'}</span>
+                    {isCreator && submission.status === 'pending' && (
+                      <button type="button" onClick={() => approveSpot(submission.id)}>Approve +300</button>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Quests Section */}
@@ -717,6 +834,7 @@ function App() {
             <div>
               <p className="eyebrow">03 / STUDENT QUESTS</p>
               <h2>Plans for your<br /><em>next free hour.</em></h2>
+              <p className="section-note">Fresh mini-adventures land here every week.</p>
             </div>
             <span className="quest-count">{quests.length} active quests</span>
           </div>
@@ -874,9 +992,6 @@ function App() {
                 <span className="passport-label">DIGITAL J-CARD PASS</span>
                 <h2>{loggedIn ? "Sofia's Hunt Pass" : 'Your Hunt Pass'}</h2>
                 <p>{loggedIn ? 'Verified student identity • Active' : 'Log in to claim your verified student identity'}</p>
-              </div>
-              <div className={`verification-seal ${loggedIn ? 'verified' : ''}`}>
-                {loggedIn ? '✓' : '?'}
               </div>
             </div>
             <div className="passport-bottom">
