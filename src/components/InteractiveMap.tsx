@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   MapPin,
   Navigation,
@@ -10,6 +10,10 @@ import {
   Crosshair,
   Radio,
   ShieldCheck,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  Move,
   // Landmark-specific unique marker icons
   GraduationCap,
   Landmark,
@@ -443,8 +447,127 @@ export const InteractiveMap: React.FC = () => {
     simulateLocation,
   } = useApp();
 
+  const mapContainerRef = useRef<HTMLDivElement>(null);
   const [activePin, setActivePin] = useState<Place | null>(null);
   const [hoveredPin, setHoveredPin] = useState<Place | null>(null);
+
+  // Zoom & Pan interactive states
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [dragDistance, setDragDistance] = useState(0);
+
+  // Zoom handlers
+  const handleZoomChange = (delta: number) => {
+    setZoom((prevZoom) => {
+      const nextZoom = Math.min(3.5, Math.max(1, Number((prevZoom + delta).toFixed(2))));
+      if (nextZoom === 1) {
+        setPan({ x: 0, y: 0 });
+      } else {
+        const width = mapContainerRef.current?.clientWidth || 600;
+        const height = mapContainerRef.current?.clientHeight || 450;
+        const maxPanX = width * (nextZoom - 1) * 0.55;
+        const maxPanY = height * (nextZoom - 1) * 0.55;
+        setPan((prevPan) => ({
+          x: Math.max(-maxPanX, Math.min(maxPanX, prevPan.x)),
+          y: Math.max(-maxPanY, Math.min(maxPanY, prevPan.y)),
+        }));
+      }
+      return nextZoom;
+    });
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const delta = e.deltaY < 0 ? 0.25 : -0.25;
+    handleZoomChange(delta);
+  };
+
+  // Drag & Pan handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 0) return;
+    setIsDragging(true);
+    setDragDistance(0);
+    setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const newX = e.clientX - dragStart.x;
+    const newY = e.clientY - dragStart.y;
+    setDragDistance((prev) => prev + Math.abs(e.movementX) + Math.abs(e.movementY));
+    const width = mapContainerRef.current?.clientWidth || 600;
+    const height = mapContainerRef.current?.clientHeight || 450;
+    const maxPanX = width * (zoom - 1) * 0.55;
+    const maxPanY = height * (zoom - 1) * 0.55;
+    setPan({
+      x: Math.max(-maxPanX, Math.min(maxPanX, newX)),
+      y: Math.max(-maxPanY, Math.min(maxPanY, newY)),
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Touch handlers for mobile pan
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      setIsDragging(true);
+      setDragDistance(0);
+      setDragStart({ x: e.touches[0].clientX - pan.x, y: e.touches[0].clientY - pan.y });
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || e.touches.length !== 1) return;
+    const newX = e.touches[0].clientX - dragStart.x;
+    const newY = e.touches[0].clientY - dragStart.y;
+    setDragDistance((prev) => prev + 5);
+    const width = mapContainerRef.current?.clientWidth || 600;
+    const height = mapContainerRef.current?.clientHeight || 450;
+    const maxPanX = width * (zoom - 1) * 0.55;
+    const maxPanY = height * (zoom - 1) * 0.55;
+    setPan({
+      x: Math.max(-maxPanX, Math.min(maxPanX, newX)),
+      y: Math.max(-maxPanY, Math.min(maxPanY, newY)),
+    });
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
+  // Preset quick-jump focal points
+  const focusPreset = (preset: 'all' | 'homewood' | 'mount-vernon' | 'harbor') => {
+    if (preset === 'all') {
+      setZoom(1);
+      setPan({ x: 0, y: 0 });
+      return;
+    }
+    const width = mapContainerRef.current?.clientWidth || 600;
+    const height = mapContainerRef.current?.clientHeight || 450;
+
+    const targets = {
+      homewood: { x: 47, y: 18, targetZoom: 2.5 },
+      'mount-vernon': { x: 48, y: 40, targetZoom: 2.4 },
+      harbor: { x: 62, y: 60, targetZoom: 2.3 },
+    };
+
+    const { x, y, targetZoom } = targets[preset];
+    const panX = (50 - x) * (width / 100) * (targetZoom - 0.4);
+    const panY = (50 - y) * (height / 100) * (targetZoom - 0.4);
+
+    const maxPanX = width * (targetZoom - 1) * 0.55;
+    const maxPanY = height * (targetZoom - 1) * 0.55;
+
+    setZoom(targetZoom);
+    setPan({
+      x: Math.max(-maxPanX, Math.min(maxPanX, panX)),
+      y: Math.max(-maxPanY, Math.min(maxPanY, panY)),
+    });
+  };
 
   // User projected coordinates on map canvas
   const userMapPos = userLocation
@@ -462,7 +585,7 @@ export const InteractiveMap: React.FC = () => {
   return (
     <div className="space-y-4">
       {/* Map Explainer Banner */}
-      <div className="bg-gradient-to-r from-hopkins-deep to-hopkins-heritage rounded-2xl p-4 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md relative overflow-hidden">
+      <div className="bg-gradient-to-r from-hopkins-deep via-hopkins-heritage to-slate-900 rounded-2xl p-4 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md relative overflow-hidden">
         {/* Top Maryland Accent Ribbon */}
         <div className="absolute top-0 inset-x-0">
           <MarylandRibbon height={3} />
@@ -474,11 +597,11 @@ export const InteractiveMap: React.FC = () => {
           </div>
           <div>
             <h3 className="text-sm font-bold tracking-tight flex items-center gap-1.5">
-              <span>Interactive Baltimore & JHU Campus Map</span>
+              <span>Geographically Detailed Baltimore & JHU Campus Map</span>
               <span className="hidden md:inline-block"><CompassRoseSticker size={20} /></span>
             </h3>
             <p className="text-xs text-blue-200">
-              Each spot features a unique marker. Hover or click any location to preview its photo, travel lore, and 250m GPS geofencing radius!
+              Interactive map with zoom controls, real street arteries, waterfront piers, and campus quads. Hover or click markers to inspect high-res photos!
             </p>
           </div>
         </div>
@@ -502,416 +625,766 @@ export const InteractiveMap: React.FC = () => {
         </div>
       </div>
 
-      {/* SVG Canvas Map Container */}
+      {/* SVG Canvas Map Outer Container */}
       <div
-        className="relative w-full aspect-[4/3] min-h-[380px] sm:min-h-[460px] max-h-[640px] bg-slate-900 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl select-none"
+        ref={mapContainerRef}
+        className={`relative w-full aspect-[4/3] min-h-[420px] sm:min-h-[500px] max-h-[700px] bg-[#0c1829] rounded-3xl overflow-hidden border border-slate-700 shadow-2xl select-none ${
+          zoom > 1 ? (isDragging ? 'cursor-grabbing' : 'cursor-grab') : 'cursor-default'
+        }`}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onWheel={handleWheel}
         onClick={() => {
-          // Deselect active pin when clicking map background
-          setActivePin(null);
+          // Deselect active pin when clicking background
+          if (dragDistance < 6) {
+            setActivePin(null);
+          }
         }}
       >
+        {/* Interactive Zoom & Navigation Controls Overlay */}
+        <div className="absolute top-3 left-3 z-30 flex flex-col gap-2 pointer-events-auto">
+          {/* Zoom In / Out / Reset Pill */}
+          <div className="flex items-center bg-slate-900/90 backdrop-blur-md rounded-xl p-1 border border-slate-700 shadow-xl text-white">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleZoomChange(0.35);
+              }}
+              disabled={zoom >= 3.5}
+              className="p-1.5 rounded-lg hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed text-slate-200 hover:text-white transition-colors"
+              title="Zoom In (+)"
+              aria-label="Zoom In"
+            >
+              <ZoomIn className="w-4 h-4" />
+            </button>
+            <div className="px-2 py-0.5 text-[11px] font-mono font-bold text-sky-400 min-w-[42px] text-center select-none">
+              {Math.round(zoom * 100)}%
+            </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleZoomChange(-0.35);
+              }}
+              disabled={zoom <= 1}
+              className="p-1.5 rounded-lg hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed text-slate-200 hover:text-white transition-colors"
+              title="Zoom Out (-)"
+              aria-label="Zoom Out"
+            >
+              <ZoomOut className="w-4 h-4" />
+            </button>
+            {zoom > 1 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  focusPreset('all');
+                }}
+                className="ml-1 p-1.5 rounded-lg hover:bg-slate-800 text-amber-300 hover:text-amber-200 transition-colors border-l border-slate-700"
+                title="Reset Zoom & Pan"
+                aria-label="Reset View"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+
+          {/* Quick Geographic Preset Buttons */}
+          <div className="hidden sm:flex items-center gap-1 bg-slate-900/85 backdrop-blur-md px-2 py-1.5 rounded-xl border border-slate-700 shadow-lg text-[10px] font-bold">
+            <span className="text-slate-400 uppercase tracking-wider text-[9px] mr-0.5">Jump:</span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                focusPreset('all');
+              }}
+              className={`px-2 py-0.5 rounded-lg transition-all ${
+                zoom === 1
+                  ? 'bg-sky-500 text-white shadow-sm'
+                  : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+              }`}
+            >
+              All Bmore
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                focusPreset('homewood');
+              }}
+              className="px-2 py-0.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-all"
+            >
+              Homewood
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                focusPreset('mount-vernon');
+              }}
+              className="px-2 py-0.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-all"
+            >
+              Mt Vernon
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                focusPreset('harbor');
+              }}
+              className="px-2 py-0.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-all"
+            >
+              Inner Harbor
+            </button>
+          </div>
+        </div>
+
+        {/* Drag Hint when Zoomed in */}
+        {zoom > 1 && (
+          <div className="absolute bottom-3 left-3 z-20 pointer-events-none hidden sm:flex items-center space-x-1.5 bg-slate-900/80 backdrop-blur-sm px-2.5 py-1 rounded-xl border border-slate-700 text-[10px] text-sky-300 font-medium animate-in fade-in">
+            <Move className="w-3 h-3 text-sky-400" />
+            <span>Drag to pan across Baltimore</span>
+          </div>
+        )}
+
         {/* Top-Right Brass Binoculars Observation Badge */}
         <div className="absolute top-3 right-3 z-20 hidden sm:flex items-center space-x-1.5 bg-slate-800/80 backdrop-blur-md px-2.5 py-1 rounded-xl border border-slate-700 text-[10px] font-bold text-slate-300 pointer-events-none">
           <BinocularsSticker size={22} />
-          <span>Field Observation</span>
+          <span>Cartographic Observation</span>
         </div>
-        
-        {/* Decorative Grid Lines */}
+
+        {/* Inner Zoomable & Pannable Canvas Container */}
         <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
+          className="w-full h-full absolute inset-0 transition-transform duration-75 origin-center will-change-transform"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-            backgroundSize: '24px 24px',
+            transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
           }}
-        />
-
-        {/* SVG Drawing Layer */}
-        <svg
-          viewBox="0 0 100 100"
-          className="w-full h-full object-contain"
-          preserveAspectRatio="none"
         >
-          <defs>
-            <linearGradient id="harborGradient" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#0369a1" stopOpacity="0.85" />
-              <stop offset="50%" stopColor="#0f2b48" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#0284c7" stopOpacity="0.9" />
-            </linearGradient>
-            <linearGradient id="parkGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#047857" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#064e3b" stopOpacity="0.9" />
-            </linearGradient>
-            <linearGradient id="shuttleGlow" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#38bdf8" />
-              <stop offset="100%" stopColor="#a78bfa" />
-            </linearGradient>
-          </defs>
-
-          {/* Waterway: Baltimore Inner Harbor & Patapsco River with Gradient Fill */}
-          <path
-            d="M 50 60 Q 55 56 60 55 Q 68 55 75 58 Q 85 62 90 70 Q 95 80 100 85 L 100 100 L 50 100 Z"
-            fill="url(#harborGradient)"
-            stroke="#38bdf8"
-            strokeWidth="0.4"
-            opacity="0.95"
-          />
-          <path
-            d="M 50 60 Q 58 52 64 54 Q 72 56 80 52 L 100 52 L 100 100 L 50 100 Z"
-            fill="#0c233b"
-            opacity="0.75"
+          {/* Subtle City Coordinate Dot Matrix */}
+          <div
+            className="absolute inset-0 opacity-15 pointer-events-none"
+            style={{
+              backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+              backgroundSize: '20px 20px',
+            }}
           />
 
-          {/* Water Shimmer Waves */}
-          <path d="M 58 64 Q 65 62 72 65" fill="none" stroke="#38bdf8" strokeWidth="0.3" strokeDasharray="1, 1.5" opacity="0.6" />
-          <path d="M 75 75 Q 82 73 90 76" fill="none" stroke="#67e8f9" strokeWidth="0.3" strokeDasharray="1.2, 2" opacity="0.6" />
+          {/* SVG Cartographic Vector Drawing Layer */}
+          <svg
+            viewBox="0 0 100 100"
+            className="w-full h-full object-contain"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              {/* Marine Ocean Gradients */}
+              <linearGradient id="harborGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#0369a1" stopOpacity="0.9" />
+                <stop offset="40%" stopColor="#075985" stopOpacity="0.95" />
+                <stop offset="80%" stopColor="#0c4a6e" stopOpacity="0.98" />
+                <stop offset="100%" stopColor="#0369a1" stopOpacity="0.95" />
+              </linearGradient>
 
-          {/* Northwest Greenery: Druid Hill Park */}
-          <ellipse cx="20" cy="22" rx="14" ry="10" fill="url(#parkGradient)" stroke="#10b981" strokeWidth="0.3" />
-          <text x="14" y="23" fill="#6ee7b7" fontSize="2.3" opacity="0.9" fontWeight="bold">
-            Druid Hill Park
-          </text>
+              {/* Park & Forest Gradients */}
+              <linearGradient id="parkGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#059669" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#064e3b" stopOpacity="0.95" />
+              </linearGradient>
 
-          {/* East Greenery: Patterson Park */}
-          <rect x="80" y="48" width="12" height="10" rx="2" fill="url(#parkGradient)" stroke="#10b981" strokeWidth="0.3" />
-          <text x="82" y="54" fill="#6ee7b7" fontSize="2.3" opacity="0.9" fontWeight="bold">
-            Patterson Park
-          </text>
+              {/* Homewood Collegiate Grounds */}
+              <linearGradient id="campusGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#0f3460" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#002D72" stopOpacity="0.9" />
+              </linearGradient>
 
-          {/* Neighborhood Region Labels */}
-          <text x="38" y="12" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
-            Charles Village
-          </text>
-          <text x="24" y="14" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
-            Hampden
-          </text>
-          <text x="44" y="36" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
-            Mount Vernon
-          </text>
-          <text x="42" y="50" fill="#38bdf8" fontSize="2.4" fontWeight="bold" opacity="0.9">
-            Inner Harbor
-          </text>
-          <text x="68" y="52" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
-            Fells Point
-          </text>
-          <text x="48" y="66" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
-            Federal Hill
-          </text>
-          <text x="74" y="74" fill="#cbd5e1" fontSize="2.4" fontWeight="bold" opacity="0.8">
-            Locust Point & Fort
-          </text>
+              {/* Freshwater Lakes & Reservoirs */}
+              <linearGradient id="lakeGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#0284c7" />
+                <stop offset="100%" stopColor="#0369a1" />
+              </linearGradient>
 
-          {/* Free JHMI Shuttle Route (Homewood -> Station North -> Peabody -> East Baltimore) */}
-          <path
-            d="M 47 18 L 48 32 L 51 40 Q 56 41 74 41"
-            fill="none"
-            stroke="url(#shuttleGlow)"
-            strokeWidth="0.9"
-            strokeDasharray="1.8, 1.2"
-            opacity="0.95"
-          />
-          <text x="52" y="32" fill="#38bdf8" fontSize="1.9" fontStyle="italic" fontWeight="bold" opacity="0.95">
-            JHMI Shuttle Route
-          </text>
+              {/* JHMI Shuttle Glow */}
+              <linearGradient id="shuttleGlow" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#38bdf8" />
+                <stop offset="50%" stopColor="#818cf8" />
+                <stop offset="100%" stopColor="#c084fc" />
+              </linearGradient>
 
-          {/* JHU Campus Anchors with Pulsing Luminous Halos */}
-          {/* Homewood Campus */}
-          <circle cx="47" cy="18" r="3.4" fill="#38bdf8" fillOpacity="0.2" className="animate-pulse" />
-          <circle cx="47" cy="18" r="2.2" fill="#002D72" stroke="#68ACE5" strokeWidth="0.8" />
-          <text x="49.5" y="18.5" fill="#93c5fd" fontSize="2.5" fontWeight="bold">
-            Homewood Campus (JHU)
-          </text>
+              {/* Street Light Glow */}
+              <linearGradient id="charlesStGlow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#f8fafc" />
+                <stop offset="100%" stopColor="#94a3b8" />
+              </linearGradient>
+            </defs>
 
-          {/* Peabody Institute */}
-          <circle cx="51" cy="40" r="3.0" fill="#facc15" fillOpacity="0.2" className="animate-pulse" />
-          <circle cx="51" cy="40" r="1.8" fill="#002D72" stroke="#F1C400" strokeWidth="0.8" />
-          <text x="53.5" y="40.5" fill="#fde047" fontSize="2.3" fontWeight="bold">
-            Peabody Institute
-          </text>
+            {/* ============================================================ */}
+            {/* 1. WATERWAYS & SHORELINES (PATAPSCO RIVER, HARBOR & LAKES)  */}
+            {/* ============================================================ */}
 
-          {/* Johns Hopkins Hospital / Med Campus */}
-          <circle cx="74" cy="41" r="3.2" fill="#f87171" fillOpacity="0.2" className="animate-pulse" />
-          <circle cx="74" cy="41" r="2" fill="#002D72" stroke="#E03A3E" strokeWidth="0.8" />
-          <text x="76.5" y="41.5" fill="#fca5a5" fontSize="2.3" fontWeight="bold">
-            JHU Medical Campus
-          </text>
-
-          {/* Active Pin 250m Geofence Radius */}
-          {activePin && (
-            <g className="pointer-events-none">
-              <circle
-                cx={activePin.coordinates.mapX}
-                cy={activePin.coordinates.mapY}
-                r={metersToMapRadiusPercent(checkInRadiusMeters)}
-                fill="#38bdf8"
-                fillOpacity="0.18"
-                stroke="#38bdf8"
-                strokeWidth="0.5"
-                strokeDasharray="1.2, 1"
-              />
-              <circle
-                cx={activePin.coordinates.mapX}
-                cy={activePin.coordinates.mapY}
-                r={metersToMapRadiusPercent(checkInRadiusMeters) * 1.05}
-                fill="none"
-                stroke="#60a5fa"
-                strokeWidth="0.2"
-                opacity="0.5"
-              />
-              <text
-                x={activePin.coordinates.mapX}
-                y={activePin.coordinates.mapY + metersToMapRadiusPercent(checkInRadiusMeters) + 2}
-                textAnchor="middle"
-                fill="#38bdf8"
-                fontSize="1.7"
-                fontWeight="600"
-                opacity="0.9"
-              >
-                250m Check-in Radius
-              </text>
-            </g>
-          )}
-
-          {/* Navigation Line Connecting User to Selected Pin */}
-          {userMapPos && activePin && (
-            <line
-              x1={userMapPos.mapX}
-              y1={userMapPos.mapY}
-              x2={activePin.coordinates.mapX}
-              y2={activePin.coordinates.mapY}
+            {/* Northwest Branch of Patapsco River & Inner Harbor Basin */}
+            <path
+              d="
+                M 50 54
+                L 64 54
+                L 64 56
+                L 68 56
+                L 74 58
+                L 82 59
+                L 92 63
+                L 100 68
+                L 100 100
+                L 50 100
+                L 50 78
+                L 54 75
+                L 54 62
+                L 50 60
+                Z
+              "
+              fill="url(#harborGradient)"
               stroke="#38bdf8"
               strokeWidth="0.4"
-              strokeDasharray="1, 1"
-              opacity="0.75"
-              className="pointer-events-none"
+              opacity="0.98"
             />
-          )}
 
-          {/* Live User Location Beacon */}
-          {userMapPos && (
-            <g className="user-beacon pointer-events-none">
-              <circle
-                cx={userMapPos.mapX}
-                cy={userMapPos.mapY}
-                r="4.2"
-                fill="#38bdf8"
-                fillOpacity="0.2"
-                stroke="#60a5fa"
-                strokeWidth="0.3"
-                strokeDasharray="1, 0.8"
-              />
-              <circle
-                cx={userMapPos.mapX}
-                cy={userMapPos.mapY}
-                r="2.5"
-                fill="#0284c7"
-                fillOpacity="0.4"
-              />
-              <circle
-                cx={userMapPos.mapX}
-                cy={userMapPos.mapY}
-                r="1.4"
-                fill="#2563eb"
-                stroke="#ffffff"
-                strokeWidth="0.4"
-              />
-              <circle
-                cx={userMapPos.mapX}
-                cy={userMapPos.mapY}
-                r="0.5"
-                fill="#ffffff"
-              />
-              <g transform={`translate(${userMapPos.mapX}, ${userMapPos.mapY - 2.8})`}>
-                <rect
-                  x="-9"
-                  y="-3.2"
-                  width="18"
-                  height="3.8"
-                  rx="1.9"
-                  fill="#0f172a"
-                  fillOpacity="0.9"
+            {/* Deep Water Estuary Channel */}
+            <path
+              d="
+                M 51 55
+                L 63 55
+                L 67 57
+                L 73 59
+                L 82 61
+                L 100 70
+                L 100 100
+                L 51 100
+                Z
+              "
+              fill="#06284a"
+              opacity="0.65"
+            />
+
+            {/* Historic Inner Harbor Piers (Piers 1, 2, 3, 4, 5, 6) */}
+            {/* Pier 1: Historic Ships / Constellation */}
+            <rect x="54.5" y="54" width="1.4" height="4.2" rx="0.3" fill="#1e293b" stroke="#38bdf8" strokeWidth="0.25" />
+            {/* Pier 2 */}
+            <rect x="57" y="54" width="1.2" height="3.8" rx="0.3" fill="#1e293b" stroke="#38bdf8" strokeWidth="0.2" />
+            {/* Pier 3 & 4: National Aquarium (With Blue Glass Roof Pyramids) */}
+            <rect x="59.5" y="54" width="2.6" height="5.2" rx="0.4" fill="#0f172a" stroke="#38bdf8" strokeWidth="0.3" />
+            <polygon points="59.8,55 60.8,54.2 61.8,55" fill="#38bdf8" opacity="0.8" />
+            <polygon points="60.2,57.5 61.2,56.5 62,57.5" fill="#0284c7" opacity="0.8" />
+            {/* Pier 5: Lighthouse Pier */}
+            <rect x="63.2" y="54" width="1.4" height="4.5" rx="0.3" fill="#1e293b" stroke="#38bdf8" strokeWidth="0.2" />
+            {/* Pier 6: Concert Pavilion Pier */}
+            <rect x="65.8" y="54.5" width="2.2" height="4.2" rx="0.4" fill="#1e293b" stroke="#38bdf8" strokeWidth="0.25" />
+
+            {/* Fells Point Broadway Pier & Historic Wharves */}
+            <rect x="71.5" y="58" width="2.4" height="4" rx="0.3" fill="#1e293b" stroke="#68ace5" strokeWidth="0.25" />
+            <line x1="68" y1="58.5" x2="76" y2="58.5" stroke="#94a3b8" strokeWidth="0.4" strokeDasharray="1 0.8" />
+
+            {/* Middle Branch of Patapsco River (South/West) */}
+            <path
+              d="M 32 80 Q 38 76 46 80 Q 48 88 44 100 L 28 100 Z"
+              fill="url(#harborGradient)"
+              stroke="#0284c7"
+              strokeWidth="0.3"
+              opacity="0.85"
+            />
+
+            {/* Water Wave Shimmer Highlights */}
+            <path d="M 55 63 Q 62 61 70 63" fill="none" stroke="#38bdf8" strokeWidth="0.25" strokeDasharray="1 1.5" opacity="0.6" />
+            <path d="M 72 65 Q 80 63 88 66" fill="none" stroke="#67e8f9" strokeWidth="0.25" strokeDasharray="1.2 2" opacity="0.6" />
+            <path d="M 60 72 Q 70 70 82 73" fill="none" stroke="#38bdf8" strokeWidth="0.25" strokeDasharray="1 1.8" opacity="0.5" />
+
+            {/* Jones Falls Stream (Flowing from Mount Washington/Druid Hill into Harbor) */}
+            <path
+              d="M 26 14 Q 28 22 36 26 Q 42 30 44 36 L 47 48 L 52 54"
+              fill="none"
+              stroke="#0284c7"
+              strokeWidth="0.5"
+              strokeDasharray="2 1"
+              opacity="0.75"
+            />
+
+            {/* ============================================================ */}
+            {/* 2. PARKS, WOODLANDS & CAMPUS GROUNDS                        */}
+            {/* ============================================================ */}
+
+            {/* Druid Hill Park with Druid Lake Reservoir */}
+            <ellipse cx="20" cy="22" rx="13" ry="9" fill="url(#parkGradient)" stroke="#10b981" strokeWidth="0.35" />
+            {/* Druid Lake (Reservoir & Walking Loop) */}
+            <ellipse cx="24" cy="24" rx="4.5" ry="2.2" fill="url(#lakeGradient)" stroke="#67e8f9" strokeWidth="0.3" />
+            <ellipse cx="24" cy="24" rx="4.9" ry="2.6" fill="none" stroke="#a7f3d0" strokeWidth="0.2" strokeDasharray="0.8 0.6" />
+            <text x="13" y="19" fill="#a7f3d0" fontSize="2.0" fontWeight="bold">Druid Hill Park</text>
+            <text x="21" y="24.5" fill="#e0f2fe" fontSize="1.3" fontStyle="italic">Druid Lake</text>
+
+            {/* Wyman Park Dell (Wooded Ravine along Homewood) */}
+            <path
+              d="M 42 16 Q 40 21 43 25 Q 44 26 46 25 Q 43 21 44 16 Z"
+              fill="#065f46"
+              stroke="#10b981"
+              strokeWidth="0.3"
+              opacity="0.9"
+            />
+            <text x="36" y="24" fill="#6ee7b7" fontSize="1.5" fontWeight="bold">Wyman Dell</text>
+
+            {/* Guilford & Sherwood Gardens (Tulip Sanctuary) */}
+            <ellipse cx="48" cy="8" rx="6" ry="3.5" fill="#047857" stroke="#34d399" strokeWidth="0.3" />
+            <circle cx="47" cy="7.5" r="1.2" fill="#f43f5e" opacity="0.8" />
+            <circle cx="49" cy="8.5" r="1.2" fill="#f59e0b" opacity="0.8" />
+            <text x="44" y="6" fill="#a7f3d0" fontSize="1.7" fontWeight="bold">Sherwood Gardens</text>
+
+            {/* JHU Homewood Campus Precinct (Keyser Quad, Gilman, Brody, Beach, Homewood Field) */}
+            <rect x="42" y="14" width="9" height="9" rx="1.5" fill="url(#campusGradient)" stroke="#68ace5" strokeWidth="0.5" />
+            {/* Keyser Upper Quad Lawn */}
+            <rect x="45" y="15" width="4" height="2.2" rx="0.4" fill="#047857" stroke="#34d399" strokeWidth="0.2" opacity="0.9" />
+            {/* Gilman Hall Footprint (Top of Keyser Quad) */}
+            <rect x="46" y="14.4" width="2.2" height="0.8" rx="0.2" fill="#991b1b" stroke="#fca5a5" strokeWidth="0.2" />
+            <circle cx="47.1" cy="14.8" r="0.3" fill="#ffffff" />
+            {/* Brody Learning Commons / MSE Library */}
+            <rect x="44.2" y="17.2" width="1.8" height="1.6" rx="0.2" fill="#0284c7" stroke="#7dd3fc" strokeWidth="0.2" />
+            {/* The Beach Sun Lawn (Sloping toward Charles St) */}
+            <polygon points="48,16.5 50.5,17 50.2,18.8 48,18" fill="#15803d" stroke="#86efac" strokeWidth="0.2" />
+            {/* Homewood Athletics Field & Running Track */}
+            <ellipse cx="43.5" cy="20.8" rx="1.8" ry="1.1" fill="#065f46" stroke="#f59e0b" strokeWidth="0.2" />
+
+            {/* Mount Vernon Place (Historic 4 Cross Park Squares & Washington Monument) */}
+            <rect x="46" y="38" width="2.2" height="6.5" rx="0.4" fill="#065f46" stroke="#10b981" strokeWidth="0.25" />
+            <rect x="44" y="40.2" width="6.5" height="2.2" rx="0.4" fill="#065f46" stroke="#10b981" strokeWidth="0.25" />
+            {/* Washington Monument Pedestal & Obelisk Plaza */}
+            <circle cx="47.1" cy="41.3" r="1.1" fill="#f8fafc" stroke="#94a3b8" strokeWidth="0.3" />
+            <circle cx="47.1" cy="41.3" r="0.4" fill="#0f172a" />
+            <text x="41" y="39" fill="#fde047" fontSize="1.8" fontWeight="bold">Mt Vernon Place</text>
+
+            {/* Patterson Park with The Pagoda & Boat Lake */}
+            <rect x="78" y="46" width="14" height="11" rx="2" fill="url(#parkGradient)" stroke="#10b981" strokeWidth="0.4" />
+            {/* Patterson Park Boat Lake */}
+            <ellipse cx="86" cy="53" rx="3.5" ry="1.8" fill="url(#lakeGradient)" stroke="#38bdf8" strokeWidth="0.25" />
+            {/* Patterson Park Pagoda Landmark Icon */}
+            <polygon points="81,48 83,48 82,46.5" fill="#f59e0b" stroke="#b45309" strokeWidth="0.2" />
+            <rect x="81.3" y="48" width="1.4" height="1.6" fill="#b45309" />
+            <text x="80" y="51" fill="#a7f3d0" fontSize="1.9" fontWeight="bold">Patterson Park</text>
+
+            {/* Federal Hill Park (Elevated Promontory Overlooking Harbor) */}
+            <path
+              d="M 50.5 62 Q 53 60 56 62 Q 56 67 52 67 Q 50 65 50.5 62 Z"
+              fill="#047857"
+              stroke="#34d399"
+              strokeWidth="0.3"
+            />
+            {/* Lookout Flagpole */}
+            <line x1="53.5" y1="62" x2="53.5" y2="60" stroke="#f8fafc" strokeWidth="0.3" />
+            <polygon points="53.5,60 54.8,60.5 53.5,61" fill="#ef4444" />
+            <text x="44" y="65" fill="#cbd5e1" fontSize="1.9" fontWeight="bold">Federal Hill</text>
+
+            {/* Fort McHenry National Monument (Historic 5-Point Star Fort Bastion) */}
+            <ellipse cx="79" cy="76" rx="6.5" ry="4.5" fill="#065f46" stroke="#10b981" strokeWidth="0.35" />
+            {/* 5-Point Star Fort Shape */}
+            <polygon
+              points="
+                79,73.5
+                80.4,75.2
+                82.5,75.4
+                81,77
+                81.5,79.1
+                79,78
+                76.5,79.1
+                77,77
+                75.5,75.4
+                77.6,75.2
+              "
+              fill="#78350f"
+              stroke="#fde047"
+              strokeWidth="0.3"
+            />
+            <text x="73" y="82.5" fill="#fde047" fontSize="1.7" fontWeight="bold">Fort McHenry</text>
+
+            {/* JHU East Baltimore Medical Campus (Billings Dome) */}
+            <rect x="71" y="38" width="6.5" height="5" rx="1" fill="#1e293b" stroke="#f87171" strokeWidth="0.4" />
+            {/* Billings Dome Icon */}
+            <ellipse cx="74.2" cy="40.5" rx="1.5" ry="1.2" fill="#ef4444" stroke="#ffffff" strokeWidth="0.25" />
+            <rect x="73.8" y="41.7" width="0.8" height="0.8" fill="#ffffff" />
+            <text x="70" y="37" fill="#fca5a5" fontSize="1.8" fontWeight="bold">JHU Medical Campus</text>
+
+            {/* ============================================================ */}
+            {/* 3. STREET ARTERIES & REGIONAL ROAD NETWORK                  */}
+            {/* ============================================================ */}
+
+            {/* Major Arterial 1: North Charles Street (The Spine of Baltimore) */}
+            <line x1="47.1" y1="4" x2="47.1" y2="54" stroke="url(#charlesStGlow)" strokeWidth="0.8" opacity="0.9" />
+            {/* St. Paul Street */}
+            <line x1="49.2" y1="8" x2="49.2" y2="54" stroke="#64748b" strokeWidth="0.5" opacity="0.75" />
+            {/* Calvert Street */}
+            <line x1="51.2" y1="8" x2="51.2" y2="54" stroke="#475569" strokeWidth="0.4" opacity="0.6" />
+            {/* Maryland Avenue */}
+            <line x1="44.2" y1="18" x2="44.2" y2="48" stroke="#64748b" strokeWidth="0.4" opacity="0.7" />
+
+            {/* University Parkway (Curving past Homewood north) */}
+            <path d="M 36 14 Q 44 14 54 15" fill="none" stroke="#94a3b8" strokeWidth="0.6" opacity="0.8" />
+            {/* 33rd Street (Homewood south border / Charles Village) */}
+            <line x1="38" y1="19.8" x2="62" y2="19.8" stroke="#94a3b8" strokeWidth="0.6" opacity="0.8" />
+            {/* 28th / 29th Streets (Charles Village) */}
+            <line x1="40" y1="24" x2="58" y2="24" stroke="#475569" strokeWidth="0.35" opacity="0.6" />
+            {/* North Avenue (US-1 E/W Corridor) */}
+            <line x1="16" y1="30" x2="88" y2="30" stroke="#94a3b8" strokeWidth="0.7" opacity="0.85" />
+
+            {/* Pratt Street (Inner Harbor Waterfront Spine) */}
+            <line x1="36" y1="53.8" x2="70" y2="53.8" stroke="#f8fafc" strokeWidth="0.8" opacity="0.9" />
+            {/* Lombard Street */}
+            <line x1="36" y1="52.2" x2="70" y2="52.2" stroke="#64748b" strokeWidth="0.5" opacity="0.7" />
+
+            {/* Light Street (Downtown / Federal Hill) */}
+            <line x1="51.2" y1="54" x2="51.2" y2="70" stroke="#94a3b8" strokeWidth="0.6" opacity="0.8" />
+            {/* Key Highway (Wrapping Federal Hill to Locust Point) */}
+            <path d="M 51.5 61 Q 58 63 60 68 L 74 72" fill="none" stroke="#64748b" strokeWidth="0.5" opacity="0.75" />
+
+            {/* Broadway (Boulevard through East Baltimore down to Fells Point) */}
+            <line x1="72.2" y1="34" x2="72.2" y2="60" stroke="#94a3b8" strokeWidth="0.7" opacity="0.85" />
+            {/* Eastern Avenue (Fells Point East/West) */}
+            <line x1="66" y1="56.5" x2="94" y2="56.5" stroke="#64748b" strokeWidth="0.5" opacity="0.7" />
+
+            {/* Fort Avenue (Peninsula Highway to Fort McHenry) */}
+            <path d="M 52 68 Q 66 71 78 76" fill="none" stroke="#f8fafc" strokeWidth="0.6" opacity="0.85" />
+
+            {/* I-83 Jones Falls Expressway (Curving Urban Highway) */}
+            <path
+              d="M 24 10 Q 26 22 34 26 Q 41 30 43 36 L 47 48 Q 50 51 52 53.5"
+              fill="none"
+              stroke="#38bdf8"
+              strokeWidth="0.8"
+              strokeDasharray="2 1"
+              opacity="0.8"
+            />
+
+            {/* Micro Street Name Annotations */}
+            <text x="47.6" y="27" fill="#94a3b8" fontSize="1.3" opacity="0.75">N Charles St</text>
+            <text x="49.6" y="27" fill="#64748b" fontSize="1.1" opacity="0.6">St Paul St</text>
+            <text x="54" y="53" fill="#cbd5e1" fontSize="1.3" opacity="0.8">Pratt St</text>
+            <text x="72.8" y="48" fill="#94a3b8" fontSize="1.3" opacity="0.75">Broadway</text>
+            <text x="63" y="70" fill="#94a3b8" fontSize="1.2" opacity="0.75">Fort Ave</text>
+
+            {/* ============================================================ */}
+            {/* 4. JHMI FREE SHUTTLE TRANSIT ROUTE & CAMPUS ANCHORS          */}
+            {/* ============================================================ */}
+
+            {/* Free Blue Jay / JHMI Shuttle Transit Line */}
+            <path
+              d="
+                M 47.1 18
+                L 47.1 32
+                L 49.2 41
+                Q 56 41 74 41
+              "
+              fill="none"
+              stroke="url(#shuttleGlow)"
+              strokeWidth="1.1"
+              strokeDasharray="2 1.4"
+              opacity="0.95"
+            />
+
+            {/* Shuttle Stop Nodes */}
+            <circle cx="47.1" cy="18" r="1.4" fill="#38bdf8" stroke="#ffffff" strokeWidth="0.4" />
+            <circle cx="47.1" cy="32" r="1.1" fill="#c084fc" stroke="#ffffff" strokeWidth="0.3" />
+            <circle cx="49.2" cy="41" r="1.2" fill="#facc15" stroke="#ffffff" strokeWidth="0.3" />
+            <circle cx="74" cy="41" r="1.3" fill="#f87171" stroke="#ffffff" strokeWidth="0.3" />
+
+            <text x="52" y="32" fill="#38bdf8" fontSize="1.8" fontStyle="italic" fontWeight="bold">
+              Free JHMI Blue Jay Shuttle
+            </text>
+
+            {/* Neighborhood District Labels */}
+            <text x="36" y="12" fill="#cbd5e1" fontSize="2.2" fontWeight="bold" opacity="0.85">Charles Village</text>
+            <text x="22" y="14" fill="#cbd5e1" fontSize="2.2" fontWeight="bold" opacity="0.85">Hampden</text>
+            <text x="36" y="34" fill="#a78bfa" fontSize="2.0" fontWeight="bold" opacity="0.9">Station North Arts</text>
+            <text x="40" y="51" fill="#38bdf8" fontSize="2.4" fontWeight="extrabold">Inner Harbor</text>
+            <text x="69" y="55" fill="#cbd5e1" fontSize="2.2" fontWeight="bold" opacity="0.85">Fells Point</text>
+            <text x="84" y="60" fill="#cbd5e1" fontSize="2.0" fontWeight="bold" opacity="0.75">Canton</text>
+            <text x="64" y="76" fill="#cbd5e1" fontSize="2.0" fontWeight="bold" opacity="0.8">Locust Point</text>
+
+            {/* Active Pin 250m Geofence Radius */}
+            {activePin && (
+              <g className="pointer-events-none">
+                <circle
+                  cx={activePin.coordinates.mapX}
+                  cy={activePin.coordinates.mapY}
+                  r={metersToMapRadiusPercent(checkInRadiusMeters)}
+                  fill="#38bdf8"
+                  fillOpacity="0.18"
                   stroke="#38bdf8"
-                  strokeWidth="0.25"
+                  strokeWidth="0.5"
+                  strokeDasharray="1.2, 1"
+                />
+                <circle
+                  cx={activePin.coordinates.mapX}
+                  cy={activePin.coordinates.mapY}
+                  r={metersToMapRadiusPercent(checkInRadiusMeters) * 1.05}
+                  fill="none"
+                  stroke="#60a5fa"
+                  strokeWidth="0.2"
+                  opacity="0.5"
                 />
                 <text
-                  x="0"
-                  y="-0.8"
+                  x={activePin.coordinates.mapX}
+                  y={activePin.coordinates.mapY + metersToMapRadiusPercent(checkInRadiusMeters) + 2}
                   textAnchor="middle"
-                  fill="#68ace5"
+                  fill="#38bdf8"
                   fontSize="1.7"
-                  fontWeight="bold"
+                  fontWeight="600"
+                  opacity="0.9"
                 >
-                  {isSimulatedLocation ? 'Simulated Spot' : 'You Are Here'}
+                  250m Check-in Radius
                 </text>
               </g>
-            </g>
-          )}
-        </svg>
+            )}
 
-        {/* Interactive Place Pins with Unique Markers & Photo Popups */}
-        {visiblePlaces.map((place) => {
-          const isVisited = profile.visitedPlaceIds.includes(place.id);
-          const isSelected = activePin?.id === place.id;
-          const isHovered = hoveredPin?.id === place.id;
-          const meta = getPlaceMarkerMeta(place);
-          const MarkerIcon = meta.icon;
+            {/* Navigation Line Connecting User to Selected Pin */}
+            {userMapPos && activePin && (
+              <line
+                x1={userMapPos.mapX}
+                y1={userMapPos.mapY}
+                x2={activePin.coordinates.mapX}
+                y2={activePin.coordinates.mapY}
+                stroke="#38bdf8"
+                strokeWidth="0.4"
+                strokeDasharray="1, 1"
+                opacity="0.75"
+                className="pointer-events-none"
+              />
+            )}
 
-          return (
-            <div
-              key={place.id}
-              className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center select-none"
-              style={{
-                left: `${place.coordinates.mapX}%`,
-                top: `${place.coordinates.mapY}%`,
-                zIndex: isSelected ? 35 : isHovered ? 40 : 20,
-              }}
-              onMouseEnter={() => setHoveredPin(place)}
-              onMouseLeave={() => setHoveredPin((prev) => (prev?.id === place.id ? null : prev))}
-              onClick={(e) => {
-                e.stopPropagation();
-                setActivePin(isSelected ? null : place);
-              }}
-            >
-              {/* Unique Marker Pin */}
-              <div
-                className={`relative flex items-center justify-center rounded-2xl w-8 h-8 sm:w-9 sm:h-9 transition-all duration-300 shadow-md ${
-                  isVisited
-                    ? 'bg-emerald-600 text-white ring-2 ring-emerald-300 scale-100 hover:scale-125'
-                    : isSelected
-                    ? 'bg-hopkins-heritage text-white ring-4 ring-sky-300 scale-125 shadow-xl'
-                    : `${meta.colorClass} hover:scale-125 hover:shadow-xl`
-                }`}
-                style={{
-                  filter: isSelected
-                    ? 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.75))'
-                    : undefined,
-                }}
-                title={`${place.name} (${meta.label})`}
-              >
-                {/* Unique Landmark Icon */}
-                <MarkerIcon className={`w-4 h-4 ${isSelected ? 'text-white' : meta.iconColor}`} />
-
-                {/* Bottom Pointer Triangle */}
-                <div
-                  className={`absolute -bottom-1 w-2 h-2 rotate-45 transition-colors ${
-                    isVisited
-                      ? 'bg-emerald-600'
-                      : isSelected
-                      ? 'bg-hopkins-heritage'
-                      : meta.pointerBg
-                  }`}
+            {/* Live User Location Beacon */}
+            {userMapPos && (
+              <g className="user-beacon pointer-events-none">
+                <circle
+                  cx={userMapPos.mapX}
+                  cy={userMapPos.mapY}
+                  r="4.2"
+                  fill="#38bdf8"
+                  fillOpacity="0.2"
+                  stroke="#60a5fa"
+                  strokeWidth="0.3"
+                  strokeDasharray="1, 0.8"
                 />
+                <circle
+                  cx={userMapPos.mapX}
+                  cy={userMapPos.mapY}
+                  r="2.5"
+                  fill="#0284c7"
+                  fillOpacity="0.4"
+                />
+                <circle
+                  cx={userMapPos.mapX}
+                  cy={userMapPos.mapY}
+                  r="1.4"
+                  fill="#2563eb"
+                  stroke="#ffffff"
+                  strokeWidth="0.4"
+                />
+                <circle
+                  cx={userMapPos.mapX}
+                  cy={userMapPos.mapY}
+                  r="0.5"
+                  fill="#ffffff"
+                />
+                <g transform={`translate(${userMapPos.mapX}, ${userMapPos.mapY - 2.8})`}>
+                  <rect
+                    x="-9"
+                    y="-3.2"
+                    width="18"
+                    height="3.8"
+                    rx="1.9"
+                    fill="#0f172a"
+                    fillOpacity="0.9"
+                    stroke="#38bdf8"
+                    strokeWidth="0.25"
+                  />
+                  <text
+                    x="0"
+                    y="-0.8"
+                    textAnchor="middle"
+                    fill="#68ace5"
+                    fontSize="1.7"
+                    fontWeight="bold"
+                  >
+                    {isSimulatedLocation ? 'Simulated Spot' : 'You Are Here'}
+                  </text>
+                </g>
+              </g>
+            )}
+          </svg>
 
-                {/* Visited Checkmark or Points Pill */}
-                {isVisited ? (
-                  <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border border-white flex items-center justify-center text-white shadow-sm">
-                    <Check className="w-2.5 h-2.5 stroke-[3]" />
-                  </div>
-                ) : (
-                  <div className="absolute -top-1.5 -right-1.5 text-[8px] font-black px-1 rounded-full bg-white text-slate-800 shadow-sm border border-slate-200">
-                    {place.points}
-                  </div>
-                )}
-              </div>
+          {/* Interactive Place Pins with Unique Markers & Photo Popups */}
+          {visiblePlaces.map((place) => {
+            const isVisited = profile.visitedPlaceIds.includes(place.id);
+            const isSelected = activePin?.id === place.id;
+            const isHovered = hoveredPin?.id === place.id;
+            const meta = getPlaceMarkerMeta(place);
+            const MarkerIcon = meta.icon;
 
-              {/* Floating Location Photo Popup (Visible on Hover) */}
-              {isHovered && !isSelected && (
+            // Compute dynamic pin scale to prevent overwhelming markers when zoomed in
+            const pinScaleCompensation = 1 / Math.pow(zoom, 0.35);
+
+            return (
+              <div
+                key={place.id}
+                className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center select-none"
+                style={{
+                  left: `${place.coordinates.mapX}%`,
+                  top: `${place.coordinates.mapY}%`,
+                  zIndex: isSelected ? 35 : isHovered ? 40 : 20,
+                  transform: `translate(-50%, -50%) scale(${pinScaleCompensation})`,
+                  transformOrigin: 'center center',
+                }}
+                onMouseEnter={() => setHoveredPin(place)}
+                onMouseLeave={() => setHoveredPin((prev) => (prev?.id === place.id ? null : prev))}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (dragDistance > 6) return;
+                  setActivePin(isSelected ? null : place);
+                }}
+              >
+                {/* Unique Marker Pin */}
                 <div
-                  className={`absolute z-40 w-60 sm:w-68 bg-white rounded-2xl shadow-2xl border-2 border-sky-300 overflow-hidden pointer-events-auto transition-all duration-200 animate-in fade-in zoom-in-95 ${
-                    place.coordinates.mapY < 35 ? 'top-full mt-3' : 'bottom-full mb-3'
-                  } ${
-                    place.coordinates.mapX < 25
-                      ? 'left-0'
-                      : place.coordinates.mapX > 75
-                      ? 'right-0'
-                      : 'left-1/2 -translate-x-1/2'
+                  className={`relative flex items-center justify-center rounded-2xl w-8 h-8 sm:w-9 sm:h-9 transition-all duration-300 shadow-md ${
+                    isVisited
+                      ? 'bg-emerald-600 text-white ring-2 ring-emerald-300 scale-100 hover:scale-125'
+                      : isSelected
+                      ? 'bg-hopkins-heritage text-white ring-4 ring-sky-300 scale-125 shadow-xl'
+                      : `${meta.colorClass} hover:scale-125 hover:shadow-xl`
                   }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActivePin(place);
+                  style={{
+                    filter: isSelected
+                      ? 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.75))'
+                      : undefined,
                   }}
+                  title={`${place.name} (${meta.label})`}
                 >
-                  {/* Location Photo */}
-                  <div className="relative w-full h-28 sm:h-32 bg-slate-900 overflow-hidden">
-                    <img
-                      src={place.imageUrl}
-                      alt={place.name}
-                      className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/places/brody-learning-commons.jpg';
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/20" />
+                  {/* Unique Landmark Icon */}
+                  <MarkerIcon className={`w-4 h-4 ${isSelected ? 'text-white' : meta.iconColor}`} />
 
-                    {/* Proximity & Neighborhood Badges */}
-                    <div className="absolute top-2 left-2 flex items-center gap-1.5 flex-wrap">
-                      <span className="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-white/95 text-slate-800 shadow-sm backdrop-blur-sm">
-                        {place.neighborhood}
-                      </span>
-                      {place.campusProximity && (
-                        <span className="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-sky-500 text-white shadow-sm">
-                          {place.campusProximity}
+                  {/* Bottom Pointer Triangle */}
+                  <div
+                    className={`absolute -bottom-1 w-2 h-2 rotate-45 transition-colors ${
+                      isVisited
+                        ? 'bg-emerald-600'
+                        : isSelected
+                        ? 'bg-hopkins-heritage'
+                        : meta.pointerBg
+                    }`}
+                  />
+
+                  {/* Visited Checkmark or Points Pill */}
+                  {isVisited ? (
+                    <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border border-white flex items-center justify-center text-white shadow-sm">
+                      <Check className="w-2.5 h-2.5 stroke-[3]" />
+                    </div>
+                  ) : (
+                    <div className="absolute -top-1.5 -right-1.5 text-[8px] font-black px-1 rounded-full bg-white text-slate-800 shadow-sm border border-slate-200">
+                      {place.points}
+                    </div>
+                  )}
+                </div>
+
+                {/* Floating Location Photo Popup (Visible on Hover) */}
+                {isHovered && !isSelected && (
+                  <div
+                    className={`absolute z-40 w-60 sm:w-68 bg-white rounded-2xl shadow-2xl border-2 border-sky-300 overflow-hidden pointer-events-auto transition-all duration-200 animate-in fade-in zoom-in-95 ${
+                      place.coordinates.mapY < 35 ? 'top-full mt-3' : 'bottom-full mb-3'
+                    } ${
+                      place.coordinates.mapX < 25
+                        ? 'left-0'
+                        : place.coordinates.mapX > 75
+                        ? 'right-0'
+                        : 'left-1/2 -translate-x-1/2'
+                    }`}
+                    style={{
+                      transform: `scale(${1 / (pinScaleCompensation * zoom)})`,
+                      transformOrigin: place.coordinates.mapY < 35 ? 'top center' : 'bottom center',
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActivePin(place);
+                    }}
+                  >
+                    {/* Location Photo */}
+                    <div className="relative w-full h-28 sm:h-32 bg-slate-900 overflow-hidden">
+                      <img
+                        src={place.imageUrl}
+                        alt={place.name}
+                        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/places/brody-learning-commons.jpg';
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/20" />
+
+                      {/* Proximity & Neighborhood Badges */}
+                      <div className="absolute top-2 left-2 flex items-center gap-1.5 flex-wrap">
+                        <span className="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-white/95 text-slate-800 shadow-sm backdrop-blur-sm">
+                          {place.neighborhood}
                         </span>
+                        {place.campusProximity && (
+                          <span className="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-sky-500 text-white shadow-sm">
+                            {place.campusProximity}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Points Badge */}
+                      <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-400 text-slate-950 shadow-sm flex items-center space-x-1">
+                        <Sparkles className="w-3 h-3 text-slate-950 flex-shrink-0" />
+                        <span>+{place.points} PTS</span>
+                      </div>
+
+                      {/* Visited Status Indicator */}
+                      {isVisited && (
+                        <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-500 text-white shadow-md flex items-center space-x-1">
+                          <Check className="w-3 h-3 stroke-[3]" />
+                          <span>Stamped</span>
+                        </div>
                       )}
                     </div>
 
-                    {/* Points Badge */}
-                    <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-400 text-slate-950 shadow-sm flex items-center space-x-1">
-                      <Sparkles className="w-3 h-3 text-slate-950 flex-shrink-0" />
-                      <span>+{place.points} PTS</span>
-                    </div>
-
-                    {/* Visited Status Indicator */}
-                    {isVisited && (
-                      <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-500 text-white shadow-md flex items-center space-x-1">
-                        <Check className="w-3 h-3 stroke-[3]" />
-                        <span>Stamped</span>
+                    {/* Card Details */}
+                    <div className="p-3 bg-white text-left">
+                      <div className="flex items-center space-x-1.5 text-[10px] font-extrabold text-hopkins-heritage uppercase tracking-wider">
+                        <MarkerIcon className="w-3 h-3 text-sky-600" />
+                        <span>{meta.label}</span>
                       </div>
-                    )}
-                  </div>
+                      <h5 className="font-heading font-black text-xs sm:text-sm text-slate-900 leading-snug line-clamp-1 mt-0.5">
+                        {place.name}
+                      </h5>
+                      <p className="text-[11px] text-slate-600 line-clamp-2 mt-1 leading-relaxed">
+                        {place.tagline}
+                      </p>
 
-                  {/* Card Details */}
-                  <div className="p-3 bg-white text-left">
-                    <div className="flex items-center space-x-1.5 text-[10px] font-extrabold text-hopkins-heritage uppercase tracking-wider">
-                      <MarkerIcon className="w-3 h-3 text-sky-600" />
-                      <span>{meta.label}</span>
+                      <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-sky-700">
+                        <span className="flex items-center space-x-1">
+                          <MapPin className="w-3 h-3 text-sky-500" />
+                          <span>Click for details & check-in</span>
+                        </span>
+                        <ChevronRight className="w-3 h-3 text-sky-400" />
+                      </div>
                     </div>
-                    <h5 className="font-heading font-black text-xs sm:text-sm text-slate-900 leading-snug line-clamp-1 mt-0.5">
-                      {place.name}
-                    </h5>
-                    <p className="text-[11px] text-slate-600 line-clamp-2 mt-1 leading-relaxed">
-                      {place.tagline}
-                    </p>
 
-                    <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-sky-700">
-                      <span className="flex items-center space-x-1">
-                        <MapPin className="w-3 h-3 text-sky-500" />
-                        <span>Click for details & check-in</span>
-                      </span>
-                      <ChevronRight className="w-3 h-3 text-sky-400" />
-                    </div>
+                    {/* Little Triangle Pointer */}
+                    <div
+                      className={`absolute w-3 h-3 bg-white border-sky-300 transform rotate-45 ${
+                        place.coordinates.mapY < 35
+                          ? '-top-1.5 border-t-2 border-l-2'
+                          : '-bottom-1.5 border-b-2 border-r-2'
+                      } ${
+                        place.coordinates.mapX < 25
+                          ? 'left-6'
+                          : place.coordinates.mapX > 75
+                          ? 'right-6'
+                          : 'left-1/2 -translate-x-1/2'
+                      }`}
+                    />
                   </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
 
-                  {/* Little Triangle Pointer */}
-                  <div
-                    className={`absolute w-3 h-3 bg-white border-sky-300 transform rotate-45 ${
-                      place.coordinates.mapY < 35
-                        ? '-top-1.5 border-t-2 border-l-2'
-                        : '-bottom-1.5 border-b-2 border-r-2'
-                    } ${
-                      place.coordinates.mapX < 25
-                        ? 'left-6'
-                        : place.coordinates.mapX > 75
-                        ? 'right-6'
-                        : 'left-1/2 -translate-x-1/2'
-                    }`}
-                  />
-                </div>
-              )}
-            </div>
-          );
-        })}
-
-        {/* Selected Pin Popup Card (Visible on Click) */}
+        {/* Selected Pin Detail Modal / Card (Visible on Click) */}
         {activePin && (() => {
           const distanceInfo = getPlaceDistanceInfo(activePin);
           const isVisited = profile.visitedPlaceIds.includes(activePin.id);
@@ -920,7 +1393,7 @@ export const InteractiveMap: React.FC = () => {
 
           return (
             <div
-              className="absolute bottom-3 inset-x-3 sm:inset-x-auto sm:bottom-4 sm:right-4 sm:w-84 bg-white/98 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200 z-30 overflow-hidden animate-in fade-in slide-in-from-bottom-2 select-text"
+              className="absolute bottom-3 inset-x-3 sm:inset-x-auto sm:bottom-4 sm:right-4 sm:w-84 bg-white/98 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200 z-30 overflow-hidden animate-in fade-in slide-in-from-bottom-2 select-text pointer-events-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Location Photo Header */}
