@@ -167,8 +167,8 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
               isVisited
                 ? 'Stamped in your passport (click to undo)'
                 : distanceInfo.isWithinRadius
-                ? `You are within 250m! Click to stamp passport (+${place.points} PTS)`
-                : `You are ${distanceInfo.formattedDistance} away. Must be within 250m to stamp.`
+                ? `You are within 20m! Click to stamp passport (+${place.points} PTS)`
+                : `You are ${distanceInfo.formattedDistance} away. Must be within 20m to stamp.`
             }
           >
             {isVisited ? (

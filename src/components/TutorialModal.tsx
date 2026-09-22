@@ -150,13 +150,13 @@ export const TutorialModal: React.FC = () => {
       badge: 'GPS Geofencing & Verification',
       badgeIcon: Navigation,
       title: 'Field Radar & Stamping Visits',
-      tagline: 'Arrive on-site within 250 meters to unlock your digital passport stamp.',
+      tagline: 'Arrive on-site within 20 meters to unlock your digital passport stamp.',
       description:
-        'Hopkins Hunt uses a 250-meter GPS radar to verify your presence. Once you arrive, the Check In button turns active and stamps your passport with points and date records.',
+        'Hopkins Hunt uses a 20-meter GPS radar to verify your presence. Once you arrive, the Check In button turns active and stamps your passport with points and date records.',
       keyPoints: [
         {
           icon: Navigation,
-          label: '250m Proximity Radar',
+          label: '20m Proximity Radar',
           text: 'Walk or transit to any landmark. The radar shows your live distance and detects arrivals.',
         },
         {
@@ -178,7 +178,7 @@ export const TutorialModal: React.FC = () => {
                 <Navigation className="w-7 h-7 text-emerald-300" />
               </div>
               <span className="text-[10px] font-black uppercase text-emerald-300 block">
-                Within 250m
+                Within 20m
               </span>
             </div>
             <ArrowRight className="w-5 h-5 text-emerald-400" />

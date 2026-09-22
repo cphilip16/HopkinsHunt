@@ -157,7 +157,7 @@ export const PlaceDetailModal: React.FC = () => {
                       ) : (
                         <span className="text-amber-900 font-semibold flex items-center space-x-1.5">
                           <Navigation className="w-3.5 h-3.5 text-amber-700 flex-shrink-0" />
-                          <span>{distanceInfo.formattedDistance} away &bull; Must be within 250m to stamp</span>
+                          <span>{distanceInfo.formattedDistance} away &bull; Must be within 20m to stamp</span>
                         </span>
                       )}
                     </div>

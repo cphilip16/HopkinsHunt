@@ -146,7 +146,7 @@ export const LocationVerificationModal: React.FC = () => {
                   ) : (
                     <span>
                       Hopkins Hunt verifies physical visits. You must be within{' '}
-                      <strong>{requiredRadiusMeters} meters (~820 ft)</strong> of {place.name} to stamp your passport.
+                      <strong>{requiredRadiusMeters} meters (~65 ft)</strong> of {place.name} to stamp your passport.
                     </span>
                   )}
                 </p>

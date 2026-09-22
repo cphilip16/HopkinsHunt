@@ -180,7 +180,7 @@ export const LocationControlBar: React.FC<{ className?: string }> = ({ className
                   <Sliders className="w-3.5 h-3.5 text-amber-600" />
                   <span>Simulator Presets (Testing & Grading)</span>
                 </span>
-                <span className="text-[10px] text-slate-400">Within 250m Radius</span>
+                <span className="text-[10px] text-slate-400">Within 20m Radius</span>
               </div>
 
               <div className="grid grid-cols-2 gap-1.5 max-h-48 overflow-y-auto pr-1">
@@ -201,7 +201,7 @@ export const LocationControlBar: React.FC<{ className?: string }> = ({ className
 
             {/* Explainer Footer */}
             <div className="mt-3 p-2 rounded-lg bg-blue-50/80 text-[10px] text-slate-600 leading-snug">
-              Visits are verified within <strong>250 meters</strong> of each landmark. Use presets to test progression anywhere!
+              Visits are verified within <strong>20 meters</strong> of each landmark. Use presets to test progression anywhere!
             </div>
           </div>
         </>

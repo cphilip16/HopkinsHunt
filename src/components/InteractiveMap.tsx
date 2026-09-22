@@ -830,7 +830,7 @@ export const InteractiveMap: React.FC = () => {
                             : 'bg-amber-200/80 text-amber-900'
                         }`}
                       >
-                        {distanceInfo.isWithinRadius ? 'In Range (≤250m)' : 'Out of Range'}
+                        {distanceInfo.isWithinRadius ? 'In Range (≤20m)' : 'Out of Range'}
                       </span>
                     </div>
                   )}
@@ -1177,7 +1177,7 @@ export const InteractiveMap: React.FC = () => {
               <text x="69" y="55" fill="#cbd5e1" fontSize="2.2" fontWeight="bold" opacity="0.85">Fells Point</text>
               <text x="64" y="76" fill="#cbd5e1" fontSize="2.0" fontWeight="bold" opacity="0.8">Locust Point</text>
 
-              {/* Active Pin 250m Radius */}
+              {/* Active Pin 20m Radius */}
               {activePin && (
                 <g className="pointer-events-none">
                   <circle
@@ -1198,7 +1198,7 @@ export const InteractiveMap: React.FC = () => {
                     fontSize="1.7"
                     fontWeight="600"
                   >
-                    250m Check-in Radius
+                    20m Check-in Radius
                   </text>
                 </g>
               )}
@@ -1476,7 +1476,7 @@ export const InteractiveMap: React.FC = () => {
                             : 'bg-amber-200/80 text-amber-900'
                         }`}
                       >
-                        {distanceInfo.isWithinRadius ? 'In Range (≤250m)' : 'Out of Range'}
+                        {distanceInfo.isWithinRadius ? 'In Range (≤20m)' : 'Out of Range'}
                       </span>
                     </div>
                   )}
