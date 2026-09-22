@@ -7,12 +7,12 @@ Hopkins Hunt is a mobile friendly campus exploration game for Johns Hopkins stud
 ## What you can do
 
 - **Explore Baltimore:** Search curated recommendations and filter them by neighborhood, category, transit access, and free admission.
-- **Use the interactive map:** Find destinations, view nearby places, and open directions in Google Maps.
+- **Use the interactive map:** Search any place or address on the embedded Google Map, jump to curated destinations, and open Google Maps or walking directions.
 - **Check in at places:** Use browser location access to verify that you are near a destination and earn points.
 - **Complete quests:** Visit themed groups of locations to unlock bonus points and celebrations.
 - **Build your rank:** Progress through Blue Jay inspired ranks and collect illustrated badges.
 - **Plan Flock Expeditions:** Create, join, leave, and check in to group trips with other students.
-- **Create a travel scrapbook:** Take or upload photos and save memories from visited locations.
+- **Create a travel scrapbook:** Take or upload photos and save memories from visited locations in the dedicated Scrapbook tab.
 - **Use a digital J-Card passport:** See profile details, stamps, badges, and exploration progress.
 - **Compare with friends:** View the leaderboard and add demo friends or classmates.
 - **Suggest a spot:** Submit a Baltimore or campus destination for future review.
