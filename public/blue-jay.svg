@@ -1,0 +1,18 @@
+<svg width="320" height="260" viewBox="0 0 320 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- A simple, friendly blue jay with its signature crest, face mask, wing bars, and tail. -->
+  <path d="M76 162C43 148 35 111 54 81C73 51 116 45 149 63C176 78 189 108 177 138C166 166 123 181 76 162Z" fill="#71BEEA" stroke="#102F55" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M104 75C112 40 137 22 172 19L157 55C182 49 208 56 226 75C193 86 172 105 160 128C144 105 125 87 104 75Z" fill="#2573AE" stroke="#102F55" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M158 127C194 112 231 119 265 146C232 152 204 171 181 202C179 169 172 145 158 127Z" fill="#1B5C91" stroke="#102F55" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M183 174C210 168 235 177 254 194L217 207L181 202Z" fill="#2D82BE" stroke="#102F55" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M257 145L300 153L267 174Z" fill="#F7C452" stroke="#102F55" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M75 158C70 178 76 195 94 210L119 180" fill="#F7C452" stroke="#102F55" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M80 96C95 81 119 77 141 86C134 103 123 116 107 124L82 116Z" fill="#F9FCFF" stroke="#102F55" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M103 88C119 91 131 97 141 106C130 117 119 123 106 125L96 111Z" fill="#102F55"/>
+  <circle cx="109" cy="101" r="10" fill="white" stroke="#102F55" stroke-width="5"/>
+  <circle cx="111" cy="102" r="5" fill="#102F55"/>
+  <circle cx="113" cy="100" r="1.8" fill="white"/>
+  <path d="M180 137C202 136 222 144 239 158" stroke="#DDF4FF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M177 153C198 153 216 161 231 174" stroke="#9DDAF5" stroke-width="7" stroke-linecap="round"/>
+  <path d="M70 113C78 94 91 82 106 75" stroke="white" stroke-width="8" stroke-linecap="round" opacity=".9"/>
+  <path d="M83 140C105 153 131 153 151 140" stroke="#DDF4FF" stroke-width="7" stroke-linecap="round"/>
+</svg>

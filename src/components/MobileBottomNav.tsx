@@ -1,0 +1,152 @@
+import React from 'react';
+import { Compass, MapPin, Award, Users, Camera, HelpCircle, Trophy } from 'lucide-react';
+import { useApp } from '../context/AppContext';
+import { MarylandRibbon } from './art/MarylandRibbon';
+import { AvatarVectorArt } from './art/VectorArt';
+
+export const MobileBottomNav: React.FC = () => {
+  const { activeTab, setActiveTab, profile, quests, groupTrips, setIsCameraModalOpen, setIsTutorialOpen } = useApp();
+
+  const completedQuestsCount = profile.completedQuestIds.length;
+  const visitedCount = profile.visitedPlaceIds.length;
+  const myTripsCount = groupTrips.filter((t) => t.members.some((m) => m.name === profile.studentName)).length;
+
+  return (
+    <>
+      {/* Floating Action Buttons (FAB) for Field Camera & How to Play Guide - Accessible Everywhere on Mobile */}
+      <div className="fixed bottom-20 right-4 z-40 md:hidden flex flex-col items-center gap-2">
+        <button
+          onClick={() => setIsTutorialOpen(true)}
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-white/95 text-hopkins-deep shadow-md border-2 border-amber-300 transform active:scale-90 transition-all cursor-pointer"
+          title="How to Play JayWalk Bmore"
+          aria-label="How to Play JayWalk Bmore"
+        >
+          <HelpCircle className="w-5 h-5 text-hopkins-heritage" />
+        </button>
+
+        <button
+          onClick={() => setIsCameraModalOpen(true)}
+          className="relative flex items-center justify-center w-13 h-13 rounded-full bg-gradient-to-tr from-amber-400 via-amber-500 to-amber-300 text-slate-950 shadow-xl shadow-amber-500/30 ring-4 ring-white/90 transform active:scale-90 transition-all cursor-pointer"
+          title="Open Field Camera"
+        >
+          <Camera className="w-5 h-5 text-slate-950" />
+          <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-sky-500 border-2 border-white"></span>
+          </span>
+        </button>
+      </div>
+
+      <nav className="fixed bottom-0 inset-x-0 z-40 md:hidden bg-hopkins-deep/95 backdrop-blur-xl border-t border-blue-900/60 shadow-2xl safe-bottom overflow-hidden">
+        {/* Maryland Accent Trim on Mobile Bottom Nav */}
+        <MarylandRibbon height={2} />
+
+        <div className="flex items-center justify-around px-2 py-1.5">
+          
+          {/* Places Tab */}
+          <button
+            onClick={() => setActiveTab('explore')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
+              activeTab === 'explore'
+                ? 'text-sky-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
+            }`}
+          >
+            <div className={`p-1.5 rounded-xl transition-all ${activeTab === 'explore' ? 'bg-gradient-to-tr from-blue-600 to-sky-400 text-white shadow-md shadow-sky-400/30 ring-2 ring-white/60' : ''}`}>
+              <Compass className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] mt-0.5 tracking-tight">Places</span>
+          </button>
+
+          {/* Map Tab */}
+          <button
+            onClick={() => setActiveTab('map')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
+              activeTab === 'map'
+                ? 'text-emerald-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
+            }`}
+          >
+            <div className={`p-1.5 rounded-xl transition-all ${activeTab === 'map' ? 'bg-gradient-to-tr from-emerald-600 to-teal-400 text-white shadow-md shadow-emerald-400/30 ring-2 ring-white/60' : ''}`}>
+              <MapPin className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] mt-0.5 tracking-tight">Map</span>
+          </button>
+
+          {/* Flock Trips Tab */}
+          <button
+            onClick={() => setActiveTab('trips')}
+            className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
+              activeTab === 'trips'
+                ? 'text-pink-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
+            }`}
+          >
+            <div className={`p-1.5 rounded-xl transition-all ${activeTab === 'trips' ? 'bg-gradient-to-tr from-purple-600 to-pink-500 text-white shadow-md shadow-pink-400/30 ring-2 ring-white/60' : ''}`}>
+              <Users className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] mt-0.5 tracking-tight">Flocks</span>
+            {myTripsCount > 0 && (
+              <span className="absolute top-1 right-2 w-2 h-2 rounded-full bg-pink-400 ring-2 ring-hopkins-deep" />
+            )}
+          </button>
+
+          {/* Quests Tab */}
+          <button
+            onClick={() => setActiveTab('quests')}
+            className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
+              activeTab === 'quests'
+                ? 'text-amber-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
+            }`}
+          >
+            <div className={`p-1.5 rounded-xl transition-all ${activeTab === 'quests' ? 'bg-gradient-to-tr from-amber-500 to-yellow-400 text-slate-950 shadow-md shadow-amber-400/30 ring-2 ring-white/60' : ''}`}>
+              <Award className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] mt-0.5 tracking-tight">Quests</span>
+            {completedQuestsCount < quests.length && (
+              <span className="absolute top-1 right-2.5 w-2 h-2 rounded-full bg-amber-400 animate-pulse ring-2 ring-hopkins-deep" />
+            )}
+          </button>
+
+          {/* Leaderboard Tab */}
+          <button
+            onClick={() => setActiveTab('leaderboard')}
+            className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
+              activeTab === 'leaderboard'
+                ? 'text-sky-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
+            }`}
+          >
+            <div className={`p-1.5 rounded-xl transition-all ${activeTab === 'leaderboard' ? 'bg-gradient-to-tr from-sky-400 to-blue-600 text-white shadow-md shadow-sky-400/30 ring-2 ring-white/60' : ''}`}>
+              <Trophy className="w-5 h-5 text-amber-300" />
+            </div>
+            <span className="text-[10px] mt-0.5 tracking-tight">Ranks</span>
+          </button>
+
+          {/* J-Card Passport Tab */}
+          <button
+            onClick={() => setActiveTab('passport')}
+            className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
+              activeTab === 'passport'
+                ? 'text-yellow-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
+            }`}
+          >
+            <div className={`p-1.5 rounded-xl transition-all flex items-center justify-center ${activeTab === 'passport' ? 'bg-gradient-to-tr from-amber-400 to-orange-400 text-slate-950 shadow-md shadow-amber-400/30 ring-2 ring-white/60' : ''}`}>
+              <AvatarVectorArt avatarId={profile.avatar} size={20} />
+            </div>
+            <span className="text-[10px] mt-0.5 tracking-tight">J-Card</span>
+            {visitedCount > 0 && (
+              <span className="absolute top-1 right-1.5 bg-emerald-500 text-white font-black text-[9px] px-1.5 py-0.2 rounded-full leading-none ring-1 ring-hopkins-deep shadow-xs">
+                {visitedCount}
+              </span>
+            )}
+          </button>
+
+        </div>
+      </nav>
+    </>
+  );
+};
+
