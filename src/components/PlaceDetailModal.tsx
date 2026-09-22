@@ -247,7 +247,7 @@ export const PlaceDetailModal: React.FC = () => {
             </p>
           </div>
 
-          {/* Baby Jay Mascot's Hopkins Lore & Student Traditions */}
+          {/* Hoppy Mascot Hopkins Lore & Student Traditions */}
           <div className="p-4 rounded-2xl bg-sky-50/70 border border-sky-200 flex items-start space-x-3.5">
             <div className="flex-shrink-0 -mt-1">
               <CuteMascot
@@ -263,7 +263,7 @@ export const PlaceDetailModal: React.FC = () => {
             </div>
             <div className="flex-1">
               <div className="flex items-center space-x-1.5 text-xs font-black text-hopkins-heritage uppercase tracking-wider mb-1">
-                <span>Baby Jay's Field Secret & Lore</span>
+                <span>Hoppy's Field Secret & Lore</span>
               </div>
               <p className="text-xs text-slate-700 leading-relaxed italic bg-white/70 p-2.5 rounded-xl border border-sky-100">
                 "{selectedPlace.hopkinsLore}"

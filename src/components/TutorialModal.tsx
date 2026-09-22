@@ -57,7 +57,7 @@ export const TutorialModal: React.FC = () => {
       title: 'Step Beyond the Hopkins Bubble',
       tagline: 'Your official gamified guide to exploring Baltimore like a local.',
       description:
-        'Hopkins has two worlds: your academic campus and the vibrant city of Baltimore. JayWalk Bmore helps you venture beyond Homewood and Peabody to discover historic neighborhoods, iconic food, world-class art, and scenic waterfronts.',
+        'Hopkins has two worlds: your academic campus and the vibrant city of Baltimore. Hopkins Hunt helps you venture beyond Homewood and Peabody to discover historic neighborhoods, iconic food, world-class art, and scenic waterfronts.',
       keyPoints: [
         {
           icon: MapPin,
@@ -152,7 +152,7 @@ export const TutorialModal: React.FC = () => {
       title: 'Field Radar & Stamping Visits',
       tagline: 'Arrive on-site within 250 meters to unlock your digital passport stamp.',
       description:
-        'JayWalk uses a 250-meter GPS radar to verify your presence. Once you arrive, the Check In button turns active and stamps your passport with points and date records.',
+        'Hopkins Hunt uses a 250-meter GPS radar to verify your presence. Once you arrive, the Check In button turns active and stamps your passport with points and date records.',
       keyPoints: [
         {
           icon: Navigation,

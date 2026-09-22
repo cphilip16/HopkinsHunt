@@ -263,7 +263,7 @@ export const ScrapbookGallery: React.FC = () => {
             <div className="mt-5 flex items-center justify-center gap-3">
               <a
                 href={inspectedPhoto.dataUrl}
-                download={`jaywalk-${inspectedPhoto.id}.png`}
+                download={`hopkins-hunt-${inspectedPhoto.id}.png`}
                 className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-hopkins-heritage text-white text-xs font-bold shadow-md hover:bg-hopkins-deep transition-all"
               >
                 <Download className="w-4 h-4" />

@@ -33,14 +33,12 @@ export const RankProgressCard: React.FC = () => {
 
   return (
     <div
-      className={`bg-gradient-to-br from-white via-sky-50/50 to-amber-50/40 rounded-2xl sm:rounded-3xl shadow-card-high border-2 border-amber-300/80 relative overflow-hidden transition-all ${
-        isCollapsed ? 'p-3.5 sm:p-4' : 'p-4 sm:p-7'
+      className={`bg-white rounded-2xl sm:rounded-3xl shadow-sm border border-sky-200 relative overflow-hidden transition-all ${
+        isCollapsed ? 'p-3.5 sm:p-4' : 'p-4 sm:p-6'
       }`}
     >
-      {/* Top Maryland & Baltimore Ribbon Accent */}
-      <div className="absolute top-0 inset-x-0">
-        <MarylandRibbon height={isCollapsed ? 2 : 3} />
-      </div>
+      {/* Light Blue Accent Top Trim */}
+      <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-sky-400 via-sky-300 to-sky-400" />
 
       {!isCollapsed && (
         <>
@@ -122,8 +120,8 @@ export const RankProgressCard: React.FC = () => {
         /* Full Expanded View */
         <div className="relative z-10">
           
-          {/* Top Header: Current Rank Badge, Chibi Mascot, Point Counter & Minimize */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-5 border-b border-amber-200/60">
+          {/* Top Header: Current Rank Badge, Hoppy Mascot, Point Counter & Minimize */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-sky-100">
             
             <div className="flex items-center space-x-3 sm:space-x-4">
               {/* Major Rank Crest with Subrank Milestone Pin Overlay */}
@@ -131,7 +129,7 @@ export const RankProgressCard: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setInspectingRank(currentRank)}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-hopkins-deep via-hopkins-heritage to-blue-900 flex items-center justify-center p-2 shadow-xl ring-2 sm:ring-4 ring-amber-300 shadow-blue-900/30 hover:scale-105 transition-all cursor-pointer focus:outline-none focus:ring-4 focus:ring-amber-400"
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-[#002D72] to-sky-700 flex items-center justify-center p-2 shadow-md ring-2 sm:ring-4 ring-sky-200 hover:scale-105 transition-all cursor-pointer focus:outline-none"
                   title={`Click to inspect Rank ${currentRank.id}: ${currentRank.name} Crest`}
                 >
                   <RankBadgeArt rankId={currentRank.id} size={54} />
@@ -141,7 +139,7 @@ export const RankProgressCard: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setInspectingSubrank(currentSubrank)}
-                  className="absolute -bottom-1.5 -right-1.5 sm:-bottom-2 sm:-right-2 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white shadow-md border-2 border-amber-400 flex items-center justify-center p-0.5 z-10 hover:scale-110 transition-all cursor-pointer focus:outline-none ring-2 ring-white"
+                  className="absolute -bottom-1.5 -right-1.5 sm:-bottom-2 sm:-right-2 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white shadow-sm border-2 border-sky-300 flex items-center justify-center p-0.5 z-10 hover:scale-110 transition-all cursor-pointer focus:outline-none"
                   title={`Click to inspect Level ${currentSubrank.levelNumber}: ${currentSubrank.subrankName} Insignia`}
                 >
                   <RankInsigniaArt insignia={currentSubrank.insignia} id={currentSubrank.id} size={26} />
@@ -155,20 +153,20 @@ export const RankProgressCard: React.FC = () => {
 
               <div>
                 <div className="flex items-center space-x-1.5 sm:space-x-2">
-                  <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-gradient-to-r from-blue-700 via-hopkins-heritage to-indigo-800 text-white flex items-center space-x-1.5 shadow-md shadow-blue-900/20 ring-1 ring-white/30">
-                    <Compass className="w-3.5 h-3.5 text-amber-300" />
+                  <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-[#002D72] text-white flex items-center space-x-1.5 shadow-xs font-bubbly">
+                    <Compass className="w-3.5 h-3.5 text-sky-300" />
                     <span>Rank {currentRank.id}: {currentRank.name}</span>
                   </span>
-                  <span className="text-[11px] sm:text-xs font-black px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs">
+                  <span className="text-[11px] sm:text-xs font-black px-2 py-0.5 rounded-full bg-sky-100 text-[#002D72] border border-sky-200 font-bubbly">
                     Lv {currentSubrank.levelNumber} of 15
                   </span>
                 </div>
 
-                <h2 className="text-xl sm:text-2xl font-heading font-black text-slate-900 mt-1 tracking-tight">
+                <h2 className="text-xl sm:text-2xl font-black text-[#002D72] mt-1 tracking-tight font-bubbly">
                   {currentSubrank.subrankName}
                 </h2>
 
-                <p className="text-xs text-slate-600 italic mt-0.5 max-w-lg line-clamp-1 font-medium">
+                <p className="text-xs text-slate-500 italic mt-0.5 max-w-lg line-clamp-1 font-medium">
                   "{currentSubrank.flavorText}"
                 </p>
               </div>
@@ -178,26 +176,26 @@ export const RankProgressCard: React.FC = () => {
             <div className="flex items-center justify-between md:flex-col md:items-end gap-2">
               <button
                 onClick={() => setIsCollapsed(true)}
-                className="inline-flex items-center space-x-1 text-[11px] font-bold text-slate-600 hover:text-slate-900 bg-white/80 hover:bg-white px-2.5 py-1 rounded-xl border border-amber-300/80 shadow-2xs transition-all order-2 md:order-1"
+                className="inline-flex items-center space-x-1 text-[11px] font-bold text-slate-500 hover:text-[#002D72] bg-sky-50 hover:bg-sky-100 px-2.5 py-1 rounded-xl border border-sky-200 transition-all order-2 md:order-1 font-bubbly"
                 title="Minimize banner"
               >
                 <ChevronUp className="w-3.5 h-3.5" />
                 <span>Minimize</span>
               </button>
 
-              <div className="bg-gradient-to-br from-amber-50 via-yellow-50/80 to-amber-100/70 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl border-2 border-amber-300 shadow-md shadow-amber-400/15 flex items-center md:flex-col md:items-end justify-between min-w-[160px] sm:min-w-[190px] order-1 md:order-2">
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-amber-900 flex items-center space-x-1">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <div className="bg-sky-50/80 px-4 sm:px-5 py-2 sm:py-2.5 rounded-2xl border border-sky-200 shadow-xs flex items-center md:flex-col md:items-end justify-between min-w-[150px] sm:min-w-[170px] order-1 md:order-2">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-sky-800 flex items-center space-x-1 font-bubbly">
+                  <Sparkles className="w-3 h-3 text-sky-600" />
                   <span>Exploration Score</span>
                 </span>
                 <div className="flex items-baseline space-x-1.5 ml-2 md:ml-0">
-                  <span className="text-2xl sm:text-3xl font-heading font-black bg-gradient-to-r from-hopkins-deep to-blue-700 bg-clip-text text-transparent">
+                  <span className="text-2xl sm:text-3xl font-black text-[#002D72] font-bubbly">
                     {totalPoints}
                   </span>
-                  <span className="text-xs sm:text-sm font-black text-amber-700">PTS</span>
+                  <span className="text-xs sm:text-sm font-black text-sky-700">PTS</span>
                 </div>
                 {profile.bonusPoints > 0 && (
-                  <span className="text-[10px] font-black text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full mt-0.5">
+                  <span className="text-[10px] font-bold text-sky-800 bg-sky-100 px-2 py-0.2 rounded-full mt-0.5">
                     +{profile.bonusPoints} bonus pts
                   </span>
                 )}

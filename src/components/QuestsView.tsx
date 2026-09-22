@@ -84,13 +84,13 @@ export const QuestsView: React.FC = () => {
           </p>
         </div>
 
-        {/* Cute Baby Jay Explorer Mascot Art + Treasure Chest Backdrop */}
+        {/* Hoppy Explorer Mascot Art + Treasure Chest Backdrop */}
         <div className="absolute right-4 -bottom-2 pointer-events-none hidden sm:flex items-end space-x-2">
           <TreasureChestSticker size={76} className="transform -rotate-6 filter drop-shadow-xl mb-1" />
           <CuteMascot
             pose="explorer"
             size={120}
-            speechBubble="Let's go explore Bmore!"
+            speechBubble="Hopkins Hunt awaits!"
             className="transform -rotate-3 drop-shadow-xl"
           />
         </div>

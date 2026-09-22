@@ -119,9 +119,9 @@ export const LevelUpModal: React.FC = () => {
         <div className="mt-6 flex flex-col sm:flex-row gap-2.5">
           <button
             onClick={() => setLevelUpData(null)}
-            className="flex-1 py-3 px-5 rounded-2xl bg-hopkins-heritage hover:bg-hopkins-deep text-white font-black text-xs sm:text-sm shadow-md transition-all flex items-center justify-center space-x-2"
+            className="flex-1 py-3 px-5 rounded-2xl bg-[#002D72] hover:bg-sky-900 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center space-x-2 font-bubbly"
           >
-            <span>Continue JayWalking!</span>
+            <span>Continue Your Hopkins Hunt!</span>
           </button>
 
           <button

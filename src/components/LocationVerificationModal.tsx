@@ -145,7 +145,7 @@ export const LocationVerificationModal: React.FC = () => {
                     </span>
                   ) : (
                     <span>
-                      JayWalk Bmore verifies physical visits. You must be within{' '}
+                      Hopkins Hunt verifies physical visits. You must be within{' '}
                       <strong>{requiredRadiusMeters} meters (~820 ft)</strong> of {place.name} to stamp your passport.
                     </span>
                   )}
@@ -154,14 +154,14 @@ export const LocationVerificationModal: React.FC = () => {
             </div>
           </div>
 
-          {/* Baby Jay Dispatch Tip */}
+          {/* Hoppy Mascot Dispatch Tip */}
           <div className="p-3.5 rounded-2xl bg-sky-50/80 border border-sky-200 flex items-start space-x-3">
             <div className="flex-shrink-0 -mt-1">
               <CuteMascot pose="scholar" size={46} />
             </div>
             <div className="flex-1 text-xs">
               <div className="font-extrabold text-hopkins-heritage uppercase tracking-wider text-[10px]">
-                Baby Jay Transit Dispatch
+                Hoppy Transit Dispatch
               </div>
               <p className="text-slate-700 mt-0.5 leading-relaxed">
                 {place.transitTip}

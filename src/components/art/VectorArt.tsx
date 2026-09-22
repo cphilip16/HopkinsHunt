@@ -3214,26 +3214,21 @@ export const AvatarVectorArt: React.FC<{
 
   switch (id) {
     case 'scholar-jay':
-      // Baby Jay with Graduation Mortarboard & Glasses
+      // Hoppy Mascot with Scholar styling
       return (
-        <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
-          <circle cx="32" cy="32" r="30" fill="#E0F2FE" />
-          <ellipse cx="32" cy="40" rx="18" ry="14" fill="#002D72" />
-          <circle cx="32" cy="28" r="14" fill="#4A90E2" />
-          {/* Mortarboard Cap */}
-          <polygon points="32,10 50,17 32,24 14,17" fill="#002D72" stroke="#1E293B" strokeWidth="1" />
-          <polygon points="24,20 40,20 37,25 27,25" fill="#002D72" />
-          <line x1="32" y1="17" x2="44" y2="21" stroke="#F59E0B" strokeWidth="1.5" />
-          <circle cx="44" cy="23" r="2" fill="#F59E0B" />
-          {/* Glasses */}
-          <circle cx="27" cy="28" r="4.5" stroke="#D97706" strokeWidth="1.5" fill="#FFFFFF" fillOpacity="0.85" />
-          <circle cx="37" cy="28" r="4.5" stroke="#D97706" strokeWidth="1.5" fill="#FFFFFF" fillOpacity="0.85" />
-          <line x1="31.5" y1="28" x2="32.5" y2="28" stroke="#D97706" strokeWidth="1.5" />
-          <circle cx="27" cy="28" r="1.5" fill="#0F172A" />
-          <circle cx="37" cy="28" r="1.5" fill="#0F172A" />
-          {/* Beak */}
-          <polygon points="30,33 34,33 32,37" fill="#F59E0B" />
-        </svg>
+        <div
+          className={`relative rounded-full overflow-hidden bg-sky-100 flex items-center justify-center border-2 border-sky-400 ${className}`}
+          style={{ width: size, height: size }}
+        >
+          <img
+            src="/blue-jay-mascot.png"
+            alt="Hoppy Mascot"
+            className="w-[85%] h-[85%] object-contain"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/blue-jay.svg';
+            }}
+          />
+        </div>
       );
 
     case 'maryland-crab':
@@ -3348,25 +3343,21 @@ export const AvatarVectorArt: React.FC<{
 
     case 'baby-jay':
     default:
-      // Baby Jay Explorer Mascot
+      // Hoppy Mascot Avatar
       return (
-        <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
-          <circle cx="32" cy="32" r="30" fill="#E0F2FE" />
-          <ellipse cx="32" cy="40" rx="18" ry="14" fill="#002D72" />
-          <ellipse cx="32" cy="43" rx="11" ry="9" fill="#FFFFFF" />
-          <circle cx="32" cy="27" r="14" fill="#4A90E2" />
-          {/* Baby Jay Beak */}
-          <polygon points="30,30 34,30 32,35" fill="#F59E0B" />
-          {/* Eyes */}
-          <circle cx="27" cy="25" r="2.5" fill="#FFFFFF" />
-          <circle cx="27" cy="25" r="1.3" fill="#0F172A" />
-          <circle cx="37" cy="25" r="2.5" fill="#FFFFFF" />
-          <circle cx="37" cy="25" r="1.3" fill="#0F172A" />
-          {/* Safari Explorer Hat */}
-          <ellipse cx="32" cy="18" rx="16" ry="4" fill="#D97706" />
-          <path d="M22 18 C22 12 42 12 42 18 Z" fill="#B45309" />
-          <rect x="23" y="16" width="18" height="2" fill="#002D72" />
-        </svg>
+        <div
+          className={`relative rounded-full overflow-hidden bg-sky-100 flex items-center justify-center border-2 border-sky-400 ${className}`}
+          style={{ width: size, height: size }}
+        >
+          <img
+            src="/blue-jay-mascot.png"
+            alt="Hoppy Mascot"
+            className="w-[85%] h-[85%] object-contain"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/blue-jay.svg';
+            }}
+          />
+        </div>
       );
   }
 };

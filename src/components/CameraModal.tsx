@@ -232,7 +232,7 @@ export const CameraModal: React.FC = () => {
   const handleDownload = () => {
     if (!capturedPhotoUrl) return;
     const link = document.createElement('a');
-    link.download = `jaywalk-bmore-${currentPlace?.id || 'snap'}-${Date.now()}.png`;
+    link.download = `hopkins-hunt-${currentPlace?.id || 'snap'}-${Date.now()}.png`;
     link.href = capturedPhotoUrl;
     link.click();
   };
@@ -396,7 +396,7 @@ export const CameraModal: React.FC = () => {
                 {caption || 'A memorable Baltimore journey with Johns Hopkins Blue Jays.'}
               </p>
               <div className="flex items-center justify-between text-[9px] font-mono text-slate-400 font-bold uppercase tracking-widest mt-2 pt-2 border-t border-slate-100">
-                <span>JAYWALK BMORE PASSPORT</span>
+                <span>HOPKINS HUNT PASSPORT</span>
                 <span>{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
               </div>
             </div>
