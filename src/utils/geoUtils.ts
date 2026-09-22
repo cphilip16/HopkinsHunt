@@ -44,10 +44,9 @@ export function formatDistance(meters: number): string {
 
 /**
  * Standard geofence verification radius in meters.
- * 250 meters (~820 feet / ~2.5 Baltimore city blocks) balances strict physical verification
- * with urban GPS multipath reflections and building density.
+ * 20 meters (~65 feet) ensures precise physical on-site presence at the location.
  */
-export const DEFAULT_CHECK_IN_RADIUS_METERS = 250;
+export const DEFAULT_CHECK_IN_RADIUS_METERS = 20;
 
 /**
  * Checks whether user coordinates are within the required radius of a destination.
@@ -104,8 +103,8 @@ export function projectGeoToMapCoords(lat: number, lng: number): { mapX: number;
  */
 export function metersToMapRadiusPercent(meters: number): number {
   // Baltimore latitude span of ~12.2 km maps to ~100% height
-  // 250m is approximately 2.0% of map canvas
-  return Math.max(1.8, Math.min(10, (meters / 12200) * 100));
+  // 20m is approximately 0.16% of map canvas, with min visible radius for touch / pin target
+  return Math.max(1.2, Math.min(10, (meters / 12200) * 100));
 }
 
 /**

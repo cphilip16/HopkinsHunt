@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { showImageFallback } from '../utils/imageFallback';
 import { X, MapPin, Bus, Clock, DollarSign, Award, Sparkles, Check, Star, Calendar, Save, Stamp, Heart, Mail, Compass, BookOpen, Camera, Users, Navigation, Radio, AlertTriangle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { MarylandRibbon } from './art/MarylandRibbon';
@@ -66,11 +67,7 @@ export const PlaceDetailModal: React.FC = () => {
             src={selectedPlace.imageUrl}
             alt={selectedPlace.name}
             className="w-full h-full object-cover"
-            onError={(e) => {
-              const target = e.currentTarget;
-              target.onerror = null;
-              target.src = 'https://upload.wikimedia.org/wikipedia/commons/0/05/Fell%27s_Point_Thames_St.jpg';
-            }}
+            onError={showImageFallback}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
 
@@ -157,7 +154,7 @@ export const PlaceDetailModal: React.FC = () => {
                       ) : (
                         <span className="text-amber-900 font-semibold flex items-center space-x-1.5">
                           <Navigation className="w-3.5 h-3.5 text-amber-700 flex-shrink-0" />
-                          <span>{distanceInfo.formattedDistance} away &bull; Must be within 250m to stamp</span>
+                          <span>{distanceInfo.formattedDistance} away &bull; Must be within 20m to stamp</span>
                         </span>
                       )}
                     </div>
@@ -247,7 +244,7 @@ export const PlaceDetailModal: React.FC = () => {
             </p>
           </div>
 
-          {/* Baby Jay Mascot's Hopkins Lore & Student Traditions */}
+          {/* Hoppy Mascot Hopkins Lore & Student Traditions */}
           <div className="p-4 rounded-2xl bg-sky-50/70 border border-sky-200 flex items-start space-x-3.5">
             <div className="flex-shrink-0 -mt-1">
               <CuteMascot
@@ -263,7 +260,7 @@ export const PlaceDetailModal: React.FC = () => {
             </div>
             <div className="flex-1">
               <div className="flex items-center space-x-1.5 text-xs font-black text-hopkins-heritage uppercase tracking-wider mb-1">
-                <span>Baby Jay's Field Secret & Lore</span>
+                <span>Hoppy's Field Secret & Lore</span>
               </div>
               <p className="text-xs text-slate-700 leading-relaxed italic bg-white/70 p-2.5 rounded-xl border border-sky-100">
                 "{selectedPlace.hopkinsLore}"

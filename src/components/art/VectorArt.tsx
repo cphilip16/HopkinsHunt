@@ -15,239 +15,99 @@ export const RankInsigniaArt: React.FC<{
 
   // Helper render for 15 subrank SVGs
   const renderSvg = () => {
-    // Level 1: Fledgling Fencer (Newbie Traveler Plaque, Explorer Knapsack, Open Passport, Practice Foil & Map Scroll)
+    // Level 1: Fledgling Fencer (Simplified Collegiate Crest with Crossed Foils & Blue Jay Feather)
     if (/\bsubrank-1\b/.test(key) || key.includes('fledgling') || key.includes('fencer') || key.includes('nestling-hatch')) {
       return (
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <defs>
-            {/* Collegiate Gold Trim Gradient */}
-            <linearGradient id="sub1-gold-frame" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FFFDF0" />
-              <stop offset="25%" stopColor="#FEF08A" />
-              <stop offset="65%" stopColor="#F59E0B" />
-              <stop offset="100%" stopColor="#92400E" />
-            </linearGradient>
-            {/* Luggage Tag Field Gradient */}
-            <radialGradient id="sub1-travel-bg" cx="50%" cy="40%" r="65%">
+            <linearGradient id="sub1-shield-grad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#003D99" />
               <stop offset="60%" stopColor="#002D72" />
               <stop offset="100%" stopColor="#001438" />
-            </radialGradient>
-            {/* Practice Spring Steel Blade */}
-            <linearGradient id="sub1-steel-blade" x1="0%" y1="0%" x2="100%" y2="100%">
+            </linearGradient>
+            <linearGradient id="sub1-gold-trim" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFDF0" />
+              <stop offset="40%" stopColor="#FEF08A" />
+              <stop offset="80%" stopColor="#F59E0B" />
+              <stop offset="100%" stopColor="#B45309" />
+            </linearGradient>
+            <linearGradient id="sub1-foil-blade" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="45%" stopColor="#E2E8F0" />
-              <stop offset="85%" stopColor="#94A3B8" />
-              <stop offset="100%" stopColor="#475569" />
+              <stop offset="70%" stopColor="#E2E8F0" />
+              <stop offset="100%" stopColor="#94A3B8" />
             </linearGradient>
-            {/* Brass Bell Guard */}
-            <radialGradient id="sub1-bell-guard" cx="40%" cy="40%" r="60%">
-              <stop offset="0%" stopColor="#FEF08A" />
-              <stop offset="50%" stopColor="#F59E0B" />
-              <stop offset="100%" stopColor="#78350F" />
-            </radialGradient>
-            {/* Diamond-Quilted Rookie Plastron */}
-            <linearGradient id="sub1-plastron" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="70%" stopColor="#F1F5F9" />
-              <stop offset="100%" stopColor="#CBD5E1" />
-            </linearGradient>
-            {/* Fluffy Blue Jay Feathers */}
-            <linearGradient id="sub1-fluff-jay" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#7DD3FC" />
-              <stop offset="50%" stopColor="#0284C7" />
-              <stop offset="100%" stopColor="#002D72" />
-            </linearGradient>
-            {/* Travel Luggage Tag Clip */}
-            <clipPath id="sub1-tag-clip">
-              <path d="M16 5 L32 5 L38 11 L38 42 C38 43 37 44 36 44 L12 44 C11 44 10 43 10 42 L10 11 Z" />
-            </clipPath>
-            {/* Curved Ribbon Text Baseline Path */}
-            <path id="sub1-text-path" d="M 10,43.0 Q 24,41.0 38,43.0" />
           </defs>
 
-          {/* Crossed Equipment Extending in Saltire Behind Luggage Tag */}
-          {/* Item 1: Rolled Vintage Campus Map Scroll (Top-Right to Bottom-Left) */}
-          <g>
-            <line x1="42" y1="6" x2="8" y2="40" stroke="#FEF3C7" strokeWidth="3.4" strokeLinecap="round" />
-            <line x1="42" y1="6" x2="8" y2="40" stroke="#FDE68A" strokeWidth="1.8" strokeLinecap="round" />
-            <line x1="42" y1="6" x2="8" y2="40" stroke="#D97706" strokeWidth="0.5" strokeDasharray="1 1.5" />
-            {/* Curled Scroll Ends */}
-            <circle cx="42.5" cy="5.5" r="1.5" fill="#FBBF24" stroke="#78350F" strokeWidth="0.4" />
-            <circle cx="7.5" cy="40.5" r="1.5" fill="#FBBF24" stroke="#78350F" strokeWidth="0.4" />
-            {/* Red Ribbon Tie Binding Scroll */}
-            <rect x="23.5" y="21.5" width="2.4" height="4" rx="0.5" fill="#DC2626" transform="rotate(45 24 23)" />
-          </g>
-
-          {/* Item 2: Flexible Practice Fencing Foil (Top-Left to Bottom-Right) */}
-          <g>
-            <line x1="5" y1="5" x2="43" y2="43" stroke="url(#sub1-steel-blade)" strokeWidth="1.8" strokeLinecap="round" />
-            <line x1="5.5" y1="5.5" x2="42.5" y2="42.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
-            {/* Oversized Red Rubber Practice Safety Stopper Knob */}
-            <circle cx="5" cy="5" r="2.4" fill="#EF4444" stroke="#991B1B" strokeWidth="0.5" />
-            <circle cx="4.2" cy="4.2" r="0.7" fill="#FECACA" />
-            {/* Bell Guard & Grip */}
-            <circle cx="39" cy="39" r="3.2" fill="url(#sub1-bell-guard)" stroke="#451A03" strokeWidth="0.6" />
-            <line x1="39" y1="39" x2="44" y2="44" stroke="#1E293B" strokeWidth="2.2" strokeLinecap="round" />
-            <circle cx="44.5" cy="44.5" r="1.2" fill="url(#sub1-bell-guard)" />
-          </g>
-
-          {/* Vintage Travel Luggage Tag / Passport Visa Plaque */}
+          {/* Clean Collegiate Shield Base */}
           <path
-            d="M16 5 L32 5 L38 11 L38 42 C38 43 37 44 36 44 L12 44 C11 44 10 43 10 42 L10 11 Z"
-            fill="url(#sub1-gold-frame)"
-            stroke="#451A03"
-            strokeWidth="1.2"
-          />
-          <path
-            d="M16.5 6 L31.5 6 L37 11.5 L37 41.5 C37 42.5 36.5 43 35.5 43 L12.5 43 C11.5 43 11 42.5 11 41.5 L11 11.5 Z"
-            fill="#001845"
-            stroke="url(#sub1-gold-frame)"
-            strokeWidth="0.5"
+            d="M24 4 C34 4 41 6 41 16 C41 28 32 38 24 44 C16 38 7 28 7 16 C7 6 14 4 24 4 Z"
+            fill="url(#sub1-shield-grad)"
+            stroke="url(#sub1-gold-trim)"
+            strokeWidth="1.8"
+            strokeLinejoin="round"
           />
 
-          {/* Clipped Luggage Tag Interior */}
-          <g clipPath="url(#sub1-tag-clip)">
-            <rect x="10" y="5" width="28" height="39" fill="url(#sub1-travel-bg)" />
+          {/* Inner Light Blue Accent Border */}
+          <path
+            d="M24 6.5 C32 6.5 38.5 8.2 38.5 16.5 C38.5 26.5 30.5 35.5 24 41 C17.5 35.5 9.5 26.5 9.5 16.5 C9.5 8.2 16 6.5 24 6.5 Z"
+            fill="none"
+            stroke="#68ACE5"
+            strokeWidth="1"
+            opacity="0.6"
+          />
 
-            {/* Travel Passport Perforated Perimeter Stitching */}
-            <path
-              d="M17 7 L31 7 L36 12 L36 41 L12 41 L12 12 Z"
-              stroke="url(#sub1-gold-frame)"
-              strokeWidth="0.6"
-              strokeDasharray="1.5 1.5"
-              fill="none"
-              opacity="0.5"
-            />
-
-            {/* Faint Compass Rose Grid in Background */}
-            <circle cx="24" cy="22" r="12" stroke="#38BDF8" strokeWidth="0.6" strokeDasharray="2 2" fill="none" opacity="0.3" />
-            <line x1="24" y1="10" x2="24" y2="34" stroke="#38BDF8" strokeWidth="0.4" opacity="0.25" />
-            <line x1="12" y1="22" x2="36" y2="22" stroke="#38BDF8" strokeWidth="0.4" opacity="0.25" />
-
-            {/* Hero Character: Fluffy Newbie Baby Jay Traveler */}
-            {/* Blue Explorer Knapsack / Daypack visible behind shoulders */}
-            <path d="M15 25 C14 21 34 21 33 25 L34 34 C34 37 14 37 14 34 Z" fill="#0369A1" stroke="#001845" strokeWidth="0.6" />
-            {/* Orange Sleeping Mat / Rolled Daypack Bedroll atop backpack */}
-            <rect x="17.5" y="20.5" width="13" height="3" rx="1.5" fill="#EA580C" stroke="#7C2D12" strokeWidth="0.4" />
-            <line x1="21" y1="20.5" x2="21" y2="23.5" stroke="#7C2D12" strokeWidth="0.5" />
-            <line x1="27" y1="20.5" x2="27" y2="23.5" stroke="#7C2D12" strokeWidth="0.5" />
-
-            {/* Quilted Padded White Practice Plastron (Travel Uniform) */}
-            <path
-              d="M17 26 C17 22.5 20 21 24 21 C28 21 31 22.5 31 26 L30 35 C30 38 27 39 24 39 C21 39 18 38 18 35 Z"
-              fill="url(#sub1-plastron)"
-              stroke="#94A3B8"
-              strokeWidth="0.8"
-            />
-            {/* Diamond Quilt Stitching */}
-            <line x1="18" y1="28" x2="28" y2="37" stroke="#CBD5E1" strokeWidth="0.6" strokeDasharray="1 1" />
-            <line x1="28" y1="25" x2="18" y2="34" stroke="#CBD5E1" strokeWidth="0.6" strokeDasharray="1 1" />
-
-            {/* Explorer Knapsack Shoulder Straps Crossing Front */}
-            <line x1="19.5" y1="22" x2="20.5" y2="36" stroke="#B45309" strokeWidth="1.2" />
-            <line x1="28.5" y1="22" x2="27.5" y2="36" stroke="#B45309" strokeWidth="1.2" />
-            {/* Brass Shoulder Strap Buckles */}
-            <rect x="18.8" y="28" width="2.4" height="2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.3" />
-            <rect x="26.8" y="28" width="2.4" height="2" fill="#FEF08A" stroke="#78350F" strokeWidth="0.3" />
-
-            {/* Left Wing Proudly Holding Open Hopkins Travel Passport Booklet */}
-            <path d="M18 26 Q13 25 14 30" stroke="#0284C7" strokeWidth="2.4" strokeLinecap="round" fill="none" />
-            {/* Navy Travel Passport Cover */}
-            <rect x="9.5" y="25" width="7.5" height="9" rx="0.8" fill="#002D72" stroke="#FEF08A" strokeWidth="0.5" transform="rotate(-18 10 25)" />
-            {/* Golden University Crest Seal on Passport Cover */}
-            <circle cx="12" cy="29" r="1.3" fill="#FEF08A" />
-            <circle cx="12" cy="29" r="0.7" fill="#002D72" />
-            {/* Open White Visa Pages Peeking Out */}
-            <rect x="11.5" y="24" width="7" height="8.5" rx="0.6" fill="#F8FAFC" stroke="#CBD5E1" strokeWidth="0.4" transform="rotate(-6 12 24)" />
-            {/* Cyan Travel Stamp Cancellation Mark on Visa Page */}
-            <circle cx="14.8" cy="28.2" r="1.2" stroke="#0284C7" strokeWidth="0.5" fill="none" strokeDasharray="0.8 0.5" />
-            <circle cx="14.8" cy="28.2" r="0.4" fill="#0284C7" />
-
-            {/* Right Wing Holding Training Foil as Explorer Trail Pointer */}
-            <path d="M28 26 Q35 24 36 21" stroke="#0284C7" strokeWidth="2.6" strokeLinecap="round" fill="none" />
-            <circle cx="36" cy="21" r="1.6" fill="url(#sub1-bell-guard)" stroke="#451A03" strokeWidth="0.4" />
-            {/* Forward Training Blade with Safety Knob */}
-            <line x1="36" y1="21" x2="42" y2="15" stroke="url(#sub1-steel-blade)" strokeWidth="1.3" strokeLinecap="round" />
-            <circle cx="42" cy="15" r="1.5" fill="#EF4444" stroke="#991B1B" strokeWidth="0.4" />
-            <circle cx="41.5" cy="14.5" r="0.4" fill="#FFFFFF" />
-
-            {/* Round Fluffy Baby Jay Head */}
-            <circle cx="24" cy="18" r="6.2" fill="url(#sub1-fluff-jay)" stroke="#001438" strokeWidth="0.5" />
-            {/* Cute Chubby Cheeks (White Face Feathers) */}
-            <ellipse cx="24" cy="19.2" rx="4.8" ry="3.5" fill="#FFFFFF" />
-
-            {/* Wide, Enthusiastic Curious Rookie Explorer Eyes */}
-            {/* Left Eye */}
-            <circle cx="21.5" cy="18.5" r="1.9" fill="#001438" />
-            <circle cx="21.2" cy="18" r="0.8" fill="#FFFFFF" />
-            <circle cx="22.2" cy="19.1" r="0.35" fill="#38BDF8" />
-            {/* Right Eye */}
-            <circle cx="26.5" cy="18.5" r="1.9" fill="#001438" />
-            <circle cx="26.2" cy="18" r="0.8" fill="#FFFFFF" />
-            <circle cx="27.2" cy="19.1" r="0.35" fill="#38BDF8" />
-
-            {/* Perky Chick Beak Opened in Cheerful Smile */}
-            <polygon points="23,19.2 25,19.2 24,21.5" fill="#F59E0B" stroke="#B45309" strokeWidth="0.3" />
-            <path d="M23.3 20.6 Q24 22 24.7 20.6 Z" fill="#EF4444" />
-
-            {/* Cute Crossed Band-Aid on Cheek */}
-            <g transform="translate(28, 20.2)">
-              <rect x="-0.8" y="-1.6" width="1.6" height="3.2" rx="0.4" fill="#FED7AA" stroke="#D97706" strokeWidth="0.25" transform="rotate(45)" />
-              <rect x="-0.8" y="-1.6" width="1.6" height="3.2" rx="0.4" fill="#FED7AA" stroke="#D97706" strokeWidth="0.25" transform="rotate(-45)" />
-            </g>
-
-            {/* Fluffy Blue Chick Feathers Poofing Out Top */}
-            <path d="M23 11.8 Q24 8.5 25.5 10 Q24.8 11.5 24 12 Z" fill="#38BDF8" stroke="#002D72" strokeWidth="0.4" />
-            <path d="M25 11.2 Q26.8 8.8 27.5 11 Q26.5 12 25.5 12.2 Z" fill="#0284C7" />
-
-            {/* The Oversized Fencing Mask Pushed Back Up onto Forehead */}
-            <g transform="rotate(-8 24 11.5)">
-              <ellipse cx="24" cy="11.5" rx="6.2" ry="4.2" fill="#0F172A" stroke="url(#sub1-gold-frame)" strokeWidth="0.9" />
-              <line x1="20" y1="10" x2="28" y2="10" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
-              <line x1="19.5" y1="11.5" x2="28.5" y2="11.5" stroke="#94A3B8" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
-              <line x1="20" y1="13" x2="28" y2="13" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
-              <line x1="22" y1="8.5" x2="22" y2="14.5" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
-              <line x1="24" y1="8" x2="24" y2="15" stroke="#94A3B8" strokeWidth="0.6" strokeDasharray="0.8 0.8" />
-              <line x1="26" y1="8.5" x2="26" y2="14.5" stroke="#64748B" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
-              <path d="M19.5 13.5 Q24 16 28.5 13.5" stroke="#F8FAFC" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-            </g>
-          </g>
-
-          {/* Brass Grommet Eyelet & Luggage Twine String at Top of Tag */}
-          <circle cx="24" cy="7.8" r="2.2" fill="#001845" stroke="url(#sub1-gold-frame)" strokeWidth="1" />
-          <circle cx="24" cy="7.8" r="1.1" fill="#001438" />
-          <path d="M24 6.6 C24 2 21 2 21 3.8 C21 5.5 24 5.5 24 7" stroke="#FEF3C7" strokeWidth="0.9" fill="none" />
-          <path d="M24 6.6 C24 2 27 2 27 3.8 C27 5.5 24 5.5 24 7" stroke="#FEF3C7" strokeWidth="0.9" fill="none" />
-
-          {/* Lower Collegiate Rookie Ribbon Banner: ROOKIE */}
+          {/* Crossed Fencing Foils */}
+          {/* Foil 1 (Top-Left to Bottom-Right) */}
           <g>
-            {/* Swallowtail Underfolds */}
-            <polygon points="8,40 11,40 9,43" fill="#451A03" />
-            <polygon points="40,40 37,40 39,43" fill="#451A03" />
-
-            {/* Front Curved Ribbon Banner */}
-            <path
-              d="M7 40 L24 37 L41 40 L39 45 L24 43 L9 45 Z"
-              fill="url(#sub1-gold-frame)"
-              stroke="#451A03"
-              strokeWidth="0.9"
-            />
-            <path d="M9 41 L24 38.5 L39 41" stroke="#FFFDF0" strokeWidth="0.5" fill="none" />
-
-            {/* Embossed Rookie Typography (Conforming to Curved Ribbon) */}
-            <text
-              fontSize="3.4"
-              fontWeight="900"
-              fill="#451A03"
-              fontFamily="sans-serif"
-              letterSpacing="0.8"
-            >
-              <textPath href="#sub1-text-path" startOffset="50%" textAnchor="middle">
-                ROOKIE
-              </textPath>
-            </text>
+            <line x1="12" y1="12" x2="33" y2="33" stroke="url(#sub1-foil-blade)" strokeWidth="1.6" strokeLinecap="round" />
+            <line x1="12.5" y1="12.5" x2="32.5" y2="32.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
+            {/* Foil Tip Stopper */}
+            <circle cx="11.5" cy="11.5" r="1.3" fill="#68ACE5" stroke="#002D72" strokeWidth="0.4" />
+            {/* Guard & Grip */}
+            <ellipse cx="32" cy="32" rx="2.4" ry="3.4" transform="rotate(-45 32 32)" fill="url(#sub1-gold-trim)" stroke="#78350F" strokeWidth="0.5" />
+            <line x1="33" y1="33" x2="36.5" y2="36.5" stroke="#CBD5E1" strokeWidth="1.8" strokeLinecap="round" />
+            <circle cx="37.5" cy="37.5" r="1.1" fill="url(#sub1-gold-trim)" />
           </g>
+
+          {/* Foil 2 (Top-Right to Bottom-Left) */}
+          <g>
+            <line x1="36" y1="12" x2="15" y2="33" stroke="url(#sub1-foil-blade)" strokeWidth="1.6" strokeLinecap="round" />
+            <line x1="35.5" y1="12.5" x2="15.5" y2="32.5" stroke="#FFFFFF" strokeWidth="0.6" strokeLinecap="round" />
+            {/* Foil Tip Stopper */}
+            <circle cx="36.5" cy="11.5" r="1.3" fill="#68ACE5" stroke="#002D72" strokeWidth="0.4" />
+            {/* Guard & Grip */}
+            <ellipse cx="16" cy="32" rx="2.4" ry="3.4" transform="rotate(45 16 32)" fill="url(#sub1-gold-trim)" stroke="#78350F" strokeWidth="0.5" />
+            <line x1="15" y1="33" x2="11.5" y2="36.5" stroke="#CBD5E1" strokeWidth="1.8" strokeLinecap="round" />
+            <circle cx="10.5" cy="37.5" r="1.1" fill="url(#sub1-gold-trim)" />
+          </g>
+
+          {/* Centerpiece: Clean Hopkins Fledgling Blue Jay Feather */}
+          <g>
+            {/* Feather Silhouette Left (Hopkins Sky Blue) & Right (Hopkins Deep Blue) */}
+            <path d="M24 10 C18 16 17 24 24 30 Z" fill="#68ACE5" />
+            <path d="M24 10 C30 16 31 24 24 30 Z" fill="#0072CE" />
+            {/* Center Quill Shaft */}
+            <line x1="24" y1="9" x2="24" y2="32" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
+            {/* Clean Blue Jay Wing Bar Detail */}
+            <line x1="20.5" y1="20" x2="27.5" y2="20" stroke="#001845" strokeWidth="1.2" />
+            <line x1="21.5" y1="22" x2="26.5" y2="22" stroke="#FFFFFF" strokeWidth="0.8" />
+          </g>
+
+          {/* Top Gold Star Accent */}
+          <polygon
+            points="24,6.5 24.8,8.2 26.6,8.2 25.1,9.3 25.7,11 24,9.9 22.3,11 22.9,9.3 21.4,8.2 23.2,8.2"
+            fill="url(#sub1-gold-trim)"
+          />
+
+          {/* Subtle Bottom Chevron Indicator */}
+          <path
+            d="M21 37.5 L24 40 L27 37.5"
+            fill="none"
+            stroke="url(#sub1-gold-trim)"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       );
     }
@@ -2162,752 +2022,7 @@ export const RankInsigniaArt: React.FC<{
   return <span className="inline-flex items-center justify-center flex-shrink-0">{renderSvg()}</span>;
 };
 
-// ==========================================
-// 2. MAJOR RANK BADGES (5 RANKS)
-// ==========================================
-
-export const RankBadgeArt: React.FC<{
-  rankId: number;
-  size?: number;
-  className?: string;
-}> = ({ rankId, size = 48, className = '' }) => {
-  switch (rankId) {
-    case 1:
-      // Rank 1: Hopkins Nestling Crest (Collegiate Enamel & Golden Homewood Nest Medallion)
-      return (
-        <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
-          <defs>
-            <linearGradient id="nest-gold-main" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FFFDF0" />
-              <stop offset="20%" stopColor="#FEF08A" />
-              <stop offset="55%" stopColor="#F59E0B" />
-              <stop offset="85%" stopColor="#D97706" />
-              <stop offset="100%" stopColor="#78350F" />
-            </linearGradient>
-            <linearGradient id="nest-gold-bright" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="40%" stopColor="#FEF08A" />
-              <stop offset="100%" stopColor="#F59E0B" />
-            </linearGradient>
-            <radialGradient id="nest-navy-enamel" cx="50%" cy="38%" r="60%">
-              <stop offset="0%" stopColor="#003D99" />
-              <stop offset="50%" stopColor="#002D72" />
-              <stop offset="100%" stopColor="#001438" />
-            </radialGradient>
-            <linearGradient id="nest-porcelain" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="45%" stopColor="#FFFBEB" />
-              <stop offset="85%" stopColor="#E2E8F0" />
-              <stop offset="100%" stopColor="#CBD5E1" />
-            </linearGradient>
-            <linearGradient id="nest-jay-body" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#38BDF8" />
-              <stop offset="35%" stopColor="#0284C7" />
-              <stop offset="75%" stopColor="#002D72" />
-              <stop offset="100%" stopColor="#001845" />
-            </linearGradient>
-            <linearGradient id="nest-twig-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#D97706" />
-              <stop offset="50%" stopColor="#92400E" />
-              <stop offset="100%" stopColor="#451A03" />
-            </linearGradient>
-            <linearGradient id="nest-goggle-brass" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FEF08A" />
-              <stop offset="50%" stopColor="#D97706" />
-              <stop offset="100%" stopColor="#78350F" />
-            </linearGradient>
-            <radialGradient id="nest-goggle-lens" cx="35%" cy="35%" r="60%">
-              <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="30%" stopColor="#BAE6FD" />
-              <stop offset="80%" stopColor="#0284C7" />
-              <stop offset="100%" stopColor="#002D72" />
-            </radialGradient>
-            <linearGradient id="nest-ribbon" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#002D72" />
-              <stop offset="50%" stopColor="#001845" />
-              <stop offset="100%" stopColor="#000E29" />
-            </linearGradient>
-            <radialGradient id="nest-ambient" cx="50%" cy="38%" r="55%">
-              <stop offset="0%" stopColor="#F0F9FF" />
-              <stop offset="70%" stopColor="#BAE6FD" />
-              <stop offset="100%" stopColor="#7DD3FC" />
-            </radialGradient>
-            {/* Banner Baseline for Curved Typography */}
-            <path id="nest-banner-path" d="M 16,57.8 Q 32,55.3 48,57.8" />
-          </defs>
-
-          {/* Top Heraldic Sunburst Rays */}
-          {[-40, -20, 0, 20, 40].map((angle, i) => {
-            const rad = (angle * Math.PI) / 180;
-            const x2 = 32 + 25 * Math.sin(rad);
-            const y2 = 28 - 25 * Math.cos(rad);
-            return (
-              <line
-                key={i}
-                x1="32"
-                y1="18"
-                x2={x2}
-                y2={y2}
-                stroke="#FDE047"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                opacity="0.8"
-              />
-            );
-          })}
-
-          {/* Top Collegiate Coronet Crest with Sapphire */}
-          <g>
-            <path
-              d="M27 7 L32 2 L37 7 L35 10 L29 10 Z"
-              fill="url(#nest-gold-main)"
-              stroke="#78350F"
-              strokeWidth="0.8"
-            />
-            <circle cx="32" cy="6" r="1.5" fill="#2563EB" stroke="#FFFFFF" strokeWidth="0.6" />
-            <circle cx="28" cy="8" r="0.8" fill="#FFFFFF" />
-            <circle cx="36" cy="8" r="0.8" fill="#FFFFFF" />
-          </g>
-
-          {/* Outer Heavy Coin-Edge Fluted 24K Gold Rim */}
-          <circle cx="32" cy="30" r="28.5" fill="url(#nest-gold-main)" stroke="#78350F" strokeWidth="1" />
-          <circle cx="32" cy="30" r="26.2" fill="url(#nest-navy-enamel)" stroke="url(#nest-gold-main)" strokeWidth="0.8" />
-
-          {/* 20 Beaded Spherical Studs */}
-          {Array.from({ length: 20 }).map((_, i) => {
-            const angle = (i * 360) / 20;
-            const rad = (angle * Math.PI) / 180;
-            const x = 32 + 27.2 * Math.cos(rad);
-            const y = 30 + 27.2 * Math.sin(rad);
-            return (
-              <circle
-                key={i}
-                cx={x}
-                cy={y}
-                r="1.1"
-                fill="#FEF08A"
-                stroke="#B45309"
-                strokeWidth="0.3"
-              />
-            );
-          })}
-
-          {/* Concentric Double Braided Cable Rope */}
-          <circle cx="32" cy="30" r="24.2" stroke="url(#nest-gold-main)" strokeWidth="1.2" strokeDasharray="2 1.5" fill="none" />
-          <circle cx="32" cy="30" r="22.8" stroke="url(#nest-gold-bright)" strokeWidth="0.6" fill="none" opacity="0.7" />
-
-          {/* Inner Ambient Glow Disc */}
-          <circle cx="32" cy="30" r="21.5" fill="url(#nest-ambient)" />
-
-          {/* Guilloché Subtle Radial Etching Lines */}
-          {Array.from({ length: 12 }).map((_, i) => {
-            const angle = (i * 360) / 12;
-            const rad = (angle * Math.PI) / 180;
-            return (
-              <line
-                key={i}
-                x1="32"
-                y1="30"
-                x2={32 + 20 * Math.cos(rad)}
-                y2={30 + 20 * Math.sin(rad)}
-                stroke="#38BDF8"
-                strokeWidth="0.6"
-                strokeDasharray="1.5 2"
-                opacity="0.4"
-              />
-            );
-          })}
-
-          {/* Sculpted Golden Laurel Branches Flanking Sides */}
-          {/* Left Laurel Sprig */}
-          <path d="M14 26 C13 32 16 40 22 45" stroke="#D97706" strokeWidth="1.4" fill="none" />
-          <ellipse cx="14" cy="27" rx="1.8" ry="3" transform="rotate(-40 14 27)" fill="url(#nest-gold-main)" />
-          <ellipse cx="13" cy="32" rx="1.8" ry="3.2" transform="rotate(-20 13 32)" fill="url(#nest-gold-main)" />
-          <ellipse cx="15" cy="38" rx="1.8" ry="3.2" transform="rotate(15 15 38)" fill="url(#nest-gold-main)" />
-          <ellipse cx="19" cy="43" rx="1.8" ry="3.2" transform="rotate(45 19 43)" fill="url(#nest-gold-main)" />
-          <circle cx="15.5" cy="35" r="1.1" fill="#DC2626" />
-          <circle cx="17" cy="41" r="1.1" fill="#DC2626" />
-
-          {/* Right Laurel Sprig */}
-          <path d="M50 26 C51 32 48 40 42 45" stroke="#D97706" strokeWidth="1.4" fill="none" />
-          <ellipse cx="50" cy="27" rx="1.8" ry="3" transform="rotate(40 50 27)" fill="url(#nest-gold-main)" />
-          <ellipse cx="51" cy="32" rx="1.8" ry="3.2" transform="rotate(20 51 32)" fill="url(#nest-gold-main)" />
-          <ellipse cx="49" cy="38" rx="1.8" ry="3.2" transform="rotate(-15 49 38)" fill="url(#nest-gold-main)" />
-          <ellipse cx="45" cy="43" rx="1.8" ry="3.2" transform="rotate(-45 45 43)" fill="url(#nest-gold-main)" />
-          <circle cx="48.5" cy="35" r="1.1" fill="#DC2626" />
-          <circle cx="47" cy="41" r="1.1" fill="#DC2626" />
-
-          {/* Woven Homewood Golden Twig & Oak Sprig Nest Cradle */}
-          <g>
-            {/* Base Twigs Arching Across */}
-            <path d="M17 41 Q32 48 47 41" stroke="url(#nest-twig-grad)" strokeWidth="3" strokeLinecap="round" fill="none" />
-            <path d="M19 44 Q32 49 45 44" stroke="url(#nest-twig-grad)" strokeWidth="2.4" strokeLinecap="round" fill="none" />
-            <path d="M21 46 Q32 50 43 46" stroke="#451A03" strokeWidth="2" strokeLinecap="round" fill="none" />
-            {/* Interlaced Twigs */}
-            <line x1="20" y1="41" x2="28" y2="46" stroke="#92400E" strokeWidth="1.4" strokeLinecap="round" />
-            <line x1="44" y1="41" x2="36" y2="46" stroke="#92400E" strokeWidth="1.4" strokeLinecap="round" />
-            <line x1="26" y1="42" x2="34" y2="47" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-            <line x1="38" y1="42" x2="30" y2="47" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-            {/* Maryland Ivy / Oak Leaves in Nest */}
-            <ellipse cx="20" cy="40" rx="1.5" ry="3" transform="rotate(-50 20 40)" fill="#059669" />
-            <ellipse cx="44" cy="40" rx="1.5" ry="3" transform="rotate(50 44 40)" fill="#059669" />
-            <ellipse cx="32" cy="48" rx="2" ry="1.2" fill="#D97706" />
-          </g>
-
-          {/* Imperial Porcelain Cracked Eggshell */}
-          <g>
-            {/* Eggshell Body */}
-            <path
-              d="M19 33 C19 42 24 45 32 45 C40 45 45 42 45 33 L40 36 L36 32.5 L32 37 L28 32.5 L24 36 Z"
-              fill="url(#nest-porcelain)"
-              stroke="#94A3B8"
-              strokeWidth="1.4"
-            />
-            {/* Inner Shell Shadow */}
-            <path
-              d="M20 34 L24 36 L28 33 L32 37 L36 33 L40 36 L44 34 C44 36 43 38 41 40 C38 38 26 38 23 40 C21 38 20 36 20 34 Z"
-              fill="#CBD5E1"
-              opacity="0.4"
-            />
-            {/* Hopkins Navy Chevron Band Across Shell */}
-            <path
-              d="M21 38.5 L27 41.5 L32 39.5 L37 41.5 L43 38.5 L42.5 40.5 L37 43.5 L32 41.5 L27 43.5 L21.5 40.5 Z"
-              fill="#002D72"
-              stroke="url(#nest-gold-main)"
-              strokeWidth="0.5"
-            />
-            {/* 3 Gold Stars on Egg Band */}
-            <polygon points="32,39.5 32.8,40.8 34.2,40.8 33.1,41.7 33.5,43 32,42.2 30.5,43 30.9,41.7 29.8,40.8 31.2,40.8" fill="#FEF08A" />
-            <circle cx="26.5" cy="41.5" r="0.8" fill="#FEF08A" />
-            <circle cx="37.5" cy="41.5" r="0.8" fill="#FEF08A" />
-            {/* Realistic Shell Fractures */}
-            <path d="M26 35 L28 39 L27 42" stroke="#94A3B8" strokeWidth="0.7" fill="none" opacity="0.7" />
-          </g>
-
-          {/* Heroic Baby Blue Jay Pioneer Peeking Out */}
-          <g>
-            {/* Wing Shoulders resting on Shell Edge */}
-            <ellipse cx="21" cy="33" rx="3.5" ry="2.2" transform="rotate(-25 21 33)" fill="url(#nest-jay-body)" stroke="#001845" strokeWidth="0.6" />
-            <ellipse cx="43" cy="33" rx="3.5" ry="2.2" transform="rotate(25 43 33)" fill="url(#nest-jay-body)" stroke="#001845" strokeWidth="0.6" />
-            <line x1="19" y1="33" x2="23" y2="33" stroke="#93C5FD" strokeWidth="0.7" strokeLinecap="round" />
-            <line x1="41" y1="33" x2="45" y2="33" stroke="#93C5FD" strokeWidth="0.7" strokeLinecap="round" />
-
-            {/* Blue Jay Head */}
-            <ellipse cx="32" cy="25" rx="11" ry="10" fill="url(#nest-jay-body)" />
-
-            {/* Layered Crest Feathers on Head */}
-            <path d="M30 14 Q32 10 35 12 Q33 15 32 17 Z" fill="#0284C7" />
-            <path d="M28 15 Q30 11 32 13 Q31 16 30 17 Z" fill="#002D72" />
-            <path d="M32 14 Q35 11 37 13 Q35 16 34 17 Z" fill="#38BDF8" />
-
-            {/* White Facial Mask & Chin Bib */}
-            <path d="M23 24 Q32 30 41 24 Q32 20 23 24 Z" fill="#FFFFFF" />
-            <path d="M27 27 Q32 32 37 27 Q32 30 27 27 Z" fill="#F8FAFC" />
-            {/* Jay Black Collar / Bridle Markings */}
-            <path d="M23 25 C23 29 27 32 32 32 C37 32 41 29 41 25" stroke="#001438" strokeWidth="1.2" fill="none" />
-
-            {/* Rosy Pink Blushing Cheeks */}
-            <ellipse cx="25" cy="26" rx="2.5" ry="1.6" fill="#FDA4AF" opacity="0.65" />
-            <ellipse cx="39" cy="26" rx="2.5" ry="1.6" fill="#FDA4AF" opacity="0.65" />
-
-            {/* Big Expressive Sparkling Traveler Eyes */}
-            {/* Left Eye */}
-            <circle cx="27.5" cy="22.5" r="2.6" fill="#0F172A" />
-            <circle cx="27.5" cy="22.5" r="2.2" fill="#002D72" />
-            <circle cx="27.5" cy="22.5" r="1.6" fill="#0F172A" />
-            <circle cx="26.6" cy="21.6" r="0.9" fill="#FFFFFF" />
-            <circle cx="28.4" cy="23.3" r="0.4" fill="#FFFFFF" />
-
-            {/* Right Eye */}
-            <circle cx="36.5" cy="22.5" r="2.6" fill="#0F172A" />
-            <circle cx="36.5" cy="22.5" r="2.2" fill="#002D72" />
-            <circle cx="36.5" cy="22.5" r="1.6" fill="#0F172A" />
-            <circle cx="35.6" cy="21.6" r="0.9" fill="#FFFFFF" />
-            <circle cx="37.4" cy="23.3" r="0.4" fill="#FFFFFF" />
-
-            {/* Cute Golden-Orange Beak */}
-            <polygon points="29.5,24 34.5,24 32,28.5" fill="#F59E0B" stroke="#D97706" strokeWidth="0.6" />
-            <line x1="29.5" y1="24" x2="34.5" y2="24" stroke="#B45309" strokeWidth="0.7" />
-
-            {/* Illuminated Parchment Diploma Scroll Held in Beak */}
-            <g transform="rotate(-12 32 27)">
-              <rect x="27" y="26.5" width="13" height="4" rx="1.2" fill="#FFFBEB" stroke="#D97706" strokeWidth="0.8" />
-              {/* Gold script lines on scroll */}
-              <line x1="29" y1="28" x2="33" y2="28" stroke="#D97706" strokeWidth="0.6" />
-              <line x1="29" y1="29.3" x2="32" y2="29.3" stroke="#D97706" strokeWidth="0.6" />
-              {/* Crimson Ribbon & Wax Seal */}
-              <rect x="34" y="26.2" width="2" height="4.6" fill="#DC2626" />
-              <circle cx="35" cy="28.5" r="1.2" fill="#991B1B" />
-              <circle cx="35" cy="28.5" r="0.6" fill="#F59E0B" />
-              <path d="M35 30.5 L33.5 33 L35 32 L36.5 33 Z" fill="#DC2626" />
-            </g>
-
-            {/* Vintage Brass Aviator Goggles on Forehead */}
-            <g>
-              {/* Leather Strap */}
-              <path d="M22 17 Q32 19 42 17" stroke="#78350F" strokeWidth="2" strokeLinecap="round" fill="none" />
-              {/* Left Lens & Rim */}
-              <circle cx="27" cy="16.5" r="4.2" fill="url(#nest-goggle-brass)" stroke="#451A03" strokeWidth="0.8" />
-              <circle cx="27" cy="16.5" r="3.2" fill="url(#nest-goggle-lens)" />
-              <line x1="25" y1="15" x2="28" y2="18" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" opacity="0.9" />
-              <circle cx="27" cy="13.2" r="0.5" fill="#FEF08A" />
-
-              {/* Right Lens & Rim */}
-              <circle cx="37" cy="16.5" r="4.2" fill="url(#nest-goggle-brass)" stroke="#451A03" strokeWidth="0.8" />
-              <circle cx="37" cy="16.5" r="3.2" fill="url(#nest-goggle-lens)" />
-              <line x1="35" y1="15" x2="38" y2="18" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" opacity="0.9" />
-              <circle cx="37" cy="13.2" r="0.5" fill="#FEF08A" />
-
-              {/* Center Bridge & Screw */}
-              <rect x="30" y="15.5" width="4" height="2" rx="0.5" fill="url(#nest-goggle-brass)" stroke="#78350F" strokeWidth="0.6" />
-              <circle cx="32" cy="16.5" r="0.6" fill="#451A03" />
-
-              {/* Explorer Feather Tucked in Goggle */}
-              <path d="M39 15 C42 11 44 6 43 3 C41 7 40 10 39 14 Z" fill="#38BDF8" stroke="#002D72" strokeWidth="0.6" />
-              <line x1="42" y1="5" x2="39" y2="15" stroke="#FFFFFF" strokeWidth="0.5" />
-            </g>
-          </g>
-
-          {/* Majestic 3D Folded Ribbon Banner: NESTLING • I */}
-          <g>
-            {/* Left & Right Swallowtail Ribbon Tails Behind */}
-            <path d="M12 55 L7 52 L12 49 L16 53 Z" fill="#001845" stroke="url(#nest-gold-main)" strokeWidth="0.8" />
-            <path d="M52 55 L57 52 L52 49 L48 53 Z" fill="#001845" stroke="url(#nest-gold-main)" strokeWidth="0.8" />
-            {/* Ribbon Folds Shadow Under */}
-            <polygon points="15,53 18,53 16,56" fill="#000E29" />
-            <polygon points="49,53 46,53 48,56" fill="#000E29" />
-
-            {/* Main Center Banner Front */}
-            <path
-              d="M14 53 L32 50.5 L50 53 L47 59.5 L32 57 L17 59.5 Z"
-              fill="url(#nest-ribbon)"
-              stroke="url(#nest-gold-main)"
-              strokeWidth="1.2"
-            />
-            {/* Banner Inner Gold Piping */}
-            <path
-              d="M17 54 L32 52 L47 54"
-              stroke="#FEF08A"
-              strokeWidth="0.6"
-              fill="none"
-              opacity="0.7"
-            />
-            {/* Embossed Gold Typography: NESTLING */}
-            <text
-              fontSize="4.4"
-              fontWeight="900"
-              fill="#FEF08A"
-              fontFamily="sans-serif"
-              letterSpacing="0.8"
-            >
-              <textPath href="#nest-banner-path" startOffset="50%" textAnchor="middle">
-                NESTLING
-              </textPath>
-            </text>
-
-            {/* Suspended Golden Medal Pendant Under Ribbon */}
-            <polygon points="32,58 33.5,60 36,60 34,61.5 35,63.5 32,62 29,63.5 30,61.5 28,60 30.5,60" fill="url(#nest-gold-main)" stroke="#78350F" strokeWidth="0.4" />
-            <circle cx="32" cy="61" r="0.8" fill="#2563EB" />
-          </g>
-        </svg>
-      );
-
-    case 2:
-      // Rank 2: Charm City Explorer Crest (Octagonal Bronze Compass & Quills)
-      return (
-        <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
-          <defs>
-            <linearGradient id="exp-bronze" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#D97706" />
-              <stop offset="50%" stopColor="#92400E" />
-              <stop offset="100%" stopColor="#451A03" />
-            </linearGradient>
-            <linearGradient id="exp-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FEF08A" />
-              <stop offset="50%" stopColor="#F59E0B" />
-              <stop offset="100%" stopColor="#B45309" />
-            </linearGradient>
-            <linearGradient id="exp-crimson" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#EF4444" />
-              <stop offset="100%" stopColor="#991B1B" />
-            </linearGradient>
-            <linearGradient id="exp-navy" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1E3A8A" />
-              <stop offset="100%" stopColor="#001845" />
-            </linearGradient>
-            {/* Banner Baseline for Curved Typography */}
-            <path id="exp-banner-path" d="M 16,57.6 Q 32,54.7 48,57.6" />
-          </defs>
-
-          {/* Dual Crossed Vintage Telescopes Behind */}
-          <g transform="rotate(45 32 30)">
-            <rect x="30" y="6" width="4" height="48" rx="2" fill="url(#exp-gold)" stroke="#78350F" strokeWidth="0.8" />
-            <rect x="29" y="16" width="6" height="12" rx="1" fill="#78350F" />
-            <rect x="28.5" y="44" width="7" height="6" rx="1.5" fill="url(#exp-gold)" />
-          </g>
-          <g transform="rotate(-45 32 30)">
-            <rect x="30" y="6" width="4" height="48" rx="2" fill="url(#exp-gold)" stroke="#78350F" strokeWidth="0.8" />
-            <rect x="29" y="16" width="6" height="12" rx="1" fill="#78350F" />
-            <rect x="28.5" y="44" width="7" height="6" rx="1.5" fill="url(#exp-gold)" />
-          </g>
-
-          {/* Octagonal Bronze Compass Casing */}
-          <polygon
-            points="21,4 43,4 58,19 58,41 43,56 21,56 6,41 6,19"
-            fill="url(#exp-bronze)"
-            stroke="url(#exp-gold)"
-            strokeWidth="1.8"
-          />
-
-          {/* 8 Corner Rivets */}
-          {[[21, 6], [43, 6], [56, 19], [56, 41], [43, 54], [21, 54], [8, 41], [8, 19]].map(([x, y], i) => (
-            <circle key={i} cx={x} cy={y} r="1.3" fill="#FEF08A" />
-          ))}
-
-          {/* Inner Circular Compass Dial */}
-          <circle cx="32" cy="30" r="21" fill="#001845" stroke="url(#exp-gold)" strokeWidth="1.5" />
-          
-          {/* Compass Degrees Ring */}
-          <circle cx="32" cy="30" r="18" stroke="#38BDF8" strokeWidth="0.8" strokeDasharray="1.5 2" fill="none" opacity="0.6" />
-
-          {/* Cardinal Directions */}
-          <text x="32" y="17" textAnchor="middle" fontSize="5.5" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif">N</text>
-          <text x="32" y="47" textAnchor="middle" fontSize="5" fontWeight="800" fill="#94A3B8" fontFamily="sans-serif">S</text>
-          <text x="47" y="32" textAnchor="middle" fontSize="5" fontWeight="800" fill="#94A3B8" fontFamily="sans-serif">E</text>
-          <text x="17" y="32" textAnchor="middle" fontSize="5" fontWeight="800" fill="#94A3B8" fontFamily="sans-serif">W</text>
-
-          {/* 3D Faceted 8-Point Navigational Star */}
-          {/* North Point */}
-          <polygon points="32,18 35,27 32,30" fill="#DC2626" />
-          <polygon points="32,18 29,27 32,30" fill="url(#exp-crimson)" />
-          {/* South Point */}
-          <polygon points="32,42 35,33 32,30" fill="#3B82F6" />
-          <polygon points="32,42 29,33 32,30" fill="url(#exp-navy)" />
-          {/* East Point */}
-          <polygon points="44,30 35,27 32,30" fill="#FEF08A" />
-          <polygon points="44,30 35,33 32,30" fill="#D97706" />
-          {/* West Point */}
-          <polygon points="20,30 29,27 32,30" fill="#FEF08A" />
-          <polygon points="20,30 29,33 32,30" fill="#D97706" />
-
-          {/* Corner points */}
-          <polygon points="40,22 35,27 32,30 35,30" fill="#B45309" opacity="0.7" />
-          <polygon points="24,22 29,27 32,30 29,30" fill="#B45309" opacity="0.7" />
-          <polygon points="40,38 35,33 32,30 35,30" fill="#B45309" opacity="0.7" />
-          <polygon points="24,38 29,33 32,30 29,30" fill="#B45309" opacity="0.7" />
-
-          {/* Central Hopkins Veritas Shield Crest */}
-          <path d="M28 26 L36 26 L36 32 C36 35 32 37 32 37 C32 37 28 35 28 32 Z" fill="#002D72" stroke="url(#exp-gold)" strokeWidth="1" />
-          {/* Miniature Open Book */}
-          <path d="M29.5 28 Q32 29 32 33 Q32 29 34.5 28" stroke="#FFFFFF" strokeWidth="0.8" fill="none" />
-          <line x1="32" y1="29" x2="32" y2="33" stroke="url(#exp-gold)" strokeWidth="0.8" />
-
-          {/* Lower Ribbon Banner: EXPLORER */}
-          <path d="M14 53 L32 50 L50 53 L47 59 L32 56 L17 59 Z" fill="#78350F" stroke="url(#exp-gold)" strokeWidth="1" />
-          <text fontSize="4.4" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.8">
-            <textPath href="#exp-banner-path" startOffset="50%" textAnchor="middle">
-              EXPLORER
-            </textPath>
-          </text>
-        </svg>
-      );
-
-    case 3:
-      // Rank 3: Baltimore Navigator Crest (Teak Ships Helm & Patapsco Anchor)
-      return (
-        <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
-          <defs>
-            <linearGradient id="nav-helm" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#92400E" />
-              <stop offset="50%" stopColor="#78350F" />
-              <stop offset="100%" stopColor="#451A03" />
-            </linearGradient>
-            <linearGradient id="nav-brass" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FEF08A" />
-              <stop offset="50%" stopColor="#F59E0B" />
-              <stop offset="100%" stopColor="#B45309" />
-            </linearGradient>
-            <linearGradient id="nav-sea" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0D9488" />
-              <stop offset="100%" stopColor="#042F2E" />
-            </linearGradient>
-            {/* Banner Baseline for Curved Typography */}
-            <path id="nav-banner-path" d="M 14,57.6 Q 32,54.6 50,57.6" />
-          </defs>
-
-          {/* 8 Ship Helm Turned Spoke Handles */}
-          {Array.from({ length: 8 }).map((_, i) => {
-            const angle = i * 45;
-            return (
-              <g key={i} transform={`rotate(${angle} 32 30)`}>
-                <rect x="30.5" y="2" width="3" height="12" rx="1.5" fill="url(#nav-helm)" stroke="url(#nav-brass)" strokeWidth="0.6" />
-                <circle cx="32" cy="3" r="2.2" fill="url(#nav-brass)" />
-              </g>
-            );
-          })}
-
-          {/* Outer Wheel Rim */}
-          <circle cx="32" cy="30" r="21" fill="url(#nav-helm)" stroke="url(#nav-brass)" strokeWidth="2" />
-          <circle cx="32" cy="30" r="17.5" fill="none" stroke="url(#nav-brass)" strokeWidth="1" strokeDasharray="1.5 1.5" />
-
-          {/* Inner Teal Patapsco Enamel Ring */}
-          <circle cx="32" cy="30" r="16" fill="url(#nav-sea)" />
-
-          {/* 8 Gold Nautical Stars around inner ring */}
-          {Array.from({ length: 8 }).map((_, i) => {
-            const angle = i * 45 + 22.5;
-            const rad = (angle * Math.PI) / 180;
-            const x = 32 + 13.5 * Math.cos(rad);
-            const y = 30 + 13.5 * Math.sin(rad);
-            return <circle key={i} cx={x} cy={y} r="1" fill="#FEF08A" />;
-          })}
-
-          {/* Burnished Heavy Naval Anchor */}
-          {/* Top Anchor Ring */}
-          <circle cx="32" cy="20" r="3.5" stroke="url(#nav-brass)" strokeWidth="1.8" fill="none" />
-          {/* Stock Crossbar */}
-          <line x1="22" y1="24" x2="42" y2="24" stroke="url(#nav-brass)" strokeWidth="2.5" strokeLinecap="round" />
-          <circle cx="22" cy="24" r="1.5" fill="#451A03" />
-          <circle cx="42" cy="24" r="1.5" fill="#451A03" />
-          {/* Shank */}
-          <line x1="32" y1="21" x2="32" y2="41" stroke="url(#nav-brass)" strokeWidth="3" strokeLinecap="round" />
-          {/* Flukes Curve */}
-          <path d="M21 33 C21 42 43 42 43 33" stroke="url(#nav-brass)" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-          <polygon points="18,33 22,34 20,38" fill="#D97706" />
-          <polygon points="46,33 42,34 44,38" fill="#D97706" />
-
-          {/* 3D Coiled Hemp Cord */}
-          <path d="M30 22 Q35 25 32 28 Q28 31 34 34 Q30 37 32 40" stroke="#FBBF24" strokeWidth="1.4" fill="none" strokeDasharray="2.5 1.5" />
-
-          {/* Soaring Blue Jay Sea Bird Perched on Top */}
-          <path d="M26 12 C28 8 36 8 38 12 C35 14 34 16 32 18 C30 16 29 14 26 12 Z" fill="#3B82F6" stroke="#FFFFFF" strokeWidth="0.8" />
-          <polygon points="31,18 33,18 32,20" fill="#F59E0B" />
-
-          {/* Lower Naval Banner: NAVIGATOR */}
-          <path d="M12 53 L32 50 L52 53 L49 59 L32 56 L15 59 Z" fill="#042F2E" stroke="url(#nav-brass)" strokeWidth="1" />
-          <text fontSize="4.2" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.6">
-            <textPath href="#nav-banner-path" startOffset="50%" textAnchor="middle">
-              NAVIGATOR
-            </textPath>
-          </text>
-        </svg>
-      );
-
-    case 4:
-      // Rank 4: Monumental Connoisseur Crest (Royal Baroque Maryland Cartouche)
-      return (
-        <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
-          <defs>
-            <linearGradient id="con-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FEF08A" />
-              <stop offset="50%" stopColor="#F59E0B" />
-              <stop offset="100%" stopColor="#78350F" />
-            </linearGradient>
-            <linearGradient id="con-ruby" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#EF4444" />
-              <stop offset="50%" stopColor="#B91C1C" />
-              <stop offset="100%" stopColor="#450A0A" />
-            </linearGradient>
-            {/* Banner Baseline for Curved Typography */}
-            <path id="con-banner-path" d="M 12,58.4 Q 32,55.4 52,58.4" />
-          </defs>
-
-          {/* Baroque Acanthus Scrollwork Auriole Frame */}
-          <path
-            d="M12 18 C8 12 18 6 26 10 C29 6 35 6 38 10 C46 6 56 12 52 18 C58 26 58 36 50 44 C46 48 38 52 32 54 C26 52 18 48 14 44 C6 36 6 26 12 18 Z"
-            fill="url(#con-gold)"
-            stroke="#78350F"
-            strokeWidth="1.2"
-          />
-
-          {/* Radiating Sunburst Behind Washington Monument */}
-          {Array.from({ length: 9 }).map((_, i) => {
-            const angle = -60 + i * 15;
-            return (
-              <line
-                key={i}
-                x1="32"
-                y1="16"
-                x2={32 + 18 * Math.sin((angle * Math.PI) / 180)}
-                y2={16 - 18 * Math.cos((angle * Math.PI) / 180)}
-                stroke="#FEF08A"
-                strokeWidth="1"
-                opacity="0.8"
-              />
-            );
-          })}
-
-          {/* Washington Monument Marble Obelisk Crest */}
-          <polygon points="32,4 34,7 34,16 30,16 30,7" fill="#F8FAFC" stroke="#94A3B8" strokeWidth="0.8" />
-          <polygon points="32,4 34,7 32,7" fill="#E2E8F0" />
-
-          {/* Two Rampant Blue Jays Flanking */}
-          <path d="M16 14 C18 10 24 11 26 15 C24 18 22 20 20 22 C18 20 15 17 16 14 Z" fill="#002D72" stroke="#FFFFFF" strokeWidth="0.6" />
-          <path d="M48 14 C46 10 40 11 38 15 C40 18 42 20 44 22 C46 20 49 17 48 14 Z" fill="#002D72" stroke="#FFFFFF" strokeWidth="0.6" />
-
-          {/* Authentic 4-Quartered Maryland Shield */}
-          <g transform="translate(18, 16)">
-            {/* Shield Outline */}
-            <clipPath id="md-shield-clip">
-              <path d="M0 0 L28 0 L28 18 C28 26 14 30 14 30 C14 30 0 26 0 18 Z" />
-            </clipPath>
-            
-            <g clipPath="url(#md-shield-clip)">
-              {/* Q1: Top Left - Calvert Chevrons (Gold & Black) */}
-              <rect x="0" y="0" width="14" height="11" fill="#F59E0B" />
-              <polygon points="0,0 4,0 0,6" fill="#18181B" />
-              <polygon points="4,0 10,0 0,11" fill="#18181B" />
-              <polygon points="10,0 14,0 5,11 1,11" fill="#18181B" />
-              <polygon points="14,3 14,8 8,11 6,11" fill="#18181B" />
-
-              {/* Q2: Top Right - Crossland Bottony Cross (Red & White) */}
-              <rect x="14" y="0" width="14" height="11" fill="#FFFFFF" />
-              <rect x="14" y="0" width="7" height="5.5" fill="#DC2626" />
-              <rect x="21" y="5.5" width="7" height="5.5" fill="#DC2626" />
-              <circle cx="21" cy="5.5" r="2" fill="#FFFFFF" />
-              <circle cx="21" cy="5.5" r="1.2" fill="#DC2626" />
-              <circle cx="21" cy="1.5" r="1" fill="#DC2626" />
-              <circle cx="21" cy="9.5" r="1" fill="#FFFFFF" />
-
-              {/* Q3: Bottom Left - Crossland Bottony Cross */}
-              <rect x="0" y="11" width="14" height="19" fill="#DC2626" />
-              <rect x="0" y="11" width="7" height="9.5" fill="#FFFFFF" />
-              <rect x="7" y="20.5" width="7" height="9.5" fill="#FFFFFF" />
-              <circle cx="7" cy="20.5" r="2" fill="#DC2626" />
-              <circle cx="7" cy="20.5" r="1.2" fill="#FFFFFF" />
-
-              {/* Q4: Bottom Right - Calvert Chevrons */}
-              <rect x="14" y="11" width="14" height="19" fill="#F59E0B" />
-              <polygon points="14,11 18,11 14,17" fill="#18181B" />
-              <polygon points="18,11 24,11 14,24" fill="#18181B" />
-              <polygon points="24,11 28,11 17,28 14,28" fill="#18181B" />
-            </g>
-
-            {/* Shield Border */}
-            <path d="M0 0 L28 0 L28 18 C28 26 14 30 14 30 C14 30 0 26 0 18 Z" stroke="url(#con-gold)" strokeWidth="2" fill="none" />
-          </g>
-
-          {/* Faceted Ruby Gemstone Pendant at Shield Tip */}
-          <polygon points="32,47 36,51 32,56 28,51" fill="url(#con-ruby)" stroke="url(#con-gold)" strokeWidth="1" />
-          <polygon points="32,48 34,51 32,54 30,51" fill="#FEF2F2" opacity="0.4" />
-
-          {/* Lower Crimson Banner: CONNOISSEUR */}
-          <path d="M10 54 L32 51 L54 54 L50 60 L32 57 L14 60 Z" fill="url(#con-ruby)" stroke="url(#con-gold)" strokeWidth="1" />
-          <text fontSize="3.8" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.4">
-            <textPath href="#con-banner-path" startOffset="50%" textAnchor="middle">
-              CONNOISSEUR
-            </textPath>
-          </text>
-        </svg>
-      );
-
-    case 5:
-    default:
-      // Rank 5: Charm City Laureate Grand Sovereign Medal (16-Point Radiant Starburst)
-      return (
-        <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
-          <defs>
-            <linearGradient id="lau-purple" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#7E22CE" />
-              <stop offset="50%" stopColor="#581C87" />
-              <stop offset="100%" stopColor="#2E1065" />
-            </linearGradient>
-            <linearGradient id="lau-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FEF08A" />
-              <stop offset="35%" stopColor="#FBBF24" />
-              <stop offset="70%" stopColor="#D97706" />
-              <stop offset="100%" stopColor="#78350F" />
-            </linearGradient>
-            <radialGradient id="lau-center" cx="50%" cy="45%" r="50%">
-              <stop offset="0%" stopColor="#FFFBEB" />
-              <stop offset="60%" stopColor="#FEF3C7" />
-              <stop offset="100%" stopColor="#FDE68A" />
-            </radialGradient>
-            {/* Banner Baseline for Curved Typography */}
-            <path id="lau-banner-path" d="M 10,59.2 Q 32,55.7 54,59.2" />
-          </defs>
-
-          {/* Royal Purple Watered-Silk Neck Sash Ribbon */}
-          <path d="M22 2 L32 16 L42 2 L50 2 L36 20 L28 20 L14 2 Z" fill="url(#lau-purple)" stroke="url(#lau-gold)" strokeWidth="0.8" />
-          <line x1="24" y1="2" x2="33" y2="16" stroke="#FDE047" strokeWidth="0.8" opacity="0.8" />
-          <line x1="40" y1="2" x2="31" y2="16" stroke="#FDE047" strokeWidth="0.8" opacity="0.8" />
-
-          {/* 16-Point Radiant Golden Sunburst Star */}
-          {Array.from({ length: 16 }).map((_, i) => {
-            const angle = (i * 360) / 16;
-            const isLong = i % 2 === 0;
-            const rOuter = isLong ? 30 : 25;
-            const rInner = 19;
-            const aRad = (angle * Math.PI) / 180;
-            const aLeft = ((angle - 11.25) * Math.PI) / 180;
-            const aRight = ((angle + 11.25) * Math.PI) / 180;
-
-            const tipX = 32 + rOuter * Math.cos(aRad);
-            const tipY = 32 + rOuter * Math.sin(aRad);
-            const leftX = 32 + rInner * Math.cos(aLeft);
-            const leftY = 32 + rInner * Math.sin(aLeft);
-            const rightX = 32 + rInner * Math.cos(aRight);
-            const rightY = 32 + rInner * Math.sin(aRight);
-
-            return (
-              <g key={i}>
-                <polygon points={`32,32 ${tipX},${tipY} ${leftX},${leftY}`} fill={isLong ? '#FEF08A' : '#FBBF24'} />
-                <polygon points={`32,32 ${tipX},${tipY} ${rightX},${rightY}`} fill={isLong ? '#D97706' : '#92400E'} />
-              </g>
-            );
-          })}
-
-          {/* Concentric Sapphire & Diamond Gem Ring */}
-          <circle cx="32" cy="32" r="20" fill="url(#lau-purple)" stroke="url(#lau-gold)" strokeWidth="1.5" />
-          {Array.from({ length: 12 }).map((_, i) => {
-            const angle = (i * 360) / 12;
-            const rad = (angle * Math.PI) / 180;
-            const x = 32 + 18.2 * Math.cos(rad);
-            const y = 32 + 18.2 * Math.sin(rad);
-            const isSapphire = i % 2 === 0;
-            return <circle key={i} cx={x} cy={y} r="1.4" fill={isSapphire ? '#38BDF8' : '#FFFFFF'} stroke="#D97706" strokeWidth="0.4" />;
-          })}
-
-          {/* High-Relief 24K Gold Laurel Wreath */}
-          <circle cx="32" cy="32" r="16" fill="url(#lau-center)" stroke="url(#lau-gold)" strokeWidth="1.5" />
-          <path d="M19 32 C19 39 25 44 32 44 C39 44 45 39 45 32 C45 25 39 20 32 20 C25 20 19 25 19 32 Z" stroke="url(#lau-gold)" strokeWidth="1" fill="none" />
-          
-          {/* Detailed Golden Laurel Sprigs */}
-          {[-60, -30, 0, 30, 60].map((deg, i) => (
-            <g key={i} transform={`rotate(${deg} 32 32)`}>
-              <ellipse cx="17.5" cy="32" rx="1.8" ry="3.5" transform="rotate(-30 17.5 32)" fill="#F59E0B" stroke="#78350F" strokeWidth="0.5" />
-              <ellipse cx="46.5" cy="32" rx="1.8" ry="3.5" transform="rotate(30 46.5 32)" fill="#F59E0B" stroke="#78350F" strokeWidth="0.5" />
-            </g>
-          ))}
-
-          {/* Central Sovereign Johns Hopkins Veritas Crest */}
-          <path d="M26 25 L38 25 L38 34 C38 39 32 42 32 42 C32 42 26 39 26 34 Z" fill="#002D72" stroke="url(#lau-gold)" strokeWidth="1.2" />
-          
-          {/* Illuminated Veritas Open Book */}
-          <path d="M28 28 Q32 29 32 34 Q32 29 36 28 L36 33 Q32 34 32 37 Q32 34 28 33 Z" fill="#FFFFFF" stroke="#D97706" strokeWidth="0.6" />
-          <line x1="32" y1="29" x2="32" y2="37" stroke="#D97706" strokeWidth="0.8" />
-          <line x1="29.5" y1="30.5" x2="31" y2="30.5" stroke="#002D72" strokeWidth="0.5" />
-          <line x1="29.5" y1="32" x2="31" y2="32" stroke="#002D72" strokeWidth="0.5" />
-          <line x1="33" y1="30.5" x2="34.5" y2="30.5" stroke="#002D72" strokeWidth="0.5" />
-          <line x1="33" y1="32" x2="34.5" y2="32" stroke="#002D72" strokeWidth="0.5" />
-
-          {/* Sovereign Diamond Crown atop shield */}
-          <path d="M28 24 L29 20 L32 22 L35 20 L36 24 Z" fill="url(#lau-gold)" stroke="#78350F" strokeWidth="0.6" />
-          <circle cx="29" cy="20" r="0.8" fill="#38BDF8" />
-          <circle cx="32" cy="22" r="0.8" fill="#FFFFFF" />
-          <circle cx="35" cy="20" r="0.8" fill="#38BDF8" />
-
-          {/* Lower Imperial Golden Banner: GRAND LAUREATE */}
-          <path d="M8 54 L32 51 L56 54 L52 61 L32 57 L12 61 Z" fill="#451A03" stroke="url(#lau-gold)" strokeWidth="1.2" />
-          <text fontSize="4.4" fontWeight="900" fill="#FEF08A" fontFamily="sans-serif" letterSpacing="0.8">
-            <textPath href="#lau-banner-path" startOffset="50%" textAnchor="middle">
-              LAUREATE
-            </textPath>
-          </text>
-        </svg>
-      );
-  }
-};
+export { RankBadgeArt } from './RankBadgeArt';
 
 // ==========================================
 // 3. ACHIEVEMENT BADGES (9 BADGES)
@@ -3214,26 +2329,21 @@ export const AvatarVectorArt: React.FC<{
 
   switch (id) {
     case 'scholar-jay':
-      // Baby Jay with Graduation Mortarboard & Glasses
+      // Hoppy Mascot with Scholar styling
       return (
-        <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
-          <circle cx="32" cy="32" r="30" fill="#E0F2FE" />
-          <ellipse cx="32" cy="40" rx="18" ry="14" fill="#002D72" />
-          <circle cx="32" cy="28" r="14" fill="#4A90E2" />
-          {/* Mortarboard Cap */}
-          <polygon points="32,10 50,17 32,24 14,17" fill="#002D72" stroke="#1E293B" strokeWidth="1" />
-          <polygon points="24,20 40,20 37,25 27,25" fill="#002D72" />
-          <line x1="32" y1="17" x2="44" y2="21" stroke="#F59E0B" strokeWidth="1.5" />
-          <circle cx="44" cy="23" r="2" fill="#F59E0B" />
-          {/* Glasses */}
-          <circle cx="27" cy="28" r="4.5" stroke="#D97706" strokeWidth="1.5" fill="#FFFFFF" fillOpacity="0.85" />
-          <circle cx="37" cy="28" r="4.5" stroke="#D97706" strokeWidth="1.5" fill="#FFFFFF" fillOpacity="0.85" />
-          <line x1="31.5" y1="28" x2="32.5" y2="28" stroke="#D97706" strokeWidth="1.5" />
-          <circle cx="27" cy="28" r="1.5" fill="#0F172A" />
-          <circle cx="37" cy="28" r="1.5" fill="#0F172A" />
-          {/* Beak */}
-          <polygon points="30,33 34,33 32,37" fill="#F59E0B" />
-        </svg>
+        <div
+          className={`relative rounded-full overflow-hidden bg-sky-100 flex items-center justify-center border-2 border-sky-400 ${className}`}
+          style={{ width: size, height: size }}
+        >
+          <img
+            src="/blue-jay-mascot.png"
+            alt="Hoppy Mascot"
+            className="w-[85%] h-[85%] object-contain"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/blue-jay.svg';
+            }}
+          />
+        </div>
       );
 
     case 'maryland-crab':
@@ -3348,25 +2458,21 @@ export const AvatarVectorArt: React.FC<{
 
     case 'baby-jay':
     default:
-      // Baby Jay Explorer Mascot
+      // Hoppy Mascot Avatar
       return (
-        <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
-          <circle cx="32" cy="32" r="30" fill="#E0F2FE" />
-          <ellipse cx="32" cy="40" rx="18" ry="14" fill="#002D72" />
-          <ellipse cx="32" cy="43" rx="11" ry="9" fill="#FFFFFF" />
-          <circle cx="32" cy="27" r="14" fill="#4A90E2" />
-          {/* Baby Jay Beak */}
-          <polygon points="30,30 34,30 32,35" fill="#F59E0B" />
-          {/* Eyes */}
-          <circle cx="27" cy="25" r="2.5" fill="#FFFFFF" />
-          <circle cx="27" cy="25" r="1.3" fill="#0F172A" />
-          <circle cx="37" cy="25" r="2.5" fill="#FFFFFF" />
-          <circle cx="37" cy="25" r="1.3" fill="#0F172A" />
-          {/* Safari Explorer Hat */}
-          <ellipse cx="32" cy="18" rx="16" ry="4" fill="#D97706" />
-          <path d="M22 18 C22 12 42 12 42 18 Z" fill="#B45309" />
-          <rect x="23" y="16" width="18" height="2" fill="#002D72" />
-        </svg>
+        <div
+          className={`relative rounded-full overflow-hidden bg-sky-100 flex items-center justify-center border-2 border-sky-400 ${className}`}
+          style={{ width: size, height: size }}
+        >
+          <img
+            src="/blue-jay-mascot.png"
+            alt="Hoppy Mascot"
+            className="w-[85%] h-[85%] object-contain"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/blue-jay.svg';
+            }}
+          />
+        </div>
       );
   }
 };

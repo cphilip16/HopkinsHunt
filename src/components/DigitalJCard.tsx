@@ -17,7 +17,6 @@ import {
   SOUVENIR_STICKERS,
 } from './art/AnimatedStickers';
 import { BadgeIconArt, AvatarVectorArt, AVATAR_OPTIONS, RankInsigniaArt, RankBadgeArt } from './art/VectorArt';
-import { ScrapbookGallery } from './ScrapbookGallery';
 
 export const DigitalJCard: React.FC = () => {
   const {
@@ -571,8 +570,6 @@ export const DigitalJCard: React.FC = () => {
         )}
       </div>
 
-      {/* Travel Scrapbook & Keepsake Polaroids */}
-      <ScrapbookGallery />
 
     </div>
   );

@@ -6,7 +6,7 @@ export const INITIAL_SCRAPBOOK_PHOTOS: ScrapbookPhoto[] = [
     placeId: 'peabody-library',
     placeName: 'George Peabody Library',
     neighborhood: 'Mount Vernon',
-    dataUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/George_Peabody_Library_2023.jpg',
+    dataUrl: '/places/peabody-library.webp',
     timestamp: 'Yesterday at 4:15 PM',
     caption: 'Standing beneath 6 tiers of cast-iron golden balconies. Pure academic cathedral magic!',
     filter: 'vintage',
@@ -19,7 +19,7 @@ export const INITIAL_SCRAPBOOK_PHOTOS: ScrapbookPhoto[] = [
     placeId: 'bma',
     placeName: 'Gilman Quad & BMA Gardens',
     neighborhood: 'Charles Village',
-    dataUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/56/Baltimore_Museum_of_Art_entrance.jpg',
+    dataUrl: '/places/baltimore-museum-of-art.webp',
     timestamp: '2 days ago at 2:30 PM',
     caption: 'Sunbathing and reading Matisse catalogs between biostats lectures with the squad.',
     filter: 'warm-sun',
@@ -41,4 +41,3 @@ export const INITIAL_SCRAPBOOK_PHOTOS: ScrapbookPhoto[] = [
     likes: 31,
   },
 ];
-

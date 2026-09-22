@@ -18,10 +18,10 @@ export const MobileBottomNav: React.FC = () => {
         <button
           onClick={() => setIsTutorialOpen(true)}
           className="flex items-center justify-center w-10 h-10 rounded-full bg-white/95 text-hopkins-deep shadow-md border-2 border-amber-300 transform active:scale-90 transition-all cursor-pointer"
-          title="How to Play JayWalk Bmore"
-          aria-label="How to Play JayWalk Bmore"
+          title="How to Play Hopkins Hunt"
+          aria-label="How to Play Hopkins Hunt"
         >
-          <HelpCircle className="w-5 h-5 text-hopkins-heritage" />
+          <HelpCircle className="w-5 h-5 text-sky-600" />
         </button>
 
         <button

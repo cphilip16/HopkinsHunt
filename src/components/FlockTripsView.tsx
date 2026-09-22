@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { showImageFallback } from '../utils/imageFallback';
 import {
   Users,
   Plus,
@@ -162,7 +163,8 @@ export const FlockTripsView: React.FC = () => {
                   {/* Top Destination Image Banner */}
                   <div className="relative h-44 sm:h-48 overflow-hidden bg-slate-900">
                     <img
-                      src={placeObj?.imageUrl || 'https://upload.wikimedia.org/wikipedia/commons/5/56/Baltimore_Museum_of_Art_entrance.jpg'}
+                      src={placeObj?.imageUrl || '/places/inner-harbor.jpg'}
+                      onError={showImageFallback}
                       alt={trip.destinationName}
                       className="w-full h-full object-cover"
                     />
@@ -366,4 +368,3 @@ export const FlockTripsView: React.FC = () => {
     </div>
   );
 };
-

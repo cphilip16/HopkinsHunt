@@ -80,11 +80,10 @@ const AppContent: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-sky-50/70 via-slate-50 to-blue-50/40 font-sans relative selection:bg-amber-300 selection:text-hopkins-deep overflow-x-hidden">
-      {/* Atmospheric Background Ambient Color Blobs */}
-      <div className="fixed top-12 left-1/4 w-96 h-96 bg-gradient-to-tr from-sky-300/15 via-blue-400/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="fixed top-1/3 right-10 w-96 h-96 bg-gradient-to-bl from-amber-300/15 via-yellow-200/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="fixed bottom-20 left-10 w-80 h-80 bg-gradient-to-tr from-emerald-300/12 via-teal-200/8 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+    <div className="min-h-screen flex flex-col bg-slate-50 font-sans relative selection:bg-sky-200 selection:text-[#002D72] overflow-x-hidden">
+      {/* Crisp Ambient Blue Soft Glows */}
+      <div className="fixed top-12 left-1/4 w-96 h-96 bg-sky-200/20 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="fixed top-1/3 right-10 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <Navbar />
 
@@ -203,17 +202,20 @@ const AppContent: React.FC = () => {
       {/* Mobile Bottom Navigation (Ergonomic thumb reach on mobile devices) */}
       <MobileBottomNav />
 
-      {/* Footer with Maryland Ribbon Accent */}
-      <footer className="bg-white border-t border-slate-200 mt-8 sm:mt-12 text-center text-xs text-slate-500 overflow-hidden">
-        <MarylandRibbon height={3} />
+      {/* Footer */}
+      <footer className="bg-white border-t border-sky-100 mt-8 sm:mt-12 text-center text-xs text-slate-500 overflow-hidden">
+        <div className="h-1 bg-gradient-to-r from-sky-400 via-sky-300 to-sky-400" />
         <div className="max-w-7xl mx-auto px-4 py-8 pb-24 md:pb-8 space-y-2">
-          <div className="flex items-center justify-center space-x-2 font-bold text-slate-700">
-            <span className="inline-flex items-center gap-1.5"><BabyJaySticker size={20} /> JayWalk Bmore</span>
+          <div className="flex items-center justify-center space-x-2 font-bold text-[#002D72] font-bubbly">
+            <span className="inline-flex items-center gap-1.5">
+              <img src="/blue-jay-mascot.png" alt="Hoppy Mascot" className="w-5 h-5 object-contain" />
+              Hopkins Hunt
+            </span>
             <span>&bull;</span>
-            <span>Johns Hopkins University Student Exploration Initiative</span>
+            <span>Johns Hopkins University Student Exploration</span>
           </div>
           <p className="max-w-md mx-auto text-slate-400 text-[11px] leading-relaxed">
-            Encouraging Hopkins students to venture beyond the campus bubble and experience the history, cuisine, arts, and vibrant spirit of Charm City!
+            Encouraging Hopkins students to discover the history, cuisine, arts, and scenic beauty of Baltimore.
           </p>
         </div>
       </footer>

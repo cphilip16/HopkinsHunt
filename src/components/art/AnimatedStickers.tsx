@@ -6,103 +6,23 @@ export const BabyJaySticker: React.FC<{ size?: number; className?: string }> = (
   className = '',
 }) => {
   return (
-    <div className={`relative inline-block select-none ${className}`} title="Baby Jay the Explorer">
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 100 100"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="filter drop-shadow-md"
-      >
-        <style>
-          {`
-            @keyframes babyJayBlink {
-              0%, 90%, 100% { transform: scaleY(1); }
-              95% { transform: scaleY(0.1); }
-            }
-            @keyframes babyJayWingWave {
-              0%, 100% { transform: rotate(0deg); }
-              50% { transform: rotate(-18deg); }
-            }
-            @keyframes babyJayBob {
-              0%, 100% { transform: translateY(0); }
-              50% { transform: translateY(-3px); }
-            }
-            .animate-jay-blink {
-              transform-origin: 50% 48%;
-              animation: babyJayBlink 3.6s infinite ease-in-out;
-            }
-            .animate-jay-wing {
-              transform-origin: 75px 60px;
-              animation: babyJayWingWave 1.4s infinite ease-in-out;
-            }
-            .animate-jay-bob {
-              animation: babyJayBob 2.2s infinite ease-in-out;
-            }
-          `}
-        </style>
-
-        <g className="animate-jay-bob">
-          {/* Ambient Glow */}
-          <circle cx="50" cy="52" r="38" fill="#68ACE5" opacity="0.12" />
-
-          {/* Tail Feathers */}
-          <path d="M 24 70 C 12 78 8 88 6 92 C 12 90 22 84 30 76 Z" fill="#002D72" />
-          <path d="M 20 74 C 10 82 8 90 6 94 C 12 92 20 86 26 80 Z" fill="#68ACE5" />
-
-          {/* Plump Body */}
-          <ellipse cx="50" cy="62" rx="28" ry="24" fill="#002D72" />
-          <ellipse cx="50" cy="68" rx="18" ry="14" fill="#FFFFFF" opacity="0.95" />
-
-          {/* Round Head */}
-          <circle cx="50" cy="40" r="24" fill="#4A90E2" />
-
-          {/* White Cheek Patches */}
-          <path d="M 32 40 C 30 50 38 56 48 55 C 42 48 38 43 32 40 Z" fill="#FFFFFF" />
-          <path d="M 68 40 C 70 50 62 56 52 55 C 58 48 62 43 68 40 Z" fill="#FFFFFF" />
-
-          {/* Rosy Kawaii Cheeks */}
-          <circle cx="34" cy="46" r="4.5" fill="#FB7185" opacity="0.75" />
-          <circle cx="66" cy="46" r="4.5" fill="#FB7185" opacity="0.75" />
-
-          {/* Blinking Kawaii Eyes */}
-          <g className="animate-jay-blink">
-            <circle cx="40" cy="38" r="5" fill="#0F172A" />
-            <circle cx="38.5" cy="36.5" r="2.2" fill="#FFFFFF" />
-            <circle cx="41.5" cy="39.5" r="0.9" fill="#FFFFFF" />
-
-            <circle cx="60" cy="38" r="5" fill="#0F172A" />
-            <circle cx="58.5" cy="36.5" r="2.2" fill="#FFFFFF" />
-            <circle cx="61.5" cy="39.5" r="0.9" fill="#FFFFFF" />
-          </g>
-
-          {/* Yellow Beak */}
-          <path d="M 46 41 Q 50 39 54 41 Q 50 48 46 41 Z" fill="#F59E0B" stroke="#D97706" strokeWidth="0.8" />
-
-          {/* Explorer Safari Hat */}
-          <g transform="translate(34, 6)">
-            <ellipse cx="16" cy="14" rx="18" ry="4.5" fill="#FDE68A" stroke="#B45309" strokeWidth="1" />
-            <path d="M 6 14 Q 6 4 16 4 Q 26 4 26 14 Z" fill="#F59E0B" stroke="#B45309" strokeWidth="1" />
-            <path d="M 6 12 Q 16 15 26 12 L 26 14 Q 16 17 6 14 Z" fill="#002D72" />
-          </g>
-
-          {/* Left Wing (Resting) */}
-          <path d="M 32 56 Q 22 64 26 74 Q 34 72 36 62 Z" fill="#002D72" />
-
-          {/* Right Wing (Waving Animated Wing) */}
-          <g className="animate-jay-wing">
-            <path d="M 68 56 Q 84 46 86 36 Q 80 34 72 48 Z" fill="#4A90E2" stroke="#002D72" strokeWidth="1.2" />
-          </g>
-
-          {/* Little Yellow Feet */}
-          <path d="M 40 86 L 37 92 M 40 86 L 40 93 M 40 86 L 43 92" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" />
-          <path d="M 60 86 L 57 92 M 60 86 L 60 93 M 60 86 L 63 92" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" />
-        </g>
-      </svg>
+    <div
+      style={{ width: size, height: size }}
+      className={`relative inline-flex items-center justify-center select-none ${className}`}
+      title="Hoppy the Blue Jay Mascot"
+    >
+      <img
+        src="/blue-jay-mascot.png"
+        alt="Hoppy Mascot"
+        className="w-full h-full object-contain emote-idle filter drop-shadow-sm"
+        onError={(e) => {
+          (e.target as HTMLImageElement).src = '/blue-jay.svg';
+        }}
+      />
     </div>
   );
 };
+
 
 // ================= 2. ANIMATED BALTIMORE CRAB STICKER =================
 export const MarylandCrabSticker: React.FC<{ size?: number; className?: string }> = ({
