@@ -100,6 +100,18 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
                 <span>{place.neighborhood}</span>
               </span>
 
+              {place.campusProximity && (
+                <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border shadow-xs ${
+                  place.campusProximity === 'On campus'
+                    ? 'bg-sky-500/90 text-white border-sky-300'
+                    : place.campusProximity === 'Near campus'
+                    ? 'bg-amber-400/90 text-slate-950 border-amber-300 font-extrabold'
+                    : 'bg-indigo-600/90 text-white border-indigo-400'
+                }`}>
+                  {place.campusProximity}
+                </span>
+              )}
+
               {/* Contextual Animated Micro-Sticker */}
               {place.category === 'food' ? (
                 <div className="hidden xs:inline-block transform -rotate-6 filter drop-shadow-sm">

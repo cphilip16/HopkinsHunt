@@ -20,6 +20,8 @@ export type NeighborhoodType =
 export interface Place {
   id: string;
   name: string;
+  formalName?: string;
+  campusProximity?: 'On campus' | 'Near campus' | 'Off campus';
   neighborhood: NeighborhoodType;
   category: CategoryType;
   points: number;
@@ -188,3 +190,32 @@ export interface LocationVerificationTarget {
   requiredRadiusMeters: number;
   isWithinRadius: boolean;
 }
+
+export type NavigationTab = 
+  | 'explore' 
+  | 'map' 
+  | 'trips' 
+  | 'quests' 
+  | 'camera' 
+  | 'passport' 
+  | 'leaderboard';
+
+export interface Friend {
+  id: string;
+  name: string;
+  email: string;
+  points: number;
+  visitedCount: number;
+  cheers: number;
+  avatarInitials: string;
+  isUser?: boolean;
+}
+
+export interface SpotSubmission {
+  id: string;
+  name: string;
+  reason: string;
+  submittedBy: string;
+  timestamp: string;
+}
+

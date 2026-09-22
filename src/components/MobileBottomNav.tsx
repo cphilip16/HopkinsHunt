@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, MapPin, Award, Users, Camera, HelpCircle } from 'lucide-react';
+import { Compass, MapPin, Award, Users, Camera, HelpCircle, Trophy } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { AvatarVectorArt } from './art/VectorArt';
@@ -107,6 +107,21 @@ export const MobileBottomNav: React.FC = () => {
             {completedQuestsCount < quests.length && (
               <span className="absolute top-1 right-2.5 w-2 h-2 rounded-full bg-amber-400 animate-pulse ring-2 ring-hopkins-deep" />
             )}
+          </button>
+
+          {/* Leaderboard Tab */}
+          <button
+            onClick={() => setActiveTab('leaderboard')}
+            className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 min-w-[56px] min-h-[46px] ${
+              activeTab === 'leaderboard'
+                ? 'text-sky-300 scale-105 font-black'
+                : 'text-blue-200/70 hover:text-white font-medium'
+            }`}
+          >
+            <div className={`p-1.5 rounded-xl transition-all ${activeTab === 'leaderboard' ? 'bg-gradient-to-tr from-sky-400 to-blue-600 text-white shadow-md shadow-sky-400/30 ring-2 ring-white/60' : ''}`}>
+              <Trophy className="w-5 h-5 text-amber-300" />
+            </div>
+            <span className="text-[10px] mt-0.5 tracking-tight">Ranks</span>
           </button>
 
           {/* J-Card Passport Tab */}

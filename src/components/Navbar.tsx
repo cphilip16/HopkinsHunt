@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, MapPin, Award, BookOpen, RotateCcw, Sparkles, ShieldCheck, LogIn, LogOut, Camera, Users, HelpCircle } from 'lucide-react';
+import { Compass, MapPin, Award, BookOpen, RotateCcw, Sparkles, ShieldCheck, LogIn, LogOut, Camera, Users, HelpCircle, Trophy } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
@@ -241,6 +241,18 @@ export const Navbar: React.FC = () => {
             <span className="ml-1 px-1.5 py-0.2 text-[10px] font-black bg-amber-400 text-hopkins-deep rounded-full shadow-xs">
               Bonus PTS
             </span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('leaderboard')}
+            className={`flex items-center space-x-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm transition-all whitespace-nowrap ${
+              activeTab === 'leaderboard'
+                ? 'bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600 text-white shadow-lg shadow-sky-500/30 ring-1 ring-white/50 font-black'
+                : 'text-blue-100/90 hover:text-white hover:bg-white/10 font-semibold'
+            }`}
+          >
+            <Trophy className="w-4 h-4 text-amber-300" />
+            <span>Leaderboard</span>
           </button>
 
           <button

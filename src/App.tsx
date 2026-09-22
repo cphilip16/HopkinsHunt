@@ -16,6 +16,8 @@ import { PlaceDetailModal } from './components/PlaceDetailModal';
 import { LocationVerificationModal } from './components/LocationVerificationModal';
 import { LoginModal } from './components/LoginModal';
 import { TutorialModal } from './components/TutorialModal';
+import { FriendsLeaderboard } from './components/FriendsLeaderboard';
+import { SuggestSpotModal } from './components/SuggestSpotModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { FeatherCelebration } from './components/FeatherCelebration';
 import { MarylandRibbon } from './components/art/MarylandRibbon';
@@ -176,6 +178,13 @@ const AppContent: React.FC = () => {
           </section>
         )}
 
+        {/* Tab 7: Friends & Classmates Leaderboard */}
+        {activeTab === 'leaderboard' && (
+          <section>
+            <FriendsLeaderboard />
+          </section>
+        )}
+
       </main>
 
       {/* Global Celebratory, Detail, Camera, Auth & Tutorial Modals */}
@@ -186,6 +195,7 @@ const AppContent: React.FC = () => {
       <LoginModal />
       <CameraModal />
       <CreateTripModal />
+      <SuggestSpotModal />
 
       {/* Interactive Hopkins Blue Jay Feather Particle Celebration */}
       <FeatherCelebration />

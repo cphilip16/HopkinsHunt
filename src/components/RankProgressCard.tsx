@@ -7,6 +7,7 @@ import { CuteMascot } from './art/CuteMascot';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { PaperAirplaneTrail } from './art/TravelDecorations';
 import { RankInsigniaArt, RankBadgeArt } from './art/VectorArt';
+import { HoppyMascot } from './HoppyMascot';
 
 export const RankProgressCard: React.FC = () => {
   const {
@@ -147,9 +148,9 @@ export const RankProgressCard: React.FC = () => {
                 </button>
               </div>
 
-              {/* Chibi Baby Jay Explorer Mascot Accent */}
+              {/* Interactive Hoppy Mascot Accent */}
               <div className="hidden sm:block flex-shrink-0">
-                <CuteMascot pose="explorer" size={74} bubbleText="Ready to explore!" />
+                <HoppyMascot size="md" showSpeechBubble={true} />
               </div>
 
               <div>

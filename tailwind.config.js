@@ -17,6 +17,26 @@ export default {
           accent: "#2A75D3",
           vibrant: "#00539C",
         },
+        // Christina's signature color palette
+        jhu: {
+          deep: "#0b2447",
+          blue: "#1b5394",
+        },
+        jay: {
+          sky: "#38bdf8",
+          cyan: "#0284c7",
+          soft: "#e0f2fe",
+          line: "#bae6fd",
+          'line-strong': "#7dd3fc",
+        },
+        cloud: "#f0f9ff",
+        bubble: "#e6f5ff",
+        candy: {
+          coral: "#fb7185",
+          amber: "#f59e0b",
+          mint: "#10b981",
+          purple: "#a855f7",
+        },
         baltimore: {
           brick: "#B83A24",
           teal: "#0D7C85",
@@ -30,9 +50,10 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['Outfit', '"Plus Jakarta Sans"', 'sans-serif'],
-        heading: ['Outfit', '"Plus Jakarta Sans"', 'sans-serif'],
+        sans: ['Nunito', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Fredoka', 'Outfit', '"Plus Jakarta Sans"', 'sans-serif'],
+        heading: ['Fredoka', 'Outfit', 'sans-serif'],
+        bubbly: ['Fredoka', 'Quicksand', 'system-ui', 'sans-serif'],
         mono: ['"Space Grotesk"', 'monospace'],
       },
       boxShadow: {

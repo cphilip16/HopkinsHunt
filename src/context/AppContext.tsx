@@ -13,6 +13,9 @@ import {
   LocationStatus,
   PlaceDistanceInfo,
   LocationVerificationTarget,
+  NavigationTab,
+  Friend,
+  SpotSubmission,
 } from '../types';
 import { PLACES } from '../data/placesData';
 import { SUBRANKS, getRankAndSubrank } from '../data/ranksData';
@@ -41,8 +44,8 @@ export interface VerificationNotice {
 interface AppContextType {
   places: Place[];
   profile: UserProfile;
-  activeTab: 'explore' | 'map' | 'trips' | 'quests' | 'camera' | 'passport';
-  setActiveTab: (tab: 'explore' | 'map' | 'trips' | 'quests' | 'camera' | 'passport') => void;
+  activeTab: NavigationTab;
+  setActiveTab: (tab: NavigationTab) => void;
   selectedPlace: Place | null;
   setSelectedPlace: (place: Place | null) => void;
   levelUpData: LevelUpData | null;
@@ -119,6 +122,17 @@ interface AppContextType {
   isTutorialOpen: boolean;
   setIsTutorialOpen: (open: boolean) => void;
   completeTutorial: () => void;
+
+  // Friends & Social Leaderboard
+  friends: Friend[];
+  addFriend: (name: string, email: string) => { success: boolean; message: string };
+  cheerFriend: (id: string) => void;
+
+  // Community Spot Suggestions
+  spotSubmissions: SpotSubmission[];
+  submitSpot: (name: string, reason: string) => { success: boolean; message: string };
+  isSuggestSpotModalOpen: boolean;
+  setIsSuggestSpotModalOpen: (open: boolean) => void;
 }
 
 const DEFAULT_PROFILE: UserProfile = {
@@ -144,6 +158,32 @@ const STORAGE_KEY = 'jaywalk_bmore_user_profile_v2';
 const TRIPS_STORAGE_KEY = 'jaywalk_bmore_group_trips_v1';
 const PHOTOS_STORAGE_KEY = 'jaywalk_bmore_scrapbook_photos_v1';
 const TUTORIAL_STORAGE_KEY = 'jaywalk_bmore_tutorial_completed_v1';
+const FRIENDS_STORAGE_KEY = 'jaywalk_bmore_friends_v1';
+const SPOTS_STORAGE_KEY = 'jaywalk_bmore_spot_submissions_v1';
+
+const INITIAL_FRIENDS: Friend[] = [
+  { id: 'sofia', name: 'Sofia Rodriguez', email: 'srodriguez@jh.edu', points: 620, visitedCount: 11, cheers: 14, avatarInitials: 'SR' },
+  { id: 'jordan', name: 'Jordan Patel', email: 'jpatel2@jh.edu', points: 380, visitedCount: 7, cheers: 8, avatarInitials: 'JP' },
+  { id: 'maya', name: 'Maya Lin', email: 'mlin19@jh.edu', points: 140, visitedCount: 3, cheers: 5, avatarInitials: 'ML' },
+  { id: 'alex', name: 'Alex Chen', email: 'achen4@jh.edu', points: 65, visitedCount: 2, cheers: 3, avatarInitials: 'AC' },
+];
+
+const INITIAL_SPOTS: SpotSubmission[] = [
+  {
+    id: 'spot-1',
+    name: 'Belvedere Square Market',
+    reason: 'Great wood-fired pizza and locally churned ice cream right off York Road.',
+    submittedBy: 'Sofia Rodriguez',
+    timestamp: '2026-09-18T14:32:00Z',
+  },
+  {
+    id: 'spot-2',
+    name: 'R. House Food Hall',
+    reason: 'Ten chef-driven restaurant pop-ups with giant community tables, perfect for team study sessions in Remington.',
+    submittedBy: 'Jordan Patel',
+    timestamp: '2026-09-20T11:15:00Z',
+  }
+];
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -164,9 +204,33 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return DEFAULT_PROFILE;
   });
 
-  const [activeTab, setActiveTab] = useState<'explore' | 'map' | 'trips' | 'quests' | 'camera' | 'passport'>('explore');
+  const [activeTab, setActiveTab] = useState<NavigationTab>('explore');
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   const [levelUpData, setLevelUpData] = useState<LevelUpData | null>(null);
+
+  // Friends & Social state
+  const [friends, setFriends] = useState<Friend[]>(() => {
+    try {
+      const saved = localStorage.getItem(FRIENDS_STORAGE_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error('Error reading friends from localStorage', e);
+    }
+    return INITIAL_FRIENDS;
+  });
+
+  // Community Spot Submissions state
+  const [spotSubmissions, setSpotSubmissions] = useState<SpotSubmission[]>(() => {
+    try {
+      const saved = localStorage.getItem(SPOTS_STORAGE_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error('Error reading spot submissions from localStorage', e);
+    }
+    return INITIAL_SPOTS;
+  });
+
+  const [isSuggestSpotModalOpen, setIsSuggestSpotModalOpen] = useState(false);
 
   // Group Trips & Camera Modals
   const [isCreateTripModalOpen, setIsCreateTripModalOpen] = useState(false);
@@ -268,6 +332,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       console.error('Error saving scrapbook photos to localStorage', e);
     }
   }, [scrapbookPhotos]);
+
+  // Save friends
+  useEffect(() => {
+    try {
+      localStorage.setItem(FRIENDS_STORAGE_KEY, JSON.stringify(friends));
+    } catch (e) {
+      console.error('Error saving friends to localStorage', e);
+    }
+  }, [friends]);
+
+  // Save spot submissions
+  useEffect(() => {
+    try {
+      localStorage.setItem(SPOTS_STORAGE_KEY, JSON.stringify(spotSubmissions));
+    } catch (e) {
+      console.error('Error saving spot submissions to localStorage', e);
+    }
+  }, [spotSubmissions]);
 
   // Calculate total points
   const placePoints = profile.visitedPlaceIds.reduce((sum, id) => {
@@ -931,6 +1013,111 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setIsCameraModalOpen(true);
   };
 
+  // Friends & Social Leaderboard Handlers
+  const addFriend = (name: string, email: string): { success: boolean; message: string } => {
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim().toLowerCase();
+
+    if (!trimmedName) {
+      return { success: false, message: 'Please enter your friend\'s full name.' };
+    }
+    if (!trimmedEmail || !trimmedEmail.includes('@') || !trimmedEmail.endsWith('.edu')) {
+      return { success: false, message: 'Please provide a valid Hopkins email address ending in .edu.' };
+    }
+    if (friends.some((f) => f.email.toLowerCase() === trimmedEmail)) {
+      return { success: false, message: `${trimmedName} is already on your leaderboard!` };
+    }
+
+    const initials = trimmedName
+      .split(' ')
+      .map((part) => part[0])
+      .slice(0, 2)
+      .join('')
+      .toUpperCase() || 'JH';
+
+    const newFriend: Friend = {
+      id: `friend-${Date.now()}`,
+      name: trimmedName,
+      email: trimmedEmail,
+      points: Math.floor(Math.random() * 200) + 50,
+      visitedCount: Math.floor(Math.random() * 5) + 1,
+      cheers: 0,
+      avatarInitials: initials,
+    };
+
+    setFriends((prev) => [newFriend, ...prev]);
+
+    try {
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.7 },
+        colors: ['#002D72', '#68ACE5', '#fb7185', '#10b981'],
+        disableForReducedMotion: true,
+      });
+    } catch {
+      // ignore
+    }
+
+    return { success: true, message: `High-five! ${trimmedName} was added to your leaderboard.` };
+  };
+
+  const cheerFriend = (friendId: string) => {
+    setFriends((prev) =>
+      prev.map((f) => (f.id === friendId ? { ...f, cheers: f.cheers + 1 } : f))
+    );
+
+    try {
+      confetti({
+        particleCount: 35,
+        spread: 50,
+        origin: { y: 0.65 },
+        colors: ['#002D72', '#68ACE5', '#f59e0b', '#fb7185'],
+        disableForReducedMotion: true,
+      });
+    } catch {
+      // ignore
+    }
+  };
+
+  const submitSpot = (name: string, reason: string): { success: boolean; message: string } => {
+    const trimmedName = name.trim();
+    const trimmedReason = reason.trim();
+    if (!trimmedName || !trimmedReason) {
+      return { success: false, message: 'Please enter both the spot name and why you recommend it.' };
+    }
+
+    const newSpot: SpotSubmission = {
+      id: `spot-${Date.now()}`,
+      name: trimmedName,
+      reason: trimmedReason,
+      submittedBy: profile.studentName,
+      timestamp: new Date().toISOString(),
+    };
+
+    setSpotSubmissions((prev) => [newSpot, ...prev]);
+
+    // Reward explorer with +50 community bonus points!
+    setProfile((prev) => ({
+      ...prev,
+      bonusPoints: prev.bonusPoints + 50,
+    }));
+
+    try {
+      confetti({
+        particleCount: 65,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#002D72', '#68ACE5', '#10b981', '#fb7185'],
+        disableForReducedMotion: true,
+      });
+    } catch {
+      // ignore
+    }
+
+    return { success: true, message: `Awesome suggestion! "${trimmedName}" submitted for review (+50 bonus pts awarded!).` };
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -1004,6 +1191,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         isTutorialOpen,
         setIsTutorialOpen,
         completeTutorial,
+        friends,
+        addFriend,
+        cheerFriend,
+        spotSubmissions,
+        submitSpot,
+        isSuggestSpotModalOpen,
+        setIsSuggestSpotModalOpen,
       }}
     >
       {children}
