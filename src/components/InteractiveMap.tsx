@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { showImageFallback } from '../utils/imageFallback';
 import {
   MapPin,
   Navigation,
@@ -766,9 +767,7 @@ export const InteractiveMap: React.FC = () => {
                     src={activePin.imageUrl}
                     alt={activePin.name}
                     className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/places/brody-learning-commons.jpg';
-                    }}
+                    onError={showImageFallback}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-black/25 to-transparent" />
 
@@ -1307,9 +1306,7 @@ export const InteractiveMap: React.FC = () => {
                           src={place.imageUrl}
                           alt={place.name}
                           className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = '/places/brody-learning-commons.jpg';
-                          }}
+                          onError={showImageFallback}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/20" />
 
@@ -1395,9 +1392,7 @@ export const InteractiveMap: React.FC = () => {
                     src={activePin.imageUrl}
                     alt={activePin.name}
                     className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/places/brody-learning-commons.jpg';
-                    }}
+                    onError={showImageFallback}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-black/25 to-transparent" />
 

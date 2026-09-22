@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { showImageFallback } from '../utils/imageFallback';
 import {
   Camera,
   Heart,
@@ -141,6 +142,7 @@ export const ScrapbookGallery: React.FC = () => {
                 >
                   <img
                     src={photo.dataUrl}
+                    onError={showImageFallback}
                     alt={photo.caption}
                     className={`w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${
                       FILTER_CLASSES[photo.filter] || ''
@@ -231,6 +233,7 @@ export const ScrapbookGallery: React.FC = () => {
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-black shadow-lg">
               <img
                 src={inspectedPhoto.dataUrl}
+                onError={showImageFallback}
                 alt={inspectedPhoto.caption}
                 className={`w-full h-full object-cover ${
                   FILTER_CLASSES[inspectedPhoto.filter] || ''
@@ -282,4 +285,3 @@ export const ScrapbookGallery: React.FC = () => {
     </div>
   );
 };
-

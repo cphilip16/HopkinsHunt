@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { showImageFallback } from '../utils/imageFallback';
 import {
   Camera,
   X,
@@ -329,6 +330,7 @@ export const CameraModal: React.FC = () => {
                   <div className="relative w-full h-full">
                     <img
                       src={currentPlace.imageUrl}
+                      onError={showImageFallback}
                       alt={currentPlace.name}
                       style={{ filter: FILTER_STYLES[activeFilter].filterCss }}
                       className="w-full h-full object-cover"
@@ -628,4 +630,3 @@ export const CameraModal: React.FC = () => {
     </div>
   );
 };
-

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { showImageFallback } from '../utils/imageFallback';
 import { X, MapPin, Bus, Clock, DollarSign, Award, Sparkles, Check, Star, Calendar, Save, Stamp, Heart, Mail, Compass, BookOpen, Camera, Users, Navigation, Radio, AlertTriangle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { MarylandRibbon } from './art/MarylandRibbon';
@@ -66,11 +67,7 @@ export const PlaceDetailModal: React.FC = () => {
             src={selectedPlace.imageUrl}
             alt={selectedPlace.name}
             className="w-full h-full object-cover"
-            onError={(e) => {
-              const target = e.currentTarget;
-              target.onerror = null;
-              target.src = 'https://upload.wikimedia.org/wikipedia/commons/0/05/Fell%27s_Point_Thames_St.jpg';
-            }}
+            onError={showImageFallback}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
 
