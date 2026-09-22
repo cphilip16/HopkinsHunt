@@ -1,102 +1,111 @@
 # Hopkins Hunt
 
-Hopkins Hunt is a playful campus adventure app built for Johns Hopkins students exploring Baltimore. The goal is simple: discover memorable places around campus and the city, earn points for visiting them, level up your student profile, and compare your progress with friends.
+Hopkins Hunt is a mobile friendly campus exploration game for Johns Hopkins students. It turns discovering JHU and Baltimore into a shared adventure: browse places, check in, complete quests, collect badges, plan group trips, and compare progress with friends.
 
-## Why this app exists
+**Live app:** [hopkins-hunt.vercel.app](https://hopkins-hunt.vercel.app)
 
-The app turns city exploration into a friendly challenge. Instead of a static list of recommendations, it creates a game-like experience around everyday student life: midnight study sessions, weekend neighborhood adventures, museum visits, harbor walks, and memorable food stops.
+## What you can do
 
-It is designed to feel like a lightweight digital passport and leaderboard for campus culture: playful, social, and motivating without requiring a backend or full production infrastructure.
+- **Explore Baltimore:** Search curated recommendations and filter them by neighborhood, category, transit access, and free admission.
+- **Use the interactive map:** Find destinations, view nearby places, and open directions in Google Maps.
+- **Check in at places:** Use browser location access to verify that you are near a destination and earn points.
+- **Complete quests:** Visit themed groups of locations to unlock bonus points and celebrations.
+- **Build your rank:** Progress through Blue Jay inspired ranks and collect illustrated badges.
+- **Plan Flock Expeditions:** Create, join, leave, and check in to group trips with other students.
+- **Create a travel scrapbook:** Take or upload photos and save memories from visited locations.
+- **Use a digital J-Card passport:** See profile details, stamps, badges, and exploration progress.
+- **Compare with friends:** View the leaderboard and add demo friends or classmates.
+- **Suggest a spot:** Submit a Baltimore or campus destination for future review.
+- **Follow the tutorial:** Learn the main flows through the built in onboarding experience.
 
-## What the app includes
+## How the prototype works
 
-- Interactive destination explorer with filters for On campus, Near campus, and Off campus spots
-- Searchable place cards with addresses, descriptions, point values, and map pins
-- GPS-style map interface with a selected-location detail panel
-- Passport-style tracking for visited locations
-- Quest cards with progress tracking
-- Friend leaderboard and add-friend flow
-- Demo student login flow and verification screen
-- Community submission form for suggesting new places
-- Rank progression and point-based badges tied to the Blue Jay theme
-- Mascot-inspired UI with a social, game-like presentation
+Hopkins Hunt is currently a front end prototype. Student profiles, progress, friends, trips, photos, tutorial status, and suggested places are stored in the browser with `localStorage`. They stay on the same browser and device, but there is no shared database or production authentication service yet.
 
-## Current app theme
+The login flow supports sample student profiles and a simulated Hopkins email verification experience. For local testing, the master demo code is `187600`.
 
-The experience is styled as a student scavenger hunt and local adventure game. It uses a bright blue-and-gold palette, playful UI details, and a mascot-driven design centered around the Blue Jay identity.
+Location check ins use the browser Geolocation API. The scrapbook camera uses the MediaDevices API when camera access is available. Both features require permission from the browser and work best on HTTPS or localhost.
 
 ## Tech stack
 
-- React + Vite
-- JavaScript and JSX
-- CSS for the app styling and game-like layout
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- Lucide React icons
+- Canvas Confetti
+- Vercel deployment
 
-## Getting started
+## Run locally
 
-1. Install dependencies:
+### Prerequisites
 
-   npm install
+- A current Node.js LTS release
+- npm
 
-2. Start the development server:
+### Setup
 
-   npm run dev
+```bash
+git clone https://github.com/cphilip16/HopkinsHunt.git
+cd HopkinsHunt
+npm install
+npm run dev
+```
 
-3. Open the local Vite URL shown in the terminal.
+Open the local URL printed by Vite, usually `http://localhost:5173`.
 
 ## Available scripts
 
-- npm run dev — start the app locally
-- npm run build — build the app for production
-- npm run preview — preview the production build
-- npm run lint — run the project linter
-
-## Demo behavior
-
-This version is a front-end prototype/demo. Some functionality is intentionally mock-driven, including:
-
-- demo verification code: 123456
-- sample leaderboard entries
-- sample student profiles and friend data
-- local in-memory state for visited spots, rank progression, and submissions
-
-## Project roadmap
-
-This app is a strong prototype foundation, and the next likely steps are:
-
-- connect the app to a real backend for persistent user accounts and saved progress
-- replace demo verification with a true auth flow
-- store and review community spot submissions in a database
-- add real location validation or geofencing for visited spots
-- expand the quest system with time-based or seasonal challenges
-- introduce real map data and richer place metadata
-- add mobile-first polish and a more durable responsive layout
-
-## Notes
-
-The project is intentionally structured as a polished prototype rather than a full production backend app. If the project evolves, the README should be updated alongside any major changes to features, data flow, or app behavior.
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Type check the project and create a production build |
+| `npm run preview` | Preview the production build locally |
 
 ## Project structure
 
-- src/App.jsx — main app logic, state, and UI
-- src/App.css — styling, layout, and visual design
-- src/main.jsx — app entry point
-- public/places — static image assets for destinations
-- index.html — Vite entry document
-- package.json — app scripts and dependencies
-- README.md — project overview and current feature summary
+```text
+HopkinsHunt/
+|-- public/                 Static images, icons, and place photography
+|-- src/
+|   |-- components/         Feature views, modals, navigation, and artwork
+|   |-- context/            Shared app state and browser persistence
+|   |-- data/               Places, quests, ranks, trips, badges, and photos
+|   |-- types/              Shared TypeScript types
+|   |-- utils/              Geolocation and image helpers
+|   |-- App.tsx             Main application layout and tab routing
+|   |-- index.css           Global styles and Tailwind layers
+|   `-- main.tsx            React entry point
+|-- package.json            Dependencies and npm scripts
+|-- tailwind.config.js      Theme and Tailwind configuration
+|-- tsconfig.json           TypeScript configuration
+`-- vite.config.ts          Vite configuration
+```
 
-## How the app is organized
+## Main app sections
 
-This project is intentionally compact and front-end focused. The main experience lives in a single large React component with a set of in-memory arrays for places, quests, leaderboard data, and submissions. That makes it easy to prototype quickly and iterate on design, but it also means a future backend or data layer will be the main architectural step once the app moves beyond the demo stage.
+| Section | Description |
+| --- | --- |
+| Explore | Recommendations, search, filters, place details, and rank progress |
+| Map | Interactive Baltimore map, location controls, and directions |
+| Trips | Student group outings and trip check ins |
+| Quests | Multi stop challenges and bonus rewards |
+| Scrapbook | Camera and uploaded memories from explored places |
+| Passport | Digital J-Card, stamps, ranks, and badges |
+| Leaderboard | Friends and classmate progress |
 
-## Maintainer reminder
+## Current limitations
 
-This README should be updated whenever a significant app change lands, such as:
+- Accounts and verification are simulated.
+- Data is stored only in the current browser.
+- Friend additions and place submissions are local demo actions.
+- Map content and place details are curated static data.
+- Location verification depends on device accuracy and browser permissions.
 
-- new gameplay features
-- major UI redesigns
-- backend or auth changes
-- new data sources or place categories
-- major user-flow changes
+## Contributing
 
-Keeping this file current helps future contributors understand the product intent, current status, and next milestones without digging through all the app code.
+Create a focused feature branch and open a pull request instead of pushing directly to `main`. Run the production build before submitting changes:
+
+```bash
+npm run build
+```
