@@ -310,8 +310,9 @@ export const PlaceDetailModal: React.FC = () => {
                 <span>Student Travel Journal & Field Notes</span>
               </span>
               {saveConfirmation && (
-                <span className="text-xs font-black text-emerald-600 animate-pulse">
-                  ✓ Reflection Inscribed!
+                <span className="text-xs font-black text-emerald-600 animate-pulse flex items-center gap-1">
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Reflection Inscribed!</span>
                 </span>
               )}
             </h3>

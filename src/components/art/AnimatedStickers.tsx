@@ -1040,15 +1040,15 @@ export const StarSpangledFlagSticker: React.FC<{ size?: number; className?: stri
           {/* Blue Canton with 15 Stars */}
           <rect x="24" y="16" width="28" height="20" fill="#002D72" />
           {/* Stars Array */}
-          <g fill="#FFFFFF" fontSize="4">
-            <text x="28" y="22">★</text>
-            <text x="36" y="22">★</text>
-            <text x="44" y="22">★</text>
-            <text x="32" y="28">★</text>
-            <text x="40" y="28">★</text>
-            <text x="28" y="34">★</text>
-            <text x="36" y="34">★</text>
-            <text x="44" y="34">★</text>
+          <g fill="#FFFFFF">
+            <circle cx="28" cy="21" r="1.2" />
+            <circle cx="36" cy="21" r="1.2" />
+            <circle cx="44" cy="21" r="1.2" />
+            <circle cx="32" cy="26" r="1.2" />
+            <circle cx="40" cy="26" r="1.2" />
+            <circle cx="28" cy="31" r="1.2" />
+            <circle cx="36" cy="31" r="1.2" />
+            <circle cx="44" cy="31" r="1.2" />
           </g>
         </g>
       </svg>

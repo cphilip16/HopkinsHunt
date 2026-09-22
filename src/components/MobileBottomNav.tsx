@@ -1,11 +1,11 @@
 import React from 'react';
-import { Compass, MapPin, Award, Users, Camera } from 'lucide-react';
+import { Compass, MapPin, Award, Users, Camera, HelpCircle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { MarylandRibbon } from './art/MarylandRibbon';
 import { AvatarVectorArt } from './art/VectorArt';
 
 export const MobileBottomNav: React.FC = () => {
-  const { activeTab, setActiveTab, profile, quests, groupTrips, setIsCameraModalOpen } = useApp();
+  const { activeTab, setActiveTab, profile, quests, groupTrips, setIsCameraModalOpen, setIsTutorialOpen } = useApp();
 
   const completedQuestsCount = profile.completedQuestIds.length;
   const visitedCount = profile.visitedPlaceIds.length;
@@ -13,14 +13,23 @@ export const MobileBottomNav: React.FC = () => {
 
   return (
     <>
-      {/* Floating Action Button (FAB) for Field Camera - Accessible Everywhere */}
-      <div className="fixed bottom-20 right-4 z-40 md:hidden flex flex-col items-center">
+      {/* Floating Action Buttons (FAB) for Field Camera & How to Play Guide - Accessible Everywhere on Mobile */}
+      <div className="fixed bottom-20 right-4 z-40 md:hidden flex flex-col items-center gap-2">
+        <button
+          onClick={() => setIsTutorialOpen(true)}
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-white/95 text-hopkins-deep shadow-md border-2 border-amber-300 transform active:scale-90 transition-all cursor-pointer"
+          title="How to Play JayWalk Bmore"
+          aria-label="How to Play JayWalk Bmore"
+        >
+          <HelpCircle className="w-5 h-5 text-hopkins-heritage" />
+        </button>
+
         <button
           onClick={() => setIsCameraModalOpen(true)}
-          className="relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-amber-400 via-amber-500 to-amber-300 text-slate-950 shadow-xl shadow-amber-500/30 ring-4 ring-white/90 transform active:scale-90 transition-all"
+          className="relative flex items-center justify-center w-13 h-13 rounded-full bg-gradient-to-tr from-amber-400 via-amber-500 to-amber-300 text-slate-950 shadow-xl shadow-amber-500/30 ring-4 ring-white/90 transform active:scale-90 transition-all cursor-pointer"
           title="Open Field Camera"
         >
-          <Camera className="w-6 h-6 text-slate-950" />
+          <Camera className="w-5 h-5 text-slate-950" />
           <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-sky-500 border-2 border-white"></span>

@@ -114,6 +114,11 @@ interface AppContextType {
   verifyStudentCode: (code: string, additionalData?: Partial<UserProfile>) => { success: boolean; error?: string };
   logoutStudent: () => void;
   loginWithDemoStudent: (type: 'homewood' | 'peabody' | 'med') => void;
+
+  // Onboarding Tutorial
+  isTutorialOpen: boolean;
+  setIsTutorialOpen: (open: boolean) => void;
+  completeTutorial: () => void;
 }
 
 const DEFAULT_PROFILE: UserProfile = {
@@ -138,6 +143,7 @@ const DEFAULT_PROFILE: UserProfile = {
 const STORAGE_KEY = 'jaywalk_bmore_user_profile_v2';
 const TRIPS_STORAGE_KEY = 'jaywalk_bmore_group_trips_v1';
 const PHOTOS_STORAGE_KEY = 'jaywalk_bmore_scrapbook_photos_v1';
+const TUTORIAL_STORAGE_KEY = 'jaywalk_bmore_tutorial_completed_v1';
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -193,6 +199,25 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [currentExpectedCode, setCurrentExpectedCode] = useState<string | null>(null);
   const [verificationNotice, setVerificationNotice] = useState<VerificationNotice | null>(null);
+
+  // Onboarding Tutorial state (auto-opens for new users)
+  const [isTutorialOpen, setIsTutorialOpen] = useState<boolean>(() => {
+    try {
+      const completed = localStorage.getItem(TUTORIAL_STORAGE_KEY);
+      return completed !== 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const completeTutorial = () => {
+    try {
+      localStorage.setItem(TUTORIAL_STORAGE_KEY, 'true');
+    } catch (e) {
+      console.error('Error saving tutorial status to localStorage', e);
+    }
+    setIsTutorialOpen(false);
+  };
 
   // Filters
   const [searchQuery, setSearchQuery] = useState('');
@@ -976,6 +1001,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         verifyStudentCode,
         logoutStudent,
         loginWithDemoStudent,
+        isTutorialOpen,
+        setIsTutorialOpen,
+        completeTutorial,
       }}
     >
       {children}

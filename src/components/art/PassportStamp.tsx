@@ -122,7 +122,7 @@ export const PassportStamp: React.FC<PassportStampProps> = ({
           />
           <text fontSize="7" fontWeight="900" fill={activeColor.primary} letterSpacing="0.8">
             <textPath href="#textPathTop" startOffset="50%" textAnchor="middle">
-              ★ JHU TRAVEL PASSPORT ★
+              • JHU TRAVEL PASSPORT •
             </textPath>
           </text>
 

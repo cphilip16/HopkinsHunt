@@ -15,6 +15,7 @@ import { LevelUpModal } from './components/LevelUpModal';
 import { PlaceDetailModal } from './components/PlaceDetailModal';
 import { LocationVerificationModal } from './components/LocationVerificationModal';
 import { LoginModal } from './components/LoginModal';
+import { TutorialModal } from './components/TutorialModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { FeatherCelebration } from './components/FeatherCelebration';
 import { MarylandRibbon } from './components/art/MarylandRibbon';
@@ -87,12 +88,12 @@ const AppContent: React.FC = () => {
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-3.5 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-6 sm:space-y-8 pb-28 md:pb-12">
         
-        {/* Top Hero: Student Rank & Progress Banner */}
-        <RankProgressCard />
-
         {/* Tab 1: Explore Places */}
         {activeTab === 'explore' && (
           <section className="space-y-6">
+            {/* Student Rank & Progress Banner */}
+            <RankProgressCard />
+
             <PlaceFilter />
 
             {/* Results Count Header */}
@@ -177,7 +178,8 @@ const AppContent: React.FC = () => {
 
       </main>
 
-      {/* Global Celebratory, Detail, Camera & Auth Modals */}
+      {/* Global Celebratory, Detail, Camera, Auth & Tutorial Modals */}
+      <TutorialModal />
       <LevelUpModal />
       <PlaceDetailModal />
       <LocationVerificationModal />

@@ -30,6 +30,7 @@ export const DigitalJCard: React.FC = () => {
     unlockedBadges,
     setSelectedPlace,
     setIsLoginModalOpen,
+    setIsTutorialOpen,
   } = useApp();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -194,10 +195,18 @@ export const DigitalJCard: React.FC = () => {
 
             <button
               onClick={() => setIsEditing(!isEditing)}
-              className="inline-flex items-center space-x-1.5 text-xs font-bold text-hopkins-heritage hover:text-blue-900 bg-white px-4 py-2 rounded-xl shadow-xs border border-amber-200/80 transition-colors"
+              className="inline-flex items-center space-x-1.5 text-xs font-bold text-hopkins-heritage hover:text-blue-900 bg-white px-3.5 py-2 rounded-xl shadow-xs border border-amber-200/80 transition-colors"
             >
               <Edit3 className="w-3.5 h-3.5" />
               <span>{isEditing ? 'Cancel Editing' : 'Customize Pass'}</span>
+            </button>
+
+            <button
+              onClick={() => setIsTutorialOpen(true)}
+              className="inline-flex items-center space-x-1.5 text-xs font-bold text-amber-900 hover:text-amber-950 bg-gradient-to-r from-amber-100 via-yellow-100 to-amber-200/80 px-3.5 py-2 rounded-xl shadow-xs border border-amber-300 transition-colors"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-amber-700" />
+              <span>How to Play (Guide)</span>
             </button>
           </div>
         </div>
@@ -408,7 +417,14 @@ export const DigitalJCard: React.FC = () => {
                     {sticker.name}
                   </span>
                   <span className="text-[9px] font-bold text-amber-700/80 block mt-0.5">
-                    {isUnlocked ? '✓ Collected' : `${sticker.unlockedAt} pts`}
+                    {isUnlocked ? (
+                      <span className="inline-flex items-center text-emerald-700 font-bold">
+                        <Check className="w-2.5 h-2.5 mr-0.5" />
+                        <span>Collected</span>
+                      </span>
+                    ) : (
+                      <span>{sticker.unlockedAt} pts</span>
+                    )}
                   </span>
                 </div>
               </div>

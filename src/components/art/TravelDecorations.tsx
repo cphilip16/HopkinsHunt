@@ -37,9 +37,9 @@ export const WashiTape: React.FC<WashiTapeProps> = ({
       {/* Decorative semi-translucent paper fiber grid texture */}
       <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:5px_5px]" />
       <div className="w-full flex justify-around opacity-50">
-        <span className="text-[8px] font-mono">✦</span>
-        <span className="text-[8px] font-mono">✦</span>
-        <span className="text-[8px] font-mono">✦</span>
+        <span className="text-[8px] font-mono">+</span>
+        <span className="text-[8px] font-mono">+</span>
+        <span className="text-[8px] font-mono">+</span>
       </div>
     </div>
   );

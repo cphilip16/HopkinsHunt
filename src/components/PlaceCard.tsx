@@ -1,5 +1,5 @@
-import React from 'react';
-import { MapPin, Bus, Check, Plus, Sparkles, Clock, DollarSign, Award, ChevronRight, Heart, Pin, Camera, Navigation, Radio } from 'lucide-react';
+import React, { useState } from 'react';
+import { MapPin, Bus, Check, Plus, Sparkles, Clock, DollarSign, Award, ChevronRight, ChevronDown, ChevronUp, Heart, Pin, Camera, Navigation, Radio } from 'lucide-react';
 import { Place } from '../types';
 import { useApp } from '../context/AppContext';
 import { PassportStamp } from './art/PassportStamp';
@@ -46,6 +46,7 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
   const isVisited = profile.visitedPlaceIds.includes(place.id);
   const userReview = profile.placeReviews[place.id];
   const distanceInfo = getPlaceDistanceInfo(place);
+  const [showLore, setShowLore] = useState(false);
 
   // Pick cute pastel tape color based on category
   const washiColor =
@@ -178,34 +179,48 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
       {/* Card Body */}
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
         
-        {/* Description & Hopkins Lore */}
+        {/* Description & Progressive Lore / Transit */}
         <div className="space-y-2.5">
           <p className="text-xs text-slate-700 font-medium line-clamp-2 leading-relaxed">
             {place.description}
           </p>
 
-          {/* Hopkins Student Lore Quote */}
-          <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-50 via-sky-50/70 to-indigo-50/50 border border-blue-200/90 text-[11px] text-hopkins-deep shadow-xs">
-            <div className="font-black flex items-center space-x-1.5 text-hopkins-heritage mb-0.5 tracking-tight">
-              <BabyJaySticker size={18} />
-              <span>Hopkins Lore:</span>
+          {/* Compact Transit Chip & Lore Toggle Row */}
+          <div className="flex items-center justify-between gap-1.5 text-[11px]">
+            <div className="flex items-center space-x-1.5 text-slate-600 font-medium min-w-0 flex-1">
+              <Bus className="w-3.5 h-3.5 text-hopkins-heritage flex-shrink-0" />
+              <span className="truncate">{place.transitTip}</span>
             </div>
-            <p className="line-clamp-2 italic text-slate-800 font-medium leading-relaxed">
-              "{place.hopkinsLore}"
-            </p>
-          </div>
 
-          {/* Transit Advice */}
-          <div className="flex items-start space-x-1.5 text-[11px] text-slate-700 bg-gradient-to-r from-slate-50 to-blue-50/50 p-2.5 rounded-xl border border-blue-100/80 font-medium">
-            <Bus className="w-3.5 h-3.5 text-hopkins-heritage flex-shrink-0 mt-0.5" />
-            <span className="line-clamp-1 font-semibold">{place.transitTip}</span>
+            {/* Interactive Hopkins Lore Toggle */}
+            <button
+              onClick={() => setShowLore(!showLore)}
+              className="inline-flex items-center space-x-1 text-[10px] font-bold text-hopkins-heritage hover:text-blue-900 bg-blue-50/80 hover:bg-blue-100 px-2 py-0.5 rounded-lg border border-blue-200/80 transition-colors flex-shrink-0 ml-1 cursor-pointer"
+              title="Toggle Hopkins Student Lore"
+            >
+              <span>{showLore ? 'Hide Lore' : 'Lore'}</span>
+              {showLore ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+            </button>
           </div>
 
           {/* Student Perk if available */}
           {place.studentPerk && (
-            <div className="flex items-center space-x-1 text-[11px] font-bold text-emerald-800 bg-emerald-50/80 px-2 py-1 rounded-lg border border-emerald-200/60">
+            <div className="flex items-center space-x-1 text-[11px] font-bold text-emerald-800 bg-emerald-50/80 px-2.5 py-1 rounded-xl border border-emerald-200/60">
               <Award className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
               <span className="line-clamp-1">{place.studentPerk}</span>
+            </div>
+          )}
+
+          {/* Collapsible Hopkins Student Lore Quote */}
+          {showLore && (
+            <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-50 via-sky-50/70 to-indigo-50/50 border border-blue-200/90 text-[11px] text-hopkins-deep shadow-xs animate-in fade-in duration-200">
+              <div className="font-black flex items-center space-x-1.5 text-hopkins-heritage mb-0.5 tracking-tight">
+                <BabyJaySticker size={18} />
+                <span>Hopkins Lore:</span>
+              </div>
+              <p className="italic text-slate-800 font-medium leading-relaxed">
+                "{place.hopkinsLore}"
+              </p>
             </div>
           )}
         </div>

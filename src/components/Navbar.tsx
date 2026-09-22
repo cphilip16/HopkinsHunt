@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, MapPin, Award, BookOpen, RotateCcw, Sparkles, ShieldCheck, LogIn, LogOut, Camera, Users } from 'lucide-react';
+import { Compass, MapPin, Award, BookOpen, RotateCcw, Sparkles, ShieldCheck, LogIn, LogOut, Camera, Users, HelpCircle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { HopkinsShield } from './art/HopkinsShield';
 import { MarylandRibbon } from './art/MarylandRibbon';
@@ -23,6 +23,7 @@ export const Navbar: React.FC = () => {
     setIsLoginModalOpen,
     logoutStudent,
     setIsCameraModalOpen,
+    setIsTutorialOpen,
   } = useApp();
 
   return (
@@ -140,6 +141,16 @@ export const Navbar: React.FC = () => {
                 <span className="xs:hidden">Verify</span>
               </button>
             )}
+
+            {/* How to Play / Tutorial Button */}
+            <button
+              onClick={() => setIsTutorialOpen(true)}
+              title="How to Play JayWalk Bmore (Tutorial & Rules)"
+              className="inline-flex items-center space-x-1 sm:space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 hover:text-amber-100 border border-amber-300/40 shadow-sm transition-all transform active:scale-95"
+            >
+              <HelpCircle className="w-3.5 h-3.5 text-amber-300" />
+              <span className="hidden sm:inline">How to Play</span>
+            </button>
 
             <button
               onClick={loadDemoProgress}
