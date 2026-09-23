@@ -89,10 +89,11 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
           <div className="absolute bottom-2 right-2 z-20 pointer-events-none transform translate-y-1">
             <PassportStamp
               neighborhood={place.neighborhood}
+              placeName={place.name}
               date={userReview?.date || 'VISITED'}
               size={82}
               rotation={-12}
-              color="sapphire"
+              color={undefined}
               animate={true}
             />
           </div>

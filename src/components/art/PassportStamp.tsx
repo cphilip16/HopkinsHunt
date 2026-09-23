@@ -1,9 +1,11 @@
 import React from 'react';
+import { getPlaceStampConfig } from '../../utils/placeStampConfig';
 
 interface PassportStampProps {
   date?: string;
   visitedDate?: string;
   neighborhood?: string;
+  placeName?: string;
   size?: number;
   rotation?: number;
   color?: 'emerald' | 'sapphire' | 'crimson' | 'amber';
@@ -15,13 +17,16 @@ export const PassportStamp: React.FC<PassportStampProps> = ({
   date = 'STAMPED',
   visitedDate,
   neighborhood = 'BALTIMORE',
+  placeName,
   size = 80,
   rotation = -12,
-  color = 'emerald',
+  color,
   className = '',
   animate = false,
 }) => {
   const displayDate = visitedDate || date;
+  const placeStampConfig = getPlaceStampConfig({ name: placeName || 'JHU', neighborhood });
+  const resolvedColor = color || placeStampConfig.color;
 
   const colorMap = {
     emerald: {
@@ -50,7 +55,7 @@ export const PassportStamp: React.FC<PassportStampProps> = ({
     },
   };
 
-  const activeColor = colorMap[color];
+  const activeColor = colorMap[resolvedColor];
 
   return (
     <div
@@ -122,7 +127,7 @@ export const PassportStamp: React.FC<PassportStampProps> = ({
           />
           <text fontSize="7" fontWeight="900" fill={activeColor.primary} letterSpacing="0.8">
             <textPath href="#textPathTop" startOffset="50%" textAnchor="middle">
-              • JHU TRAVEL PASSPORT •
+              • {placeStampConfig.title} TRAVEL PASSPORT •
             </textPath>
           </text>
 
@@ -134,7 +139,7 @@ export const PassportStamp: React.FC<PassportStampProps> = ({
           />
           <text fontSize="6.5" fontWeight="900" fill={activeColor.primary} letterSpacing="1">
             <textPath href="#textPathBottom" startOffset="50%" textAnchor="middle">
-              {neighborhood.toUpperCase()} &bull; VISITED
+              {placeStampConfig.label} &bull; VISITED
             </textPath>
           </text>
 

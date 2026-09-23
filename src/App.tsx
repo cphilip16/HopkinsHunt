@@ -27,6 +27,7 @@ import { Compass, Sparkles, MapPin } from 'lucide-react';
 const AppContent: React.FC = () => {
   const {
     places,
+    profile,
     activeTab,
     searchQuery,
     selectedNeighborhood,
@@ -34,6 +35,8 @@ const AppContent: React.FC = () => {
     transitFilter,
     freeOnlyFilter,
   } = useApp();
+
+  const visitedPlaces = places.filter((place) => profile.visitedPlaceIds.includes(place.id));
 
   // Filter places for explore tab
   const filteredPlaces = places.filter((place) => {
@@ -94,6 +97,55 @@ const AppContent: React.FC = () => {
           <section className="space-y-6">
             {/* Student Rank & Progress Banner */}
             <RankProgressCard />
+
+            {/* Your Travel Passport */}
+            <div className="relative overflow-hidden rounded-[32px] border-[3px] border-[#123d78] bg-[radial-gradient(circle_at_top,#edf5ff_0%,#fdfefe_18%,#eaf0ff_46%,#dfeefc_100%)] p-4 shadow-[0_30px_80px_rgba(10,46,98,0.18)] sm:p-5">
+              <div className="absolute inset-0 bg-[linear-gradient(115deg,transparent_0%,rgba(255,255,255,0.15)_25%,transparent_55%,rgba(18,61,120,0.06)_100%)]" />
+              <div className="absolute -left-2 top-6 h-20 w-20 rotate-[-18deg] rounded-full border-[6px] border-[#9bb8e8] bg-[#f2f8ff]/85 shadow-[0_0_30px_rgba(107,149,217,0.28)]" />
+              <div className="absolute right-6 top-4 h-14 w-14 rotate-[22deg] rounded-[18px] border-2 border-[#8db0e5] bg-[#f4f8ff]/85" />
+
+              <div className="relative rounded-[26px] border-[3px] border-[#abc3ea] bg-[#fbfdff]/90 p-4 sm:p-5">
+                <div className="mb-4 flex flex-col gap-3 border-b border-[#bfd1ea] pb-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-[0.32em] text-[#174a8c]">Your Travel Passport</p>
+                    <h2 className="mt-1 text-xl font-black tracking-tight text-[#112f59] sm:text-2xl">Baltimore Highlights</h2>
+                  </div>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-[#17355f]/25 bg-[#0f3d86] px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-white shadow-[0_8px_16px_rgba(15,61,134,0.25)]">
+                    <span className="inline-flex h-2.5 w-2.5 rounded-full bg-[#9ee6b0] shadow-[0_0_12px_rgba(158,230,176,0.8)]" />
+                    {visitedPlaces.length} memories
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {visitedPlaces.length > 0 ? (
+                    visitedPlaces.map((place, index) => (
+                      <div
+                        key={place.id}
+                        className="relative rounded-[20px] border border-[#d9e3f2] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-3 shadow-[0_14px_28px_rgba(17,47,89,0.08)]"
+                        style={{ transform: `rotate(${index % 2 === 0 ? '-1.5deg' : '1.5deg'})` }}
+                      >
+                        <div className="absolute -left-2 top-6 h-4 w-4 rotate-45 rounded-sm border border-[#bfd2f5] bg-[#9ab9eb]" />
+                        <div className="mb-2 flex items-center justify-between text-[8px] font-black uppercase tracking-[0.18em] text-[#2f5d97]">
+                          <span>Class of ’27</span>
+                          <span>{place.points} pts</span>
+                        </div>
+                        <div className="mb-3 flex h-24 items-center justify-center rounded-[18px] border-[3px] border-[#d4e2f8] bg-[linear-gradient(135deg,#eaf3ff_0%,#fffaf0_100%)] text-4xl font-black text-[#143b76] shadow-inner">
+                          {place.name.slice(0, 1).toUpperCase()}
+                        </div>
+                        <p className="text-[15px] font-black text-[#112f59]">{place.name}</p>
+                        <p className="mt-1 text-[10px] font-black uppercase tracking-[0.14em] text-[#5d7ea6]">{place.neighborhood}</p>
+                        <p className="mt-2 text-[12px] leading-relaxed text-[#476a93]">{place.description}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="col-span-full rounded-[20px] border-[2px] border-dashed border-[#b2c6ea] bg-[linear-gradient(180deg,#ffffff_0%,#f4f8ff_100%)] p-5 text-center text-[#234972] shadow-inner">
+                      <p className="text-base font-black uppercase tracking-[0.18em] text-[#143b76]">Passport page blank</p>
+                      <p className="mt-2 text-sm font-medium text-[#496c97]">Your first campus memory is waiting to be stamped.</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
 
             <PlaceFilter />
 

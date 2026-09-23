@@ -518,6 +518,7 @@ export const DigitalJCard: React.FC = () => {
                     <div className="flex-shrink-0">
                       <PassportStamp
                         neighborhood={place.neighborhood}
+                        placeName={place.name}
                         date={review?.date || 'APPROVED'}
                         size={66}
                         rotation={-8}
