@@ -91,8 +91,9 @@ export const PlaceDetailModal: React.FC = () => {
             <div className="absolute top-3 right-16 z-20 pointer-events-none transform -rotate-12 scale-90 sm:scale-100">
               <PassportStamp
                 neighborhood={selectedPlace.neighborhood}
+                placeName={selectedPlace.name}
                 visitedDate="AUTHENTICATED"
-                color="sapphire"
+                color={undefined}
                 animate={isJustStamped}
               />
             </div>
